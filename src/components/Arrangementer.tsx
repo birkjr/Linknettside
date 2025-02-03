@@ -51,7 +51,7 @@ export default function Arrangementer() {
                             <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
                             <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
                                     {/* Logo Section */}
-                                    <div className="w-20 h-20 sm:w-24 sm:h-24 bg-stone-50 rounded-lg flex items-center justify-center flex-shrink-0">
+                                    <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 bg-stone-50 rounded-lg flex items-center justify-center flex-shrink-0">
                                         <img
                                             src={`https://logo.clearbit.com/${event.bedrift.toLowerCase().replace(/\s+/g, "")}.com`}
                                             alt={event.bedrift}
