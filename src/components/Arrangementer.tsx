@@ -38,9 +38,9 @@ export default function Arrangementer() {
 
 
     return (
-        <div className=" w-full max-w-6xl mx-auto p-6 sm:p-12 text-black rounded-xl" style={{ backgroundColor: "#4682B4" }}>
+        <div className="w-full max-w-6xl mx-auto p-6 sm:p-12 text-black rounded-xl" style={{ backgroundColor: "#4682B4" }}>
             <h1 className="text-white text-3xl text-center">Arrangementer</h1>
-            <p className="text-white text-sm text-center">Her er de kommende arrangementene for EMIL studenter</p>
+            <p className="text-white text-sm text-center pb-4">Her er de kommende arrangementene for EMIL studenter</p>
 
             {loading ? (
                 <p className="text-center text-black">Laster inn arrangementer...</p>
@@ -48,8 +48,8 @@ export default function Arrangementer() {
                 <div >
                     {events.map((event) => (
                         <a key={event.id} href={event.link} target="_blank" rel="noopener noreferrer">
-                            <div className="w-full sm:max-w-2xl mx-auto bg-white py-2 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
-                                <div className="flex flex-wrap md:flex-nowrap items-center ">
+                            <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
+                            <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
                                     {/* Logo Section */}
                                     <div className="w-20 h-20 sm:w-24 sm:h-24 bg-stone-50 rounded-lg flex items-center justify-center flex-shrink-0">
                                         <img
