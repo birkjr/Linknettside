@@ -1,4 +1,5 @@
 import { Link } from "react-router";
+const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
 
 export default function Header(){
     return (
@@ -8,7 +9,7 @@ export default function Header(){
                 <Link to={"/"}>
                 <img 
                     className="h-32 transition-transform duration-300 hover:scale-105" 
-                    src="/src/assets/logo/logo_transparent.png"/>
+                    src={`${supabaseStorageUrl}logo_transparent.JPG`}/>
                 </Link>
             </div>
             <div className='hidden lg:flex items-center justify-center w-3/5'>

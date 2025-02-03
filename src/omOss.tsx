@@ -1,3 +1,5 @@
+const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
+
 export default function OmOss() {
     return (
         <div className="flex flex-col items-center bg-stone-100">
@@ -22,7 +24,9 @@ export default function OmOss() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-12" >
                     {/* Styret */}
                     <div>
-                        <div><img className='rounded-xl' src="/src/assets/bilder/styret-kopi.png"/></div>
+                        <div>
+                            <img className='rounded-xl' src={`${supabaseStorageUrl}Styret.JPG`}/>
+                        </div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl">
                         <h3 className="text-4xl font-semibold flex justify-center py-4 ">Styret</h3>
@@ -37,7 +41,7 @@ export default function OmOss() {
 
                     {/* Bedrift */}
                     <div>
-                        <div><img className='rounded-xl' src="/src/assets/bilder/bedrift.png"/></div>
+                        <div><img className='rounded-xl' src={`${supabaseStorageUrl}Bedrift.JPG`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto text-center">
                         <h3 className="text-4xl font-semibold py-4">Bedrift</h3>
@@ -48,7 +52,7 @@ export default function OmOss() {
 
                     {/* Marked */}
                     <div>
-                        <div><img className='rounded-xl' src="/src/assets/bilder/marked.png"/></div>
+                        <div><img className='rounded-xl' src={`${supabaseStorageUrl}Marked.JPG`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto text-center">
                         <h3 className="text-4xl font-semibold py-4">Marked</h3>
@@ -60,7 +64,7 @@ export default function OmOss() {
 
                     {/* Logistikk */}
                     <div>
-                        <div><img className='rounded-xl' src="/src/assets/bilder/logistikk-kopi.png"/></div>
+                        <div><img className='rounded-xl' src={`${supabaseStorageUrl}Logistikk.JPG`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto text-center">
                         <h3 className="text-4xl font-semibold py-4">Logistikk</h3>
@@ -71,7 +75,7 @@ export default function OmOss() {
 
                     {/* FA */}
                     <div>
-                        <div><img className='rounded-xl' src="/src/assets/bilder/fa-kopi.png"/></div>
+                        <div><img className='rounded-xl' src={`${supabaseStorageUrl}FA.JPG`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto text-center">
                         <h3 className="text-4xl font-semibold py-4">FA</h3>
