@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
+// Supabase Storage URL for images
+const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
+
+
 
 type Styret = {
     id: number;
@@ -64,7 +68,7 @@ export default function ContactUs() {
                         {leder && (
                             <div className="flex flex-col items-center justify-center py-6">
                                 <img
-                                    src={leder.bilde || "/src/assets/bilder/markus_edited.avif"}
+                                    src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.JPG`}
                                     className="h-40 rounded-2xl object-cover"
                                     alt={leder.name}
                                 />
@@ -80,7 +84,7 @@ export default function ContactUs() {
                             {nestleder && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/sanna_edited.avif"
+                                        src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
                                         alt="Nestleder"
                                     />
@@ -93,7 +97,7 @@ export default function ContactUs() {
                             {hr && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/fabian_edited.avif"
+                                        src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
                                         alt="HR ansvarlig"
                                     />
@@ -106,7 +110,7 @@ export default function ContactUs() {
                             {økonomi && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/august_edited.avif"
+                                        src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
                                         alt="Økonomiansvarlig"
                                     />
@@ -121,9 +125,9 @@ export default function ContactUs() {
                         {/* Other members */}
                         <div className="flex flex-row  justify-center p-6 space-x-12">
                             {marked && (
-                                <div className="text-center">
+                                <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/birk_edited.avif"
+                                        src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
                                         alt="Nestleder"
                                     />
@@ -136,7 +140,7 @@ export default function ContactUs() {
                             {bedrift && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/erik_edited.avif"
+                                        src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
                                         alt="HR ansvarlig"
                                     />
@@ -149,9 +153,9 @@ export default function ContactUs() {
                             {logistikk && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/celine_edited.avif"
+                                        src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="Økonomiansvarlig"
+                                        alt="Logistikk"
                                     />
                                     <p className="font-semibold mt-2">{logistikk.name}</p>
                                     <p className="text-sm">{logistikk.stilling}</p>
@@ -162,9 +166,9 @@ export default function ContactUs() {
                             {fa && (
                                 <div className="text-center flex flex-col items-center justify-center">
                                     <img
-                                        src="/src/assets/bilder/sondre_edited.avif"
+                                        src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="Økonomiansvarlig"
+                                        alt="FA"
                                     />
                                     <p className="font-semibold mt-2">{fa.name}</p>
                                     <p className="text-sm">{fa.stilling}</p>
