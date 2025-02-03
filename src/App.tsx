@@ -8,6 +8,7 @@ function App() {
     <>
     <div className="h-full w-full min-h-auto bg-stone-100 flex justify-center p-6">
       <Arrangementer/>
+      hei
     </div>
     <div className="w-full grid grid-cols-2 bg-stone-100 p-6">
       <div className="flex flex-col justify-center items-center border border-gray-200 rounded-xl p-4 text-serif mx-6">
