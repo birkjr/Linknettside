@@ -40,6 +40,7 @@ export default function OmOss() {
                     setFa(data.find((person: Styret) => person.stilling === "Teamleder FA") || null);
                 }
                 setLoading(false);
+                loading
             };
     
             fetchStyret();
