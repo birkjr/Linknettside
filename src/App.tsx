@@ -4,11 +4,11 @@ import Nyheter from "./components/Nyheter";
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
 
 function App() {
-  
+
   return (
     <>
       {/* Container for everything */}
-      <div className="flex flex-col w-full px-6 space-y-6">
+      <div className="flex flex-col w-full px-6 space-y-6 mt-6">
         
         {/* Arrangementer Section - Always on Top */}
         <Arrangementer />
@@ -17,7 +17,7 @@ function App() {
         <div className="flex flex-col lg:flex-row items-center justify-center w-full space-y-6 lg:space-y-0 lg:space-x-6">
           
           {/* Info Box */}
-          <div className="flex flex-col justify-center items-center border border-gray-200 rounded-xl p-6 text-serif w-full lg:w-1/2 text-center">
+          <div className="flex flex-col justify-center items-center rounded-xl p-6 text-serif w-full lg:w-1/2 text-center">
               <img 
                   className="h-24 w-28 rounded-xl my-6" 
                   src={`${supabaseStorageUrl}logo_transparent.JPG`} 
@@ -33,7 +33,7 @@ function App() {
           </div>
 
           {/* Nyheter Box */}
-          <div className="flex flex-col justify-center items-center border border-gray-200 rounded-xl p-6 text-serif w-full lg:w-1/2 text-center text-lg sm:text-xl font-bold">
+          <div className="flex flex-col justify-center items-center rounded-xl text-serif lg:w-1/2 text-center text-lg sm:text-xl font-bold">
               <Nyheter />
           </div>
 

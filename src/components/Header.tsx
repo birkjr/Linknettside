@@ -106,7 +106,7 @@ export default function Header() {
               </li>
               <li>
                 <Link to={"/kontakt_oss"} onClick={() => setMenuOpen(false)}>
-                  Kontakt oss
+                  Kontakt oss 
                 </Link>
               </li>
             </ul>

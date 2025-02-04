@@ -49,7 +49,7 @@ export default function ContactUs() {
     }, []);
 
     return (
-        <div className="flex flex-col items-center bg-stone-100">
+        <div className="flex flex-col items-center">
             {/* Main content */}
             <div className="w-full p-6 lg:px-12">
                 {/* Blue Section */}

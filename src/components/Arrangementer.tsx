@@ -25,7 +25,7 @@ export default function Arrangementer() {
             const { data, error } = await supabase.from("events").select("*");
 
             if (error) {
-                console.error("Error fetching events:", error);
+                console.error("Kunne ikke hente arrangementer:", error);
             } else {
                 setEvents(data);
             }
@@ -68,7 +68,7 @@ export default function Arrangementer() {
                                     {/* Event Details */}
                                     <div className="flex-1 text-center md:text-left flex-col md:items-start text-sm text-black font-serif md:mt-0">
                                         <p className="flex items-center space-x-4 py-1">
-                                            <PlaceIcon fontSize="inherit" className="text-[18px]" />
+                                            <PlaceIcon fontSize="inherit" />
                                             <span>{event.location}</span>
                                         </p>
                                         <p className="flex items-center space-x-4 py-1">

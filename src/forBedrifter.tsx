@@ -3,7 +3,7 @@ const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/
 
 export default function ForBedrifter() {
     return (
-        <div className="min-h-screen flex flex-col w-full p-6 lg:px-12 bg-stone-100">
+        <div className="min-h-screen flex flex-col w-full p-6 lg:px-12">
             {/* For bedrifter Header */}
             <div className="w-full max-w-6xl mx-auto p-12 text-white text-center rounded-xl" 
                 style={{ backgroundColor: "#4682B4" }}>
