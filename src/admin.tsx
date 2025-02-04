@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { supabase } from "./supabaseClient";
+import SupportManager from "./components/SupportManager";
 
 type Event = {
     id: string;
@@ -45,30 +46,10 @@ export default function admin(){
                 place: ""
             });
     
-    // Function to check password before adding a job
-    const checkPasswordForAddJob = () => {
-        const enteredPassword = prompt("Enter the admin password:");
-        if (enteredPassword === "Link25") {
-            setJobShowForm(true);
-        } else {
-            alert("Incorrect password! You are not authorized.");
-        }
-    };
-
-    // Function to check password before removing a job
-    const checkPasswordForDeleteJob = async () => {
-        const enteredPassword = prompt("Enter the admin password:");
-        if (enteredPassword === "Link25") {
-            removeJob();
-        } else {
-            alert("Incorrect password! You are not authorized.");
-        }
-    };
-
     // Function to add a new job
     const addNewJob = async () => {
         if (!newJob.bedrift || !newJob.jobTitle || !newJob.link || !newJob.jobType || !newJob.place || !newJob.deadline) {
-            alert("Please fill in all required fields.");
+            alert("Fyll inn alle felt.");
             return;
         }
 
@@ -102,37 +83,17 @@ export default function admin(){
 
     // Function to remove a job
     const removeJob = async () => {
-        const jobToDelete = prompt("Skriv nøyaktig annonsetittel på jobbd:");
+        const jobToDelete = prompt("Skriv nøyaktig annonsetittel på jobbannonse du vil fjerne:");
         if (!jobToDelete) return;
 
         const { error } = await supabase.from("jobs").delete().eq("jobTitle", jobToDelete);
 
         if (error) {
-            console.error("Error deleting job:", error);
+            console.error("Feil ved fjerning av jobb:", error);
             alert("Klarte ikke å fjerne jobb. Prøv igjen.");
         } else {
             setJobListings(jobListings.filter(job => job.jobTitle !== jobToDelete));
             alert(`"${jobToDelete}" har blitt fjernet.`);
-        }
-    };
-
-    // Function to check password before adding an event
-    const checkPasswordForAddEvent = () => {
-    const enteredPassword = prompt("Skriv inn admin passord:");
-    if (enteredPassword === "Mia") {
-        setEventShowForm(true);
-    } else {
-        alert("Feil passord!");
-        }
-    };
-
-    // Function to check password before removing an event
-    const checkPasswordForDeleteEvent = async () => {
-    const enteredPassword = prompt("Skriv in admin passord:");
-    if (enteredPassword === "Mia") {
-        removeEvent();
-    } else {
-        alert("Feil passord!");
         }
     };
 
@@ -149,7 +110,7 @@ export default function admin(){
             .select("*");
 
         if (error) {
-            console.error("Error adding event:", error);
+            console.error("Feil ved legge til arrangement:", error);
             alert(`Kunne ikke legge til arrangement. Prøv igjen. Error: ${error.message}`);
         } else {
             alert("Arrangement er opprettet!");
@@ -161,7 +122,7 @@ export default function admin(){
     
     // Function to remove an event
     const removeEvent = async () => {
-        const eventToDelete = prompt("Enter the exact title of the event you want to delete:");
+        const eventToDelete = prompt("Skriv nøyaktig tittel på arrangement du vil fjerne:");
         if (!eventToDelete) return;
 
         const { error } = await supabase.from("events").delete().eq("title", eventToDelete);
@@ -171,7 +132,7 @@ export default function admin(){
             alert("Failed to delete event. Try again.");
         } else {
             setEvents(events.filter(event => event.title !== eventToDelete));
-            alert(`"${eventToDelete}" has been removed.`);
+            alert(`"${eventToDelete}" har blitt fjernet.`);
         }
     };
 
@@ -190,12 +151,12 @@ export default function admin(){
                         <div className=" border-1 rounded-2xl border-gray-300 p-6">
                             <button 
                                 className="hover:scale-105 text-green-700 font-semibold flex justify-center items-center text-sm rounded-full"
-                                onClick={checkPasswordForAddEvent}>
+                                onClick={() => setJobShowForm(true)}>
                                     Legg til arrangement
                             </button>
                             <button 
                                 className="hover:scale-105 text-red-700 font-semibold flex justify-center items-center text-sm rounded-full "
-                                onClick={checkPasswordForDeleteEvent}>
+                                onClick={() => removeEvent()}>
                                     Fjern arrangement
                             </button>
                             </div>
@@ -226,12 +187,12 @@ export default function admin(){
                         <div className=" border-1 rounded-2xl border-gray-300 p-6">
                             <button 
                                 className="hover:scale-105 text-green-700 font-semibold flex justify-center items-center text-sm rounded-full"
-                                onClick={checkPasswordForAddJob}>
+                                onClick={() => setEventShowForm(true)}>
                                         Legg til jobbannonse
                             </button>
                             <button 
                                 className="hover:scale-105 text-red-700 font-semibold flex justify-center items-center text-sm rounded-full "
-                                onClick={checkPasswordForDeleteJob}>
+                                onClick={() => removeJob()}>
                                     Fjern jobbannonse
                             </button>
                         </div>
@@ -269,7 +230,10 @@ export default function admin(){
                 <div className="font-bold">Legg til nyheter</div>
             </div>
             <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl my-6 bg-amber-50">
-            <div className="font-bold">Support</div>
+                <div className="font-bold">Support</div>
+                <div>
+                    <SupportManager/>
+                </div>
             </div>
         </div>
     </div>

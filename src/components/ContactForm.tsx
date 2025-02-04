@@ -1,5 +1,5 @@
 import { useState } from "react";
-import emailjs from "emailjs-com";
+import { supabase } from "../supabaseClient"; // Ensure this is correctly imported
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({
@@ -10,41 +10,57 @@ export default function ContactForm() {
     });
 
     const [message, setMessage] = useState("");
+    const [messageType, setMessageType] = useState<"success" | "error" | "">(""); // State to control message color
 
+    // Handle input change
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    // Handle form submission
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
 
-        // Replace with your EmailJS Service ID, Template ID, and User ID
-        emailjs.send(
-            "YOUR_SERVICE_ID",
-            "YOUR_TEMPLATE_ID",
-            {
-                from_name: `${formData.firstName} ${formData.lastName}`,
-                from_email: formData.email,
-                message: formData.question,
-            },
-            "YOUR_PUBLIC_KEY"
-        )
-        .then((response) => {
-            console.log("Email sent successfully!", response);
-            setMessage("E-posten er sendt! Vi vil svare så snart som mulig.");
-            setFormData({ firstName: "", lastName: "", email: "", question: "" }); // Reset form
-        })
-        .catch((error) => {
-            console.error("Error sending email:", error);
-            setMessage("Noe gikk galt. Prøv igjen.");
-        });
+        const { firstName, lastName, email, question } = formData;
+
+        // Validate fields
+        if (!firstName || !lastName || !email || !question) {
+            setMessage("Vennligst fyll ut alle felt.");
+            setMessageType("error"); // Set message color to red
+            return;
+        }
+
+        // Insert into Supabase
+        const { error } = await supabase
+            .from("support")
+            .insert([{ 
+                firstname: firstName, 
+                surname: lastName, 
+                email: email, 
+                message: question, 
+                helped: false // Default to false
+            }]);
+
+        if (error) {
+            console.error("Error inserting into support table:", error);
+            setMessage("Kunne ikke sende spørsmålet. Prøv igjen.");
+            setMessageType("error"); // Set message color to red
+        } else {
+            setMessage("Spørsmålet er sendt! Vi vil svare deg snart.");
+            setMessageType("success"); // Set message color to green
+            setFormData({ firstName: "", lastName: "", email: "", question: "" });
+        }
     };
 
     return (
         <div className="max-w-4xl mx-auto bg-white p-8 rounded-xl shadow-lg mt-12">
             <h2 className="text-2xl font-bold mb-6">Still spørsmål her:</h2>
 
-            {message && <p className="text-green-600 text-center font-semibold">{message}</p>}
+            {message && (
+                <p className={`text-center font-semibold ${messageType === "success" ? "text-green-600" : "text-red-600"}`}>
+                    {message}
+                </p>
+            )}
 
             <form className="space-y-4" onSubmit={handleSubmit}>
                 {/* Name Fields */}

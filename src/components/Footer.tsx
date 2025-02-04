@@ -7,16 +7,30 @@ import WindPowerIcon from "@mui/icons-material/WindPower";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import { Link } from "react-router-dom";
 import Partners from "./Partners"; // Import the Partners modal
+import { useNavigate } from "react-router-dom";
 
 export default function Footer() {
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
+
+  const navigate = useNavigate();
+
+  const handleAdminClick = () => {
+    const correctPassword = "LinkAdmin25"; // 🔐 Set your password here
+    const enteredPassword = window.prompt("Skriv inn passord for admin tilgang:");
+
+    if (enteredPassword === correctPassword) {
+      navigate("/admin"); // ✅ Redirect if correct
+    } else {
+      alert("Feil passord! 🚫"); // ❌ Show error if incorrect
+    }
+  };
 
   return (
     <div className="relative w-full">
       {/* Wave Above Footer */}
       <div className="absolute top-0 left-0 w-full overflow-hidden">
         <svg
-          className="w-full min-w-[1440px] h-24"
+          className="w-full h-24"
           viewBox="0 0 1440 320"
           xmlns="http://www.w3.org/2000/svg"
           preserveAspectRatio="none"
@@ -66,7 +80,8 @@ export default function Footer() {
           </div>
         </div>
         <p>
-          <Link to={"/admin"} className="hover:text-red-300 hover:scale-102 text-sm">
+          <Link to={"/admin"} className="hover:text-red-300 hover:scale-102 text-sm"
+            onClick={handleAdminClick}>
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </Link>
         </p>

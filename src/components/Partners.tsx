@@ -81,7 +81,7 @@ export default function Partners({ isOpen, onClose }: PartnersProps) {
             {mainPartners.length > 0 && (
               <div className="mb-6">
                 <h3 className="flex justify-center text-lg font-bold text-center mb-4">Hovedpartnere</h3>
-                <div className="grid grid-cols-2 px-4 space-x-4">
+                <div className="grid grid-cols-2 sm:space-x-1 px-4 space-x-4">
                   {mainPartners.map((partner) => (
                     <img
                       key={partner}
