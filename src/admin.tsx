@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { supabase } from "./supabaseClient";
 import SupportManager from "./components/SupportManager";
+import AdminBoard from "./components/AdminBoard";
 
 type Event = {
     id: string;
@@ -138,20 +139,19 @@ export default function admin(){
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <div className="flex justify-center font-4xl bg-red-400 w-2/3 mt-6 rounded-xl text-black py-6">
+            <div className="flex justify-center font-4xl bg-red-400 w-2/3 mt-6 rounded-xl text-black py-6 mb-6">
                 ADMIN
             </div>
 
-            <div className="grid grid-cols-4 space-x-6 mx-4">
-                <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl my-6 bg-amber-50">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2">
+                <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl bg-amber-50">
                     <div className="font-bold">Arrangementer og jobbannonser</div>
                     {/* Add/Remove Event Buttons */}
-                    <div className="px-12 flex flex-col items-center py-4 text-black space-y-4">
-                        Adminstrer arrangementer
+                    <div className="flex flex-col items-center py-4 text-black space-y-4">
                         <div className=" border-1 rounded-2xl border-gray-300 p-6">
                             <button 
                                 className="hover:scale-105 text-green-700 font-semibold flex justify-center items-center text-sm rounded-full"
-                                onClick={() => setJobShowForm(true)}>
+                                onClick={() => setEventShowForm(true)}>
                                     Legg til arrangement
                             </button>
                             <button 
@@ -162,7 +162,7 @@ export default function admin(){
                             </div>
                                 {/* New Event Form */}
                                 {showEventForm && (
-                                    <div className="relative max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg mt-6">
+                                    <div className="relative max-w-lg mx-auto bg-stone-100 p-6 rounded-lg shadow-lg mt-6">
                                         <button className="absolute top-3 right-3 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-lg font-bold hover:bg-red-700" onClick={() => setEventShowForm(false)}>
                                             ✕
                                         </button>
@@ -176,18 +176,17 @@ export default function admin(){
                                         <input type="text" placeholder="Restaurant" value={newEvent.restaurant} onChange={(e) => setNewEvent({ ...newEvent, restaurant: e.target.value })} className="w-full p-2 border rounded mb-2" />
                                         <input type="text" placeholder="Tid" value={newEvent.time} onChange={(e) => setNewEvent({ ...newEvent, time: e.target.value })} className="w-full p-2 border rounded mb-2" />
                                         <input type="text" placeholder="Lenke til teknologiporten arrangement" value={newEvent.link} onChange={(e) => setNewEvent({ ...newEvent, link: e.target.value })} className="w-full p-2 border rounded mb-2" />
-                                        <button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md w-full mt-2" onClick={addNewEvent}>
+                                        <button className="bg-eblue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 rounded-md w-full mt-2" onClick={addNewEvent}>
                                             Legg til arrangement
                                         </button>
                                     </div>
                                     )}
                     {/* Add/Remove Job Buttons */}
-                    <div className="px-12 flex flex-col items-center py-4 text-black space-y-4">
-                        Adminstrer jobbannonser
+                    <div className="flex flex-col items-center text-black space-y-4">
                         <div className=" border-1 rounded-2xl border-gray-300 p-6">
                             <button 
                                 className="hover:scale-105 text-green-700 font-semibold flex justify-center items-center text-sm rounded-full"
-                                onClick={() => setEventShowForm(true)}>
+                                onClick={() => setJobShowForm(true)}>
                                         Legg til jobbannonse
                             </button>
                             <button 
@@ -198,7 +197,7 @@ export default function admin(){
                         </div>
                         {/* New Job Form */}
                         {showJobForm && (
-                            <div className="relative max-w-lg mx-auto bg-white p-6 rounded-lg shadow-lg mt-6">
+                            <div className="relative max-w-lg mx-auto bg-stone-100 p-6 rounded-lg shadow-lg mt-6">
                                 <button className="absolute top-3 right-3 bg-red-500 text-white w-6 h-6 rounded-full flex items-center justify-center text-lg font-bold hover:bg-red-700" onClick={() => setJobShowForm(false)}>
                                     ✕
                                 </button>
@@ -223,15 +222,17 @@ export default function admin(){
                     </div>
                 </div>
             </div>
-            <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl my-6 bg-amber-50">
-                <div className="font-bold">Adminstrer bilder og styret</div>
+            <div className="w-full max-w-sm sm:max-w-sm lg:max-w-4xl text-center border border-gray-300 rounded-xl bg-amber-50 ">
+                <div> 
+                    <AdminBoard/>
+                </div>
             </div>
-            <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl my-6 bg-amber-50">
+            <div className="w-full max-w-sm sm:max-w-sm lg:max-w-4xl text-center border border-gray-300 rounded-xl bg-amber-50 py-6">
                 <div className="font-bold">Legg til nyheter</div>
             </div>
-            <div className="grid text-center justify-center py-8 border border-gray-300 rounded-xl my-6 bg-amber-50">
+            <div className="w-full max-w-sm sm:max-w-sm lg:max-w-4xl text-center border border-gray-300 rounded-xl bg-amber-50 py-6">
                 <div className="font-bold">Support</div>
-                <div>
+                <div className="w-full">
                     <SupportManager/>
                 </div>
             </div>

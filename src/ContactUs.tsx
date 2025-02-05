@@ -66,7 +66,7 @@ export default function ContactUs() {
                     <>
                         {/* Leader Section */}
                         {leder && (
-                            <div className="flex flex-col items-center justify-center py-6">
+                            <div className="flex flex-col items-center justify-center my-3">
                                 <img
                                     src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.JPG`}
                                     className="h-40 rounded-2xl object-cover"
@@ -80,9 +80,9 @@ export default function ContactUs() {
                         )}
 
                         {/* Nestleder, HR, Økonomiansvarlig in a row */}
-                        <div className="flex flex-row  justify-center p-6 space-x-12">
+                        <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
                             {nestleder && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -95,7 +95,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                             {hr && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -108,7 +108,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                             {økonomi && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -123,9 +123,9 @@ export default function ContactUs() {
                         </div>
 
                         {/* Other members */}
-                        <div className="flex flex-row  justify-center p-6 space-x-12">
+                        <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
                             {marked && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -138,7 +138,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                             {bedrift && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -151,7 +151,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                             {logistikk && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
@@ -164,7 +164,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                             {fa && (
-                                <div className="text-center flex flex-col items-center justify-center">
+                                <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"

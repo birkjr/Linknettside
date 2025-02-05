@@ -107,10 +107,10 @@ export default function SupportManager() {
             ) : messages.length === 0 ? (
                 <p className="text-center text-gray-600">Ingen supportmeldinger funnet.</p>
             ) : (
-                <div className=" border p-4 rounded-lg shadow-sm">
+                <div className="border p-4 rounded-lg shadow-sm">
                     {/* Delete Message Button */}
                     <button
-                        className="absolute top-2 right-2 text-red-600 hover:text-red-800 text-xl"
+                        className="text-red-600 hover:scale-125 text-xl"
                         onClick={() => deleteMessage(messages[0].id)}
                     >
                         ✕

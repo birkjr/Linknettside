@@ -81,14 +81,14 @@ export default function OmOss() {
                             Styret 
                         </h3>
                         <p className="py-2 text-center text-xl">Styret leder EMIL-Link og tar avgjørelser på vegne av komiteen</p>
-                        <p className="py-2 lg:text-center sm:text-left">Leder | {leder?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">Nestleder | {nestleder?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">HR-ansvarlig | {hr?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">Økonomi ansvarlig | {økonomi?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">FA teamleder | {fa?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">Logistikk teamleder | {logistikk?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">Bedrift teamleder | {bedrift?.name}</p>
-                        <p className="py-2 lg:text-center sm:text-left">Markedsføring teamleder & IT | {marked?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left"> {leder?.stilling} | {leder?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{nestleder?.stilling} | {nestleder?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{hr?.stilling} | {hr?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{økonomi?.stilling} | {økonomi?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{bedrift?.stilling} | {bedrift?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{marked?.stilling} | {marked?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{logistikk?.stilling} | {logistikk?.name}</p>
+                        <p className="py-2 lg:text-center sm:text-left">{fa?.stilling} | {fa?.name}</p>
                     </div>
 
 
