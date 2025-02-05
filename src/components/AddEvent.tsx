@@ -73,7 +73,7 @@ export default function AddEvent() {
     };
 
     return (
-        <div className="w-full max-w-2xl mx-auto p-6 bg-yellow-100 rounded-xl shadow-lg">
+        <div className="w-full max-w-2xl mx-auto p-6 rounded-xl shadow-lg">
             <h2 className="text-lg font-bold mb-4 text-center">Administrer arrangementer</h2>
 
             {/* Form for adding new events */}
@@ -94,17 +94,17 @@ export default function AddEvent() {
             {events.length === 0 ? (
                 <p className="text-center">Ingen arrangementer ute for øyeblikket.</p>
             ) : (
-                <ul className="space-y-4">
+                <ul className="space-y-1">
                     {events.map((event) => (
-                        <li key={event.id} className="border p-1 rounded-lg shadow-md flex justify-between items-center bg-white">
+                        <li key={event.id} className="px-12 py-2 rounded-lg shadow-md flex justify-between items-center bg-yellow-100">
                             <div >
-                                <p className="font-bold">{event.title}</p>
-                                <p className="text-sm text-gray-700">{event.date} kl. {event.time}</p>
+                                <p className="font-bold flex text-center">{event.title }, {event.date}</p>
                             </div>
-                            <button onClick={() => removeEvent(event.id)} className="text-red-600 hover:text-red-800 text-lg">
+                            <button className="text-red-600 hover:text-red-800 text-lg" onClick={() => removeEvent(event.id)}>
                                 ✖
                             </button>
                         </li>
+                        
                     ))}
                 </ul>
             )}

@@ -96,7 +96,7 @@ export default function AddNews() {
         />
         <button
           onClick={addNewsItem}
-          className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800"
+          className="bg-green-700 text-white px-4 py-1 rounded-md hover:bg-green-800"
         >
           Legg til nyhet
         </button>
@@ -108,15 +108,11 @@ export default function AddNews() {
       ) : news.length === 0 ? (
         <p className="text-gray-500">Ingen nyheter ute for øyeblikket.</p>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-1 bg-yellow-100">
           {news.map((item) => (
-            <li key={item.id} className="border p-4 rounded-lg shadow-md flex justify-between items-center">
+            <li key={item.id} className="p-4 rounded-lg shadow-md flex justify-between items-center">
               <div>
                 <p className="font-bold">{item.title}</p>
-                <p className="text-sm text-gray-700">{item.description}</p>
-                <a href={item.link} target="_blank" rel="noopener noreferrer" className="text-blue-600 underline">
-                  Les mer
-                </a>
               </div>
               <button
                 onClick={() => deleteNewsItem(item.id)}

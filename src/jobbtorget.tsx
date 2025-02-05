@@ -52,7 +52,7 @@ export default function Jobbtorget() {
     };
 
     return (
-        <div className="min-h-screen flex flex-col w-full p-6 lg:px-12">
+        <div className="flex flex-col w-full p-6 lg:px-12">
             {/* Blue Header Section */}
             <div className="w-full max-w-6xl mx-auto p-12 text-white text-center rounded-xl" style={{ backgroundColor: "#4682B4" }}>
                 <h1 className="text-white text-3xl my-4">Jobbtorget</h1>

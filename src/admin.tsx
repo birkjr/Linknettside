@@ -3,10 +3,26 @@ import AdminBoard from "./components/AdminBoard";
 import AddNews from "./components/AddNews";
 import AddEvent from "./components/AddEvent";
 import AddJob from "./components/AddJob";
-import EditPhoto from "./components/EditPhoto";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { useAuth } from "./auth";
+import UploadPhoto from "./components/UploadPhoto";
+
 
 export default function admin(){
+    const navigate = useNavigate();
+
+    const { isAuthenticated } = useAuth(); // ✅ Get authentication state
+
+    useEffect(() => {
+      if (!isAuthenticated) {
+        alert("Ingen tilgang! 🚫");
+        navigate("/");
+      }
+    }, [isAuthenticated, navigate]);
+
     return (
+        
         <div className="flex flex-col items-center justify-center">
             <div className="flex justify-center font-4xl bg-red-400 w-2/3 mt-6 rounded-xl text-black py-6 mb-6">
                 ADMIN
@@ -33,7 +49,7 @@ export default function admin(){
                     <AdminBoard/>
                 </div>
                 <div className="w-full max-w-sm sm:max-w-sm lg:max-w-4xl text-center border border-gray-300 rounded-xl bg-amber-50 py-6">
-                    <EditPhoto/>
+                    <UploadPhoto/>
                 </div>
             </div>
         </div>
@@ -43,3 +59,4 @@ export default function admin(){
         
     )
 }
+

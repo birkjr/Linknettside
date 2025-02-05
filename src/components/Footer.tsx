@@ -5,28 +5,27 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import { Link } from "react-router-dom";
-import Partners from "./Partners"; // Import the Partners modal
+import Partners from "./Partners";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../auth";
 
 export default function Footer() {
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // ✅ Ensure this is correctly defined
+  const { login } = useAuth(); // ✅ Get login function from auth
 
-  const handleAdminClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
-    e.preventDefault(); // Prevent navigation
-  
-    const correctPassword = "LinkAdmin25"; // 🔐 Set your password here
+  const handleAdminClick = () => {
+    const correctPassword = "LinkAdmin25";
     const enteredPassword = window.prompt("Skriv inn passord for admin tilgang:");
-  
+
     if (enteredPassword === correctPassword) {
-      navigate("/admin"); // ✅ Redirect only if correct
+      login(); // ✅ Authenticate user
+      navigate("/admin");
     } else {
-      alert("Feil passord! 🚫"); // ❌ Show error if incorrect
+      alert("Feil passord! 🚫");
     }
   };
-  
 
   return (
     <div className="relative w-full">
@@ -83,15 +82,17 @@ export default function Footer() {
           </div>
         </div>
         <p>
-        <p>
-          <Link
-            to="#"
-            className="hover:text-red-300 hover:scale-102 text-sm"
-            onClick={handleAdminClick}
-          >
+
+        <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault(); // Prevents the link from navigating
+            handleAdminClick();
+          }}
+          className="hover:text-red-400">
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
-          </Link>
-        </p>
+          </a>
+
         </p>
       </footer>
 
@@ -100,3 +101,4 @@ export default function Footer() {
     </div>
   );
 }
+

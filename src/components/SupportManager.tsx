@@ -100,8 +100,8 @@ export default function SupportManager() {
     };
 
     return (
-        <div className="max-w-3xl mx-auto p-8 shadow-lg rounded-xl mt-12">
-            <h1 className="font-bold underline">Support</h1>
+        <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-lg">
+            <h2 className="text-xl font-bold mb-4">Support</h2>
 
             {loading ? (
                 <p className="text-center text-gray-600">Laster inn meldinger...</p>
