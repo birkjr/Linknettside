@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import UploadFileIcon from '@mui/icons-material/UploadFile';
+import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 
 export default function UploadPhoto() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -86,24 +88,15 @@ export default function UploadPhoto() {
     <div className="w-full max-w-xl mx-auto p-6 rounded-xl shadow-lg ">
       <h2 className="text-lg font-bold mb-4 text-center">Last opp bilder</h2>
 
-      {/* Drag and Drop Box */}
-      <div
-        onDragOver={(e) => e.preventDefault()}
-        onDrop={handleDrop}
-        className="border-2 border-dashed border-gray-400 p-6 rounded-lg text-center cursor-pointer hover:bg-yellow-100"
-      >
-        {selectedFile ? (
-          <p className="text-green-600">📸 {selectedFile.name} er valgt!</p>
-        ) : (
-          <p className="text-gray-500">Dra og slipp et bilde her</p>
-        )}
-      </div>
-
       {/* File Input Button */}
-      <div className="mt-4 flex flex-col items-center">
-        <label className="hover:bg-yellow-100 text-gray-400 px-4 py-2 rounded-md cursor-pointer border-2 border-dashed">
-          eller velg bilde her
-          <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+      <div className="flex flex-col items-center justify-center space-y-4 border-2 border-dashed border-gray-400 p-6 rounded-lg text-center cursor-pointer hover:bg-yellow-100"
+        
+        onDragOver={(e) => e.preventDefault()}
+        onDrop={handleDrop}>
+            <AddPhotoAlternateIcon/>
+        <label className="hover:bg-yellow-200 text-gray-400 px-4 py-2 rounded-md cursor-pointer border-2 border-dashed">
+            <UploadFileIcon/>
+        <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
         </label>
       </div>
 
