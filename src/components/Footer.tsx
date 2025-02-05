@@ -5,6 +5,7 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import HandshakeIcon from "@mui/icons-material/Handshake";
+import GitHubIcon from '@mui/icons-material/GitHub';
 import Partners from "./Partners";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
@@ -81,9 +82,8 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <p>
-
-        <a
+        <p className="flex flex-col justify-center item-center">
+          <a
           href="#"
           onClick={(e) => {
             e.preventDefault(); // Prevents the link from navigating
@@ -92,7 +92,7 @@ export default function Footer() {
           className="hover:text-red-400">
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </a>
-
+          <a className="hover:scale-120 text-black mt-6"><GitHubIcon/></a>
         </p>
       </footer>
 
