@@ -1,6 +1,13 @@
 import { useState } from "react";
 import { supabase } from "../supabaseClient";
-
+type Job ={
+    bedrift: string;
+    jobType: string;
+    jobTitle: string;
+    deadline: string;
+    link: string;
+    place: string;
+}
 
 export default function AddJob() {
     const [jobListings, setJobListings] = useState<Job[]>([]);
