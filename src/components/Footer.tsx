@@ -14,16 +14,19 @@ export default function Footer() {
 
   const navigate = useNavigate();
 
-  const handleAdminClick = () => {
+  const handleAdminClick = (e: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    e.preventDefault(); // Prevent navigation
+  
     const correctPassword = "LinkAdmin25"; // 🔐 Set your password here
     const enteredPassword = window.prompt("Skriv inn passord for admin tilgang:");
-
+  
     if (enteredPassword === correctPassword) {
-      navigate("/admin"); // ✅ Redirect if correct
+      navigate("/admin"); // ✅ Redirect only if correct
     } else {
       alert("Feil passord! 🚫"); // ❌ Show error if incorrect
     }
   };
+  
 
   return (
     <div className="relative w-full">
@@ -80,10 +83,15 @@ export default function Footer() {
           </div>
         </div>
         <p>
-          <Link to={"/admin"} className="hover:text-red-300 hover:scale-102 text-sm"
-            onClick={handleAdminClick}>
+        <p>
+          <Link
+            to="#"
+            className="hover:text-red-300 hover:scale-102 text-sm"
+            onClick={handleAdminClick}
+          >
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </Link>
+        </p>
         </p>
       </footer>
 

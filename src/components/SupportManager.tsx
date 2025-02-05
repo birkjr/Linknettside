@@ -81,7 +81,7 @@ export default function SupportManager() {
 
     // Handle deleting a message without replying
     const deleteMessage = async (id: number) => {
-        if (!window.confirm("Er du sikker på at du vil slette denne supportmeldingen?")) return;
+        //if (!window.confirm("Er du sikker på at du vil slette denne supportmeldingen?")) return;
 
         try {
             await supabase.from("support").delete().eq("id", id);
@@ -101,6 +101,7 @@ export default function SupportManager() {
 
     return (
         <div className="max-w-3xl mx-auto p-8 shadow-lg rounded-xl mt-12">
+            <h1 className="font-bold underline">Support</h1>
 
             {loading ? (
                 <p className="text-center text-gray-600">Laster inn meldinger...</p>
