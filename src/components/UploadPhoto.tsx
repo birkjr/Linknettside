@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-import UploadFileIcon from '@mui/icons-material/UploadFile';
-import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
+import UploadFileIcon from "@mui/icons-material/UploadFile";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 export default function UploadPhoto() {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
@@ -19,7 +20,7 @@ export default function UploadPhoto() {
     if (error) {
       console.error("❌ Error fetching files:", error);
     } else {
-      setFileNames(data.map(file => file.name)); // Store only file names
+      setFileNames(data.map((file) => file.name)); // Store only file names
     }
   };
 
@@ -40,8 +41,8 @@ export default function UploadPhoto() {
       alert("Kunne ikke laste opp bildet. Prøv igjen.");
     } else {
       alert("✅ Bildet ble lastet opp!");
-      setFileNames(prev => [...prev, filePath.split("/").pop()!]); // Add only file name
-      setSelectedFile(null);
+      setFileNames((prev) => [...prev, filePath.split("/").pop()!]); // Add only file name
+      setSelectedFile(null); // Clear selected file after upload
     }
 
     setUploading(false);
@@ -58,10 +59,16 @@ export default function UploadPhoto() {
       alert("Kunne ikke slette bildet. Prøv igjen.");
     } else {
       alert("✅ Bildet ble slettet!");
-      setFileNames(prev => prev.filter(name => name !== fileName));
+      setFileNames((prev) => prev.filter((name) => name !== fileName));
     }
   };
-  // ** Handle file drop (Drag & Drop) **
+
+  // Remove selected file before uploading
+  const removeSelectedFile = () => {
+    setSelectedFile(null);
+  };
+
+  // Handle file drop (Drag & Drop)
   const handleDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const file = event.dataTransfer.files[0];
@@ -72,9 +79,7 @@ export default function UploadPhoto() {
     }
   };
 
-
-
-  // ** Handle file selection via input (Finder) **
+  // Handle file selection via input (Finder)
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file && file.type.startsWith("image/")) {
@@ -85,26 +90,47 @@ export default function UploadPhoto() {
   };
 
   return (
-    <div className="w-full max-w-xl mx-auto p-6 rounded-xl shadow-lg ">
+    <div className="w-full max-w-xl mx-auto p-6 rounded-xl shadow-lg">
       <h2 className="text-lg font-bold mb-4 text-center">Last opp bilder</h2>
 
-      {/* File Input Button */}
-      <div className="flex flex-col items-center justify-center space-y-4 border-2 border-dashed border-gray-400 p-6 rounded-lg text-center cursor-pointer hover:bg-yellow-100"
-        
+      {/* File Input and Drag & Drop Box */}
+      <div
+        className="flex flex-col items-center justify-center space-y-4 border-2 border-dashed border-gray-400 p-6 rounded-lg text-center cursor-pointer hover:bg-yellow-100"
         onDragOver={(e) => e.preventDefault()}
-        onDrop={handleDrop}>
-            <AddPhotoAlternateIcon/>
-        <label className="hover:bg-yellow-200 text-gray-400 px-4 py-2 rounded-md cursor-pointer border-2 border-dashed">
-            <UploadFileIcon/>
-        <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
+        onDrop={handleDrop}
+      >
+        <AddPhotoAlternateIcon />
+        {selectedFile ? (
+          <p className="text-green-600 font-semibold">{selectedFile.name} er valgt!</p>
+        ) : (
+          <p className="text-gray-500">Dra og slipp et bilde her</p>
+        )}
+      </div>
+
+      {/* Visible File Input Button */}
+      <div className="mt-4 flex flex-col items-center">
+        <label className="hover:bg-yellow-200 text-gray-400 px-4 py-2 rounded-md cursor-pointer border-2 border-dashed flex items-center space-x-2">
+          <UploadFileIcon />
+          <span>{selectedFile ? selectedFile.name : "eller velg bilde her"}</span>
+          <input type="file" accept="image/*" onChange={handleFileChange} className="hidden" />
         </label>
       </div>
 
+      {/* Show delete button if a file is selected */}
+      {selectedFile && (
+        <button
+          onClick={removeSelectedFile}
+          className="bg-red-500 text-white px-4 py-2 my-2 rounded-md hover:bg-red-600 w-full flex items-center justify-center"
+        >
+          <DeleteIcon className="mr-2" />
+          Fjern valgt fil
+        </button>
+      )}
 
       {/* Upload Button */}
       <button
         onClick={uploadFile}
-        disabled={uploading}
+        disabled={uploading || !selectedFile}
         className="bg-green-700 text-white px-4 py-2 my-2 rounded-md hover:bg-green-800 w-full"
       >
         {uploading ? "Laster opp..." : "Last opp bilde"}
@@ -120,10 +146,7 @@ export default function UploadPhoto() {
             {fileNames.map((fileName) => (
               <li key={fileName} className="flex justify-between items-center mb-2 p-2 shadow-md bg-yellow-100 rounded-xl">
                 <span className="text-gray-700">{fileName}</span>
-                <button
-                  onClick={() => deleteFile(fileName)}
-                  className="text-red-600 hover:text-red-800 text-lg"
-                >
+                <button onClick={() => deleteFile(fileName)} className="text-red-500 hover:text-red-600 text-lg">
                   ✖
                 </button>
               </li>
