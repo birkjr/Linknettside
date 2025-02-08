@@ -2,7 +2,7 @@ import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.tsx";
-import { Route, Routes, Navigate, BrowserRouter } from "react-router-dom";
+import { Route, Routes, Navigate, HashRouter } from "react-router-dom";
 import Layout from "./components/layout.tsx";
 import FAQ from "./FAQ.tsx";
 import ForBedrifter from "./forBedrifter.tsx";
@@ -23,7 +23,7 @@ const PrivateRoute = ({ children }: { children: JSX.Element }) => {
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
@@ -39,7 +39,7 @@ createRoot(document.getElementById("root")!).render(
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   </StrictMode>
 );
