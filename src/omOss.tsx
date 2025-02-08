@@ -80,7 +80,6 @@ export default function OmOss() {
                         <h3 className="text-3xl font-semibold text-center sm:text-center py-4">
                             Styret 
                         </h3>
-                        <p className="py-2 text-center text-xl">Styret leder EMIL-Link og tar avgjørelser på vegne av komiteen</p>
                         <p className="py-2 lg:text-center sm:text-left"> {leder?.stilling} | {leder?.name}</p>
                         <p className="py-2 lg:text-center sm:text-left">{nestleder?.stilling} | {nestleder?.name}</p>
                         <p className="py-2 lg:text-center sm:text-left">{hr?.stilling} | {hr?.name}</p>

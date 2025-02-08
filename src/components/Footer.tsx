@@ -86,19 +86,23 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <p className="flex flex-col justify-center item-center">
+        <div className="flex flex-col justify-center items-center">
           <a
             href="#"
             onClick={(e) => {
               e.preventDefault();
               setShowPasswordModal(true); // Show password modal
             }}
-            className="hover:text-red-400"
+            className="hover:text-red-400" // ✅ Move hover effect here
           >
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </a>
-          <a className="hover:scale-120 text-black mt-6"><GitHubIcon /></a>
-        </p>
+          <a href="https://github.com/birkjr/Linknettside" target="_blank" rel="noopener noreferrer">
+            <GitHubIcon className="hover:scale-110" />
+          </a>
+
+        </div>
+
       </footer>
 
       {/* Render Partner Popup */}
