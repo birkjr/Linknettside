@@ -54,7 +54,7 @@ export default function ContactUs() {
             <div className="w-full p-6 lg:px-12">
                 {/* Blue Section */}
                 <div
-                    className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto h-auto lg:h-auto p-12 text-white text-center rounded-lg"
+                    className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto h-auto lg:h-auto p-6 text-white text-center rounded-lg"
                     style={{ backgroundColor: "#4682B4" }}
                 >
                     <h3 className="text-3xl">Styret</h3>
@@ -70,7 +70,7 @@ export default function ContactUs() {
                                 <img
                                     src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.JPG`}
                                     className="h-40 rounded-2xl object-cover"
-                                    alt={leder.name}
+                                    alt={leder.stilling}
                                 />
                                 <p className="font-semibold mt-2">{leder.stilling}</p>
                                 <p className="text-sm">{leder.name}</p>
@@ -81,25 +81,12 @@ export default function ContactUs() {
 
                         {/* Nestleder, HR, Økonomiansvarlig in a row */}
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
-                            {nestleder && (
-                                <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <img
-                                        src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.JPG`}
-                                        className="h-40 rounded-2xl"
-                                        alt="Nestleder"
-                                    />
-                                    <p className="font-semibold mt-2">{nestleder.stilling}</p>
-                                    <p className="text-sm">{nestleder.name}</p>
-                                    <p> tlf: <a href={`tel:${nestleder.telefon}`} className="text-blue-500">{nestleder.telefon}</a> </p> 
-                                    <p> Mail: <a href={`mailto:${nestleder.mail}`} className="text-blue-500">{nestleder.mail}</a> </p>
-                                </div>
-                            )}
                             {hr && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="HR ansvarlig"
+                                        alt={`${hr.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{hr.name}</p>
                                     <p className="text-sm">{hr.stilling}</p>
@@ -107,12 +94,25 @@ export default function ContactUs() {
                                     <p> Mail: <a href={`mailto:${hr.mail}`} className="text-blue-500">{hr.mail}</a> </p>
                                 </div>
                             )}
+                            {nestleder && (
+                                <div className="text-center flex flex-col items-center justify-center my-3">
+                                    <img
+                                        src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.JPG`}
+                                        className="h-40 rounded-2xl"
+                                        alt={`${nestleder.stilling}`}
+                                    />
+                                    <p className="font-semibold mt-2">{nestleder.stilling}</p>
+                                    <p className="text-sm">{nestleder.name}</p>
+                                    <p> tlf: <a href={`tel:${nestleder.telefon}`} className="text-blue-500">{nestleder.telefon}</a> </p> 
+                                    <p> Mail: <a href={`mailto:${nestleder.mail}`} className="text-blue-500">{nestleder.mail}</a> </p>
+                                </div>
+                            )}
                             {økonomi && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
                                         src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="Økonomiansvarlig"
+                                        alt={`${økonomi.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{økonomi.name}</p>
                                     <p className="text-sm">{økonomi.stilling}</p>
@@ -129,7 +129,7 @@ export default function ContactUs() {
                                     <img
                                         src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="Nestleder"
+                                        alt={`${marked.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{marked.name}</p>
                                     <p className="text-sm">{marked.stilling}</p>
@@ -142,7 +142,7 @@ export default function ContactUs() {
                                     <img
                                         src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="HR ansvarlig"
+                                        alt={`${bedrift.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{bedrift.name}</p>
                                     <p className="text-sm">{bedrift.stilling}</p>
@@ -155,7 +155,7 @@ export default function ContactUs() {
                                     <img
                                         src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="Logistikk"
+                                        alt={`${logistikk.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{logistikk.name}</p>
                                     <p className="text-sm">{logistikk.stilling}</p>
@@ -168,7 +168,7 @@ export default function ContactUs() {
                                     <img
                                         src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.JPG`}
                                         className="h-40 rounded-2xl"
-                                        alt="FA"
+                                        alt={`${fa.stilling}`}
                                     />
                                     <p className="font-semibold mt-2">{fa.name}</p>
                                     <p className="text-sm">{fa.stilling}</p>
