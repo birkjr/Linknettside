@@ -64,12 +64,12 @@ export default function AddEvent() {
     useEffect(() => {
         const checkAndDeleteExpiredEvents = async () => {
             const nowDate = new Date().toISOString().slice(0,7);
-            const nowTime = new Date().toISOString().slice(11,16)
+            //const nowTime = new Date().toISOString().slice(11,16)
     
             for (const event of events) {
                 // Properly format the event datetime
                 const eventDate = new Date(`${event.date}`);
-                const eventTime = new Date(`${event.time}`)
+                //const eventTime = new Date(`${event.time}`)
     
                 // If the current time is equal or past the event time, delete it
                 if (nowDate >= eventDate.toISOString()) {
