@@ -7,7 +7,20 @@ type JobListingProps = {
     place: string;
 };
 
+
 export default function JobListing({ bedrift, jobType, jobTitle, deadline, link, place }: JobListingProps) {
+    
+    const formatDate = (dateString: string) => {
+        const date = new Date(dateString);
+        const formattedDate = date.toLocaleDateString("no-NO", {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric",
+        });
+        // Replace default formatting with desired format: "day.date year"
+    return formattedDate.replace(/\//g, ".").replace(/(\d{2})\.(\d{2})\.(\d{4})/, "$1.$2 $3");
+    };
+
     return (
         <div className="w-full sm:max-w-2xl mx-auto bg-white rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md">
             
@@ -34,7 +47,7 @@ export default function JobListing({ bedrift, jobType, jobTitle, deadline, link,
                     <p className="text-gray-900 font-semibold text-xs sm:text-sm">{jobType}</p>
                     <h3 className="hidden sm:block text-2xl font-bold">{jobTitle}</h3> {/* Desktop title */}
                     <p className="text-sm text-gray-900">{place}</p> 
-                    <p className="text-xs text-gray-700">Frist: {deadline}</p>
+                    <p className="text-xs text-gray-700">Frist: {formatDate(deadline)}</p>
                 </div>
 
             </a>

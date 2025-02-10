@@ -63,18 +63,16 @@ export default function AddEvent() {
 
     useEffect(() => {
         const checkAndDeleteExpiredEvents = async () => {
-            const now = new Date();
-            console.log("🔍 Current time:", now.toISOString());
+            const nowDate = new Date().toISOString().slice(0,7);
+            const nowTime = new Date().toISOString().slice(11,16)
     
             for (const event of events) {
                 // Properly format the event datetime
-                const eventDateTime = new Date(`${event.date}T${event.time}`);
-    
-                console.log(`🕒 Checking event: ${event.title}`);
-                console.log("   🗓️ Event DateTime:", eventDateTime.toISOString());
+                const eventDate = new Date(`${event.date}`);
+                const eventTime = new Date(`${event.time}`)
     
                 // If the current time is equal or past the event time, delete it
-                if (now >= eventDateTime) {
+                if (nowDate >= eventDate.toISOString()) {
                     console.log(`🚨 Deleting event: ${event.title}`);
     
                     const { error } = await supabase.from("events").delete().eq("id", event.id);
@@ -93,8 +91,6 @@ export default function AddEvent() {
     
         return () => clearInterval(interval); // Cleanup function
     }, [events]);
-    
-    
 
     // Function to remove an event
     const removeEvent = async (id: number) => {
@@ -162,7 +158,7 @@ export default function AddEvent() {
             ) : (
                 <ul className="space-y-1">
                     {events.map((event) => (
-                        <li key={event.id} className="px-12 py-2 rounded-lg shadow-md flex justify-between items-center bg-yellow-100 hover:scale-102" onClick={() => editEvent(event)}>
+                        <li key={event.id} className="px-12 py-2 rounded-lg shadow-md flex justify-between items-center bg-yellow-100 hover:bg-yellow-200" onClick={() => editEvent(event)}>
                             <div >
                                 <p className="font-bold flex text-center">{event.title }, {event.date}</p>
                             </div>
@@ -170,6 +166,7 @@ export default function AddEvent() {
                                 ✖
                             </button>
                         </li>
+                        
                         
                     ))}
                 </ul>

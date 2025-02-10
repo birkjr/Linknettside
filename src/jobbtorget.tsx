@@ -50,6 +50,8 @@ export default function Jobbtorget() {
 
         setFilteredJobs(filtered);
     };
+    const now = new Date().toISOString().slice(0,10);
+    
 
     return (
         <div className="flex flex-col w-full p-6 lg:px-12">
@@ -58,6 +60,8 @@ export default function Jobbtorget() {
                 <h1 className="text-white text-3xl my-4">Jobbtorget</h1>
                 <p>Her er de nyeste jobbannonsene som ligger ute for EMIL studenter</p>
                 <p>SØK!</p>
+                {now}
+                
             </div>
 
             {/* Main Layout: Responsive Filter & Job Listings */}
