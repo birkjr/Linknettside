@@ -22,6 +22,20 @@ type Event = {
 export default function Arrangementer() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    const formattedDate = date.toLocaleDateString("no-NO", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric",
+    });
+
+    // Replace default formatting with desired format: "day.date year"
+    return formattedDate.replace(/\//g, ".").replace(/(\d{2})\.(\d{2})\.(\d{4})/, "$1.$2 $3");
+  };
+  const formatTime = (timeString: string) => {
+    return timeString.slice(0, 5); // Removes the seconds (e.g., "18:00:00" -> "18:00")
+  };
 
   useEffect(() => {
     const fetchEvents = async () => {
@@ -83,11 +97,11 @@ export default function Arrangementer() {
                     </p>
                     <p className="flex items-center space-x-4 py-1">
                       <CalendarMonthIcon fontSize="inherit" />
-                      <span>{event.date}</span>
+                      <span>{formatDate(event.date)}</span>
                     </p>
                     <p className="flex items-center space-x-4 py-1">
                       <AccessTimeIcon fontSize="inherit" />
-                      <span>{event.time}</span>
+                      <span>{formatTime(event.time)}</span>
                     </p>
                   </div>
                 </div>
