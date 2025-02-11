@@ -76,8 +76,8 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <p>
-              <a href="https://link.mazemap.com/34oLTzyB" target="_blank" rel="noopener noreferrer" className="hover:text-stone-100">
+            <p className="hover:text-stone-100 inline-block">
+              <a href="https://link.mazemap.com/34oLTzyB" target="_blank" rel="noopener noreferrer">
                 <WindPowerIcon /> <br />
                 Energi- og miljøingeniørenes linjeforening, EMIL <br />
                 NTNU GLØSHAUGEN, ELEKTROBYGGET <br />
@@ -85,6 +85,7 @@ export default function Footer() {
               </a>
             </p>
           </div>
+
         </div>
         <div className="flex flex-col justify-center items-center">
           <a
@@ -93,12 +94,11 @@ export default function Footer() {
               e.preventDefault();
               setShowPasswordModal(true); // Show password modal
             }}
-            className="hover:text-red-400" // ✅ Move hover effect here
           >
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </a>
           <a href="https://github.com/birkjr/Linknettside" target="_blank" rel="noopener noreferrer">
-            <GitHubIcon className="hover:scale-110" />
+            <GitHubIcon className="hover:scale-120" />
           </a>
 
         </div>
