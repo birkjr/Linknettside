@@ -19,7 +19,7 @@ export default function Footer() {
   const { login } = useAuth(); // ✅ Get login function from auth
 
   const correctPassword = "LinkAdmin25"; // Your admin password
-
+ 
   const handleLogin = () => {
     if (password === correctPassword) {
       login(); // ✅ Authenticate user
