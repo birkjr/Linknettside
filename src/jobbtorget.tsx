@@ -58,6 +58,7 @@ export default function Jobbtorget() {
                 <h1 className="text-white text-3xl my-4">Jobbtorget</h1>
                 <p>Her er de nyeste jobbannonsene som ligger ute for EMIL studenter</p>
                 <p>SØK!</p>
+                
             </div>
 
             {/* Main Layout: Responsive Filter & Job Listings */}

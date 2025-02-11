@@ -22,6 +22,28 @@ export default function AddJob() {
         place: "",
     });
 
+
+    useEffect(() => {
+        const checkAndDeleteExpiredEvents = async () => {
+            const now = new Date().toISOString().slice(0,10);
+    
+            for (const jobs of job) {
+                // Properly format the event datetime
+                const jobDate = new Date(`${jobs.deadline}`).toISOString();
+    
+                // If the current time is equal or past the event time, delete it
+                if (now > jobDate) {
+                    removeJob
+                }
+            }
+        };
+    
+        // Run every 10 seconds to ensure events get deleted on time
+        const interval = setInterval(checkAndDeleteExpiredEvents, 10000);
+    
+        return () => clearInterval(interval); // Cleanup function
+    }, [job]);
+
     useEffect(()=> {
         const fetchJobs = async () =>{
             const { data, error } = await supabase.from("jobs").select("*");
@@ -87,7 +109,7 @@ return (
                 </select>
                 <input type="text" placeholder="Tittel" value={newJob.jobTitle} onChange={(e) => setNewJob({ ...newJob, jobTitle: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Sted (Place)" value={newJob.place} onChange={(e) => setNewJob({ ...newJob, place: e.target.value })} className="w-full p-2 border rounded mb-2" />
-            <input type="text" placeholder="Søknadsfrist" value={newJob.deadline} onChange={(e) => setNewJob({ ...newJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
+            <input type="date" placeholder="Søknadsfrist" value={newJob.deadline} onChange={(e) => setNewJob({ ...newJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Link til annonse her" value={newJob.link} onChange={(e) => setNewJob({ ...newJob, link: e.target.value})} className="w-full p-2 border rounded mb-2" /> 
             <button className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full" onClick={addNewJob}>
                 Legg til jobbannonse
