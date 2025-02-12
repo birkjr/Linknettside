@@ -20,7 +20,7 @@ function App() {
           <div className="flex flex-col justify-center items-center rounded-xl p-6 text-serif w-full lg:w-1/2 text-center">
               <img 
                   className="h-24 w-28 rounded-xl my-6" 
-                  src={`${supabaseStorageUrl}logo_transparent.JPG`} 
+                  src={`${supabaseStorageUrl}logo_transparent.png`} 
                   alt="EMIL-Link Logo"
               />
               <p className="text-sm sm:text-base">EMIL-Link er Energi og Miljø</p>

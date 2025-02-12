@@ -38,7 +38,7 @@ export default function Header() {
           <Link to={"/"}>
             <img
               className="h-20 flex items-center transition-transform duration-300 hover:scale-105"
-              src={`${supabaseStorageUrl}logo_transparent.JPG`}
+              src={`${supabaseStorageUrl}logo_transparent.png`}
               alt="Logo"
             />
           </Link>

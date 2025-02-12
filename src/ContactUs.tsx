@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
 // Supabase Storage URL for images
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
+const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/";
 
 
 
@@ -68,7 +68,7 @@ export default function ContactUs() {
                         {leder && (
                             <div className="flex flex-col items-center justify-center my-3">
                                 <img
-                                    src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.JPG`}
+                                    src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.png`}
                                     className="h-40 rounded-2xl object-cover"
                                     alt={leder.stilling}
                                 />
@@ -84,7 +84,7 @@ export default function ContactUs() {
                             {hr && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${hr.stilling}`}
                                     />
@@ -97,7 +97,7 @@ export default function ContactUs() {
                             {nestleder && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${nestleder.stilling}`}
                                     />
@@ -110,7 +110,7 @@ export default function ContactUs() {
                             {økonomi && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${økonomi.stilling}`}
                                     />
@@ -127,7 +127,7 @@ export default function ContactUs() {
                             {marked && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${marked.stilling}`}
                                     />
@@ -140,7 +140,7 @@ export default function ContactUs() {
                             {bedrift && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${bedrift.stilling}`}
                                     />
@@ -153,7 +153,7 @@ export default function ContactUs() {
                             {logistikk && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${logistikk.stilling}`}
                                     />
@@ -166,7 +166,7 @@ export default function ContactUs() {
                             {fa && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <img
-                                        src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.JPG`}
+                                        src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.png`}
                                         className="h-40 rounded-2xl"
                                         alt={`${fa.stilling}`}
                                     />
