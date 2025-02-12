@@ -93,7 +93,6 @@ export default function Footer() {
               e.preventDefault();
               setShowPasswordModal(true); // Show password modal
             }}
-            className="hover:text-red-400" // ✅ Move hover effect here
           >
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
           </a>
