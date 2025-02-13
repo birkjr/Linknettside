@@ -112,7 +112,7 @@ export default function AdminBoard() {
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.webUrl || ""}
+                          value={editedPartner?.bedriftskontakt || ""}
                           onChange={(e) => handleChange(e, "bedriftskontakt")}
                           className="w-full border p-1 rounded text-xs"
                         />
@@ -120,7 +120,7 @@ export default function AdminBoard() {
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.webUrl || ""}
+                          value={editedPartner?.mail || ""}
                           onChange={(e) => handleChange(e, "mail")}
                           className="w-full border p-1 rounded text-xs"
                         />
@@ -128,7 +128,7 @@ export default function AdminBoard() {
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.webUrl || ""}
+                          value={editedPartner?.tlf || ""}
                           onChange={(e) => handleChange(e, "tlf")}
                           className="w-full border p-1 rounded text-xs"
                         />
