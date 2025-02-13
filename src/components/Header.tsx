@@ -103,7 +103,7 @@ export default function Header() {
           )}
 
           {/* Mobile Menu Button */}
-          <div className="sticky lg:hidden flex">
+          <div className="relative lg:hidden flex">
             <button onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? <CloseIcon fontSize="large" /> : <MenuIcon fontSize="large" />}
             </button>

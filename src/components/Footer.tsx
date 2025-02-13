@@ -51,7 +51,7 @@ export default function Footer() {
       </div>
 
       {/* Footer Section */}
-      <footer className="relative text-green-950 text-center py-6 mt-20" style={{ backgroundColor: "#A8D5A4" }}>
+      <footer className="sticky text-green-950 text-center py-6 mt-20" style={{ backgroundColor: "#A8D5A4" }}>
         <div className="grid grid-cols-2 justify-center items-center my-6">
           <div>
             {/* Handshake Icon with Click Event */}
@@ -86,7 +86,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col justify-center items-center">
+        <div className="flex flex-col justify-center items-center mb-2">
           <a
             href="#"
             onClick={(e) => {
