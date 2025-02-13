@@ -31,7 +31,7 @@ export default function Footer() {
       alert("Feil passord! 🚫");
     }
   };
-
+ 
   return (
     <div className="relative w-full">
       {/* Wave Above Footer */}
