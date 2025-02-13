@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "./supabaseClient";
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroups/";
+const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/";
 
 type Styret = {
     id: number;
@@ -55,7 +55,7 @@ export default function OmOss() {
                 <div 
                     className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto 
                     p-12 text-white text-center rounded-lg 
-                    h-[50vh] overflow-y-auto lg:h-auto lg:overflow-visible" // ✅ Scrolls only on mobile
+                    h-auto overflow-visible" // ✅ Scrolls only on mobile
                     style={{ backgroundColor: "#4682B4" }}>
                     
                     <h3 className="text-3xl py-4">
