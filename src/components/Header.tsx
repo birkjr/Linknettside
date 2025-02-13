@@ -67,7 +67,7 @@ export default function Header() {
                 
               ))}
             </ul>
-            <a
+            {/*<a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
@@ -76,7 +76,7 @@ export default function Header() {
               className={`font-medium text-xl text-gray-500 hover:text-red-400 hover:scale-103 mx-10 ${
                       location.pathname === "/admin" ? "text-red-400" : ""
                     }`}>
-              Admin</a>
+              Admin</a> */}
           </div>
           {/* Password Modal */}
           {showPasswordModal && (
@@ -134,14 +134,14 @@ export default function Header() {
                 </li>
               ))}
             </ul>
-            <a
+            {/*<a
               href="#"
               onClick={(e) => {
                 e.preventDefault();
                 setShowPasswordModal(true); // Show password modal
               }}
               className="flex flex-col items-center text-gray-700 hover:text-red-400 hover:scale-103 my-4">
-              Admin</a>
+              Admin</a>*/}
           </div>
         )}
       </nav>
