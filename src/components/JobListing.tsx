@@ -5,10 +5,11 @@ type JobListingProps = {
     deadline: string;
     link: string;
     place: string;
+    imageURL: string;
 };
 
 
-export default function JobListing({ bedrift, jobType, jobTitle, deadline, link, place }: JobListingProps) {
+export default function JobListing({ bedrift, jobType, jobTitle, deadline, link, place, imageURL }: JobListingProps) {
     
     const formatDate = (dateString: string) => {
         const date = new Date(dateString);
@@ -32,7 +33,7 @@ export default function JobListing({ bedrift, jobType, jobTitle, deadline, link,
                 <div className="flex flex-col items-center sm:items-start">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
                         <img 
-                            src={`https://logo.clearbit.com/${bedrift.toLowerCase().replace(/\s+/g, "")}.com`} 
+                            src={`${imageURL}`} 
                             alt={`${bedrift} Logo`}
                             className="w-full h-full object-contain bg-white rounded-lg shadow-md"
                         />

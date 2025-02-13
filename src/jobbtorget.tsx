@@ -11,6 +11,7 @@ type Job = {
     deadline: string;
     link: string;
     place: string;
+    imageURL:string;
 };
 
 export default function Jobbtorget() {
@@ -83,6 +84,7 @@ export default function Jobbtorget() {
                                     deadline={job.deadline} 
                                     link={job.link} 
                                     place={job.place} 
+                                    imageURL={job.imageURL}
                                 />
                             ))}
                         </div>

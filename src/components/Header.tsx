@@ -73,7 +73,9 @@ export default function Header() {
                 e.preventDefault();
                 setShowPasswordModal(true); // Show password modal
               }}
-              className="font-medium text-xl text-gray-500 hover:text-red-400 hover:scale-103 mx-10">
+              className={`font-medium text-xl text-gray-500 hover:text-red-400 hover:scale-103 mx-10 ${
+                      location.pathname === "/admin" ? "text-red-400" : ""
+                    }`}>
               Admin</a>
           </div>
           {/* Password Modal */}

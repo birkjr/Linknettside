@@ -1,5 +1,23 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+
+// Debounce helper function
+const useDebounce = (value: any, delay: any) => {
+    const [debouncedValue, setDebouncedValue] = useState(value);
+
+    useEffect(() => {
+        const handler = setTimeout(() => {
+            setDebouncedValue(value);
+        }, delay);
+
+        return () => {
+            clearTimeout(handler);
+        };
+    }, [value, delay]);
+
+    return debouncedValue;
+};
 
 type Job ={
     id: number;
@@ -9,6 +27,7 @@ type Job ={
     deadline: string;
     link: string;
     place: string;
+    imageURL: string;
 }
 
 export default function AddJob() {
@@ -20,29 +39,11 @@ export default function AddJob() {
         deadline: "",
         link: "",
         place: "",
+        imageURL: "",
     });
-
-
-    useEffect(() => {
-        const checkAndDeleteExpiredEvents = async () => {
-            const now = new Date().toISOString().slice(0,10);
-    
-            for (const jobs of job) {
-                // Properly format the event datetime
-                const jobDate = new Date(`${jobs.deadline}`).toISOString();
-    
-                // If the current time is equal or past the event time, delete it
-                if (now > jobDate) {
-                    removeJob
-                }
-            }
-        };
-    
-        // Run every 10 seconds to ensure events get deleted on time
-        const interval = setInterval(checkAndDeleteExpiredEvents, 10000);
-    
-        return () => clearInterval(interval); // Cleanup function
-    }, [job]);
+    const [editingJob, setEditingJob] = useState<Job | null>(null);
+    const [imageSearch, setImageSearch] = useState(""); // Track search input for images
+    const [images, setImages] = useState<string[]>([]); // Store available images in state
 
     useEffect(()=> {
         const fetchJobs = async () =>{
@@ -56,10 +57,34 @@ export default function AddJob() {
             fetchJobs();
         }, []);
         
+    // Use debounce to wait for user to stop typing before fetching images
+    const debouncedSearch = useDebounce(imageSearch, 500); // 500ms debounce
+
+    // Fetch images from the 'events_jobads' folder in Supabase storage
+    useEffect(() => {
+        if (!debouncedSearch) return; // Do not fetch images if search is empty
+
+        const fetchImages = async () => {
+            const { data, error } = await supabase
+                .storage
+                .from('bilder')
+                .list('events_jobads', { search: debouncedSearch.toLowerCase() }); // Filter images by search term
+            
+            if (error) {
+                console.error("Error fetching images:", error);
+            } else {
+                console.log("Fetched images:", data); // Add log to check the response
+                setImages(data.map(item => item.name)); // Store image names
+            }
+        };
+
+        fetchImages();
+    }, [debouncedSearch]); // Re-fetch images when the debounced search term changes
+        
 
     // Function to add a new job
     const addNewJob = async () => {
-        if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place ) {
+        if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place || !newJob.imageURL) {
             alert("Fyll inn alle nødvendige felt.");
             return;
         }
@@ -75,7 +100,7 @@ export default function AddJob() {
         } else {
             alert("Jobbannonse er opprettet!");
             setJobs([...job, ...data]); // Update the state with the new Job
-            setNewJob({ bedrift: "", jobType: "", jobTitle: "", deadline: "", link: "", place: "" });
+            setNewJob({ bedrift: "", jobType: "", jobTitle: "", deadline: "", link: "", place: "", imageURL: "" });
         }
     };
 
@@ -92,6 +117,36 @@ export default function AddJob() {
         }
     };
 
+    const editJob = (job: Job) => {
+        setEditingJob(job);
+    };
+
+    // ✅ Save edited event
+    const saveEditedJob = async () => {
+        if (!editingJob) return;
+
+        const { error } = await supabase
+            .from("jobs")
+            .update({
+                bedrift: editingJob.bedrift,
+                jobType: editingJob.jobType,
+                jobTitle: editingJob.jobTitle,
+                deadline: editingJob.deadline,
+                link: editingJob.link,
+                place: editingJob.place,
+                imageURL: editingJob.imageURL,
+            })
+            .eq("id", editingJob.id);
+
+        if (error) {
+            console.error("Error oppdatering jobber:", error);
+            alert("Kunne ikke oppdatere jobbannonse. Prøv igjen.");
+        } else {
+            setJobs(job.map((job) => (job.id === editingJob.id ? editingJob : job))); // Update UI
+            setEditingJob(null);
+        }
+    };
+
  
 
 return (
@@ -101,17 +156,44 @@ return (
             {/* Form for adding new Jobs */}
             <div className="mb-6">
             <input type="text" placeholder="Bedrift" value={newJob.bedrift} onChange={(e) => setNewJob({ ...newJob, bedrift: e.target.value })} className="w-full p-2 border rounded mb-2" />
-                <select className="w-full p-2 border rounded mb-2" onChange={(e) => setNewJob({ ...newJob, jobType: e.target.value })} value={newJob.jobType}>
-                    <option value="">Velg stillingstype</option>
-                    <option value="Sommerjobb">Sommerjobb</option>
-                    <option value="Internship">Internship</option>
-                    <option value="Heltidsstilling">Heltidsstilling</option>
-                </select>
-                <input type="text" placeholder="Tittel" value={newJob.jobTitle} onChange={(e) => setNewJob({ ...newJob, jobTitle: e.target.value })} className="w-full p-2 border rounded mb-2" />
+            <select className="w-full p-2 border rounded mb-2" onChange={(e) => setNewJob({ ...newJob, jobType: e.target.value })} value={newJob.jobType}>
+                <option value="">Velg stillingstype</option>
+                <option value="Sommerjobb">Sommerjobb</option>
+                <option value="Internship">Internship</option>
+                <option value="Heltidsstilling">Heltidsstilling</option>
+            </select>
+            <input type="text" placeholder="Tittel" value={newJob.jobTitle} onChange={(e) => setNewJob({ ...newJob, jobTitle: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Sted (Place)" value={newJob.place} onChange={(e) => setNewJob({ ...newJob, place: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="date" placeholder="Søknadsfrist" value={newJob.deadline} onChange={(e) => setNewJob({ ...newJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Link til annonse her" value={newJob.link} onChange={(e) => setNewJob({ ...newJob, link: e.target.value})} className="w-full p-2 border rounded mb-2" /> 
-            <button className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full" onClick={addNewJob}>
+            {/* Image Search and Selection */}
+            <div>
+                <input
+                    type="text"
+                    placeholder="Legg til bilde"
+                    value={imageSearch}
+                    onChange={(e) => setImageSearch(e.target.value)}
+                    className="w-full p-2 border rounded mb-2"
+                    />
+                    {/* Only display the images if there is a search term */}
+                    {debouncedSearch && (
+                        <div className="flex flex-col mb-4 gap-2">
+                            {images.length > 0 ? (
+                                images.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className="pb-2 text-green-500"
+                                        onClick={() => setNewJob({ ...newJob, imageURL: image })}
+                                    > 
+                                        <em>{image}</em>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>No images found.</p>
+                            )}
+                        </div>
+                    )}
+            <button className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full cursor-pointer" onClick={addNewJob}>
                 Legg til jobbannonse
             </button>
         </div>
@@ -122,17 +204,69 @@ return (
         ) : (
             <ul className="space-y-1">
                 {job.map((job) => (
-                    <li key={job.id} className="px-12 py-2 rounded-lg shadow-md flex justify-between items-center bg-yellow-100">
-                        <div >
-                            <p className="font-bold flex text-center">{job.jobTitle }, {job.deadline}</p>
-                        </div>
-                        <button className="text-red-600 hover:text-red-800 text-lg" onClick={() => removeJob(job.id)}>
-                            ✖
-                        </button>
+                    <li key={job.id} >
+                        <div className="flex flex-row">
+                            <div className="px-12 py-2 rounded-lg shadow-md flex justify-between items-center bg-amber-100 hover:bg-amber-200 cursor-pointer" onClick={() => editJob(job)}>
+                                <p className="font-bold flex text-center">{job.jobTitle }, {job.deadline}</p>
+                                </div>
+                                <button className="text-red-600 hover:scale-110 text-lg cursor-pointer" onClick={() => removeJob(job.id)}>
+                                    <DeleteForeverIcon/>
+                                </button>
+                            </div>
                     </li>                
                 ))}
             </ul>
         )}
+        {/* Edit Job Form */}
+        {editingJob && (
+                <div className="mt-6 p-4 border rounded-lg shadow-md bg-gray-100">
+                    <h3 className="text-lg font-bold mb-2">Rediger arrangement</h3>
+                    <input type="text" value={editingJob.bedrift} onChange={(e) => setEditingJob({ ...editingJob, bedrift: e.target.value })} className="w-full p-2 border rounded mb-2" />
+                    <select onChange={(e) => setEditingJob({ ...editingJob, jobType: e.target.value })} className="w-full border rounded mb-2" >
+                        <option value="">Velg stillingstype</option>
+                        <option value="Sommerjobb">Sommerjobb</option>
+                        <option value="Internship">Internship</option>
+                        <option value="Heltidsstilling">Heltidsstilling</option>
+                    </select>
+                    <input type="text" value={editingJob.jobTitle} onChange={(e) => setEditingJob({ ...editingJob, jobTitle: e.target.value })} className="w-full p-2 border rounded mb-2" />
+                    <input type="date" value={editingJob.deadline} onChange={(e) => setEditingJob({ ...editingJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
+                    <input type="text" value={editingJob.link} onChange={(e) => setEditingJob({ ...editingJob, link: e.target.value })} className="w-full p-2 border rounded mb-2" />
+                    <input type="text" value={editingJob.place} onChange={(e) => setEditingJob({ ...editingJob, place: e.target.value })} className="w-full p-2 border rounded mb-2" />
+                    {/* Image Search and Selection */}
+            <div>
+                <input 
+                    type="text"
+                    //placeholder={`${editingJob.bedrift}.png`}
+                    value={editingJob.imageURL}
+                    onChange={(e) => setEditingJob({...editingJob, imageURL: e.target.value})}
+                    className="w-full p-2 border rounded mb-2"
+                    />
+                    {/* Only display the images if there is a search term */}
+                    {debouncedSearch && (
+                        <div className="flex flex-col mb-4 gap-2">
+                            {images.length > 0 ? (
+                                images.map((image, index) => (
+                                    <div
+                                        key={index}
+                                        className="pb-2 text-green-500"
+                                        onClick={() => setEditingJob({ ...editingJob, imageURL: image })}
+                                    > 
+                                        <em>{image}</em>
+                                    </div>
+                                ))
+                            ) : (
+                                <p>Ingen bilder funnet. Legg til dette først.</p>
+                            )}
+                        </div>
+                    )}
+                    </div>
+                    <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" onClick={saveEditedJob}>
+                        Lagre endringer
+                    </button>
+                </div>
+            )}
+        </div>
     </div>          
     )
 }
+

@@ -24,7 +24,7 @@ export default function admin(){
     return (
         
         <div className="flex flex-col items-center justify-center">
-            <div className="flex justify-center font-4xl bg-red-400 w-2/3 mt-6 rounded-xl text-black py-6 mb-6">
+            <div className="flex justify-center font-4xl bg-red-400 w-2/3 my-4 rounded-xl text-black py-6">
                 ADMIN
             </div>
 

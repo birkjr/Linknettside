@@ -76,8 +76,8 @@ export default function Footer() {
             </p>
           </div>
           <div>
-            <p>
-              <a href="https://link.mazemap.com/34oLTzyB" target="_blank" rel="noopener noreferrer" className="hover:text-stone-100">
+            <p className="inline-flex justify-center rounded-xl hover:text-stone-200">
+              <a href="https://link.mazemap.com/34oLTzyB" target="_blank" rel="noopener noreferrer">
                 <WindPowerIcon /> <br />
                 Energi- og miljøingeniørenes linjeforening, EMIL <br />
                 NTNU GLØSHAUGEN, ELEKTROBYGGET <br />
