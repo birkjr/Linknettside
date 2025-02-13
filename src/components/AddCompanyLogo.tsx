@@ -72,7 +72,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps)
                     <CloseIcon />
                 </button>
 
-                <h2 className="text-lg font-bold mb-4 text-center">Administrer Bedriftslogoer</h2>
+                <h2 className="text-lg font-bold mb-4 text-center">Administrer Samarbeidspartnere</h2>
 
                 {/* Upload Section */}
                 <label className="cursor-pointer flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-4 mb-4 bg-white hover:border-gray-600 hover:bg-gray-100 transition duration-200">

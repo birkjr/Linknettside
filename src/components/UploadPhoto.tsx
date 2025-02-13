@@ -12,7 +12,7 @@ export default function UploadPhoto(){
   const [isAddEventsJobads, setIsAddEventsJobads] = useState(false);
   return(
     <div className="max-w-2xl mx-auto p-6 rounded-lg shadow-lg">
-            <h2 className="text-xl font-bold mb-4">Adminstrer bilder</h2>
+      <h2 className="text-xl font-bold mb-4">Adminstrer bilder</h2>
       <div
         className="mb-6 bg-amber-100 hover:scale-102 text-black cursor-pointer border-1 p-2 rounded-xl"
         onClick={() => setIsAddCompanyLogoOpen(true)}>

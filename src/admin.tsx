@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "./auth";
 import UploadPhoto from "./components/UploadPhoto";
+import AdminPartners from "./components/AdminPartners";
 
 
 export default function admin(){
@@ -50,6 +51,11 @@ export default function admin(){
                 </div>
                 <div className="w-full max-w-sm sm:max-w-sm lg:max-w-4xl text-center border border-gray-300 rounded-xl bg-amber-50 py-6">
                     <UploadPhoto/>
+                </div>
+            </div>
+            <div className="flex w-full justify-center">
+                <div className="w-full text-center border border-gray-300 rounded-xl bg-amber-50 py-6">
+                    <AdminPartners/>
                 </div>
             </div>
         </div>

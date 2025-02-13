@@ -62,7 +62,7 @@ export default function AdminBoard() {
 
   return (
     <div className="w-full sm:text-sm max-w-sm sm:max-w-xl lg:max-w-3xl mx-auto p-4 sm:p-6 rounded-xl shadow-lg">
-      <h2 className="text-sm sm:text-sm font-bold mb-4 text-center">Styret Administrasjon</h2>
+      <h2 className="text-xl font-bold mb-4">Adminstrer styret</h2>
 
       {loading ? (
         <p className="text-center text-gray-600">Laster inn data...</p>
