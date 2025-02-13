@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type News = {
   id: number;
@@ -118,7 +119,7 @@ export default function AddNews() {
                 onClick={() => deleteNewsItem(item.id)}
                 className="text-red-600 hover:text-red-800 text-lg"
               >
-                ✖
+                <DeleteForeverIcon/>
               </button>
             </li>
           ))}
