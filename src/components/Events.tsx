@@ -83,7 +83,7 @@ export default function Arrangementer() {
                         alt={event.bedrift}
                         className="w-full h-full object-contain rounded-xl"
                         onError={(e) => (e.currentTarget.src = "/images/placeholder.png")} // Fallback if image not found
-                      />
+                      /> 
                     </div>
 
                     {/* Event Info Section */}

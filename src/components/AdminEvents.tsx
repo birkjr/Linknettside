@@ -116,17 +116,7 @@ export default function AddEvent() {
         }
     };
 
-    const removeEvent = async (id: number) => {
-        const { error } = await supabase.from("events").delete().eq("id", id);
-
-        if (error) {
-            console.error("Error deleting event:", error);
-            alert("Kunne ikke fjerne arrangement. Prøv igjen.");
-        } else {
-            setEvents(events.filter((event) => event.id !== id)); // Update state to remove event
-            alert("Arrangementet har blitt fjernet.");
-        }
-    };
+2
 
     const editEvent = (event: Event) => {
         setEditingEvent(event);

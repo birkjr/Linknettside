@@ -75,7 +75,12 @@ export default function Jobbtorget() {
                         <p className="text-center text-gray-500 mt-6">Laster inn jobber...</p>
                     ) : filteredJobs?.length > 0 ? (
                         <div className="space-y-6">
-                            {filteredJobs.map((job, index) => (
+                            {filteredJobs
+                            .sort((a, b) => {
+                                // Ensure the date is treated as a string, and then compare using new Date()
+                                return new Date(a.deadline as string).getTime() - new Date(b.deadline as string).getTime();
+                              })
+                            .map((job, index) => (
                                 <JobListing 
                                     key={index} 
                                     bedrift={job.bedrift} 

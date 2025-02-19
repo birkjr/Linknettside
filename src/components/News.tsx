@@ -10,7 +10,7 @@ type News = {
   link: string;
 };
 
-export default function Nyheter() {
+export default function News() {
   const [news, setNews] = useState<News[]>([]);
   const [loading, setLoading] = useState(true);
 

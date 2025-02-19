@@ -1,8 +1,8 @@
 import SupportManager from "./components/SupportManager";
 import AdminBoard from "./components/AdminBoard";
-import AddNews from "./components/AddNews";
-import AddEvent from "./components/AddEvent";
-import AddJob from "./components/AddJob";
+import AddNews from "./components/AdminNews";
+import AddEvent from "./components/AdminEvents";
+import AddJob from "./components/AdminJobs";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useAuth } from "./auth";
@@ -14,6 +14,7 @@ export default function admin(){
     const navigate = useNavigate();
 
     const { isAuthenticated } = useAuth(); // ✅ Get authentication state
+
 
     useEffect(() => {
       if (!isAuthenticated) {

@@ -42,7 +42,7 @@ export default function AddJob() {
         imageURL: "",
     });
     const [editingJob, setEditingJob] = useState<Job | null>(null);
-    const [imageSearch, setImageSearch] = useState(""); // Track search input for images
+    const [imageSearch] = useState(""); // Track search input for images
     const [images, setImages] = useState<string[]>([]); // Store available images in state
 
     useEffect(()=> {
@@ -85,7 +85,7 @@ export default function AddJob() {
     // Function to add a new job
     const addNewJob = async () => {
         if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place || !newJob.imageURL) {
-            alert("Fyll inn alle nødvendige felt.");
+            alert(`Fyll inn alle nødvendige felt.`);
             return;
         }
 
@@ -166,37 +166,10 @@ return (
             <input type="text" placeholder="Sted (Place)" value={newJob.place} onChange={(e) => setNewJob({ ...newJob, place: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="date" placeholder="Søknadsfrist" value={newJob.deadline} onChange={(e) => setNewJob({ ...newJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Link til annonse her" value={newJob.link} onChange={(e) => setNewJob({ ...newJob, link: e.target.value})} className="w-full p-2 border rounded mb-2" /> 
-            {/* Image Search and Selection */}
-            <div>
-                <input
-                    type="text"
-                    placeholder="Legg til bilde"
-                    value={imageSearch}
-                    onChange={(e) => setImageSearch(e.target.value)}
-                    className="w-full p-2 border rounded mb-2"
-                    />
-                    {/* Only display the images if there is a search term */}
-                    {debouncedSearch && (
-                        <div className="flex flex-col mb-4 gap-2">
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className="pb-2 text-green-500"
-                                        onClick={() => setNewJob({ ...newJob, imageURL: image })}
-                                    > 
-                                        <em>{image}</em>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No images found.</p>
-                            )}
-                        </div>
-                    )}
+            <input type="text" placeholder="Legg til bilde" value={newJob.imageURL} onChange={(e) => setNewJob({...newJob, imageURL: `https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/events_jobads/${e.target.value}`})} className="w-full p-2 border rounded mb-2"/>
             <button className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full cursor-pointer" onClick={addNewJob}>
                 Legg til jobbannonse
             </button>
-        </div>
 
         {/* Display Existing Jobs */}
         {job.length === 0 ? (
@@ -238,7 +211,7 @@ return (
                     type="text"
                     //placeholder={`${editingJob.bedrift}.png`}
                     value={editingJob.imageURL}
-                    onChange={(e) => setEditingJob({...editingJob, imageURL: e.target.value})}
+                    onChange={(e) => setEditingJob({...editingJob, imageURL: `${e.target.value}`})}
                     className="w-full p-2 border rounded mb-2"
                     />
                     {/* Only display the images if there is a search term */}

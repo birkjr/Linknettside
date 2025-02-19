@@ -4,12 +4,12 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-type EditSubGroup = {
+type ImgEventsJobads = {
     isOpen: boolean;
     onClose: () => void;
 };
 
-export default function AddCompanyLogo({ isOpen, onClose }: EditSubGroup) {
+export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
     const [files, setFiles] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
 
@@ -20,7 +20,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: EditSubGroup) {
     }, [isOpen]);
 
     const fetchFiles = async () => {
-        const { data, error } = await supabase.storage.from("bilder").list("subGroup");
+        const { data, error } = await supabase.storage.from("bilder").list("events_jobads");
         if (error) {
             console.error("Error fetching files:", error);
         } else {
@@ -34,7 +34,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: EditSubGroup) {
 
         const file = event.target.files[0];
         const fileName = file.name;
-        const filePath = `subGroup/${fileName}`;
+        const filePath = `events_jobads/${fileName}`;
 
         const { error } = await supabase.storage.from("bilder").upload(filePath, file);
 
@@ -50,7 +50,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: EditSubGroup) {
     };
 
     const handleDelete = async (fileName: string) => {
-        const filePath = `subGroup/${fileName}`;
+        const filePath = `events_jobads/${fileName}`;
         const { error } = await supabase.storage.from("bilder").remove([filePath]);
 
         if (error) {
@@ -72,7 +72,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: EditSubGroup) {
                     <CloseIcon />
                 </button>
 
-                <h2 className="text-lg font-bold mb-4 text-center">Administrer gruppebilder</h2>
+                <h2 className="text-lg font-bold mb-4 text-center">Administrer arrangementbilder og jobbannonsebilder</h2>
 
                 {/* Upload Section */}
                 <label className="cursor-pointer flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-4 mb-4 bg-white hover:border-gray-600 hover:bg-gray-100 transition duration-200">

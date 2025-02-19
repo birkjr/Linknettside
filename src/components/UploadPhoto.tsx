@@ -1,9 +1,9 @@
 import { useState } from "react";
-import AddCompanyLogo from "./AddCompanyLogo";
-import EditBoardPics from "./EditBoardPics";
-import EditSubGroup from "./EditSubGroup";
+import AddCompanyLogo from "./ImgPartners";
+import EditBoardPics from "./ImgBoard";
+import EditSubGroup from "./ImgSubGroups";
 import EditIcon from '@mui/icons-material/Edit';
-import AddEventsJobads from "./AddEventsJobads";
+import AddEventsJobads from "./ImgEventsJobads";
 
 export default function UploadPhoto(){
   const [isAddCompanyLogoOpen, setIsAddCompanyLogoOpen] = useState(false);

@@ -4,12 +4,12 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-type AddCompanyLogoProps = {
+type EditSubGroup = {
     isOpen: boolean;
     onClose: () => void;
 };
 
-export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps) {
+export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
     const [files, setFiles] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
 
@@ -20,7 +20,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps)
     }, [isOpen]);
 
     const fetchFiles = async () => {
-        const { data, error } = await supabase.storage.from("bilder").list("company_logo");
+        const { data, error } = await supabase.storage.from("bilder").list("subGroup");
         if (error) {
             console.error("Error fetching files:", error);
         } else {
@@ -34,7 +34,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps)
 
         const file = event.target.files[0];
         const fileName = file.name;
-        const filePath = `company_logo/${fileName}`;
+        const filePath = `subGroup/${fileName}`;
 
         const { error } = await supabase.storage.from("bilder").upload(filePath, file);
 
@@ -50,7 +50,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps)
     };
 
     const handleDelete = async (fileName: string) => {
-        const filePath = `company_logo/${fileName}`;
+        const filePath = `subGroup/${fileName}`;
         const { error } = await supabase.storage.from("bilder").remove([filePath]);
 
         if (error) {
@@ -72,7 +72,7 @@ export default function AddCompanyLogo({ isOpen, onClose }: AddCompanyLogoProps)
                     <CloseIcon />
                 </button>
 
-                <h2 className="text-lg font-bold mb-4 text-center">Administrer Samarbeidspartnere</h2>
+                <h2 className="text-lg font-bold mb-4 text-center">Administrer gruppebilder</h2>
 
                 {/* Upload Section */}
                 <label className="cursor-pointer flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-4 mb-4 bg-white hover:border-gray-600 hover:bg-gray-100 transition duration-200">
