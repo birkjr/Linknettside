@@ -87,10 +87,10 @@ export default function AddEvent() {
 
     // Function to add a new event
     const addNewEvent = async () => {
-        if (!newEvent.title || !newEvent.date || !newEvent.location || !newEvent.restaurant || !newEvent.bedrift || !newEvent.time || !newEvent.link || !newEvent.imageURL) {
+        {/*if (!newEvent.title || !newEvent.date || !newEvent.location || !newEvent.restaurant || !newEvent.bedrift || !newEvent.time || !newEvent.link || !newEvent.imageURL) {
             alert("Fyll inn alle nødvendige felt.");
             return;
-        }
+        } */}
 
         const { data, error } = await supabase
             .from("events")
@@ -147,6 +147,10 @@ export default function AddEvent() {
             setEditingEvent(null);
         }
     };
+
+    function removeEvent(id: number): void {
+        throw new Error("Function not implemented.");
+    }
 
     return (
         <div className="w-full max-w-2xl mx-auto p-6 rounded-xl shadow-lg">
