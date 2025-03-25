@@ -84,6 +84,18 @@ export default function AddEvent() {
 
         fetchImages();
     }, [debouncedSearch]); // Re-fetch images when the debounced search term changes
+    
+    const removeEvent = async (id: number) => {
+            const { error } = await supabase.from("events").delete().eq("id", id);
+    
+            if (error) {
+                console.error("Error deleting job:", error);
+                alert("Kunne ikke fjerne arrangement. Prøv igjen.");
+            } else {
+                setEvents(events.filter((events) => events.id !== id)); // Update state to remove event
+                alert("Arrangement har blitt fjernet.");
+            }
+        };
 
     // Function to add a new event
     const addNewEvent = async () => {
@@ -147,10 +159,6 @@ export default function AddEvent() {
             setEditingEvent(null);
         }
     };
-
-    function removeEvent(id: number): void {
-        throw new Error("Function not implemented.");
-    }
 
     return (
         <div className="w-full max-w-2xl mx-auto p-6 rounded-xl shadow-lg">
