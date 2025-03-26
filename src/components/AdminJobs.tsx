@@ -84,10 +84,11 @@ export default function AddJob() {
 
     // Function to add a new job
     const addNewJob = async () => {
-        if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place || !newJob.imageURL) {
+        {/*if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place || !newJob.imageURL) {
             alert(`Fyll inn alle nødvendige felt.`);
             return;
         }
+        */}
 
         const { data, error } = await supabase
             .from("jobs")

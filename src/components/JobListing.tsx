@@ -1,3 +1,5 @@
+import { supabase } from "../supabaseClient";
+
 type JobListingProps = {
     bedrift: string;
     jobType: string;
@@ -33,7 +35,7 @@ export default function JobListing({ bedrift, jobType, jobTitle, deadline, link,
                 <div className="flex flex-col items-center sm:items-start">
                     <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
                         <img 
-                            src={`${imageURL}`} 
+                            src={`${supabase.storage.from("bilder").getPublicUrl(`events_jobads/${imageURL}`).data.publicUrl}`}
                             alt={`${bedrift} Logo`}
                             className="w-full h-full object-contain bg-white rounded-lg shadow-md"
                         />

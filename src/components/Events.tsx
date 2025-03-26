@@ -78,7 +78,7 @@ export default function Arrangementer() {
                         src={
                           event.bedrift.toLowerCase() === "teknologiporten"
                             ? `${supabaseStorageUrl}/events_jobads/teknologiporten.png`
-                            : `${event.imageURL}`
+                            : `${supabase.storage.from("bilder").getPublicUrl(`events_jobads/${event.imageURL}`).data.publicUrl}`
                         }
                         alt={event.bedrift}
                         className="w-full h-full object-contain rounded-xl"
@@ -89,6 +89,7 @@ export default function Arrangementer() {
                     {/* Event Info Section */}
                     <div className="flex-1 text-center justify-center md:text-left px-6">
                       <h2 className="text-lg sm:text-xl font-semibold">{event.title}</h2>
+
                     </div>
 
                     {/* Event Details */}
