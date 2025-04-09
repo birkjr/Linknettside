@@ -9,26 +9,30 @@ import GitHubIcon from '@mui/icons-material/GitHub';
 import Partners from "./Partners";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; 
 
 export default function Footer() {
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Get login function from auth
 
-  const correctPassword = "LinkAdmin25"; // Your admin password
+  const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD; // Use the environment variable
  
   const handleLogin = () => {
     if (password === correctPassword) {
-      login(); // ✅ Authenticate user
+      login(); // ✅ Authenticate user)
       localStorage.setItem("isAdmin", "true"); // Store authentication flag
       navigate("/admin");
       setShowPasswordModal(false);
       setPassword(""); // Clear password after login
     } else {
       alert("Feil passord! 🚫");
+      console.log("Correct Password:", import.meta.env.VITE_ADMIN_PASSWORD); // Debugging line
     }
   };
  
@@ -100,26 +104,39 @@ export default function Footer() {
           <a href="https://github.com/birkjr/Linknettside" target="_blank" rel="noopener noreferrer">
             <GitHubIcon className="hover:scale-110" />
           </a>
-
         </div>
-
       </footer>
 
       {/* Render Partner Popup */}
       <Partners isOpen={isPartnersOpen} onClose={() => setIsPartnersOpen(false)} />
 
       {/* Password Modal */}
+
       {showPasswordModal && (
         <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center">
           <div className="bg-yellow-50 p-6 rounded-lg shadow-lg w-100">
             <h2 className="text-lg font-bold mb-4 text-center">Admin Tilgang</h2>
-            <input
-              type="password"
-              placeholder="Skriv inn passord"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full p-2 border rounded mb-4"
-            />
+            <div className="flex items-center mb-4"> {/* Flex container for input and button */}
+              <input
+                type={showPassword ? "text" : "password"} // Toggle between text and password
+                placeholder="Skriv inn passord"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    handleLogin(); // Call handleLogin when Enter is pressed
+                  }
+                }}
+                className="w-full p-2 border rounded-l-md" // Rounded left corners
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="bg-gray-200 p-2 rounded-r-md" // Rounded right corners
+              >
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />} {/* Toggle icon */}
+              </button>
+            </div>
             <div className="flex justify-between">
               <button onClick={() => setShowPasswordModal(false)} className="bg-gray-500 hover:bg-red-300 text-white px-4 py-2 rounded-md">
                 Avbryt

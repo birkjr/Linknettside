@@ -63,7 +63,7 @@ export default function AdminBoard() {
 
   return (
     <div className="w-full p-4 rounded-xl shadow-lg m-1">
-      <h2 className="text-xl font-bold mb-4">Adminstrer styret</h2>
+      <h2 className="text-xl font-bold mb-4">Adminstrer partnere</h2>
 
       {loading ? (
         <p className="text-center text-gray-600">Laster inn data...</p>
