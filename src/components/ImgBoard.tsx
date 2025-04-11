@@ -12,38 +12,42 @@ type EditBoardPics = {
 export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     const [files, setFiles] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
+    const [error, setError] = useState<string | null>(null);
 
-    // ✅ Prevent fetching files when modal is closed
+    // Fetch files when modal is open
     useEffect(() => {
-        if (!isOpen) return;
-        fetchFiles();
+        if (isOpen) {
+            fetchFiles();
+        }
     }, [isOpen]);
 
     const fetchFiles = async () => {
         const { data, error } = await supabase.storage.from("bilder").list("board_pic");
         if (error) {
+            setError("Error fetching files: " + error.message);
             console.error("Error fetching files:", error);
         } else {
             setFiles(data.map(file => file.name));
+            setError(null); // Clear any previous errors
         }
     };
 
     const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
         if (!event.target.files || event.target.files.length === 0) return;
         setUploading(true);
+        setError(null); // Clear previous errors
 
         const file = event.target.files[0];
-        const fileName = file.name;
-        const filePath = `board_pic/${fileName}`;
+        const filePath = `board_pic/${file.name}`;
 
         const { error } = await supabase.storage.from("bilder").upload(filePath, file);
 
         if (error) {
+            setError("Error uploading file: " + error.message);
             console.error("Error uploading file:", error);
-            alert("Feil ved opplasting.");
         } else {
-            alert("Bildet ble lastet opp!");
-            setFiles(prev => [...prev, fileName]);
+            alert("Image uploaded successfully!");
+            fetchFiles(); // Refresh the file list
         }
 
         setUploading(false);
@@ -51,18 +55,21 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
 
     const handleDelete = async (fileName: string) => {
         const filePath = `board_pic/${fileName}`;
+        console.log("Attempting to delete:", filePath); // Debugging line
+    
         const { error } = await supabase.storage.from("bilder").remove([filePath]);
-
+    
         if (error) {
+            setError("Error deleting file: " + error.message);
             console.error("Error deleting file:", error);
-            alert("Kunne ikke slette filen.");
         } else {
-            alert("Bildet er slettet");
-            setFiles(prev => prev.filter(file => file !== fileName));
+            console.log("Delete operation successful for:", filePath); // Debugging line
+            alert("Image deleted successfully!");
+            fetchFiles(); // Refresh the file list
         }
     };
 
-    if (!isOpen) return null; // ✅ Don't render if modal is closed
+    if (!isOpen) return null; // Don't render if modal is closed
 
     return (
         <div className="fixed inset-0 flex items-center justify-center backdrop-blur-sm bg-opacity-50 z-50">
@@ -72,12 +79,14 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
                     <CloseIcon />
                 </button>
 
-                <h2 className="text-lg font-bold mb-4 text-center">Administrer styrebilder</h2>
+                <h2 className="text-lg font-bold mb-4 text-center">Manage Board Images</h2>
+
+                {error && <p className="text-red-600 text-center">{error}</p>}
 
                 {/* Upload Section */}
                 <label className="cursor-pointer flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-4 mb-4 bg-white hover:border-gray-600 hover:bg-gray-100 transition duration-200">
                     <AddPhotoAlternateIcon className="w-6 h-6 text-gray-600 mr-2" />
-                    <span className="text-gray-700 font-medium">Klikk her for å laste opp en fil</span>
+                    <span className="text-gray-700 font-medium">Click here to upload a file</span>
                     <input 
                         type="file" 
                         onChange={handleUpload} 
@@ -87,7 +96,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
                     />
                 </label>
 
-                {uploading && <p className="text-gray-600 text-center">Laster opp...</p>}
+                {uploading && <p className="text-gray-600 text-center">Uploading...</p>}
 
                 {/* File List */}
                 <ul className="space-y-2">
