@@ -1,5 +1,6 @@
 import Arrangementer from "./components/Events";
 import Nyheter from "./components/News";
+//import CoopPartners from "./components/CoopPartners"
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
 
@@ -36,9 +37,10 @@ function App() {
           <div className="flex flex-col justify-center items-center rounded-xl text-serif lg:w-1/2 text-center text-lg sm:text-xl font-bold">
               <Nyheter />
           </div>
-
+          {/*
+            <CoopPartners/>
+          */}
         </div>
-
       </div>
     </>
   );

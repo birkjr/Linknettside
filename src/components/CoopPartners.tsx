@@ -3,22 +3,13 @@ import { supabase } from "../supabaseClient"; // Ensure your Supabase client is 
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo";
 
-type PartnersProps = {
-  isOpen: boolean;
-  onClose: () => void;
-};
-
-export default function Partners({ isOpen, onClose }: PartnersProps) {
+export default function Partners() {
   const [mainPartners, setMainPartners] = useState<string[]>([]);
   const [otherPartners, setOtherPartners] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    if (!isOpen) return;
-
-    document.body.style.overflow = "hidden"; // Prevent scrolling when modal is open
-
     const fetchPartners = async () => {
       setLoading(true);
       setError(null);
@@ -50,25 +41,11 @@ export default function Partners({ isOpen, onClose }: PartnersProps) {
     };
 
     fetchPartners();
-
-    return () => {
-      document.body.style.overflow = "auto"; // Restore scrolling when modal is closed
-    };
-  }, [isOpen]);
-
-  if (!isOpen) return null;
+  }, []);
 
   return (
-    <div className="fixed inset-0 bg-opacity-50 backdrop-blur-xs flex items-center justify-center z-50">
-      <div className="bg-white p-6 rounded-lg shadow-xl max-w-4xl w-full relative">
-        {/* Close Button */}
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-red-700 rounded-full p-2 hover:scale-125"
-        >
-          ✕
-        </button>
-
+    <div>
+      <div className="max-w-6xl mx-auto px-4">
         {/* Loading State */}
         {loading && <p className="text-center text-gray-500">Laster inn partnere...</p>}
 
