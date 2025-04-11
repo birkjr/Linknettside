@@ -68,22 +68,22 @@ export default function ContactUs() {
                         )}
 
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
-                            {hr && (
-                                <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.png`} alt={`${hr.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{hr.name}</p>
-                                    <p className="text-sm">{hr.stilling}</p>
-                                    <p>Tlf: <a href={`tel:${hr.telefon}`} className="text-blue-500">{hr.telefon}</a></p>
-                                    <p>Mail: <a href={`mailto:${hr.mail}`} className="text-blue-500">{hr.mail}</a></p>
-                                </div>
-                            )}
                             {nestleder && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.png`} alt={`${nestleder.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{nestleder.stilling}</p>
-                                    <p className="text-sm">{nestleder.name}</p>
+                                    <p className="font-semibold mt-2">{nestleder.name}</p>
+                                    <p className="text-sm">{nestleder.stilling}</p>
                                     <p>Tlf: <a href={`tel:${nestleder.telefon}`} className="text-blue-500">{nestleder.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${nestleder.mail}`} className="text-blue-500">{nestleder.mail}</a></p>
+                                </div>
+                            )}
+                            {hr && (
+                                <div className="text-center flex flex-col items-center justify-center my-3">
+                                    <BoardPic src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.png`} alt={`${hr.stilling}`} className="h-40 rounded-2xl" />
+                                    <p className="font-semibold mt-2">{hr.stilling}</p>
+                                    <p className="text-sm">{hr.name}</p>
+                                    <p>Tlf: <a href={`tel:${hr.telefon}`} className="text-blue-500">{hr.telefon}</a></p>
+                                    <p>Mail: <a href={`mailto:${hr.mail}`} className="text-blue-500">{hr.mail}</a></p>
                                 </div>
                             )}
                             {økonomi && (
