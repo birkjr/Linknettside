@@ -29,7 +29,7 @@ export default function FAQ() {
                 <FAQCard 
                     number={3}
                     title="Venteliste"
-                    description="Om du er på venteliste vil du inntil midnatt samme dag som arrangementet automatisk bli påmeldt dersom det blir ledig plass. Etter dette tidspunktet vil de første på venteliste på mail dersom det er ledig plass. Da er det førstemann til mølla for å ta plassen. Mer om venteliste finner du under «Retningslinjer for påmelding og prikker» på."
+                    description="Om du er på venteliste vil du inntil midnatt samme dag som arrangementet automatisk bli påmeldt dersom det blir ledig plass. Etter dette tidspunktet vil de første på venteliste få mail dersom det er ledig plass. Da er det førstemann til mølla for å ta plassen. Mer om venteliste finner du under «Retningslinjer for påmelding og prikker» på."
                 />
             </div>
 
