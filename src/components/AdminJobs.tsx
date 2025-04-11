@@ -2,23 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-// Debounce helper function
-const useDebounce = (value: any, delay: any) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
-
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
-
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [value, delay]);
-
-    return debouncedValue;
-};
-
 type Job ={
     id: number;
     bedrift: string;
@@ -42,8 +25,6 @@ export default function AddJob() {
         imageURL: "",
     });
     const [editingJob, setEditingJob] = useState<Job | null>(null);
-    const [imageSearch, setImageSearch] = useState(""); // Track search input for images
-    const [images, setImages] = useState<string[]>([]); // Store available images in state
 
     useEffect(()=> {
         const fetchJobs = async () =>{
@@ -57,30 +38,7 @@ export default function AddJob() {
             fetchJobs();
         }, []);
         
-    // Use debounce to wait for user to stop typing before fetching images
-    const debouncedSearch = useDebounce(imageSearch, 500); // 500ms debounce
-
-    // Fetch images from the 'events_jobads' folder in Supabase storage
-    useEffect(() => {
-        if (!debouncedSearch) return; // Do not fetch images if search is empty
-
-        const fetchImages = async () => {
-            const { data, error } = await supabase
-                .storage
-                .from('bilder')
-                .list('events_jobads', { search: debouncedSearch.toLowerCase() }); // Filter images by search term
-            
-            if (error) {
-                console.error("Error fetching images:", error);
-            } else {
-                console.log("Fetched images:", data); // Add log to check the response
-                setImages(data.map(item => item.name)); // Store image names
-            }
-        };
-
-        fetchImages();
-    }, [debouncedSearch]); // Re-fetch images when the debounced search term changes
-        
+    
 
     // Function to add a new job
     const addNewJob = async () => {
@@ -168,31 +126,13 @@ return (
             <input type="date" placeholder="Søknadsfrist" value={newJob.deadline} onChange={(e) => setNewJob({ ...newJob, deadline: e.target.value })} className="w-full p-2 border rounded mb-2" />
             <input type="text" placeholder="Link til annonse her" value={newJob.link} onChange={(e) => setNewJob({ ...newJob, link: e.target.value})} className="w-full p-2 border rounded mb-2" /> 
             <div>
-                    <input
-                        type="text"
-                        placeholder="Legg til bilde"
-                        value={imageSearch}
-                        onChange={(e) => setImageSearch(e.target.value)}
-                        className="w-full p-2 border rounded mb-2"
+            <input 
+                    type="text"
+                    placeholder={"Legg til bilde"}
+                    value={newJob.imageURL}
+                    onChange={(e) => setNewJob({...newJob, imageURL: `${e.target.value}`})}
+                    className="w-full p-2 border rounded mb-2"
                     />
-                    {/* Only display the images if there is a search term */}
-                    {debouncedSearch && (
-                        <div className="flex flex-col mb-4 gap-2">
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className="pb-2 text-green-500"
-                                        onClick={() => setNewJob({ ...newJob, imageURL: image })}
-                                    > 
-                                        <em>{image}</em>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No images found.</p>
-                            )}
-                        </div>
-                    )}
                 </div>
             <button className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full cursor-pointer" onClick={addNewJob}>
                 Legg til jobbannonse
@@ -241,24 +181,6 @@ return (
                     onChange={(e) => setEditingJob({...editingJob, imageURL: `${e.target.value}`})}
                     className="w-full p-2 border rounded mb-2"
                     />
-                    {/* Only display the images if there is a search term */}
-                    {debouncedSearch && (
-                        <div className="flex flex-col mb-4 gap-2">
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className="pb-2 text-green-500"
-                                        onClick={() => setEditingJob({ ...editingJob, imageURL: image })}
-                                    > 
-                                        <em>{image}</em>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Ingen bilder funnet. Legg til dette først.</p>
-                            )}
-                        </div>
-                    )}
                     </div>
                     <button className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-md" onClick={saveEditedJob}>
                         Lagre endringer

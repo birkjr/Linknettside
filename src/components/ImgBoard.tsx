@@ -24,8 +24,8 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     const fetchFiles = async () => {
         const { data, error } = await supabase.storage.from("bilder").list("board_pic");
         if (error) {
-            setError("Error fetching files: " + error.message);
-            console.error("Error fetching files:", error);
+            setError("Kunne ikke hente bilder: " + error.message);
+            console.error("Kunne ikke hente bilder:", error);
         } else {
             setFiles(data.map(file => file.name));
             setError(null); // Clear any previous errors
@@ -43,8 +43,8 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
         const { error } = await supabase.storage.from("bilder").upload(filePath, file);
 
         if (error) {
-            setError("Error uploading file: " + error.message);
-            console.error("Error uploading file:", error);
+            setError("Kunne ikke laste opp bilde: " + error.message);
+            console.error("Kunne ikke laste opp bilde:", error);
         } else {
             alert("Image uploaded successfully!");
             fetchFiles(); // Refresh the file list
@@ -60,11 +60,11 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
         const { error } = await supabase.storage.from("bilder").remove([filePath]);
     
         if (error) {
-            setError("Error deleting file: " + error.message);
-            console.error("Error deleting file:", error);
+            setError("Kunne ikke slette bilde: " + error.message);
+            console.error("Kunne ikke slette bilde:", error);
         } else {
-            console.log("Delete operation successful for:", filePath); // Debugging line
-            alert("Image deleted successfully!");
+            console.log("Suksessfull sletting av:", filePath); // Debugging line
+            alert("Bilde slettet suksessfullt!");
             fetchFiles(); // Refresh the file list
         }
     };

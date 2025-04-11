@@ -2,23 +2,6 @@ import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-// Debounce helper function
-const useDebounce = (value: any, delay: any) => {
-    const [debouncedValue, setDebouncedValue] = useState(value);
-
-    useEffect(() => {
-        const handler = setTimeout(() => {
-            setDebouncedValue(value);
-        }, delay);
-
-        return () => {
-            clearTimeout(handler);
-        };
-    }, [value, delay]);
-
-    return debouncedValue;
-};
-
 type Event = {
     id: number;
     title: string;
@@ -45,11 +28,6 @@ export default function AddEvent() {
     });
 
     const [editingEvent, setEditingEvent] = useState<Event | null>(null);
-    const [imageSearch, setImageSearch] = useState(""); // Track search input for images
-    const [images, setImages] = useState<string[]>([]); // Store available images in state
-
-    // Use debounce to wait for user to stop typing before fetching images
-    const debouncedSearch = useDebounce(imageSearch, 500); // 500ms debounce
 
     // Fetch events from Supabase on component mount
     useEffect(() => {
@@ -64,27 +42,6 @@ export default function AddEvent() {
         fetchEvents();
     }, []);
 
-    // Fetch images from the 'events_jobads' folder in Supabase storage
-    useEffect(() => {
-        if (!debouncedSearch) return; // Do not fetch images if search is empty
-
-        const fetchImages = async () => {
-            const { data, error } = await supabase
-                .storage
-                .from('bilder')
-                .list('events_jobads', { search: debouncedSearch.toLowerCase() }); // Filter images by search term
-            
-            if (error) {
-                console.error("Error fetching images:", error);
-            } else {
-                console.log("Fetched images:", data); // Add log to check the response
-                setImages(data.map(item => item.name)); // Store image names
-            }
-        };
-
-        fetchImages();
-    }, [debouncedSearch]); // Re-fetch images when the debounced search term changes
-    
     const removeEvent = async (id: number) => {
             const { error } = await supabase.from("events").delete().eq("id", id);
     
@@ -217,31 +174,13 @@ export default function AddEvent() {
                 />
                 {/* Image Search and Selection */}
                 <div>
-                    <input
-                        type="text"
-                        placeholder="Legg til bilde"
-                        value={imageSearch}
-                        onChange={(e) => setImageSearch(e.target.value)}
-                        className="w-full p-2 border rounded mb-2"
+                <input 
+                    type="text"
+                    placeholder={'Legg til bilde'}
+                    value={newEvent.imageURL}
+                    onChange={(e) => setNewEvent({...newEvent, imageURL: e.target.value})}
+                    className="w-full p-2 border rounded mb-2"
                     />
-                    {/* Only display the images if there is a search term */}
-                    {debouncedSearch && (
-                        <div className="flex flex-col mb-4 gap-2">
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className="pb-2 text-green-500"
-                                        onClick={() => setNewEvent({ ...newEvent, imageURL: image })}
-                                    > 
-                                        <em>{image}</em>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>No images found.</p>
-                            )}
-                        </div>
-                    )}
                 </div>
                 <button
                     className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 w-full cursor-pointer"
@@ -299,24 +238,6 @@ export default function AddEvent() {
                     onChange={(e) => setEditingEvent({...editingEvent, imageURL: e.target.value})}
                     className="w-full p-2 border rounded mb-2"
                     />
-                    {/* Only display the images if there is a search term */}
-                    {debouncedSearch && (
-                        <div className="flex flex-col mb-4 gap-2">
-                            {images.length > 0 ? (
-                                images.map((image, index) => (
-                                    <div
-                                        key={index}
-                                        className="pb-2 text-green-500"
-                                        onClick={() => setEditingEvent({ ...editingEvent, imageURL: image })}
-                                    > 
-                                        <em>{image}</em>
-                                    </div>
-                                ))
-                            ) : (
-                                <p>Ingen bilder funnet. Legg til dette først.</p>
-                            )}
-                        </div>
-                    )}
                     </div>
 
                     <button
