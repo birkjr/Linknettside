@@ -34,10 +34,6 @@ export default function AddNews() {
 
   // Add a new news item
   const addNewsItem = async () => {
-    if (!newTitle || !newDescription || !newLink) {
-      alert("Fyll inn alle feltene.");
-      return;
-    }
 
     const { data, error } = await supabase
       .from("news")
