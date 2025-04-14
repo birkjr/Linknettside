@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; 
+import { supabase } from "../supabaseClient";
 
 export default function Footer() {
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
@@ -21,18 +22,29 @@ export default function Footer() {
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Get login function from auth
 
-  const correctPassword = import.meta.env.VITE_ADMIN_PASSWORD; // Use the environment variable
+
  
-  const handleLogin = () => {
-    if (password === correctPassword) {
-      login(); // ✅ Authenticate user)
-      localStorage.setItem("isAdmin", "true"); // Store authentication flag
-      navigate("/admin");
-      setShowPasswordModal(false);
-      setPassword(""); // Clear password after login
-    } else {
-      alert("Feil passord! 🚫");
-      console.log("Correct Password:", import.meta.env.VITE_ADMIN_PASSWORD); // Debugging line
+  const handleLogin = async () => {
+    try {
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: 'link-styret@emilweb.no', // The admin email from your auth table
+        password: password
+      });
+
+      if (error) {
+        alert("Feil passord! 🚫");
+        return;
+}
+      if (data.user) {
+        login(); // Your existing auth context login
+        localStorage.setItem("isAdmin", "true");
+        navigate("/admin");
+        setShowPasswordModal(false);
+        setPassword(""); // Clear password after login
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert("En feil oppstod under innlogging");
     }
   };
  
