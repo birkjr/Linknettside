@@ -1,3 +1,4 @@
+{/*
 import { useEffect } from "react";
 import { supabase } from "../supabaseClient";
 
@@ -25,7 +26,8 @@ const EventCleaner = ({ events, setEvents }) => {
         return () => clearInterval(intervalId); // Cleanup on unmount
     }, [events]);
 
-    return null; // This component does not render anything
+    return null;
 };
 
 export default EventCleaner;
+*/}
