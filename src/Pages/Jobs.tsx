@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { supabase } from "./supabaseClient";
-import JobListing from "./components/JobListing";
-import JobFilter from "./components/JobFilter";
+import { supabase } from "../supabaseClient";
+import JobListing from "../components/JobListing";
+import JobFilter from "../components/JobFilter";
 
 type Job = {
     id: number;

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { supabase } from "./supabaseClient";
-import BoardPic from "./components/BoardPic"; // Adjust the path as necessary
+import { supabase } from "../supabaseClient";
+import BoardPic from "../components/BoardPic"; // Adjust the path as necessary
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/";
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient";
-
+import { supabase } from "../../supabaseClient";
 
 type StyretMember = {
   id: number;

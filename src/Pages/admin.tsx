@@ -1,13 +1,13 @@
-import SupportManager from "./components/SupportManager";
-import AdminBoard from "./components/AdminBoard";
-import AddNews from "./components/AdminNews";
-import AddEvent from "./components/AdminEvents";
-import AddJob from "./components/AdminJobs";
+import SupportManager from "../components/Admin/SupportManager";
+import AdminBoard from "../components/Admin/AdminBoard";
+import AddNews from "../components/Admin/AdminNews";
+import AddEvent from "../components/Admin/AdminEvents";
+import AddJob from "../components/Admin/AdminJobs";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
-import { useAuth } from "./auth";
-import UploadPhoto from "./components/UploadPhoto";
-import AdminPartners from "./components/AdminPartners";
+import { useAuth } from "../auth";
+import UploadPhoto from "../components/Admin/UploadPhoto";
+import AdminPartners from "../components/Admin/AdminPartners";
 
 
 export default function admin(){

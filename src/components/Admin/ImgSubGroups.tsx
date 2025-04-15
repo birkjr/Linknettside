@@ -1,15 +1,15 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
 
-type ImgEventsJobads = {
+type EditSubGroup = {
     isOpen: boolean;
     onClose: () => void;
 };
 
-export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
+export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
     const [files, setFiles] = useState<string[]>([]);
     const [uploading, setUploading] = useState(false);
 
@@ -20,7 +20,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
     }, [isOpen]);
 
     const fetchFiles = async () => {
-        const { data, error } = await supabase.storage.from("bilder").list("events_jobads");
+        const { data, error } = await supabase.storage.from("bilder").list("subGroup");
         if (error) {
             console.error("Error fetching files:", error);
         } else {
@@ -34,7 +34,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
 
         const file = event.target.files[0];
         const fileName = file.name;
-        const filePath = `events_jobads/${fileName}`;
+        const filePath = `subGroup/${fileName}`;
 
         const { error } = await supabase.storage.from("bilder").upload(filePath, file);
 
@@ -50,7 +50,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
     };
 
     const handleDelete = async (fileName: string) => {
-        const filePath = `events_jobads/${fileName}`;
+        const filePath = `subGroup/${fileName}`;
         const { error } = await supabase.storage.from("bilder").remove([filePath]);
 
         if (error) {
@@ -72,7 +72,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
                     <CloseIcon />
                 </button>
 
-                <h2 className="text-lg font-bold mb-4 text-center">Administrer arrangementbilder og jobbannonsebilder</h2>
+                <h2 className="text-lg font-bold mb-4 text-center">Administrer gruppebilder</h2>
 
                 {/* Upload Section */}
                 <label className="cursor-pointer flex items-center justify-center border-2 border-dashed border-gray-400 rounded-lg p-4 mb-4 bg-white hover:border-gray-600 hover:bg-gray-100 transition duration-200">

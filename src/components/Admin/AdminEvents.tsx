@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type Event = {
@@ -36,6 +36,7 @@ export default function AddEvent() {
             if (error) {
                 console.error("Error fetching events:", error);
             } else {
+                console.log("Fetched Events:", data); // Log fetched events
                 setEvents(data);
             }
         };
@@ -43,24 +44,47 @@ export default function AddEvent() {
     }, []);
 
     const removeEvent = async (id: number) => {
-            const { error } = await supabase.from("events").delete().eq("id", id);
-    
-            if (error) {
-                console.error("Error deleting job:", error);
-                alert("Kunne ikke fjerne arrangement. Prøv igjen.");
-            } else {
-                setEvents(events.filter((events) => events.id !== id)); // Update state to remove event
-                alert("Arrangement har blitt fjernet.");
-            }
+        const { error } = await supabase.from("events").delete().eq("id", id);
+        if (error) {
+            console.error("Error deleting job:", error);
+            alert("Kunne ikke fjerne arrangement. Prøv igjen.");
+        } else {
+            setEvents(events.filter((event) => event.id !== id)); // Update state to remove event
+            alert("Arrangement har blitt fjernet.");
+        }
+    };
+
+    // Function to delete past events
+    const deletePastEvents = async () => {
+        const now = new Date();
+        console.log("Current Date and Time:", now);
+
+        const pastEvents = events.filter(event => {
+            const eventDateTime = new Date(`${event.date}T${event.time}`);
+            console.log(`Checking event: ${event.title}, DateTime: ${eventDateTime}`);
+            return eventDateTime < now;
+        });
+
+        console.log("Past Events to be deleted:", pastEvents);
+
+        for (const event of pastEvents) {
+            await removeEvent(event.id);
+        }
+    };
+
+    // Set up interval to check for past events
+    useEffect(() => {
+        const intervalId = setInterval(deletePastEvents, 60000); // Check every minute
+        console.log("Setting up interval to delete past events");
+
+        return () => {
+            clearInterval(intervalId); // Cleanup on unmount
+            console.log("Clearing interval");
         };
+    }, []); // Run only once on mount
 
     // Function to add a new event
     const addNewEvent = async () => {
-        {/*if (!newEvent.title || !newEvent.date || !newEvent.location || !newEvent.restaurant || !newEvent.bedrift || !newEvent.time || !newEvent.link || !newEvent.imageURL) {
-            alert("Fyll inn alle nødvendige felt.");
-            return;
-        } */}
-
         const { data, error } = await supabase
             .from("events")
             .insert([newEvent])
@@ -84,8 +108,6 @@ export default function AddEvent() {
             });
         }
     };
-
-2
 
     const editEvent = (event: Event) => {
         setEditingEvent(event);
@@ -233,7 +255,6 @@ export default function AddEvent() {
                     <div>
                     <input 
                     type="text"
-                    //placeholder={`${editingJob.bedrift}.png`}
                     value={editingEvent.imageURL}
                     onChange={(e) => setEditingEvent({...editingEvent, imageURL: e.target.value})}
                     className="w-full p-2 border rounded mb-2"
