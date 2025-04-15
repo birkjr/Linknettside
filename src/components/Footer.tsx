@@ -21,9 +21,6 @@ export default function Footer() {
 
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Get login function from auth
-
-
- 
   const handleLogin = async () => {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
