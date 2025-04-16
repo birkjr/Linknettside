@@ -4,6 +4,7 @@ import PlaceIcon from "@mui/icons-material/Place";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import EventCleaner from "./EventCleaner"; // Import the EventCleaner component
 
 const supabaseStorageUrl =
   "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
@@ -23,17 +24,19 @@ type Event = {
 export default function Arrangementer() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
     const formattedDate = date.toLocaleDateString("no-NO", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric",
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
     });
 
     // Replace default formatting with desired format: "day.date year"
     return formattedDate.replace(/\//g, ".").replace(/(\d{2})\.(\d{2})\.(\d{4})/, "$1.$2 $3");
   };
+
   const formatTime = (timeString: string) => {
     return timeString.slice(0, 5); // Removes the seconds (e.g., "18:00:00" -> "18:00")
   };
@@ -57,6 +60,8 @@ export default function Arrangementer() {
     <div className="w-full max-w-6xl mx-auto p-6 sm:p-12 text-black rounded-xl" style={{ backgroundColor: "#4682B4" }}>
       <h1 className="text-white text-3xl text-center">Arrangementer</h1>
       <p className="text-white text-sm text-center pb-4">Her er de kommende arrangementene for EMIL studenter</p>
+
+      <EventCleaner events={events} setEvents={setEvents} /> {/* Include the EventCleaner component */}
 
       {loading ? (
         <p className="text-center text-black">Laster inn arrangementer...</p>
@@ -89,7 +94,6 @@ export default function Arrangementer() {
                     {/* Event Info Section */}
                     <div className="flex-1 text-center justify-center md:text-left px-6">
                       <h2 className="text-lg sm:text-xl font-semibold">{event.title}</h2>
-
                     </div>
 
                     {/* Event Details */}
