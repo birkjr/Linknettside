@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient"; // Ensure your Supabase client is correctly configured
+import { supabase } from "../../supabaseClient"; // Ensure your Supabase client is correctly configured
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo";
 

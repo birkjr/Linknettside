@@ -1,5 +1,5 @@
-import Arrangementer from "../components/Events";
-import Nyheter from "../components/News";
+import Arrangementer from "../components/Tools/Events";
+import Nyheter from "../components/Schema/News";
 //import CoopPartners from "./components/CoopPartners"
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";

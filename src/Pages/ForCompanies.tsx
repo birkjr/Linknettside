@@ -1,4 +1,4 @@
-import BusinessOffer from "../components/BusinessOffer";
+import BusinessOffer from "../components/Schema/BusinessOffer";
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
 
 export default function ForBedrifter() {

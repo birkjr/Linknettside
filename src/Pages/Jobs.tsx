@@ -1,17 +1,18 @@
 import { useState, useEffect } from "react";
 import { supabase } from "../supabaseClient";
 import JobListing from "../components/JobListing";
-import JobFilter from "../components/JobFilter";
+import JobFilter from "../components/Tools/JobFilter";
+import JobCleaner from "../components/Tools/JobCleaner";
 
 type Job = {
-    id: number;
+    id: string; // Ensure this matches the type in JobCleaner
     bedrift: string;
     jobType: string;
     jobTitle: string;
-    deadline: string;
+    deadline: string; // Ensure this is in a valid date format
     link: string;
     place: string;
-    imageURL:string;
+    imageURL: string;
 };
 
 export default function Jobbtorget() {
@@ -59,7 +60,7 @@ export default function Jobbtorget() {
                 <h1 className="text-white text-3xl my-4">Jobbtorget</h1>
                 <p>Her er de nyeste jobbannonsene som ligger ute for EMIL studenter</p>
                 <p>SØK!</p>
-                
+                <JobCleaner jobs={jobListings} setJobs={setJobListings} /> {/* Correctly pass jobListings */}
             </div>
 
             {/* Main Layout: Responsive Filter & Job Listings */}
@@ -73,25 +74,25 @@ export default function Jobbtorget() {
                 <div className="w-full">
                     {loading ? (
                         <p className="text-center text-gray-500 mt-6">Laster inn jobber...</p>
-                    ) : filteredJobs?.length > 0 ? (
+                    ) : filteredJobs.length > 0 ? (
                         <div className="space-y-6">
                             {filteredJobs
-                            .sort((a, b) => {
-                                // Ensure the date is treated as a string, and then compare using new Date()
-                                return new Date(a.deadline as string).getTime() - new Date(b.deadline as string).getTime();
-                              })
-                            .map((job, index) => (
-                                <JobListing 
-                                    key={index} 
-                                    bedrift={job.bedrift} 
-                                    jobType={job.jobType} 
-                                    jobTitle={job.jobTitle} 
-                                    deadline={job.deadline} 
-                                    link={job.link} 
-                                    place={job.place} 
-                                    imageURL={job.imageURL}
-                                />
-                            ))}
+                                .sort((a, b) => {
+                                    // Ensure the date is treated as a string, and then compare using new Date()
+                                    return new Date(a.deadline).getTime() - new Date(b.deadline).getTime();
+                                })
+                                .map((job) => (
+                                    <JobListing 
+                                        key={job.id} // Use job.id as the key
+                                        bedrift={job.bedrift} 
+                                        jobType={job.jobType} 
+                                        jobTitle={job.jobTitle} 
+                                        deadline={job.deadline} 
+                                        link={job.link} 
+                                        place={job.place} 
+                                        imageURL={job.imageURL}
+                                    />
+                                ))}
                         </div>
                     ) : (
                         <p className="text-center text-gray-500 mt-6">Ingen jobber funnet.</p>
