@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/";
-import SubGroupPic from "../components/SubGroupPic";
+import SubGroupPic from "../components/Tools/SubGroupPic";
 
 type Styret = {
     id: number;

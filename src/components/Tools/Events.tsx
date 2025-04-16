@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabaseClient";
+import { supabase } from "../../supabaseClient";
 import PlaceIcon from "@mui/icons-material/Place";
 import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";

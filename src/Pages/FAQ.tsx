@@ -1,5 +1,5 @@
-import FAQCard from "../components/FAQcard";
-import ContactForm from "../components/ContactForm"; // ✅ Import Contact Form
+import FAQCard from "../components/Tools/FAQcard";
+import ContactForm from "../components/Schema/ContactForm";
 
 export default function FAQ() {
     return (

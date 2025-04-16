@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { supabase } from "../supabaseClient"; // Ensure this is correctly imported
+import { supabase } from "../../supabaseClient";
 
 export default function ContactForm() {
     const [formData, setFormData] = useState({

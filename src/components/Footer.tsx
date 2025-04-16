@@ -6,7 +6,7 @@ import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import HandshakeIcon from "@mui/icons-material/Handshake";
 import GitHubIcon from '@mui/icons-material/GitHub';
-import Partners from "./Partners";
+import Partners from "./Schema/Partners";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
 import VisibilityIcon from '@mui/icons-material/Visibility';
