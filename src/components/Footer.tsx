@@ -5,7 +5,6 @@ import FacebookIcon from "@mui/icons-material/Facebook";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import WindPowerIcon from "@mui/icons-material/WindPower";
 import HandshakeIcon from "@mui/icons-material/Handshake";
-import GitHubIcon from '@mui/icons-material/GitHub';
 import Partners from "./Schema/Partners";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../auth";
@@ -109,9 +108,6 @@ export default function Footer() {
             className="hover:text-red-400 hover:scale-105"
           >
             &copy;{new Date().getFullYear()} EMIL-Link{" "}
-          </a>
-          <a href="https://github.com/birkjr/Linknettside" target="_blank" rel="noopener noreferrer">
-            <GitHubIcon className="hover:scale-110" />
           </a>
         </div>
       </footer>
