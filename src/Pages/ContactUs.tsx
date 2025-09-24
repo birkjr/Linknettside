@@ -71,8 +71,8 @@ export default function ContactUs() {
                             {nestleder && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.png`} alt={`${nestleder.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{nestleder.name}</p>
-                                    <p className="text-sm">{nestleder.stilling}</p>
+                                    <p className="font-semibold mt-2">{nestleder.stilling}</p>
+                                    <p className="text-sm">{nestleder.name}</p>
                                     <p>Tlf: <a href={`tel:${nestleder.telefon}`} className="text-blue-500">{nestleder.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${nestleder.mail}`} className="text-blue-500">{nestleder.mail}</a></p>
                                 </div>
@@ -89,8 +89,8 @@ export default function ContactUs() {
                             {økonomi && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.png`} alt={`${økonomi.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{økonomi.name}</p>
-                                    <p className="text-sm">{økonomi.stilling}</p>
+                                    <p className="font-semibold mt-2">{økonomi.stilling}</p>
+                                    <p className="text-sm">{økonomi.name}</p>
                                     <p>Tlf: <a href={`tel:${økonomi.telefon}`} className="text-blue-500">{økonomi.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${økonomi.mail}`} className="text-blue-500">{økonomi.mail}</a></p>
                                 </div>
@@ -101,8 +101,8 @@ export default function ContactUs() {
                             {marked && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.png`} alt={`${marked.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{marked.name}</p>
-                                    <p className="text-sm">{marked.stilling}</p>
+                                    <p className="font-semibold mt-2">{marked.stilling}</p>
+                                    <p className="text-sm">{marked.name}</p>
                                     <p>Tlf: <a href={`tel:${marked.telefon}`} className="text-blue-500">{marked.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${marked.mail}`} className="text-blue-500">{marked.mail}</a></p>
                                 </div>
@@ -110,8 +110,8 @@ export default function ContactUs() {
                             {bedrift && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.png`} alt={`${bedrift.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{bedrift.name}</p>
-                                    <p className="text-sm">{bedrift.stilling}</p>
+                                    <p className="font-semibold mt-2">{bedrift.stilling}</p>
+                                    <p className="text-sm">{bedrift.name}</p>
                                     <p>Tlf: <a href={`tel:${bedrift.telefon}`} className="text-blue-500">{bedrift.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${bedrift.mail}`} className="text-blue-500">{bedrift.mail}</a></p>
                                 </div>
@@ -119,8 +119,8 @@ export default function ContactUs() {
                             {logistikk && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.png`} alt={`${logistikk.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{logistikk.name}</p>
-                                    <p className="text-sm">{logistikk.stilling}</p>
+                                    <p className="font-semibold mt-2">{logistikk.stilling}</p>
+                                    <p className="text-sm">{logistikk.name}</p>
                                     <p>Tlf: <a href={`tel:${logistikk.telefon}`} className="text-blue-500">{logistikk.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${logistikk.mail}`} className="text-blue-500">{logistikk.mail}</a></p>
                                 </div>
@@ -128,8 +128,8 @@ export default function ContactUs() {
                             {fa && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
                                     <BoardPic src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.png`} alt={`${fa.stilling}`} className="h-40 rounded-2xl" />
-                                    <p className="font-semibold mt-2">{fa.name}</p>
-                                    <p className="text-sm">{fa.stilling}</p>
+                                    <p className="font-semibold mt-2">{fa.stilling}</p>
+                                    <p className="text-sm">{fa.name}</p>
                                     <p>Tlf: <a href={`tel:${fa.telefon}`} className="text-blue-500">{fa.telefon}</a></p>
                                     <p>Mail: <a href={`mailto:${fa.mail}`} className="text-blue-500">{fa.mail}</a></p>
                                 </div>
