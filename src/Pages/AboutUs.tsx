@@ -3,6 +3,38 @@ import { supabase } from "../supabaseClient";
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/";
 import SubGroupPic from "../components/Tools/SubGroupPic";
 
+// Preload critical images
+const preloadImages = () => {
+    const criticalImages = [
+        `${supabaseStorageUrl}styret.png`
+    ];
+    
+    const prefetchImages = [
+        `${supabaseStorageUrl}bedrift.png`,
+        `${supabaseStorageUrl}marked.png`,
+        `${supabaseStorageUrl}logistikk.png`,
+        `${supabaseStorageUrl}fa.png`
+    ];
+    
+    // Preload critical above-the-fold images
+    criticalImages.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'preload';
+        link.as = 'image';
+        link.href = url;
+        document.head.appendChild(link);
+    });
+    
+    // Prefetch other images with lower priority
+    prefetchImages.forEach(url => {
+        const link = document.createElement('link');
+        link.rel = 'prefetch';
+        link.as = 'image';
+        link.href = url;
+        document.head.appendChild(link);
+    });
+};
+
 type Styret = {
     id: number;
     stilling: string;
@@ -24,6 +56,9 @@ export default function OmOss() {
         const [loading, setLoading] = useState(true);
 
         useEffect(() => {
+            // Preload images immediately when component mounts
+            preloadImages();
+            
             const fetchStyret = async () => {
                 const { data, error } = await supabase.from("styret").select("*");
     
@@ -41,14 +76,22 @@ export default function OmOss() {
                     setFa(data.find((person: Styret) => person.stilling === "Teamleder FA") || null);
                 }
                 setLoading(false);
-                loading
             };
     
             fetchStyret();
         }, []);
 
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="mt-4 text-gray-600">Laster inn...</p>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col items-center ">
+        <div className="flex flex-col items-center" style={{ zIndex: 1 }}>
             {/* Widen the main content */}
             <div className="w-full p-6 lg:px-12">
                 
@@ -74,7 +117,7 @@ export default function OmOss() {
                     {/* Styret */}
                     <div>
                         <div>
-                            <SubGroupPic alt="Styret" className='rounded-xl' src={`${supabaseStorageUrl}styret.png`}/>
+                            <SubGroupPic alt="Styret" className='rounded-xl' src={`${supabaseStorageUrl}styret.png`} priority={true}/>
                         </div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-sm sm:text-xl px-4 sm:px-0">

@@ -32,7 +32,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="bg-stone-100 sticky top-0 w-full shadow-md">
+      <nav className="bg-stone-100 sticky top-0 w-full shadow-md z-50">
         <div className="flex lg:flex-col sm:flex-row justify-between items-center w-full px-6 py-4">
           {/* Logo */}
           <Link to={"/"}>
@@ -80,7 +80,7 @@ export default function Header() {
           </div>
           {/* Password Modal */}
           {showPasswordModal && (
-            <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center">
+            <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center z-[60]">
               <div className="bg-yellow-50 p-6 rounded-lg shadow-lg w-100">
                 <h2 className="text-lg font-bold mb-4 text-center">Admin Tilgang</h2>
                 <input
