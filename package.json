@@ -3,11 +3,17 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pnpm:dev": "pnpm dev",
+    "pnpm:build": "pnpm build",
+    "pnpm:install": "pnpm install",
+    "pnpm:lint": "pnpm lint",
+    "pnpm:preview": "pnpm preview"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",

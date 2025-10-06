@@ -4,6 +4,32 @@ import BoardPic from "../components/Tools/BoardPic"; // Adjust the path as neces
 
 const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/";
 
+// Preload critical images
+const preloadBoardImages = (members: Styret[]) => {
+    // Preload the first member (leader) with high priority
+    if (members.length > 0) {
+        const leader = members.find(member => member.stilling === "Leder");
+        if (leader) {
+            const link = document.createElement('link');
+            link.rel = 'preload';
+            link.as = 'image';
+            link.href = `${supabaseStorageUrl}${leader.name.split(" ")[0]}.png`;
+            document.head.appendChild(link);
+        }
+    }
+    
+    // Prefetch other member images with lower priority
+    members.forEach(member => {
+        if (member.stilling !== "Leder") {
+            const link = document.createElement('link');
+            link.rel = 'prefetch';
+            link.as = 'image';
+            link.href = `${supabaseStorageUrl}${member.name.split(" ")[0]}.png`;
+            document.head.appendChild(link);
+        }
+    });
+};
+
 type Styret = {
     id: number;
     stilling: string;
@@ -31,6 +57,9 @@ export default function ContactUs() {
             if (error) {
                 console.error("Error fetching styret:", error);
             } else {
+                // Preload images after data is fetched
+                preloadBoardImages(data);
+                
                 setLeder(data.find((person: Styret) => person.stilling === "Leder") || null);
                 setNestleder(data.find((person: Styret) => person.stilling === "Nestleder") || null);
                 setHr(data.find((person: Styret) => person.stilling === "HR ansvarlig") || null);
@@ -46,20 +75,26 @@ export default function ContactUs() {
         fetchStyret();
     }, []);
 
+    if (loading) {
+        return (
+            <div className="flex flex-col items-center justify-center min-h-screen">
+                <div className="w-16 h-16 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+                <p className="mt-4 text-gray-600">Laster inn styret...</p>
+            </div>
+        );
+    }
+
     return (
-        <div className="flex flex-col items-center">
+        <div className="flex flex-col items-center" style={{ zIndex: 1 }}>
             <div className="w-full p-6 lg:px-12">
                 <div className="flex flex-col justify-center items-center w-full max-w-6xl mx-auto h-auto lg:h-auto p-6 text-white text-center rounded-lg" style={{ backgroundColor: "#4682B4" }}>
                     <h3 className="text-3xl">Styret</h3>
                 </div>
 
-                {loading ? (
-                    <p className="text-gray-500 text-center py-6">Laster inn styret...</p>
-                ) : (
-                    <>
-                        {leder && (
-                            <div className="flex flex-col items-center justify-center my-3">
-                                <BoardPic src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.png`} alt={leder.stilling} className="h-40 rounded-2xl object-cover" />
+                <>
+                    {leder && (
+                        <div className="flex flex-col items-center justify-center my-3">
+                            <BoardPic src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.png`} alt={leder.stilling} className="h-40 rounded-2xl object-cover" priority={true} />
                                 <p className="font-semibold mt-2">{leder.stilling}</p>
                                 <p className="text-sm">{leder.name}</p>
                                 <p>Tlf: <a href={`tel:${leder.telefon}`} className="text-blue-500">{leder.telefon}</a></p>
@@ -135,8 +170,7 @@ export default function ContactUs() {
                                 </div>
                             )}
                         </div>
-                    </>
-                )}
+                </>
             </div>
         </div>
     );
