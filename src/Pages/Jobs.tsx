@@ -4,6 +4,8 @@ import JobListing from '../components/JobListing';
 import JobFilter from '../components/Tools/JobFilter';
 import JobCleaner from '../components/Tools/JobCleaner';
 import SkeletonLoader from '../components/Tools/SkeletonLoader';
+import Swipeable from '../components/Tools/Swipeable';
+import PullToRefresh from '../components/Tools/PullToRefresh';
 
 type Job = {
   id: string; // Ensure this matches the type in JobCleaner
@@ -20,6 +22,7 @@ export default function Jobbtorget() {
   const [jobListings, setJobListings] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentJobIndex, setCurrentJobIndex] = useState(0);
 
   // Fetch jobs from Supabase
   useEffect(() => {
@@ -53,6 +56,35 @@ export default function Jobbtorget() {
     });
 
     setFilteredJobs(filtered);
+    setCurrentJobIndex(0); // Reset to first job when filtering
+  };
+
+  // Refresh jobs
+  const handleRefresh = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.from('jobs').select('*');
+    
+    if (error) {
+      console.error('❌ Error refreshing jobs:', error);
+    } else {
+      setJobListings(data || []);
+      setFilteredJobs(data || []);
+      setCurrentJobIndex(0);
+    }
+    setLoading(false);
+  };
+
+  // Swipe handlers
+  const handleSwipeLeft = () => {
+    if (currentJobIndex < filteredJobs.length - 1) {
+      setCurrentJobIndex(currentJobIndex + 1);
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (currentJobIndex > 0) {
+      setCurrentJobIndex(currentJobIndex - 1);
+    }
   };
 
   return (
@@ -78,36 +110,78 @@ export default function Jobbtorget() {
 
         {/* Job Listings Section - Full width on mobile */}
         <div className="w-full">
-          {loading ? (
-            <SkeletonLoader type="job" count={3} />
-          ) : filteredJobs.length > 0 ? (
-            <div className="space-y-6">
-              {filteredJobs
-                .sort((a, b) => {
-                  // Ensure the date is treated as a string, and then compare using new Date()
-                  return (
-                    new Date(a.deadline).getTime() -
-                    new Date(b.deadline).getTime()
-                  );
-                })
-                .map(job => (
-                  <JobListing
-                    key={job.id} // Use job.id as the key
-                    bedrift={job.bedrift}
-                    jobType={job.jobType}
-                    jobTitle={job.jobTitle}
-                    deadline={job.deadline}
-                    link={job.link}
-                    place={job.place}
-                    imageURL={job.imageURL}
-                  />
-                ))}
-            </div>
-          ) : (
-            <p className="text-center text-gray-500 mt-6">
-              Ingen jobber funnet.
-            </p>
-          )}
+          <PullToRefresh onRefresh={handleRefresh}>
+            {loading ? (
+              <SkeletonLoader type="job" count={3} />
+            ) : filteredJobs.length > 0 ? (
+              <div className="space-y-6">
+                {/* Mobile: Swipeable single job view */}
+                <div className="lg:hidden">
+                  <Swipeable
+                    onSwipeLeft={handleSwipeLeft}
+                    onSwipeRight={handleSwipeRight}
+                  >
+                    <div className="relative">
+                      <JobListing
+                        key={filteredJobs[currentJobIndex]?.id}
+                        bedrift={filteredJobs[currentJobIndex]?.bedrift}
+                        jobType={filteredJobs[currentJobIndex]?.jobType}
+                        jobTitle={filteredJobs[currentJobIndex]?.jobTitle}
+                        deadline={filteredJobs[currentJobIndex]?.deadline}
+                        link={filteredJobs[currentJobIndex]?.link}
+                        place={filteredJobs[currentJobIndex]?.place}
+                        imageURL={filteredJobs[currentJobIndex]?.imageURL}
+                      />
+                      {/* Swipe indicator */}
+                      <div className="flex justify-center mt-4 space-x-2">
+                        {filteredJobs.map((_, index) => (
+                          <div
+                            key={index}
+                            className={`w-2 h-2 rounded-full ${
+                              index === currentJobIndex
+                                ? 'bg-blue-500'
+                                : 'bg-gray-300'
+                            }`}
+                          />
+                        ))}
+                      </div>
+                      {/* Swipe hint */}
+                      <p className="text-center text-gray-500 text-sm mt-2">
+                        Swipe for å se flere jobber ({currentJobIndex + 1}/{filteredJobs.length})
+                      </p>
+                    </div>
+                  </Swipeable>
+                </div>
+
+                {/* Desktop: All jobs list */}
+                <div className="hidden lg:block space-y-6">
+                  {filteredJobs
+                    .sort((a, b) => {
+                      return (
+                        new Date(a.deadline).getTime() -
+                        new Date(b.deadline).getTime()
+                      );
+                    })
+                    .map(job => (
+                      <JobListing
+                        key={job.id}
+                        bedrift={job.bedrift}
+                        jobType={job.jobType}
+                        jobTitle={job.jobTitle}
+                        deadline={job.deadline}
+                        link={job.link}
+                        place={job.place}
+                        imageURL={job.imageURL}
+                      />
+                    ))}
+                </div>
+              </div>
+            ) : (
+              <p className="text-center text-gray-500 mt-6">
+                Ingen jobber funnet.
+              </p>
+            )}
+          </PullToRefresh>
         </div>
       </div>
     </div>

@@ -104,8 +104,8 @@ export default function Header() {
             </div>
           )}
 
-          {/* Mobile Menu Button */}
-          <div className="relative lg:hidden flex">
+          {/* Mobile Menu Button - Hidden, using MobileNavigation component instead */}
+          <div className="relative lg:hidden flex hidden">
             <button onClick={() => setMenuOpen(!menuOpen)}>
               {menuOpen ? (
                 <CloseIcon fontSize="large" />
@@ -116,8 +116,8 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
-        {menuOpen && (
+        {/* Mobile Menu - Hidden, using MobileNavigation component instead */}
+        {false && menuOpen && (
           <div className="lg:hidden bg-white shadow-md py-4">
             <ul className="flex flex-col items-center space-y-4 text-gray-700">
               {[
