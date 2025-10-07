@@ -1,5 +1,4 @@
 import BusinessOffer from "../components/Schema/BusinessOffer";
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
 
 export default function ForBedrifter() {
     return (
@@ -19,17 +18,17 @@ export default function ForBedrifter() {
             {/* Business Offers Section */}
             <div className="flex flex-col md:flex-row justify-center items-start gap-12 max-w-6xl mx-auto mt-12">
                 <BusinessOffer 
-                    image={`${supabaseStorageUrl}bedriftsbilde.png`}
+                    image={`/images/content/bedriftsbilde.avif`}
                     title="Bedriftspresentasjoner"
                     description="Bedriftspresentasjon er en promoteringsform hvor representanter fra din bedrift kommer i direkte kontakt med EMIL-studentene, og er den mest brukte rekruteringsarenaen. Det starter som regel med en presentasjon av bedriften, enten på Gløshaugen eller i byen, etterfulgt av bespisning og mingling mellom studentene og bedriftsrepresentantene. Det er mange måter å gjennomføre en «bedpres» på, og bedriftskontaktene i EMIL-Link er svært behjelpelige i planleggingen av arrangementet for å promotere din bedrift best mulig."
                 />
                 <BusinessOffer 
-                    image={`${supabaseStorageUrl}logo_sirkel.png`}
+                    image={`/images/logos/logo_sirkel.avif`}
                     title="Jobbtorget"
                     description="Jobbtorget er EMIL-Link sin egen side for relevante stillingsannonser hvor vi publiserer ledige stillinger, sommerjobber, internships og oppgaver. I tillegg legges det ut på vår instagram-konto som «nye stillingsannonser». Hvis dette er interessant for din bedrift, send en mail med link til den aktuelle annonsen!"
                 />
                 <BusinessOffer 
-                    image={`${supabaseStorageUrl}instagram.png`}
+                    image={`/images/content/instagram.avif`}
                     title="Insta take-over og annen promotering"
                     description="Få muligheten til å nå ut til energi- og miljøstudentene via EMIL-Link sin egen instagramkonto! Representanter fra din bedrift kan styre instagram-kontoen og promotere ønsket innhold selv, for en hel dag. Det er også mulighet for at EMIL-Link kan markedsføre eksterne arrangementer, så lenge det ikke kommer i veien for eget opplegg."
                 />

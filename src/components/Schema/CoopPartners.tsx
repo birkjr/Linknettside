@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../../supabaseClient"; // Ensure your Supabase client is correctly configured
 
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo";
 
 export default function Partners() {
   const [mainPartners, setMainPartners] = useState<string[]>([]);
@@ -62,7 +61,7 @@ export default function Partners() {
                   {mainPartners.map((partner) => (
                     <img
                       key={partner}
-                      src={`${supabaseStorageUrl}/${partner}.JPG`}
+                      src={`/images/company_logos/${partner}.JPG`}
                       alt={partner}
                       onError={(e) => (e.currentTarget.src = "/images/placeholder.JPG")} // Fallback image if not found
                       className="h-20 rounded-xl hover:scale-105 p-4 flex justify-center items-center"
@@ -80,7 +79,7 @@ export default function Partners() {
                   {otherPartners.map((partner) => (
                     <img
                       key={partner}
-                      src={`${supabaseStorageUrl}/${partner}.JPG`}
+                      src={`/images/company_logos/${partner}.JPG`}
                       alt={partner}
                       onError={(e) => (e.currentTarget.src = "/images/placeholder.JPG")} // Fallback image if not found
                       className="h-20 rounded-xl hover:scale-105 p-4 flex justify-center items-center"

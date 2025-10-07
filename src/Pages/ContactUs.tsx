@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
 import BoardPic from "../components/Tools/BoardPic"; // Adjust the path as necessary
 
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/";
-
 // Preload critical images
 const preloadBoardImages = (members: Styret[]) => {
     // Preload the first member (leader) with high priority
@@ -13,7 +11,7 @@ const preloadBoardImages = (members: Styret[]) => {
             const link = document.createElement('link');
             link.rel = 'preload';
             link.as = 'image';
-            link.href = `${supabaseStorageUrl}${leader.name.split(" ")[0]}.png`;
+            link.href = `/images/board_pics/${leader.name.split(" ")[0]}.png`;
             document.head.appendChild(link);
         }
     }
@@ -24,7 +22,7 @@ const preloadBoardImages = (members: Styret[]) => {
             const link = document.createElement('link');
             link.rel = 'prefetch';
             link.as = 'image';
-            link.href = `${supabaseStorageUrl}${member.name.split(" ")[0]}.png`;
+            link.href = `/images/board_pics/${member.name.split(" ")[0]}.png`;
             document.head.appendChild(link);
         }
     });
@@ -94,7 +92,7 @@ export default function ContactUs() {
                 <>
                     {leder && (
                         <div className="flex flex-col items-center justify-center my-3">
-                            <BoardPic src={`${supabaseStorageUrl}${leder.name.split(" ")[0]}.png`} alt={leder.stilling} className="h-40 rounded-2xl object-cover" priority={true} />
+                            <BoardPic src={`/images/board_pics/${leder.name.split(" ")[0]}.png`} alt={leder.stilling} className="h-40 rounded-2xl object-cover" priority={true} />
                                 <p className="font-semibold mt-2">{leder.stilling}</p>
                                 <p className="text-sm">{leder.name}</p>
                                 <p>Tlf: <a href={`tel:${leder.telefon}`} className="text-blue-500">{leder.telefon}</a></p>
@@ -105,7 +103,7 @@ export default function ContactUs() {
                         <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
                             {nestleder && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${nestleder.name.split(" ")[0]}.png`} alt={`${nestleder.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${nestleder.name.split(" ")[0]}.png`} alt={`${nestleder.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{nestleder.stilling}</p>
                                     <p className="text-sm">{nestleder.name}</p>
                                     <p>Tlf: <a href={`tel:${nestleder.telefon}`} className="text-blue-500">{nestleder.telefon}</a></p>
@@ -114,7 +112,7 @@ export default function ContactUs() {
                             )}
                             {hr && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${hr.name.split(" ")[0]}.png`} alt={`${hr.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${hr.name.split(" ")[0]}.png`} alt={`${hr.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{hr.stilling}</p>
                                     <p className="text-sm">{hr.name}</p>
                                     <p>Tlf: <a href={`tel:${hr.telefon}`} className="text-blue-500">{hr.telefon}</a></p>
@@ -123,7 +121,7 @@ export default function ContactUs() {
                             )}
                             {økonomi && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${økonomi.name.split(" ")[0]}.png`} alt={`${økonomi.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${økonomi.name.split(" ")[0]}.png`} alt={`${økonomi.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{økonomi.stilling}</p>
                                     <p className="text-sm">{økonomi.name}</p>
                                     <p>Tlf: <a href={`tel:${økonomi.telefon}`} className="text-blue-500">{økonomi.telefon}</a></p>
@@ -135,7 +133,7 @@ export default function ContactUs() {
                         <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
                             {marked && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${marked.name.split(" ")[0]}.png`} alt={`${marked.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${marked.name.split(" ")[0]}.png`} alt={`${marked.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{marked.stilling}</p>
                                     <p className="text-sm">{marked.name}</p>
                                     <p>Tlf: <a href={`tel:${marked.telefon}`} className="text-blue-500">{marked.telefon}</a></p>
@@ -144,7 +142,7 @@ export default function ContactUs() {
                             )}
                             {bedrift && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${bedrift.name.split(" ")[0]}.png`} alt={`${bedrift.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${bedrift.name.split(" ")[0]}.png`} alt={`${bedrift.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{bedrift.stilling}</p>
                                     <p className="text-sm">{bedrift.name}</p>
                                     <p>Tlf: <a href={`tel:${bedrift.telefon}`} className="text-blue-500">{bedrift.telefon}</a></p>
@@ -153,7 +151,7 @@ export default function ContactUs() {
                             )}
                             {logistikk && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${logistikk.name.split(" ")[0]}.png`} alt={`${logistikk.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${logistikk.name.split(" ")[0]}.png`} alt={`${logistikk.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{logistikk.stilling}</p>
                                     <p className="text-sm">{logistikk.name}</p>
                                     <p>Tlf: <a href={`tel:${logistikk.telefon}`} className="text-blue-500">{logistikk.telefon}</a></p>
@@ -162,7 +160,7 @@ export default function ContactUs() {
                             )}
                             {fa && (
                                 <div className="text-center flex flex-col items-center justify-center my-3">
-                                    <BoardPic src={`${supabaseStorageUrl}${fa.name.split(" ")[0]}.png`} alt={`${fa.stilling}`} className="h-40 rounded-2xl" />
+                                    <BoardPic src={`/images/board_pics/${fa.name.split(" ")[0]}.png`} alt={`${fa.stilling}`} className="h-40 rounded-2xl" />
                                     <p className="font-semibold mt-2">{fa.stilling}</p>
                                     <p className="text-sm">{fa.name}</p>
                                     <p>Tlf: <a href={`tel:${fa.telefon}`} className="text-blue-500">{fa.telefon}</a></p>

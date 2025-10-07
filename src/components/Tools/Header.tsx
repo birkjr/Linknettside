@@ -4,8 +4,6 @@ import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../../auth";
 
-const supabaseStorageUrl =
-  "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
   
 
 export default function Header() {
@@ -38,7 +36,7 @@ export default function Header() {
           <Link to={"/"}>
             <img
               className="h-20 flex items-center transition-transform duration-300 hover:scale-105"
-              src={`${supabaseStorageUrl}logo_transparent.png`}
+              src={`/images/logos/logo_transparent.png`}
               alt="Logo"
             />
           </Link>

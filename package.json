@@ -13,7 +13,10 @@
     "pnpm:build": "pnpm build",
     "pnpm:install": "pnpm install",
     "pnpm:lint": "pnpm lint",
-    "pnpm:preview": "pnpm preview"
+    "pnpm:preview": "pnpm preview",
+    "migrate:images": "node migrate-images.js",
+    "update:image-paths": "node update-image-paths.js",
+    "check:images": "node check-actual-images.js"
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
