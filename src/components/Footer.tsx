@@ -1,21 +1,21 @@
-import { useState } from "react";
-import MailOutlineIcon from "@mui/icons-material/MailOutline";
-import InstagramIcon from "@mui/icons-material/Instagram";
-import FacebookIcon from "@mui/icons-material/Facebook";
-import LinkedInIcon from "@mui/icons-material/LinkedIn";
-import WindPowerIcon from "@mui/icons-material/WindPower";
-import HandshakeIcon from "@mui/icons-material/Handshake";
-import Partners from "./Schema/Partners";
-import { useNavigate } from "react-router-dom";
-import { useAuth } from "../auth";
+import { useState } from 'react';
+import MailOutlineIcon from '@mui/icons-material/MailOutline';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import FacebookIcon from '@mui/icons-material/Facebook';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import WindPowerIcon from '@mui/icons-material/WindPower';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import Partners from './Schema/Partners';
+import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../auth';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import VisibilityOffIcon from '@mui/icons-material/VisibilityOff'; 
-import { supabase } from "../supabaseClient";
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { supabase } from '../supabaseClient';
 
 export default function Footer() {
   const [isPartnersOpen, setIsPartnersOpen] = useState(false);
   const [showPasswordModal, setShowPasswordModal] = useState(false);
-  const [password, setPassword] = useState("");
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
@@ -24,26 +24,26 @@ export default function Footer() {
     try {
       const { data, error } = await supabase.auth.signInWithPassword({
         email: 'link-styret@emilweb.no', // The admin email from your auth table
-        password: password
+        password: password,
       });
 
       if (error) {
-        alert("Feil passord! 🚫");
+        alert('Feil passord! 🚫');
         return;
-}
+      }
       if (data.user) {
         login(); // Your existing auth context login
-        localStorage.setItem("isAdmin", "true");
-        navigate("/admin");
+        localStorage.setItem('isAdmin', 'true');
+        navigate('/admin');
         setShowPasswordModal(false);
-        setPassword(""); // Clear password after login
+        setPassword(''); // Clear password after login
       }
     } catch (error) {
       console.error('Login error:', error);
-      alert("En feil oppstod under innlogging");
+      alert('En feil oppstod under innlogging');
     }
   };
- 
+
   return (
     <div className="relative w-full">
       {/* Wave Above Footer */}
@@ -63,7 +63,10 @@ export default function Footer() {
       </div>
 
       {/* Footer Section */}
-      <footer className="sticky text-green-950 text-center py-6 mt-20" style={{ backgroundColor: "#A8D5A4" }}>
+      <footer
+        className="sticky text-green-950 text-center py-6 mt-20"
+        style={{ backgroundColor: '#A8D5A4' }}
+      >
         <div className="grid grid-cols-2 justify-center items-center my-6">
           <div>
             {/* Handshake Icon with Click Event */}
@@ -74,22 +77,50 @@ export default function Footer() {
             />
             <p>
               <a href={`mailto:link-styret@emilweb.no`}>
-                <MailOutlineIcon className="hover:scale-110" style={{ fontSize: "40px" }} />
+                <MailOutlineIcon
+                  className="hover:scale-110"
+                  style={{ fontSize: '40px' }}
+                />
               </a>
-              <a href="https://www.instagram.com/emil__link/" target="_blank" rel="noopener noreferrer">
-                <InstagramIcon className="hover:scale-110" style={{ fontSize: "40px" }} />
+              <a
+                href="https://www.instagram.com/emil__link/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <InstagramIcon
+                  className="hover:scale-110"
+                  style={{ fontSize: '40px' }}
+                />
               </a>
-              <a href="https://www.facebook.com/emil.link.773" target="_blank" rel="noopener noreferrer">
-                <FacebookIcon className="hover:scale-110" style={{ fontSize: "40px" }} />
+              <a
+                href="https://www.facebook.com/emil.link.773"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <FacebookIcon
+                  className="hover:scale-110"
+                  style={{ fontSize: '40px' }}
+                />
               </a>
-              <a href="https://www.linkedin.com/company/emillink/posts/?feedView=all" target="_blank" rel="noopener noreferrer">
-                <LinkedInIcon className="hover:scale-110" style={{ fontSize: "40px" }} />
+              <a
+                href="https://www.linkedin.com/company/emillink/posts/?feedView=all"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <LinkedInIcon
+                  className="hover:scale-110"
+                  style={{ fontSize: '40px' }}
+                />
               </a>
             </p>
           </div>
           <div>
             <p className="inline-flex justify-center rounded-xl hover:text-stone-200">
-              <a href="https://link.mazemap.com/34oLTzyB" target="_blank" rel="noopener noreferrer">
+              <a
+                href="https://link.mazemap.com/34oLTzyB"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <WindPowerIcon /> <br />
                 Energi- og miljøingeniørenes linjeforening, EMIL <br />
                 NTNU GLØSHAUGEN, ELEKTROBYGGET <br />
@@ -101,33 +132,40 @@ export default function Footer() {
         <div className="flex flex-col justify-center items-center mb-2">
           <a
             href="#"
-            onClick={(e) => {
+            onClick={e => {
               e.preventDefault();
               setShowPasswordModal(true); // Show password modal
             }}
             className="hover:text-red-400 hover:scale-105"
           >
-            &copy;{new Date().getFullYear()} EMIL-Link{" "}
+            &copy;{new Date().getFullYear()} EMIL-Link{' '}
           </a>
         </div>
       </footer>
 
       {/* Render Partner Popup */}
-      <Partners isOpen={isPartnersOpen} onClose={() => setIsPartnersOpen(false)} />
+      <Partners
+        isOpen={isPartnersOpen}
+        onClose={() => setIsPartnersOpen(false)}
+      />
 
       {/* Password Modal */}
 
       {showPasswordModal && (
         <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center z-[100]">
           <div className="bg-yellow-50 p-6 rounded-lg shadow-lg w-100">
-            <h2 className="text-lg font-bold mb-4 text-center">Admin Tilgang</h2>
-            <div className="flex items-center mb-4"> {/* Flex container for input and button */}
+            <h2 className="text-lg font-bold mb-4 text-center">
+              Admin Tilgang
+            </h2>
+            <div className="flex items-center mb-4">
+              {' '}
+              {/* Flex container for input and button */}
               <input
-                type={showPassword ? "text" : "password"} // Toggle between text and password
+                type={showPassword ? 'text' : 'password'} // Toggle between text and password
                 placeholder="Skriv inn passord"
                 value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                onKeyDown={(e) => {
+                onChange={e => setPassword(e.target.value)}
+                onKeyDown={e => {
                   if (e.key === 'Enter') {
                     handleLogin(); // Call handleLogin when Enter is pressed
                   }
@@ -139,14 +177,21 @@ export default function Footer() {
                 onClick={() => setShowPassword(!showPassword)}
                 className="bg-gray-200 p-2 rounded-r-md" // Rounded right corners
               >
-                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />} {/* Toggle icon */}
+                {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}{' '}
+                {/* Toggle icon */}
               </button>
             </div>
             <div className="flex justify-between">
-              <button onClick={() => setShowPasswordModal(false)} className="bg-gray-500 hover:bg-red-300 text-white px-4 py-2 rounded-md">
+              <button
+                onClick={() => setShowPasswordModal(false)}
+                className="bg-gray-500 hover:bg-red-300 text-white px-4 py-2 rounded-md"
+              >
                 Avbryt
               </button>
-              <button onClick={handleLogin} className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800">
+              <button
+                onClick={handleLogin}
+                className="bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800"
+              >
                 Logg inn
               </button>
             </div>

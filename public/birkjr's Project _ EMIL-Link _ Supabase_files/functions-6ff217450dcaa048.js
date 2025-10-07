@@ -1,1 +1,154 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},n=(new e.Error).stack;n&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[n]="805f12f1-3c7b-41b9-a2e4-5d89e8cd682c",e._sentryDebugIdIdentifier="sentry-dbid-805f12f1-3c7b-41b9-a2e4-5d89e8cd682c")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[3587],{41341:function(e,n,s){(window.__NEXT_P=window.__NEXT_P||[]).push(["/project/[ref]/functions",function(){return s(55202)}])},55202:function(e,n,s){"use strict";s.r(n);var t=s(97458),l=s(12436),c=s(36210),d=s(90839),r=s(72595),i=s(6834),a=s(57006),h=s(5529),o=s(63621),u=s(7429);let f=()=>{let{ref:e}=(0,l.UO)(),{data:n,error:s,isLoading:i,isError:f,isSuccess:j}=(0,u.I)({projectRef:e}),x=(null!=n?n:[]).length>0;return(0,t.jsx)(t.Fragment,{children:(0,t.jsxs)("div",{className:"py-6",children:[i&&(0,t.jsx)(o.A,{}),f&&(0,t.jsx)(h.Z,{error:s,subject:"Failed to retrieve edge functions"}),j&&(0,t.jsx)(t.Fragment,{children:x?(0,t.jsxs)("div",{className:"py-6 space-y-4",children:[(0,t.jsxs)("div",{className:"flex justify-between items-center",children:[(0,t.jsx)("span",{className:"text-sm text-foreground-lighter",children:"".concat(n.length," function").concat(n.length>1?"s":""," deployed")}),(0,t.jsxs)(c.Vq,{children:[(0,t.jsx)(c.hg,{asChild:!0,children:(0,t.jsx)(d.z,{type:"primary",children:"Deploy a new function"})}),(0,t.jsx)(c.cZ,{size:"large",children:(0,t.jsx)(c.VO,{padding:"small",children:(0,t.jsx)(r.ds,{})})})]})]}),(0,t.jsx)(a.Z,{head:(0,t.jsxs)(t.Fragment,{children:[(0,t.jsx)(a.Z.th,{children:"Name"}),(0,t.jsx)(a.Z.th,{children:"URL"}),(0,t.jsx)(a.Z.th,{className:"hidden 2xl:table-cell",children:"Created"}),(0,t.jsx)(a.Z.th,{className:"lg:table-cell",children:"Last updated"}),(0,t.jsx)(a.Z.th,{className:"lg:table-cell",children:"Deployments"})]}),body:(0,t.jsx)(t.Fragment,{children:n.length>0&&n.map(e=>(0,t.jsx)(r.vI,{function:e},e.id))})})]}):(0,t.jsx)(r.Zv,{})})]})})};f.getLayout=e=>(0,t.jsx)(i.Z,{children:e}),n.default=f}},function(e){e.O(0,[6665,7623,588,783,1018,1706,1864,8703,2397,3954,9621,9911,659,7612,4637,9344,7726,6739,3302,3898,8985,793,3594,3861,6120,7094,4334,3242,9774,2888,179],function(){return e(e.s=41341)}),_N_E=e.O()}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      n = new e.Error().stack;
+    n &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[n] = '805f12f1-3c7b-41b9-a2e4-5d89e8cd682c'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-805f12f1-3c7b-41b9-a2e4-5d89e8cd682c'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [3587],
+    {
+      41341: function (e, n, s) {
+        (window.__NEXT_P = window.__NEXT_P || []).push([
+          '/project/[ref]/functions',
+          function () {
+            return s(55202);
+          },
+        ]);
+      },
+      55202: function (e, n, s) {
+        'use strict';
+        s.r(n);
+        var t = s(97458),
+          l = s(12436),
+          c = s(36210),
+          d = s(90839),
+          r = s(72595),
+          i = s(6834),
+          a = s(57006),
+          h = s(5529),
+          o = s(63621),
+          u = s(7429);
+        let f = () => {
+          let { ref: e } = (0, l.UO)(),
+            {
+              data: n,
+              error: s,
+              isLoading: i,
+              isError: f,
+              isSuccess: j,
+            } = (0, u.I)({ projectRef: e }),
+            x = (null != n ? n : []).length > 0;
+          return (0, t.jsx)(t.Fragment, {
+            children: (0, t.jsxs)('div', {
+              className: 'py-6',
+              children: [
+                i && (0, t.jsx)(o.A, {}),
+                f &&
+                  (0, t.jsx)(h.Z, {
+                    error: s,
+                    subject: 'Failed to retrieve edge functions',
+                  }),
+                j &&
+                  (0, t.jsx)(t.Fragment, {
+                    children: x
+                      ? (0, t.jsxs)('div', {
+                          className: 'py-6 space-y-4',
+                          children: [
+                            (0, t.jsxs)('div', {
+                              className: 'flex justify-between items-center',
+                              children: [
+                                (0, t.jsx)('span', {
+                                  className: 'text-sm text-foreground-lighter',
+                                  children: ''
+                                    .concat(n.length, ' function')
+                                    .concat(
+                                      n.length > 1 ? 's' : '',
+                                      ' deployed'
+                                    ),
+                                }),
+                                (0, t.jsxs)(c.Vq, {
+                                  children: [
+                                    (0, t.jsx)(c.hg, {
+                                      asChild: !0,
+                                      children: (0, t.jsx)(d.z, {
+                                        type: 'primary',
+                                        children: 'Deploy a new function',
+                                      }),
+                                    }),
+                                    (0, t.jsx)(c.cZ, {
+                                      size: 'large',
+                                      children: (0, t.jsx)(c.VO, {
+                                        padding: 'small',
+                                        children: (0, t.jsx)(r.ds, {}),
+                                      }),
+                                    }),
+                                  ],
+                                }),
+                              ],
+                            }),
+                            (0, t.jsx)(a.Z, {
+                              head: (0, t.jsxs)(t.Fragment, {
+                                children: [
+                                  (0, t.jsx)(a.Z.th, { children: 'Name' }),
+                                  (0, t.jsx)(a.Z.th, { children: 'URL' }),
+                                  (0, t.jsx)(a.Z.th, {
+                                    className: 'hidden 2xl:table-cell',
+                                    children: 'Created',
+                                  }),
+                                  (0, t.jsx)(a.Z.th, {
+                                    className: 'lg:table-cell',
+                                    children: 'Last updated',
+                                  }),
+                                  (0, t.jsx)(a.Z.th, {
+                                    className: 'lg:table-cell',
+                                    children: 'Deployments',
+                                  }),
+                                ],
+                              }),
+                              body: (0, t.jsx)(t.Fragment, {
+                                children:
+                                  n.length > 0 &&
+                                  n.map(e =>
+                                    (0, t.jsx)(r.vI, { function: e }, e.id)
+                                  ),
+                              }),
+                            }),
+                          ],
+                        })
+                      : (0, t.jsx)(r.Zv, {}),
+                  }),
+              ],
+            }),
+          });
+        };
+        ((f.getLayout = e => (0, t.jsx)(i.Z, { children: e })),
+          (n.default = f));
+      },
+    },
+    function (e) {
+      (e.O(
+        0,
+        [
+          6665, 7623, 588, 783, 1018, 1706, 1864, 8703, 2397, 3954, 9621, 9911,
+          659, 7612, 4637, 9344, 7726, 6739, 3302, 3898, 8985, 793, 3594, 3861,
+          6120, 7094, 4334, 3242, 9774, 2888, 179,
+        ],
+        function () {
+          return e((e.s = 41341));
+        }
+      ),
+        (_N_E = e.O()));
+    },
+  ]));

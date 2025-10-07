@@ -16,33 +16,30 @@ const __dirname = path.dirname(__filename);
 // Bare de faktiske bildene som trengs for nettsiden
 const requiredImages = {
   // Logoer
-  logos: [
-    'logo_transparent.png',
-    'logo_sirkel.avif'
-  ],
-  
+  logos: ['logo_transparent.png', 'logo_sirkel.avif'],
+
   // Undergruppe bilder
   subgroups: [
     'styret.png',
     'bedrift.png',
     'marked.png',
     'logistikk.png',
-    'fa.png'
+    'fa.png',
   ],
-  
+
   // Innholdsbilder
-  content: [
-    'bedriftsbilde.avif',
-    'instagram.avif'
-  ]
+  content: ['bedriftsbilde.avif', 'instagram.avif'],
 };
 
 // Supabase URLs
 const supabaseUrls = {
   main: 'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/',
-  subgroups: 'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/',
-  boardPics: 'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/',
-  companyLogos: 'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo/'
+  subgroups:
+    'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/',
+  boardPics:
+    'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/board_pic/',
+  companyLogos:
+    'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo/',
 };
 
 console.log('🖼️  EMIL-Link Image Migration Helper');
@@ -80,7 +77,9 @@ requiredImages.content.forEach(image => {
 console.log('');
 
 console.log('🔗 Bedriftslogoer:');
-console.log('   Disse er dynamiske basert på partnernavn og finnes allerede i public/images/company_logos/');
+console.log(
+  '   Disse er dynamiske basert på partnernavn og finnes allerede i public/images/company_logos/'
+);
 console.log('');
 
 console.log('📝 Instruksjoner:');
@@ -111,10 +110,14 @@ Object.entries(requiredImages).forEach(([category, images]) => {
 });
 
 console.log('');
-console.log(`📊 Status: ${existingCount} bilder funnet, ${missingCount} bilder mangler`);
+console.log(
+  `📊 Status: ${existingCount} bilder funnet, ${missingCount} bilder mangler`
+);
 
 if (missingCount === 0) {
-  console.log('🎉 Alle bilder er på plass! Du kan nå kjøre: npm run update-image-paths');
+  console.log(
+    '🎉 Alle bilder er på plass! Du kan nå kjøre: npm run update-image-paths'
+  );
 } else {
   console.log('⚠️  Last ned de manglende bildene først.');
 }

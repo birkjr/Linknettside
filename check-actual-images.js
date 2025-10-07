@@ -16,10 +16,10 @@ const __dirname = path.dirname(__filename);
 const checkActualImages = () => {
   const imageDirs = [
     'public/images/logos',
-    'public/images/subgroups', 
+    'public/images/subgroups',
     'public/images/content',
     'public/images/company_logos',
-    'public/images/board_pics'
+    'public/images/board_pics',
   ];
 
   console.log('🔍 Sjekker faktiske bilder i public/images/...');
@@ -31,16 +31,28 @@ const checkActualImages = () => {
   // Bilder som trengs for at nettsiden skal fungere
   const requiredImages = {
     logos: ['logo_transparent.png', 'logo_sirkel.avif'],
-    subgroups: ['styret.png', 'bedrift.png', 'marked.png', 'logistikk.png', 'fa.png'],
-    content: ['bedriftsbilde.avif', 'instagram.avif']
+    subgroups: [
+      'styret.png',
+      'bedrift.png',
+      'marked.png',
+      'logistikk.png',
+      'fa.png',
+    ],
+    content: ['bedriftsbilde.avif', 'instagram.avif'],
   };
 
   Object.entries(requiredImages).forEach(([category, images]) => {
     console.log(`📁 ${category.toUpperCase()}:`);
-    
+
     images.forEach(imageName => {
-      const imagePath = path.join(__dirname, 'public', 'images', category, imageName);
-      
+      const imagePath = path.join(
+        __dirname,
+        'public',
+        'images',
+        category,
+        imageName
+      );
+
       if (fs.existsSync(imagePath)) {
         console.log(`   ✅ ${imageName}`);
         totalFound++;
@@ -55,10 +67,10 @@ const checkActualImages = () => {
   // Sjekk også board_pics (medlemsbilder)
   const boardPicsDir = path.join(__dirname, 'public', 'images', 'board_pics');
   if (fs.existsSync(boardPicsDir)) {
-    const boardPics = fs.readdirSync(boardPicsDir).filter(file => 
-      /\.(png|jpg|jpeg|avif|webp)$/i.test(file)
-    );
-    
+    const boardPics = fs
+      .readdirSync(boardPicsDir)
+      .filter(file => /\.(png|jpg|jpeg|avif|webp)$/i.test(file));
+
     if (boardPics.length > 0) {
       console.log(`📁 BOARD_PICS (${boardPics.length} bilder):`);
       boardPics.forEach(pic => {
@@ -70,12 +82,17 @@ const checkActualImages = () => {
   }
 
   // Sjekk også company_logos (bedriftslogoer)
-  const companyLogosDir = path.join(__dirname, 'public', 'images', 'company_logos');
+  const companyLogosDir = path.join(
+    __dirname,
+    'public',
+    'images',
+    'company_logos'
+  );
   if (fs.existsSync(companyLogosDir)) {
-    const companyLogos = fs.readdirSync(companyLogosDir).filter(file => 
-      /\.(png|jpg|jpeg|avif|webp)$/i.test(file)
-    );
-    
+    const companyLogos = fs
+      .readdirSync(companyLogosDir)
+      .filter(file => /\.(png|jpg|jpeg|avif|webp)$/i.test(file));
+
     if (companyLogos.length > 0) {
       console.log(`📁 COMPANY_LOGOS (${companyLogos.length} bilder):`);
       companyLogos.forEach(logo => {

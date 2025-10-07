@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect } from "react";
+import { createContext, useContext, useState, useEffect } from 'react';
 
 type AuthContextType = {
   isAuthenticated: boolean;
@@ -13,17 +13,17 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
 
   useEffect(() => {
-    const storedAuth = localStorage.getItem("isAdmin");
-    setIsAuthenticated(storedAuth === "true");
+    const storedAuth = localStorage.getItem('isAdmin');
+    setIsAuthenticated(storedAuth === 'true');
   }, []);
 
   const login = () => {
-    localStorage.setItem("isAdmin", "true");
+    localStorage.setItem('isAdmin', 'true');
     setIsAuthenticated(true);
   };
 
   const logout = () => {
-    localStorage.removeItem("isAdmin");
+    localStorage.removeItem('isAdmin');
     setIsAuthenticated(false);
   };
 
@@ -37,6 +37,6 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 // Custom Hook
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within an AuthProvider");
+  if (!context) throw new Error('useAuth must be used within an AuthProvider');
   return context;
 };

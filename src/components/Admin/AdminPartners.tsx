@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { useEffect, useState } from 'react';
+import { supabase } from '../../supabaseClient';
 
 type Partners = {
   id: number;
@@ -18,20 +18,20 @@ export default function AdminBoard() {
   const [editedPartner, setEditedPartner] = useState<Partners | null>(null);
   const [newPartner, setNewPartner] = useState<Partners>({
     id: 0, // Temporary ID, will be set by Supabase
-    bedrift: "",
+    bedrift: '',
     mainpartner: false,
-    webUrl: "",
-    bedriftskontakt: "",
-    mail: "",
-    tlf: "",
+    webUrl: '',
+    bedriftskontakt: '',
+    mail: '',
+    tlf: '',
   });
 
   // Fetch partners from Supabase
   useEffect(() => {
     const fetchPartners = async () => {
-      const { data, error } = await supabase.from("partners").select("*");
+      const { data, error } = await supabase.from('partners').select('*');
       if (error) {
-        console.error("Error fetching board partners:", error);
+        console.error('Error fetching board partners:', error);
       } else {
         setPartners(data);
       }
@@ -48,7 +48,10 @@ export default function AdminBoard() {
   };
 
   // Handle Input Change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof Partners) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof Partners
+  ) => {
     if (editedPartner) {
       setEditedPartner({ ...editedPartner, [field]: e.target.value });
     } else {
@@ -60,13 +63,25 @@ export default function AdminBoard() {
   const handleSave = async () => {
     if (!editedPartner) return;
 
-    const { error } = await supabase.from("partners").update(editedPartner).eq("id", editedPartner.id);
+    // Valider at obligatoriske felt er fylt ut
+    if (!editedPartner.bedrift.trim()) {
+      alert('Bedriftsnavn er påkrevd!');
+      return;
+    }
+
+    const { error } = await supabase
+      .from('partners')
+      .update(editedPartner)
+      .eq('id', editedPartner.id);
 
     if (error) {
-      console.error("Error updating partner:", error);
-      alert("Could not update the board partner. Try again.");
+      console.error('Error updating partner:', error);
+      console.error('Error details:', error.message);
+      alert(`Kunne ikke oppdatere partner: ${error.message}`);
     } else {
-      setPartners(partners.map((p) => (p.id === editedPartner.id ? editedPartner : p)));
+      setPartners(
+        partners.map(p => (p.id === editedPartner.id ? editedPartner : p))
+      );
       setEditRow(null);
       setEditedPartner(null);
     }
@@ -74,33 +89,46 @@ export default function AdminBoard() {
 
   // Add New Partner
   const handleAddPartner = async () => {
-    const { data, error } = await supabase.from("partners").insert([newPartner]).select("*");
+    // Valider at obligatoriske felt er fylt ut
+    if (!newPartner.bedrift.trim()) {
+      alert('Bedriftsnavn er påkrevd!');
+      return;
+    }
+
+    // Fjern id fra objektet før insert - Supabase vil generere det automatisk
+    const { id, ...partnerToInsert } = newPartner;
+
+    const { data, error } = await supabase
+      .from('partners')
+      .insert([partnerToInsert])
+      .select('*');
 
     if (error) {
-      console.error("Error adding partner:", error);
-      alert("Could not add the partner. Try again.");
+      console.error('Error adding partner:', error);
+      console.error('Error details:', error.message);
+      alert(`Kunne ikke legge til partner: ${error.message}`);
     } else {
       setPartners([...partners, ...data]);
       setNewPartner({
         id: 0,
-        bedrift: "",
+        bedrift: '',
         mainpartner: false,
-        webUrl: "",
-        bedriftskontakt: "",
-        mail: "",
-        tlf: "",
+        webUrl: '',
+        bedriftskontakt: '',
+        mail: '',
+        tlf: '',
       });
     }
   };
 
   // Remove Partner
   const handleRemovePartner = async (id: number) => {
-    const { error } = await supabase.from("partners").delete().eq("id", id);
+    const { error } = await supabase.from('partners').delete().eq('id', id);
     if (error) {
-      console.error("Error removing partner:", error);
-      alert("Could not remove the partner. Try again.");
+      console.error('Error removing partner:', error);
+      alert('Could not remove the partner. Try again.');
     } else {
-      setPartners(partners.filter((partner) => partner.id !== id));
+      setPartners(partners.filter(partner => partner.id !== id));
     }
   };
 
@@ -115,25 +143,39 @@ export default function AdminBoard() {
           <table className="w-full border-collapse border border-gray-300 text-xs lg:text-xs sm:text-xs">
             <thead>
               <tr className="bg-white">
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Bedrift</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Hovedpartner?</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Nettside</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Kontakt-person</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Email</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Telefon</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-center">Handlinger</th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Bedrift
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Hovedpartner?
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Nettside
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Kontakt-person
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Email
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Telefon
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-center">
+                  Handlinger
+                </th>
               </tr>
             </thead>
             <tbody>
-              {partners.map((partner) => (
+              {partners.map(partner => (
                 <tr key={partner.id} className="hover:bg-gray-100">
                   {editRow === partner.id ? (
                     <>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.bedrift || ""}
-                          onChange={(e) => handleChange(e, "bedrift")}
+                          value={editedPartner?.bedrift || ''}
+                          onChange={e => handleChange(e, 'bedrift')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
@@ -141,39 +183,39 @@ export default function AdminBoard() {
                         <input
                           type="checkbox"
                           checked={editedPartner?.mainpartner || false}
-                          onChange={(e) => handleChange(e, "mainpartner")}
+                          onChange={e => handleChange(e, 'mainpartner')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.webUrl || ""}
-                          onChange={(e) => handleChange(e, "webUrl")}
+                          value={editedPartner?.webUrl || ''}
+                          onChange={e => handleChange(e, 'webUrl')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.bedriftskontakt || ""}
-                          onChange={(e) => handleChange(e, "bedriftskontakt")}
+                          value={editedPartner?.bedriftskontakt || ''}
+                          onChange={e => handleChange(e, 'bedriftskontakt')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.mail || ""}
-                          onChange={(e) => handleChange(e, "mail")}
+                          value={editedPartner?.mail || ''}
+                          onChange={e => handleChange(e, 'mail')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedPartner?.tlf || ""}
-                          onChange={(e) => handleChange(e, "tlf")}
+                          value={editedPartner?.tlf || ''}
+                          onChange={e => handleChange(e, 'tlf')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
@@ -194,12 +236,24 @@ export default function AdminBoard() {
                     </>
                   ) : (
                     <>
-                      <td className="border border-gray-300 p-1">{partner.bedrift}</td>
-                      <td className="border border-gray-300 p-1">{partner.mainpartner.toString()}</td>
-                      <td className="border border-gray-300 p-1">{partner.webUrl}</td>
-                      <td className="border border-gray-300 p-1">{partner.bedriftskontakt}</td>
-                      <td className="border border-gray-300 p-1">{partner.mail}</td>
-                      <td className="border border-gray-300 p-1">{partner.tlf}</td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.bedrift}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.mainpartner.toString()}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.webUrl}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.bedriftskontakt}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.mail}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {partner.tlf}
+                      </td>
                       <td className="border border-gray-300 p-1 flex space-x-1">
                         <button
                           onClick={() => handleEdit(partner)}
@@ -224,7 +278,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     value={newPartner.bedrift}
-                    onChange={(e) => handleChange(e, "bedrift")}
+                    onChange={e => handleChange(e, 'bedrift')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>
@@ -232,7 +286,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     checked={newPartner.mainpartner}
-                    onChange={(e) => handleChange(e, "mainpartner")}
+                    onChange={e => handleChange(e, 'mainpartner')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>
@@ -240,7 +294,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     value={newPartner.webUrl}
-                    onChange={(e) => handleChange(e, "webUrl")}
+                    onChange={e => handleChange(e, 'webUrl')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>
@@ -248,7 +302,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     value={newPartner.bedriftskontakt}
-                    onChange={(e) => handleChange(e, "bedriftskontakt")}
+                    onChange={e => handleChange(e, 'bedriftskontakt')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>
@@ -256,7 +310,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     value={newPartner.mail}
-                    onChange={(e) => handleChange(e, "mail")}
+                    onChange={e => handleChange(e, 'mail')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>
@@ -264,7 +318,7 @@ export default function AdminBoard() {
                   <input
                     type="text"
                     value={newPartner.tlf}
-                    onChange={(e) => handleChange(e, "tlf")}
+                    onChange={e => handleChange(e, 'tlf')}
                     className="w-full border p-1 rounded text-xs"
                   />
                 </td>

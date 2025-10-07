@@ -1,7 +1,7 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
-import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-import { Link } from "react-router-dom";
+import { useState, useEffect } from 'react';
+import { supabase } from '../../supabaseClient';
+import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
+import { Link } from 'react-router-dom';
 
 type News = {
   id: number;
@@ -16,10 +16,10 @@ export default function News() {
 
   useEffect(() => {
     const fetchNews = async () => {
-      const { data, error } = await supabase.from("news").select("*");
+      const { data, error } = await supabase.from('news').select('*');
 
       if (error) {
-        console.error("Error fetching news:", error);
+        console.error('Error fetching news:', error);
       } else {
         setNews(data);
       }
@@ -34,7 +34,7 @@ export default function News() {
       <h1 className="text-2xl">Nyheter</h1>
       <div className="font-medium mt-2 flex justify-center items-center">
         <Link
-          to={"/jobbtorget"}
+          to={'/jobbtorget'}
           className="bg-green-800 py-6 px-4 rounded-xl text-sm hover:scale-102 text-white"
         >
           Sjekk ut nyeste jobbannonser <ArrowCircleRightIcon />
@@ -46,20 +46,23 @@ export default function News() {
         {loading ? (
           <p className="text-gray-600 text-center">Laster inn nyheter...</p>
         ) : news.length === 0 ? (
-            <div></div>
+          <div></div>
         ) : (
-          news.map((item) => (
-              <a
-                href={item.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="block bg-amber-50 rounded-xl text-black hover:scale-102"
+          news.map(item => (
+            <a
+              href={item.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block bg-amber-50 rounded-xl text-black hover:scale-102"
+            >
+              <div
+                key={item.id}
+                className="p-4 rounded-lg shadow-md mb-4 w-full break-words overflow-hidden"
               >
-                <div key={item.id} className="p-4 rounded-lg shadow-md mb-4 w-full break-words overflow-hidden">
-                    <h2 className="text-lg">{item.title}</h2>
-                    <p className="text-sm text-gray-700">{item.description}</p>
-                </div>
-              </a>
+                <h2 className="text-lg">{item.title}</h2>
+                <p className="text-sm text-gray-700">{item.description}</p>
+              </div>
+            </a>
           ))
         )}
       </div>

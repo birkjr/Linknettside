@@ -8,13 +8,13 @@ import fs from 'fs';
 
 const filesToUpdate = [
   'src/Pages/AboutUs.tsx',
-  'src/Pages/App.tsx', 
+  'src/Pages/App.tsx',
   'src/Pages/ForCompanies.tsx',
   'src/Pages/ContactUs.tsx',
   'src/components/Header.tsx',
   'src/components/Tools/Header.tsx',
   'src/components/Schema/Partners.tsx',
-  'src/components/Schema/CoopPartners.tsx'
+  'src/components/Schema/CoopPartners.tsx',
 ];
 
 console.log('🔄 Oppdaterer image paths...');
@@ -27,10 +27,10 @@ filesToUpdate.forEach(filePath => {
     console.log(`⚠️  Fil ikke funnet: ${filePath}`);
     return;
   }
-  
+
   let content = fs.readFileSync(filePath, 'utf8');
   let fileReplacements = 0;
-  
+
   // Oppdater logo_transparent.png
   if (content.includes('logo_transparent.png')) {
     content = content.replace(
@@ -39,7 +39,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   // Oppdater logo_sirkel (både .png og .avif)
   if (content.includes('logo_sirkel')) {
     content = content.replace(
@@ -52,7 +52,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   // Oppdater undergruppe bilder
   const subgroups = ['styret', 'bedrift', 'marked', 'logistikk', 'fa'];
   subgroups.forEach(subgroup => {
@@ -64,7 +64,7 @@ filesToUpdate.forEach(filePath => {
       fileReplacements++;
     }
   });
-  
+
   // Oppdater innholdsbilder
   if (content.includes('bedriftsbilde')) {
     content = content.replace(
@@ -77,7 +77,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   if (content.includes('instagram')) {
     content = content.replace(
       /\$\{supabaseStorageUrl\}instagram\.png/g,
@@ -89,7 +89,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   // Oppdater bedriftslogoer
   if (content.includes('company_logo')) {
     content = content.replace(
@@ -98,7 +98,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   // Oppdater medlemsbilder
   if (content.includes('board_pic')) {
     content = content.replace(
@@ -107,7 +107,7 @@ filesToUpdate.forEach(filePath => {
     );
     fileReplacements++;
   }
-  
+
   if (fileReplacements > 0) {
     fs.writeFileSync(filePath, content);
     console.log(`✅ ${filePath}: ${fileReplacements} paths oppdatert`);
