@@ -1,4 +1,5 @@
 import { getOptimizedImageUrl, handleImageError } from '../utils/imageUtils';
+import LazyImage from './Tools/LazyImage';
 
 type JobListingProps = {
   bedrift: string;
@@ -44,12 +45,10 @@ export default function JobListing({
         {/* Logo Section */}
         <div className="flex flex-col items-center sm:items-start">
           <div className="w-20 h-20 sm:w-24 sm:h-24 flex-shrink-0">
-            <img
+            <LazyImage
               src={getOptimizedImageUrl(imageURL, 'events_jobads')}
               alt={`${bedrift} Logo`}
               className="w-full h-full object-contain bg-white rounded-lg shadow-md"
-              loading="lazy"
-              decoding="async"
               onError={e => handleImageError(e, imageURL, 'events_jobads')}
             />
           </div>

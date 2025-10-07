@@ -3,6 +3,7 @@ import { supabase } from '../supabaseClient';
 import JobListing from '../components/JobListing';
 import JobFilter from '../components/Tools/JobFilter';
 import JobCleaner from '../components/Tools/JobCleaner';
+import SkeletonLoader from '../components/Tools/SkeletonLoader';
 
 type Job = {
   id: string; // Ensure this matches the type in JobCleaner
@@ -78,9 +79,7 @@ export default function Jobbtorget() {
         {/* Job Listings Section - Full width on mobile */}
         <div className="w-full">
           {loading ? (
-            <p className="text-center text-gray-500 mt-6">
-              Laster inn jobber...
-            </p>
+            <SkeletonLoader type="job" count={3} />
           ) : filteredJobs.length > 0 ? (
             <div className="space-y-6">
               {filteredJobs

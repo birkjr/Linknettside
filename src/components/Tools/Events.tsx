@@ -6,6 +6,8 @@ import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import EventCleaner from './EventCleaner'; // Import the EventCleaner component
+import LazyImage from './LazyImage';
+import SkeletonLoader from './SkeletonLoader';
 
 type Event = {
   id: string;
@@ -68,7 +70,7 @@ export default function Arrangementer() {
       <EventCleaner events={events} setEvents={setEvents} />{' '}
       {/* Include the EventCleaner component */}
       {loading ? (
-        <p className="text-center text-black">Laster inn arrangementer...</p>
+        <SkeletonLoader type="event" count={3} />
       ) : events.length > 0 ? (
         <div>
           {events
@@ -90,7 +92,7 @@ export default function Arrangementer() {
                   <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
                     {/* Logo Section */}
                     <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <img
+                      <LazyImage
                         src={
                           event.bedrift.toLowerCase() === 'teknologiporten'
                             ? getOptimizedImageUrl(
@@ -104,8 +106,6 @@ export default function Arrangementer() {
                         }
                         alt={event.bedrift}
                         className="w-full h-full object-contain rounded-xl"
-                        loading="lazy"
-                        decoding="async"
                         onError={e => {
                           const fileName =
                             event.bedrift.toLowerCase() === 'teknologiporten'
