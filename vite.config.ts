@@ -1,17 +1,17 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import tailwindcss from '@tailwindcss/vite';
-import { imagetools } from 'vite-imagetools'
+import { imagetools } from 'vite-imagetools';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [tailwindcss(), react(), imagetools()],
-  
+
   server: {
-    port: 3000
+    port: 3000,
   },
   build: {
-    outDir: "dist"
+    outDir: 'dist',
   },
-  base: "/",
+  base: '/',
 });

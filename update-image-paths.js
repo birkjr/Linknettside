@@ -16,25 +16,38 @@ const __dirname = path.dirname(__filename);
 // Bare de faktiske bildene som trengs for nettsiden
 const pathMappings = {
   // Logoer
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_transparent.png': '/images/logos/logo_transparent.png',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_sirkel.png': '/images/logos/logo_sirkel.avif',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_sirkel.avif': '/images/logos/logo_sirkel.avif',
-  
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_transparent.png':
+    '/images/logos/logo_transparent.png',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_sirkel.png':
+    '/images/logos/logo_sirkel.avif',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/logo_sirkel.avif':
+    '/images/logos/logo_sirkel.avif',
+
   // Undergruppe bilder
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/styret.png': '/images/subgroups/styret.png',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/bedrift.png': '/images/subgroups/bedrift.png',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/marked.png': '/images/subgroups/marked.png',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/logistikk.png': '/images/subgroups/logistikk.png',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/fa.png': '/images/subgroups/fa.png',
-  
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/styret.png':
+    '/images/subgroups/styret.png',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/bedrift.png':
+    '/images/subgroups/bedrift.png',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/marked.png':
+    '/images/subgroups/marked.png',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/logistikk.png':
+    '/images/subgroups/logistikk.png',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/fa.png':
+    '/images/subgroups/fa.png',
+
   // Innholdsbilder
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/bedriftsbilde.png': '/images/content/bedriftsbilde.avif',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/bedriftsbilde.avif': '/images/content/bedriftsbilde.avif',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/instagram.png': '/images/content/instagram.avif',
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/instagram.avif': '/images/content/instagram.avif',
-  
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/bedriftsbilde.png':
+    '/images/content/bedriftsbilde.avif',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/bedriftsbilde.avif':
+    '/images/content/bedriftsbilde.avif',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/instagram.png':
+    '/images/content/instagram.avif',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/instagram.avif':
+    '/images/content/instagram.avif',
+
   // Bedriftslogoer - dynamiske paths
-  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo/': '/images/company_logos/',
+  'https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/company_logo/':
+    '/images/company_logos/',
 };
 
 // Filer som skal oppdateres
@@ -46,7 +59,7 @@ const filesToUpdate = [
   'src/components/Header.tsx',
   'src/components/Tools/Header.tsx',
   'src/components/Schema/Partners.tsx',
-  'src/components/Schema/CoopPartners.tsx'
+  'src/components/Schema/CoopPartners.tsx',
 ];
 
 console.log('🔄 Oppdaterer image paths...');
@@ -59,15 +72,18 @@ filesToUpdate.forEach(filePath => {
     console.log(`⚠️  Fil ikke funnet: ${filePath}`);
     return;
   }
-  
+
   let content = fs.readFileSync(filePath, 'utf8');
   let fileReplacements = 0;
-  
+
   // Oppdater hver mapping
   Object.entries(pathMappings).forEach(([supabaseUrl, localPath]) => {
-    const regex = new RegExp(supabaseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    const regex = new RegExp(
+      supabaseUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'),
+      'g'
+    );
     const matches = content.match(regex);
-    
+
     if (matches) {
       content = content.replace(regex, localPath);
       fileReplacements += matches.length;
@@ -87,7 +103,7 @@ filesToUpdate.forEach(filePath => {
     /\$\{supabaseStorageUrl\}\$\{([^}]+)\.name\.split\(" "\)\[0\]\}\.png/g,
     '/images/board_pics/${$1.name.split(" ")[0]}.png'
   );
-  
+
   if (fileReplacements > 0) {
     fs.writeFileSync(filePath, content);
     console.log(`✅ ${filePath}: ${fileReplacements} paths oppdatert`);

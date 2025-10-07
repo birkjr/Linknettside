@@ -1,1 +1,5806 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},t=(new e.Error).stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]="f86bcaac-4d5b-4618-84ea-7a268f38cada",e._sentryDebugIdIdentifier="sentry-dbid-f86bcaac-4d5b-4618-84ea-7a268f38cada")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[9874],{62923:function(e,t,s){var a=s(22825);e.exports=function(e){return(null==e?0:e.length)?a(e,1):[]}},67628:function(e,t,s){"use strict";s.d(t,{Q:function(){return l}});var a=s(97458),n=s(94059),r=s(73565),i=s(55228),l=e=>{let{page:t,menu:s}=e;return(0,a.jsx)("div",{className:"flex flex-col space-y-8 overflow-y-auto","data-sentry-component":"ProductMenu","data-sentry-source-file":"ProductMenu.tsx",children:(0,a.jsx)(n.ZP,{type:"pills","data-sentry-element":"Menu","data-sentry-source-file":"ProductMenu.tsx",children:s.map((e,l)=>(0,a.jsxs)("div",{children:[(0,a.jsx)("div",{className:"my-6 space-y-8",children:(0,a.jsxs)("div",{className:"mx-3",children:[(0,a.jsx)(n.ZP.Group,{title:e.title?(0,a.jsxs)("div",{className:"flex flex-col space-y-2 uppercase font-mono",children:[(0,a.jsx)("span",{children:e.title}),e.isPreview&&(0,a.jsx)(r.C,{variant:"warning",children:"Not production ready"})]}):null}),(0,a.jsx)("div",{children:e.items.map(e=>(0,a.jsx)(i.Z,{url:e.url,name:e.name,icon:e.icon,rightIcon:e.rightIcon,isActive:t===e.key,isExternal:e.isExternal,target:e.isExternal?"_blank":"_self",label:e.label},e.key))})]})}),l!==s.length-1&&(0,a.jsx)("div",{className:"h-px w-full bg-border-overlay"})]},e.key||e.title))})})}},94724:function(e,t,s){"use strict";s.d(t,{_:function(){return d}});var a=s(36457),n=s(64618),r=s(34549),i=s(6464),l=s(26600);async function o(e){let{projectRef:t,config:s}=e,{data:a,error:n}=await (0,i.r$)("/platform/auth/{ref}/config",{params:{path:{ref:t}},body:{...s}});return n&&(0,i.S3)(n),a}let d=function(){let{onSuccess:e,onError:t,...s}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},i=(0,a.NL)();return(0,n.D)(e=>o(e),{async onSuccess(t,s,a){let{projectRef:n}=s;await i.invalidateQueries(l.o.authConfig(n)),await (null==e?void 0:e(t,s,a))},async onError(e,s,a){void 0===t?r.Am.error("Failed to update auth configuration: ".concat(e.message)):t(e,s,a)},...s})}},52682:function(e,t,s){"use strict";s.d(t,{U7:function(){return H},dU:function(){return en},SK:function(){return eu},uW:function(){return eO},m9:function(){return ek},gn:function(){return tS}});var a=s(97458),n=s(198),r=s(52983),i=s(34549),l=s(18648),o=s(12436),d=s(59461),c=s(24083),u=s(87696),m=s(46993),h=s(61767),p=s(35336),x=s(72909),f=s(94724),g=s(69951),j=s(90817),y=s(75541),b=s(37756),v=s(28977),S=s.n(v),E=s(97224),N=s(50963),T=s(87831),_=s(49996),A=s(85817),w=s(51571),C=s(90839),R=s(73500),P=s(30739),I=s(85818);function M(e){return S()(e).format("dddd, MMMM D, YYYY HH:mm:ss Z")}var O=e=>{let{name:t,properties:s,formValues:n,disabled:i=!1,setFieldValue:l}=e,[o,d]=(0,r.useState)(!!s.isSecret),[c,u]=(0,r.useState)(n[t]?M(new Date(n[t])):"");if((0,r.useEffect)(()=>{s.show&&s.show.key&&!n[s.show.key]&&(l(t,""),u(""))},[s.show&&s.show.key&&!n[s.show.key]]),s.show){if(s.show.matches){if(!s.show.matches.includes(n[s.show.key]))return null}else if(!n[s.show.key])return null}switch(s.type){case"datetime":return(0,a.jsx)(w.Z,{size:"small",layout:"vertical",id:t,name:t,type:"text",value:c,readOnly:!0,label:s.title,labelOptional:s.descriptionOptional?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.descriptionOptional}):null,descriptionText:s.description?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.description}):null,actions:(0,a.jsx)(A.M,{selectsRange:!1,minDate:new Date,from:n[t],to:n[t],onChange:e=>{e&&e.to?(l(t,e.to),u(M(new Date(e.to)))):(u(""),l(t,""))},children:(0,a.jsx)("span",{children:"Pick"})})});case"string":return(0,a.jsx)(w.Z,{size:"small",layout:"vertical",id:t,name:t,disabled:i,type:o?"password":"text",label:s.title,labelOptional:s.descriptionOptional?(0,a.jsx)(_.U,{content:s.descriptionOptional,className:"text-foreground-lighter"}):null,descriptionText:s.description?(0,a.jsx)(_.U,{content:s.description,className:"text-foreground-lighter"}):null,actions:s.isSecret?(0,a.jsx)(C.z,{icon:o?(0,a.jsx)(E.Z,{}):(0,a.jsx)(N.Z,{}),type:"default",onClick:()=>d(!o)}):(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:s.units?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.units}):null})});case"multiline-string":return(0,a.jsx)(w.Z.TextArea,{size:"small",layout:"vertical",id:t,name:t,disabled:i,type:o?"password":"text",label:s.title,labelOptional:s.descriptionOptional?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.descriptionOptional}):void 0,descriptionText:s.description?(0,a.jsx)(_.U,{content:s.description,className:"text-foreground-lighter"}):null,actions:s.isSecret?(0,a.jsx)(C.z,{icon:o?(0,a.jsx)(E.Z,{}):(0,a.jsx)(N.Z,{}),type:"default",onClick:()=>d(!o)}):(0,a.jsx)("span",{className:"mr-3 text-scale-900",children:s.units?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.units}):null})});case"number":return(0,a.jsx)(R.Z,{size:"small",layout:"vertical",id:t,name:t,disabled:i,label:s.title,labelOptional:s.descriptionOptional?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.descriptionOptional}):null,descriptionText:s.description?(0,a.jsx)(_.U,{content:s.description,className:"text-foreground-lighter"}):null,actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:s.units?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:s.units}):null})});case"boolean":return(0,a.jsx)(P.Z,{size:"small",id:t,name:t,disabled:i,label:s.title,descriptionText:s.description?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],className:"form-field-markdown",children:s.description}):null});case"select":return(0,a.jsx)(I.Z,{size:"small",name:t,disabled:i,label:s.title,descriptionText:s.description?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],className:"form-field-markdown",children:s.description}):null,defaultValue:s.enum[0],children:s.enum.map(e=>(0,a.jsx)(I.Z.Option,{id:e.value,label:e.label,value:e.value,addOnBefore:()=>e.icon?(0,a.jsx)("img",{className:"h-6 w-6",src:"".concat(b.GW,"/img/icons/").concat(e.icon)}):null,children:e.label},e.value))})}return(0,a.jsx)(a.Fragment,{})},D=s(10947),L=s(7756),U=s(19540);let F=(0,l.object)({JWT_EXP:(0,l.number)().max(604800,"Must be less than 604800").required("Must have a JWT expiry value"),REFRESH_TOKEN_ROTATION_ENABLED:(0,l.boolean)().required(),SECURITY_REFRESH_TOKEN_REUSE_INTERVAL:(0,l.number)().min(0,"Must be a value more than 0").required("Must have a Reuse Interval value"),MFA_PHONE_OTP_LENGTH:(0,l.number)().min(6,"Must be a value 6 or larger").max(30,"must be a value no greater than 30"),MFA_PHONE_TEMPLATE:(0,l.string)().required("SMS template is required."),MFA_MAX_ENROLLED_FACTORS:(0,l.number)().min(0,"Must be be a value more than 0").max(30,"Must be a value no greater than 30"),DB_MAX_POOL_SIZE:(0,l.number)().min(1,"Must be 1 or larger").max(200,"Must be a value no greater than 200"),API_MAX_REQUEST_DURATION:(0,l.number)().min(5,"Must be 5 or larger").max(30,"Must be a value no greater than 30"),MFA_TOTP:(0,l.string)().required(),MFA_PHONE:(0,l.string)().required()});function k(e,t){return e?t?"Enabled":"Verify Enabled":"Disabled"}let Z=[{label:"Enabled",value:"Enabled"},{label:"Verify Enabled",value:"Verify Enabled"},{label:"Disabled",value:"Disabled"}],B=e=>"Enabled"===e?{verifyEnabled:!0,enrollEnabled:!0}:"Verify Enabled"===e?{verifyEnabled:!0,enrollEnabled:!1}:{verifyEnabled:!1,enrollEnabled:!1};var H=()=>{var e,t,s;let{ref:l}=(0,o.UO)(),{data:v,error:S,isLoading:E,isError:N,isSuccess:T}=(0,x.$E)({projectRef:l}),{mutate:_,isLoading:A}=(0,f._)(),w="auth-config-advanced-form",C=(0,j.Xo)(n.KA.READ,"custom_config_gotrue"),I=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue"),M=(0,y.l)(),{data:H,isSuccess:z}=(0,g.Gl)({orgSlug:null==M?void 0:M.slug}),V=z&&"free"!==H.plan.id&&"pro"!==H.plan.id,Y=z&&(null==H?void 0:null===(e=H.plan)||void 0===e?void 0:e.id)!=="free",W=b.Qy&&!Y,X=null==H?void 0:H.project_addons.find(e=>e.ref===l);null==X||X.addons.some(e=>"auth_mfa_phone"===e.type);let q=b.Qy&&!V,G={SITE_URL:null==v?void 0:v.SITE_URL,JWT_EXP:null==v?void 0:v.JWT_EXP,REFRESH_TOKEN_ROTATION_ENABLED:(null==v?void 0:v.REFRESH_TOKEN_ROTATION_ENABLED)||!1,MFA_PHONE_OTP_LENGTH:(null==v?void 0:v.MFA_PHONE_OTP_LENGTH)||6,MFA_PHONE_TEMPLATE:(null==v?void 0:v.MFA_PHONE_TEMPLATE)||"Your code is {{ .Code }}",SECURITY_REFRESH_TOKEN_REUSE_INTERVAL:null==v?void 0:v.SECURITY_REFRESH_TOKEN_REUSE_INTERVAL,MFA_MAX_ENROLLED_FACTORS:(null==v?void 0:v.MFA_MAX_ENROLLED_FACTORS)||10,DB_MAX_POOL_SIZE:(null==v?void 0:v.DB_MAX_POOL_SIZE)||10,API_MAX_REQUEST_DURATION:(null==v?void 0:v.API_MAX_REQUEST_DURATION)||10,MFA_TOTP:k(null===(t=null==v?void 0:v.MFA_TOTP_VERIFY_ENABLED)||void 0===t||t,null===(s=null==v?void 0:v.MFA_TOTP_ENROLL_ENABLED)||void 0===s||s)||"Enabled",MFA_PHONE:k((null==v?void 0:v.MFA_PHONE_VERIFY_ENABLED)||!1,(null==v?void 0:v.MFA_PHONE_ENROLL_ENABLED)||!1)||"Disabled"},K=(null==v?void 0:v.HOOK_SEND_SMS_URI)!==null&&(null==v?void 0:v.HOOK_SEND_SMS_ENABLED)===!0,J=(null==v?void 0:v.EXTERNAL_PHONE_ENABLED)===!0||K;return N?(0,a.jsxs)(D.bZ,{variant:"destructive",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Failed to retrieve auth configuration"}),(0,a.jsx)(D.X,{children:S.message})]}):C?(0,a.jsx)(U.Z,{id:w,initialValues:G,onSubmit:(e,t)=>{let{resetForm:s}=t,a={...e},{verifyEnabled:n,enrollEnabled:r}=B(e.MFA_TOTP);if(Y){let{verifyEnabled:t,enrollEnabled:s}=B(e.MFA_PHONE);a={...a,MFA_PHONE_ENROLL_ENABLED:s,MFA_PHONE_VERIFY_ENABLED:t}}a={...a,MFA_TOTP_ENROLL_ENABLED:r,MFA_TOTP_VERIFY_ENABLED:n},delete a.MFA_TOTP,delete a.MFA_PHONE,V||(delete a.DB_MAX_POOL_SIZE,delete a.API_MAX_REQUEST_DURATION),_({projectRef:l,config:a},{onError:e=>{i.Am.error("Failed to update settings: ".concat(null==e?void 0:e.message))},onSuccess:()=>{i.Am.success("Successfully updated settings"),s({values:e,initialValues:e})}})},validationSchema:F,"data-sentry-element":"Form","data-sentry-component":"AdvancedAuthSettingsForm","data-sentry-source-file":"AdvancedAuthSettingsForm.tsx",children:e=>{let{handleReset:t,resetForm:s,values:n,initialValues:i,setFieldValue:l}=e,o=JSON.stringify(n)!==JSON.stringify(i);(0,r.useEffect)(()=>{T&&s({values:G,initialValues:G})},[T]);let h="Disabled"===G.MFA_PHONE&&n.MFA_PHONE!==G.MFA_PHONE,x="Enabled"===n.MFA_PHONE||"Verify Enabled"===n.MFA_PHONE;return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(c.p,{title:"Advanced Settings",description:"These settings rarely need to be changed."}),(0,a.jsxs)(u.by,{disabled:!0,footer:(0,a.jsx)("div",{className:"flex py-4 px-8",children:(0,a.jsx)(d.i,{form:w,isSubmitting:A,hasChanges:o,handleReset:t,disabled:!I,helper:I?void 0:"You need additional permissions to update authentication settings"})}),children:[(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Access Tokens (JWT)"}),children:(0,a.jsx)(m.B4,{loading:E,children:(0,a.jsx)(R.Z,{id:"JWT_EXP",size:"small",label:"Access token (JWT) expiry time",descriptionText:"How long access tokens are valid for before a refresh token has to be used. Recommendation: 3600 (1 hour).",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"seconds"}),disabled:!I})})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Refresh Tokens"}),children:(0,a.jsxs)(m.B4,{loading:E,children:[(0,a.jsx)(P.Z,{id:"REFRESH_TOKEN_ROTATION_ENABLED",size:"small",label:"Detect and revoke potentially compromised refresh tokens",layout:"flex",descriptionText:"Prevent replay attacks from potentially compromised refresh tokens. Recommendation: ON.",disabled:!I}),n.REFRESH_TOKEN_ROTATION_ENABLED&&(0,a.jsx)(R.Z,{id:"SECURITY_REFRESH_TOKEN_REUSE_INTERVAL",size:"small",min:0,label:"Refresh token reuse interval",descriptionText:"Time interval where the same refresh token can be used multiple times to request for an access token. Recommendation: 10 seconds.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"seconds"}),disabled:!I})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Multi-Factor Authentication (MFA)"}),children:(0,a.jsxs)(m.B4,{loading:E,children:[(0,a.jsx)(O,{name:"MFA_TOTP",properties:{type:"select",title:"TOTP (App Authenticator)",description:"Control use of TOTP (App Authenticator) factors",enum:Z},formValues:n,disabled:!I,setFieldValue:l}),(0,a.jsx)(R.Z,{id:"MFA_MAX_ENROLLED_FACTORS",size:"small",label:"Maximum number of per-user MFA factors",descriptionText:"How many MFA factors can be enrolled at once per user.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"factors"}),disabled:!I})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Advanced MFA"}),children:(0,a.jsxs)(m.B4,{loading:E,children:[W&&(0,a.jsx)(p.Z,{primaryText:"Upgrade to Pro",secondaryText:"Advanced MFA requires the Pro Plan"}),(0,a.jsx)(O,{name:"MFA_PHONE",properties:{type:"select",title:"Phone",description:"Control use of phone factors",enum:Z},formValues:n,disabled:!I||!Y,setFieldValue:l}),!J&&x&&(0,a.jsxs)(D.bZ,{variant:"warning",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"To use MFA with Phone you should set up a Phone provider or Send SMS Hook."})]}),(0,a.jsx)(R.Z,{id:"MFA_PHONE_OTP_LENGTH",size:"small",label:"Phone OTP Length",descriptionText:"Number of digits in OTP",disabled:!I||!Y}),(0,a.jsx)(O,{name:"MFA_PHONE_TEMPLATE",properties:{title:"Phone verification message",type:"multiline-string",description:"To format the OTP code use `{{ .Code }}`"},formValues:n,disabled:!I||!Y,setFieldValue:l}),h&&(0,a.jsxs)(D.bZ,{variant:"warning",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Enabling advanced MFA with phone will result in an additional charge of $75 per month for the first project in the organization and an additional $10 per month for additional projects."})]})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Max Direct Database Connections"}),children:(0,a.jsxs)(m.B4,{loading:E,children:[q&&(0,a.jsx)(p.Z,{primaryText:"Upgrade to Team or Enterprise",secondaryText:"Max Direct Database Connections settings are only available on the Team Plan and up.",buttonText:"Upgrade to Team"}),(0,a.jsx)(R.Z,{id:"DB_MAX_POOL_SIZE",size:"small",label:"Max direct database connections used by Auth",descriptionText:"Auth will take up no more than this number of connections from the total number of available connections to serve requests. These connections are not reserved, so when unused they are released.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"connections"}),disabled:!I||!V})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Max Request Duration"}),children:(0,a.jsxs)(m.B4,{loading:E,children:[q&&(0,a.jsx)(p.Z,{primaryText:"Upgrade to Team or Enterprise",secondaryText:"Max Request Duration settings are only available on the Team Plan and up.",buttonText:"Upgrade to Team"}),(0,a.jsx)(R.Z,{id:"API_MAX_REQUEST_DURATION",size:"small",label:"Maximum time allowed for an Auth request to last",descriptionText:"Number of seconds to wait for an Auth request to complete before canceling it. In certain high-load situations setting a larger or smaller value can be used to control load-shedding. Recommended: 10 seconds.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"seconds"}),disabled:!I||!V})]})})]})]})}}):(0,a.jsx)(h.Z,{resourceText:"view auth configuration settings"})},z=s(4839),V=s(83145),Y=s.n(V),W=s(756),X=s(94102);let q=["bg-surface-100","hover:bg-overlay-hover","data-open:bg-selection","border-default","hover:border-strong data-open:border-strong","data-open:pb-px col-span-12 mx-auto","-space-y-px overflow-hidden","border shadow","transition","first:rounded-tl","first:rounded-tr","last:rounded-bl","last:rounded-br","hover:z-50"];var G=s(37393),K=s(62507),J=s(359),Q=s(67096),$=s(31485),ee=s(79600),et=s(9450),es=s(33526),ea=e=>{var t,s,l,d;let{config:c,provider:u}=e,m=(0,r.useRef)(null),[h,p]=(0,r.useState)(!1),{ref:x,provider:g}=(0,o.UO)(),{mutate:y,isLoading:v}=(0,f._)(),S=["MAILER_AUTOCONFIRM","SMS_AUTOCONFIRM"],E=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue"),N=e=>{let t=c.HOOK_SEND_SMS_ENABLED&&e.startsWith("SMS_")&&!["SMS_AUTOCONFIRM","SMS_OTP_EXP","SMS_OTP_LENGTH","SMS_OTP_LENGTH","SMS_TEMPLATE","SMS_TEST_OTP","SMS_TEST_OTP_VALID_UNTIL"].includes(e);return["EXTERNAL_SLACK_CLIENT_ID","EXTERNAL_SLACK_SECRET"].includes(e)||t},A=e=>{switch(e){case"Slack (Deprecated)":return(0,a.jsxs)(D.bZ,{variant:"warning",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Slack (Deprecated) Provider"}),(0,a.jsxs)(D.X,{children:["Recently, Slack has updated their OAuth API. Please use the new Slack (OIDC) provider below. Developers using this provider should move over to the new provider. Please refer to our"," ",(0,a.jsx)("a",{href:"https://supabase.com/docs/guides/auth/social-login/auth-slack",className:"underline",target:"_blank",children:"documentation"})," ","for more details."]})]});case"Phone":return c.HOOK_SEND_SMS_ENABLED&&(0,a.jsxs)(D.bZ,{children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"SMS provider settings are disabled while the SMS hook is enabled."}),(0,a.jsxs)(D.X,{className:"flex flex-col gap-y-3",children:[(0,a.jsx)("p",{children:"The SMS hook will be used in place of the SMS provider configured"}),(0,a.jsx)(C.z,{asChild:!0,type:"default",className:"w-min",icon:(0,a.jsx)(z.Z,{}),children:(0,a.jsx)(Y(),{href:"/project/".concat(x,"/auth/hooks"),children:"View auth hooks"})})]})]});default:return null}},{data:R}=(0,$.zR)({projectRef:x}),P=null!==(d=null==R?void 0:null===(t=R.app_config)||void 0===t?void 0:t.protocol)&&void 0!==d?d:"https",I=null==R?void 0:null===(s=R.app_config)||void 0===s?void 0:s.endpoint,M="".concat(P,"://").concat(I),{data:F}=(0,ee.z)({projectRef:x}),k="SAML 2.0"===u.title&&c&&c.SAML_ENABLED,Z="LinkedIn (OIDC)"===u.title&&c&&c.EXTERNAL_LINKEDIN_OIDC_ENABLED,B="Slack (OIDC)"===u.title&&c.EXTERNAL_SLACK_OIDC_ENABLED,H=c&&c["EXTERNAL_".concat(null==u?void 0:null===(l=u.title)||void 0===l?void 0:l.toUpperCase(),"_ENABLED")],V=(()=>{let e={};return Object.keys(u.properties).forEach(t=>{let s=S.includes(t);if("SAML 2.0"===u.title){let s=c[t];e[t]=s||"boolean"!==u.properties[t].type&&""}else if(s)e[t]=!c[t];else{let s=c[t];e[t]=s||"boolean"!==u.properties[t].type&&""}}),e})();return(0,r.useEffect)(()=>{if((null==g?void 0:g.toLowerCase())===u.title.toLowerCase()){var e;p(!0),null===(e=m.current)||void 0===e||e.scrollIntoView({behavior:"smooth",block:"start"})}},[g]),(0,a.jsxs)(et.ZP,{open:h,onOpenChange:p,className:q.join(" "),"data-sentry-element":"Collapsible","data-sentry-component":"ProviderForm","data-sentry-source-file":"ProviderForm.tsx",children:[(0,a.jsx)(et.ZP.Trigger,{asChild:!0,"data-sentry-element":"unknown","data-sentry-source-file":"ProviderForm.tsx",children:(0,a.jsxs)("button",{ref:m,type:"button",className:"group flex w-full items-center justify-between rounded py-3 px-4 text-foreground",children:[(0,a.jsxs)("div",{className:"flex items-center gap-3",children:[(0,a.jsx)(G.Z,{className:"text-border-stronger transition data-open-parent:rotate-0 data-closed-parent:rotate-180",strokeWidth:2,width:14,"data-sentry-element":"ChevronUp","data-sentry-source-file":"ProviderForm.tsx"}),(0,a.jsx)("img",{src:"".concat(b.GW,"/img/icons/").concat(u.misc.iconKey,".svg"),width:18,alt:"".concat(u.title," auth icon")}),(0,a.jsx)("span",{className:"text-sm",children:u.title})]}),(0,a.jsx)("div",{className:"flex items-center gap-3",children:k||H||Z||B?(0,a.jsxs)("div",{className:"flex items-center gap-1 rounded-full border border-brand-400 bg-brand-200 py-1 px-1 text-xs text-brand",children:[(0,a.jsx)("span",{className:"rounded-full bg-brand p-0.5 text-xs text-brand-200",children:(0,a.jsx)(K.Z,{strokeWidth:2,size:12})}),(0,a.jsx)("span",{className:"px-1",children:"Enabled"})]}):(0,a.jsx)("div",{className:"rounded-md border border-strong bg-surface-100 py-1 px-3 text-xs text-foreground-lighter",children:"Disabled"})})]})}),(0,a.jsx)(U.Z,{name:"provider-".concat(u.title,"-form"),initialValues:V,validationSchema:u.validationSchema,onSubmit:(e,t)=>{let{resetForm:s}=t,a={...e};Object.keys(e).map(t=>{S.includes(t)&&(a[t]=!e[t]),""===a[t]&&(a[t]=null)}),y({projectRef:x,config:a},{onSuccess:()=>{s({values:{...e},initialValues:{...e}}),p(!1),i.Am.success("Successfully updated settings")}})},"data-sentry-element":"Form","data-sentry-source-file":"ProviderForm.tsx",children:e=>{var t,s,n;let{handleReset:r,initialValues:i,values:l,setFieldValue:o}=e,d=JSON.stringify(i)===JSON.stringify(l);return(0,a.jsx)(et.ZP.Content,{children:(0,a.jsx)("div",{className:"group border-t border-strong bg-surface-100 py-6 px-4 md:px-6 text-foreground",children:(0,a.jsxs)("div",{className:"mx-auto my-2 md:my-6 max-w-lg space-y-6",children:[A(u.title),Object.keys(u.properties).map(e=>(0,a.jsx)(O,{name:e,setFieldValue:o,properties:u.properties[e],formValues:l,disabled:N(e)||!E},e)),(null==u?void 0:null===(t=u.misc)||void 0===t?void 0:t.alert)&&(0,a.jsx)(es.J,{type:"warning",title:u.misc.alert.title,description:(0,a.jsx)(a.Fragment,{children:(0,a.jsx)(T.D,{children:u.misc.alert.description})})}),u.misc.requiresRedirect&&(0,a.jsx)(a.Fragment,{children:(0,a.jsx)(w.Z,{copy:!0,readOnly:!0,disabled:!0,label:"Callback URL (for OAuth)",value:(null==F?void 0:null===(s=F.customDomain)||void 0===s?void 0:s.status)==="active"?"https://".concat(null===(n=F.customDomain)||void 0===n?void 0:n.hostname,"/auth/v1/callback"):"".concat(M,"/auth/v1/callback"),descriptionText:(0,a.jsx)(_.U,{content:u.misc.helper,className:"text-foreground-lighter"})})}),(0,a.jsxs)("div",{className:"flex items-center justify-between",children:[(0,a.jsx)(Q.G,{href:u.link}),(0,a.jsxs)("div",{className:"flex items-center gap-x-3",children:[(0,a.jsx)(C.z,{type:"default",htmlType:"reset",onClick:()=>{r(),p(!1)},disabled:v,children:"Cancel"}),(0,a.jsx)(J.u,{htmlType:"submit",loading:v,disabled:v||!E||d,tooltip:{content:{side:"bottom",text:E?void 0:"You need additional permissions to update provider settings"}},children:"Save"})]})]})]})})})}})]})},en=()=>{let{ref:e}=(0,o.UO)(),{isLoading:t,error:s,isError:n,data:r,isSuccess:i}=(0,x.$E)({projectRef:e});return(0,a.jsxs)("div",{"data-sentry-component":"AuthProvidersForm","data-sentry-source-file":"AuthProvidersForm.tsx",children:[(0,a.jsx)(c.p,{title:"Auth Providers",description:"Authenticate your users through a suite of providers and login methods","data-sentry-element":"FormHeader","data-sentry-source-file":"AuthProvidersForm.tsx"}),(0,a.jsxs)("div",{className:"-space-y-px",children:[(null==r?void 0:r.EXTERNAL_EMAIL_ENABLED)&&(null==r?void 0:r.MAILER_OTP_EXP)>3600&&(0,a.jsxs)(D.bZ,{className:"flex w-full items-center justify-between my-3",variant:"warning",children:[(0,a.jsx)(L.aN,{}),(0,a.jsxs)("div",{children:[(0,a.jsx)(D.Cd,{children:"OTP expiry exceeds recommended threshold"}),(0,a.jsxs)(D.X,{className:"flex flex-col gap-y-3",children:[(0,a.jsx)("p",{children:"We have detected that you have enabled the email provider with the OTP expiry set to more than an hour. It is recommended to set this value to less than an hour."}),(0,a.jsx)(C.z,{asChild:!0,type:"default",className:"w-min",icon:(0,a.jsx)(z.Z,{}),children:(0,a.jsx)(Y(),{href:"https://supabase.com/docs/guides/platform/going-into-prod#security",children:"View security recommendations"})})]})]})]}),t&&X.Wm.map(e=>(0,a.jsx)("div",{className:[...q,"px-6 py-3"].join(" "),children:(0,a.jsx)(W.p,{})},"provider_".concat(e.title))),n&&(0,a.jsxs)(D.bZ,{variant:"destructive",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Failed to retrieve auth configuration"}),(0,a.jsx)(D.X,{children:s.message})]}),i&&X.Wm.map(e=>{let t="Phone"===e.title?{...e,validationSchema:(0,X.OK)(r)}:e;return(0,a.jsx)(ea,{config:r,provider:t},"provider_".concat(t.title))})]})]})};let er="NO_REQUIRED_CHARS",ei="abcdefghijklmnopqrstuvwxyz:ABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789",el=ei+":!@#$%^&*()_+-=[]{};'\\\\:\"|<>?,./`~",eo=(0,l.object)({DISABLE_SIGNUP:(0,l.boolean)().required(),EXTERNAL_ANONYMOUS_USERS_ENABLED:(0,l.boolean)().required(),SECURITY_MANUAL_LINKING_ENABLED:(0,l.boolean)().required(),SITE_URL:(0,l.string)().required("Must have a Site URL"),SECURITY_CAPTCHA_ENABLED:(0,l.boolean)().required(),SECURITY_CAPTCHA_SECRET:(0,l.string)().when("SECURITY_CAPTCHA_ENABLED",{is:!0,then:e=>e.required("Must have a Captcha secret")}),SECURITY_CAPTCHA_PROVIDER:(0,l.string)().when("SECURITY_CAPTCHA_ENABLED",{is:!0,then:e=>e.oneOf(["hcaptcha","turnstile"]).required("Captcha provider must be either hcaptcha or turnstile")}),SESSIONS_TIMEBOX:(0,l.number)().min(0,"Must be a positive number"),SESSIONS_INACTIVITY_TIMEOUT:(0,l.number)().min(0,"Must be a positive number"),SESSIONS_SINGLE_PER_USER:(0,l.boolean)(),PASSWORD_MIN_LENGTH:(0,l.number)().min(6,"Must be greater or equal to 6."),PASSWORD_REQUIRED_CHARACTERS:(0,l.string)(),PASSWORD_HIBP_ENABLED:(0,l.boolean)()});function ed(e){let{value:t}=e;return 0===t?"never":1===t?"hour":"hours"}let ec="auth-config-basic-settings";var eu=()=>{var e;let{ref:t}=(0,o.UO)(),{data:s,error:l,isLoading:c,isError:v,isSuccess:S}=(0,x.$E)({projectRef:t}),{mutate:T,isLoading:A}=(0,f._)(),[I,M]=(0,r.useState)(!0),F=(0,j.Xo)(n.KA.READ,"custom_config_gotrue"),k=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue"),Z=(0,y.l)(),{data:B,isSuccess:H}=(0,g.Gl)({orgSlug:null==Z?void 0:Z.slug},{enabled:b.Qy}),V=H&&(null==B?void 0:null===(e=B.plan)||void 0===e?void 0:e.id)!=="free",W=b.Qy&&!V,X={DISABLE_SIGNUP:!(null==s?void 0:s.DISABLE_SIGNUP),EXTERNAL_ANONYMOUS_USERS_ENABLED:null==s?void 0:s.EXTERNAL_ANONYMOUS_USERS_ENABLED,SECURITY_MANUAL_LINKING_ENABLED:(null==s?void 0:s.SECURITY_MANUAL_LINKING_ENABLED)||!1,SITE_URL:null==s?void 0:s.SITE_URL,SECURITY_CAPTCHA_ENABLED:(null==s?void 0:s.SECURITY_CAPTCHA_ENABLED)||!1,SECURITY_CAPTCHA_SECRET:(null==s?void 0:s.SECURITY_CAPTCHA_SECRET)||"",SECURITY_CAPTCHA_PROVIDER:(null==s?void 0:s.SECURITY_CAPTCHA_PROVIDER)||"hcaptcha",SESSIONS_TIMEBOX:(null==s?void 0:s.SESSIONS_TIMEBOX)||0,SESSIONS_INACTIVITY_TIMEOUT:(null==s?void 0:s.SESSIONS_INACTIVITY_TIMEOUT)||0,SESSIONS_SINGLE_PER_USER:(null==s?void 0:s.SESSIONS_SINGLE_PER_USER)||!1,PASSWORD_MIN_LENGTH:(null==s?void 0:s.PASSWORD_MIN_LENGTH)||6,PASSWORD_REQUIRED_CHARACTERS:(null==s?void 0:s.PASSWORD_REQUIRED_CHARACTERS)||er,PASSWORD_HIBP_ENABLED:(null==s?void 0:s.PASSWORD_HIBP_ENABLED)||!1};return v?(0,a.jsxs)(D.bZ,{variant:"destructive",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Failed to retrieve auth configuration"}),(0,a.jsx)(D.X,{children:l.message})]}):F?(0,a.jsx)(U.Z,{id:ec,initialValues:X,onSubmit:(e,s)=>{let{resetForm:a}=s,n={...e};n.DISABLE_SIGNUP=!e.DISABLE_SIGNUP,n.PASSWORD_REQUIRED_CHARACTERS===er&&(n.PASSWORD_REQUIRED_CHARACTERS=""),T({projectRef:t,config:n},{onError:e=>{i.Am.error("Failed to update settings:  ".concat(null==e?void 0:e.message))},onSuccess:()=>{i.Am.success("Successfully updated settings"),a({values:e,initialValues:e})}})},validationSchema:eo,"data-sentry-element":"Form","data-sentry-component":"BasicAuthSettingsForm","data-sentry-source-file":"BasicAuthSettingsForm.tsx",children:e=>{let{handleReset:s,resetForm:n,values:i,initialValues:l,setFieldValue:o}=e,h=JSON.stringify(i)!==JSON.stringify(l);return(0,r.useEffect)(()=>{S&&n({values:X,initialValues:X})},[S]),(0,a.jsx)(a.Fragment,{children:(0,a.jsxs)(u.by,{disabled:!0,footer:(0,a.jsx)("div",{className:"flex py-4 px-8",children:(0,a.jsx)(d.i,{form:ec,isSubmitting:A,hasChanges:h,handleReset:s,disabled:!k,helper:k?void 0:"You need additional permissions to update authentication settings"})}),children:[(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"User Signups"}),children:(0,a.jsxs)(m.B4,{loading:c,children:[(0,a.jsx)(P.Z,{id:"DISABLE_SIGNUP",size:"small",label:"Allow new users to sign up",layout:"flex",descriptionText:"If this is disabled, new users will not be able to sign up to your application.",disabled:!k}),(0,a.jsx)(P.Z,{id:"SECURITY_MANUAL_LINKING_ENABLED",size:"small",label:"Allow manual linking",layout:"flex",descriptionText:(0,a.jsx)(_.U,{extLinks:!0,className:"[&>p>a]:text-foreground-light [&>p>a]:transition-all [&>p>a]:hover:text-foreground [&>p>a]:hover:decoration-brand",content:"Enable [manual linking APIs](https://supabase.com/docs/guides/auth/auth-identity-linking#manual-linking-beta) for your project."}),disabled:!k}),(0,a.jsx)(P.Z,{id:"EXTERNAL_ANONYMOUS_USERS_ENABLED",size:"small",label:"Allow anonymous sign-ins",layout:"flex",descriptionText:(0,a.jsx)(_.U,{extLinks:!0,className:"[&>p>a]:text-foreground-light [&>p>a]:transition-all [&>p>a]:hover:text-foreground [&>p>a]:hover:decoration-brand",content:"Enable [anonymous sign-ins](https://supabase.com/docs/guides/auth/auth-anonymous) for your project."}),disabled:!k}),i.EXTERNAL_ANONYMOUS_USERS_ENABLED&&(0,a.jsxs)("div",{className:"flex flex-col gap-y-2",children:[(0,a.jsxs)(D.bZ,{className:"flex w-full items-center justify-between",variant:"warning",children:[(0,a.jsx)(L.aN,{}),(0,a.jsxs)("div",{children:[(0,a.jsxs)(D.Cd,{children:["Anonymous users will use the"," ",(0,a.jsx)("code",{className:"text-xs",children:"authenticated"})," role when signing in"]}),(0,a.jsxs)(D.X,{className:"flex flex-col gap-y-3",children:[(0,a.jsxs)("p",{children:["As a result, anonymous users will be subjected to RLS policies that apply to the ",(0,a.jsx)("code",{className:"text-xs",children:"public"})," and"," ",(0,a.jsx)("code",{className:"text-xs",children:"authenticated"})," roles. We strongly advise"," ",(0,a.jsx)(Y(),{href:"/project/".concat(t,"/auth/policies"),className:"text-foreground underline",children:"reviewing your RLS policies"})," ","to ensure that access to your data is restricted where required."]}),(0,a.jsx)(C.z,{asChild:!0,type:"default",className:"w-min",icon:(0,a.jsx)(z.Z,{}),children:(0,a.jsx)(Y(),{href:"https://supabase.com/docs/guides/auth/auth-anonymous#access-control",children:"View access control docs"})})]})]})]}),!i.SECURITY_CAPTCHA_ENABLED&&(0,a.jsxs)(D.bZ,{children:[(0,a.jsx)(L.aN,{}),(0,a.jsxs)(D.Cd,{children:["We highly recommend"," ",(0,a.jsx)("span",{tabIndex:1,className:"cursor-pointer underline",onClick:()=>{let e=document.getElementById("enable-captcha");e&&e.scrollIntoView({behavior:"smooth",block:"center"})},children:"enabling captcha"})," ","for anonymous sign-ins"]}),(0,a.jsx)(D.X,{children:"This will prevent potential abuse on sign-ins which may bloat your database and incur costs for monthly active users (MAU)"})]})]})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"Passwords"}),children:(0,a.jsxs)(m.B4,{loading:c,children:[(0,a.jsx)(R.Z,{id:"PASSWORD_MIN_LENGTH",size:"small",label:"Minimum password length",descriptionText:"Passwords shorter than this value will be rejected as weak. Minimum 6, recommended 8 or more.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"characters"}),disabled:!k}),(0,a.jsx)(O,{name:"PASSWORD_REQUIRED_CHARACTERS",properties:{type:"select",title:"Password Requirements",description:"Passwords that do not have at least one of each will be rejected as weak.",enum:[{label:"No required characters (default)",value:er},{label:"Letters and digits",value:"abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789"},{label:"Lowercase, uppercase letters and digits",value:ei},{label:"Lowercase, uppercase letters, digits and symbols (recommended)",value:el}]},formValues:i,setFieldValue:o}),W?(0,a.jsx)(p.Z,{primaryText:"Upgrade to Pro",secondaryText:"Leaked password protection available on Pro plans and up."}):(0,a.jsx)(a.Fragment,{}),(0,a.jsx)(P.Z,{id:"PASSWORD_HIBP_ENABLED",size:"small",label:"Prevent use of leaked passwords",afterLabel:" (recommended)",layout:"flex",descriptionText:"Rejects the use of known or easy to guess passwords on sign up or password change. Powered by the HaveIBeenPwned.org Pwned Passwords API.",disabled:!k||!V})]})}),(0,a.jsx)(m.hj,{header:(0,a.jsx)(m.S0,{children:"User Sessions"}),children:(0,a.jsxs)(m.B4,{loading:c,children:[W?(0,a.jsx)(p.Z,{primaryText:"Upgrade to Pro",secondaryText:"Configuring user sessions requires the Pro Plan."}):(0,a.jsx)(a.Fragment,{}),(0,a.jsx)(P.Z,{id:"SESSIONS_SINGLE_PER_USER",size:"small",label:"Enforce single session per user",layout:"flex",descriptionText:"If enabled, all but a user's most recently active session will be terminated.",disabled:!k||!V}),(0,a.jsx)(R.Z,{id:"SESSIONS_TIMEBOX",size:"small",label:"Time-box user sessions",descriptionText:"The amount of time before a user is forced to sign in again. Use 0 for never",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:(0,a.jsx)(ed,{value:i.SESSIONS_TIMEBOX})}),disabled:!k||!V}),(0,a.jsx)(R.Z,{id:"SESSIONS_INACTIVITY_TIMEOUT",size:"small",label:"Inactivity timeout",descriptionText:"The amount of time a user needs to be inactive to be forced to sign in again. Use 0 for never.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:(0,a.jsx)(ed,{value:i.SESSIONS_INACTIVITY_TIMEOUT})}),disabled:!k||!V})]})}),(0,a.jsx)(m.hj,{id:"enable-captcha",header:(0,a.jsx)(m.S0,{children:"Bot and Abuse Protection"}),children:(0,a.jsxs)(m.B4,{loading:c,children:[(0,a.jsx)(P.Z,{id:"SECURITY_CAPTCHA_ENABLED",size:"small",label:"Enable Captcha protection",layout:"flex",descriptionText:"Protect authentication endpoints from bots and abuse.",disabled:!k}),i.SECURITY_CAPTCHA_ENABLED&&(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(O,{name:"SECURITY_CAPTCHA_PROVIDER",properties:{type:"select",title:"Choose Captcha Provider",description:"",enum:[{label:"hCaptcha",value:"hcaptcha",icon:"hcaptcha-icon.png"},{label:"Turnstile by Cloudflare",value:"turnstile",icon:"cloudflare-icon.png"}]},formValues:i,setFieldValue:o}),(0,a.jsx)(w.Z,{id:"SECURITY_CAPTCHA_SECRET",type:I?"password":"text",size:"small",label:"Captcha secret",descriptionText:"Obtain this secret from the provider.",disabled:!k,actions:(0,a.jsx)(C.z,{icon:I?(0,a.jsx)(E.Z,{}):(0,a.jsx)(N.Z,{}),type:"default",onClick:()=>M(!I)})})]})]})})]})})}}):(0,a.jsx)(h.Z,{resourceText:"view auth configuration settings"})},em=s(5529),eh=s(63621),ep=s(92240);let ex="http://json-schema.org/draft-07/schema#",ef={$schema:ex,id:"CONFIRMATION",type:"object",title:"Confirm signup",properties:{MAILER_SUBJECTS_CONFIRMATION:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_CONFIRMATION_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:" \n- `{{ .ConfirmationURL }}` : URL to confirm the e-mail address for the new account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_CONFIRMATION:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}},eg={$schema:ex,id:"INVITE",type:"object",title:"Invite user",properties:{MAILER_SUBJECTS_INVITE:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_INVITE_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:" \n- `{{ .ConfirmationURL }}` : URL to accept the invitation to create an account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `redirectTo` passed in options\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_INVITE:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}},ej={$schema:ex,id:"MAGIC_LINK",type:"object",title:"Magic Link",properties:{MAILER_SUBJECTS_MAGIC_LINK:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_MAGIC_LINK_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:" \n- `{{ .ConfirmationURL }}` : URL for a one-time login to the user's account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_MAGIC_LINK:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}},ey=[ef,eg,ej,{$schema:ex,id:"EMAIL_CHANGE",type:"object",title:"Change Email Address",properties:{MAILER_SUBJECTS_EMAIL_CHANGE:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_EMAIL_CHANGE_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:" \n- `{{ .ConfirmationURL }}` : URL to confirm the email change\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The original user's email address\n- `{{ .NewEmail }}` : The user's new email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_EMAIL_CHANGE:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}},{$schema:ex,id:"RECOVERY",type:"object",title:"Reset Password",properties:{MAILER_SUBJECTS_RECOVERY:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_RECOVERY_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:" \n- `{{ .ConfirmationURL }}` : URL to confirm the password reset\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `redirectTo` passed in options\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_RECOVERY:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}},{$schema:ex,id:"REAUTHENTICATION",type:"object",title:"Reauthentication",properties:{MAILER_SUBJECTS_REAUTHENTICATION:{title:"Subject heading",type:"string"},MAILER_TEMPLATES_REAUTHENTICATION_CONTENT:{title:"Message body",descriptionOptional:"HTML body of your email",type:"code",description:"\n- `{{ .Token }}` : The 6-digit numeric email OTP\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n"}},validationSchema:(0,l.object)().shape({MAILER_SUBJECTS_REAUTHENTICATION:(0,l.string)().required('"Subject heading is required.')}),misc:{iconKey:"email-icon2",helper:"To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)"}}];var eb=function(){let{ref:e}=(0,o.UO)();return(0,a.jsxs)(D.bZ,{variant:"warning","data-sentry-element":"Alert_Shadcn_","data-sentry-component":"EmailRateLimitsAlert","data-sentry-source-file":"EmailRateLimitsAlert.tsx",children:[(0,a.jsx)(L.aN,{"data-sentry-element":"WarningIcon","data-sentry-source-file":"EmailRateLimitsAlert.tsx"}),(0,a.jsx)(D.Cd,{"data-sentry-element":"AlertTitle_Shadcn_","data-sentry-source-file":"EmailRateLimitsAlert.tsx",children:"Email rate-limits and restrictions"}),(0,a.jsxs)(D.X,{"data-sentry-element":"AlertDescription_Shadcn_","data-sentry-source-file":"EmailRateLimitsAlert.tsx",children:["You're using the built-in email service. The service has rate limits and it's not meant to be used for production apps. Check the"," ",(0,a.jsx)("a",{href:"https://supabase.com/docs/guides/platform/going-into-prod#auth-rate-limits",className:"underline",target:"_blank",rel:"noreferrer noopener",children:"documentation"})," ","for an up-to-date information on the current rate limits.",(0,a.jsx)(C.z,{asChild:!0,type:"default",className:"mt-2","data-sentry-element":"Button","data-sentry-source-file":"EmailRateLimitsAlert.tsx",children:(0,a.jsx)(Y(),{target:"_blank",href:"/project/".concat(e,"/settings/auth#auth-config-smtp-form"),"data-sentry-element":"Link","data-sentry-source-file":"EmailRateLimitsAlert.tsx",children:"Set up custom SMTP server"})})]})]})},ev=s(10839),eS=s(44619),eE=s(20022),eN=s(13064),eT=s(64618),e_=s(6464);async function eA(e){let{projectRef:t,template:s}=e,{data:a,error:n}=await (0,e_.v_)("/platform/auth/{ref}/validate/spam",{params:{path:{ref:t}},body:s});return n&&(0,e_.S3)(n),a}let ew=function(){let{onSuccess:e,onError:t,...s}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{};return(0,eT.D)(e=>eA(e),{async onSuccess(t,s,a){await (null==e?void 0:e(t,s,a))},async onError(e,s,a){void 0===t?i.Am.error("Failed to validate template: ".concat(e.message)):t(e,s,a)},...s})};var eC=s(65092),eR=s(78258),eP=s(11221);let eI=e=>{var t;let{validationResult:s}=e,n=(null!==(t=null==s?void 0:s.rules)&&void 0!==t?t:[]).filter(e=>e.score>=0),r=n.length>0;return(0,a.jsx)(eN.Z,{className:(0,eC.cn)("mb-2",r&&"!bg-alternative/75","!px-0","rounded-t-none"),icon:r&&(0,a.jsx)(L.aN,{}),title:r?"Email has a high probability of being marked as spam and deliverability may be affected":"Email content is unlikely to be marked as spam",description:r?(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)("div",{className:"flex flex-col gap-y-3",children:[(0,a.jsx)("p",{children:r?" Rectify the following issues to improve your email's deliverability in order of priority:":" Address the following issues to improve your email's deliverability:"}),(0,a.jsxs)(eR.iA,{children:[(0,a.jsx)(eR.xD,{className:"font-mono uppercase text-xs [&_th]:h-auto [&_th]:py-2",children:(0,a.jsxs)(eR.SC,{className:"hover:bg-transparent",children:[(0,a.jsx)(eR.ss,{className:"pl-0",children:"Warning"}),(0,a.jsx)(eR.ss,{className:"pr-0",children:"Description"})]})}),(0,a.jsx)(eR.RM,{children:n.map(e=>(0,a.jsxs)(eR.SC,{className:"hover:bg-transparent",children:[(0,a.jsx)(eR.pj,{className:"pl-0 font-mono text-xs text-foreground",children:e.name}),(0,a.jsx)(eR.pj,{className:"pr-0",children:e.desc})]},e.name))})]})]}),(0,a.jsx)(eP.Z,{}),(0,a.jsx)(_.U,{className:"!max-w-none text-foreground-muted text-xs [&_a]:text-foreground-lighter mt-2",content:"Spam validation is powered by [SpamAssassin](https://spamassassin.apache.org/doc.html). Full list of all available warnings can be found [here](https://gist.github.com/ychaouche/a2faff159c2a1fea16019156972c7f8b)."})]}):null,"data-sentry-element":"InformationBox","data-sentry-component":"SpamValidation","data-sentry-source-file":"SpamValidation.tsx"})};var eM=e=>{var t,s;let{template:l}=e,{ref:c}=(0,o.UO)(),u=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue"),{data:h,isSuccess:p}=(0,x.$E)({projectRef:c}),{mutate:g}=ew({onSuccess:e=>R(e)}),{mutate:y}=(0,f._)({onError:e=>{L(!1),i.Am.error("Failed to update email templates: ".concat(e.message))}}),{id:b,properties:v}=l,S="auth-config-email-templates-".concat(b),E=(0,r.useMemo)(()=>{let e={};return Object.keys(v).forEach(t=>{var s;e[t]=null!==(s=h&&h[t])&&void 0!==s?s:""}),e},[h,v]),N="MAILER_TEMPLATES_".concat(b,"_CONTENT"),_=v[N],A=p&&h&&(!h.SMTP_HOST||!h.SMTP_USER||!h.SMTP_PASS),[C,R]=(0,r.useState)(),[P,I]=(0,r.useState)(null!==(t=h&&h[N])&&void 0!==t?t:""),[M,O]=(0,r.useState)(!1),[D,L]=(0,r.useState)(!1),F=(null!==(s=null==C?void 0:C.rules)&&void 0!==s?s:[]).filter(e=>e.score>0),k=A&&F.length>0;return(0,r.useEffect)(()=>{let e=e=>{M&&(e.preventDefault(),e.returnValue="")};return window.addEventListener("beforeunload",e),()=>{window.removeEventListener("beforeunload",e)}},[M]),(0,r.useEffect)(()=>{if(c&&b&&h){let[e]=Object.keys(v);g({projectRef:c,template:{subject:h[e],content:h[N]}})}},[b]),(0,a.jsx)(U.Z,{id:S,className:"!border-t-0",initialValues:E,onSubmit:(e,t)=>{let{resetForm:s}=t;if(!c)return console.error("Project ref is required");L(!0);let a={...e};delete a[N],_&&(a[N]=P);let[n]=Object.keys(v);g({projectRef:c,template:{subject:a[n],content:a[N]}},{onSuccess:t=>{var n;let r=(null!==(n=null==t?void 0:t.rules)&&void 0!==n?n:[]).filter(e=>e.score>0);A&&r.length>0?(L(!1),i.Am.error("Please rectify all spam warnings before saving while using the built-in email service")):y({projectRef:c,config:a},{onSuccess:()=>{L(!1),i.Am.success("Successfully updated settings"),s({values:e,initialValues:e}),O(!1)}})},onError:()=>L(!1)})},"data-sentry-element":"Form","data-sentry-component":"TemplateEditor","data-sentry-source-file":"TemplateEditor.tsx",children:e=>{var t;let{resetForm:s,values:n,initialValues:r}=e,i=null!==(t=h&&h[N])&&void 0!==t?t:"",l=JSON.stringify(n)!==JSON.stringify(r)||i!==P;return(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(m.hj,{className:"!border-t-0 pb-8 pt-4",children:(0,a.jsx)(m.B4,{loading:!1,children:Object.keys(v).map(e=>{let t=v[e];if("string"===t.type)return(0,a.jsxs)("div",{className:"space-y-3",children:[(0,a.jsx)("label",{className:"col-span-12 text-sm text-foreground lg:col-span-5",children:t.title}),(0,a.jsx)(w.Z,{size:"small",layout:"vertical",id:e,name:e,descriptionText:t.description?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:t.description}):null,labelOptional:t.descriptionOptional?(0,a.jsx)(T.D,{unwrapDisallowed:!0,disallowedElements:["p"],children:t.descriptionOptional}):null,disabled:!u},e)]},e)})})}),(0,a.jsx)(m.hj,{className:"!mt-0 grid-cols-12 !border-t-0 !pt-0 pb-7",children:(0,a.jsxs)(m.B4,{fullWidth:!0,loading:!1,children:[_&&(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)("div",{className:"space-y-3",children:[(0,a.jsx)(m.S0,{children:(0,a.jsx)("span",{children:_.title})}),(0,a.jsx)(eN.Z,{defaultVisibility:!0,title:"Message variables",hideCollapse:!1,description:_.description&&(0,a.jsx)(T.D,{children:_.description})})]}),(0,a.jsxs)(ep.mQ,{defaultValue:"source",children:[(0,a.jsxs)(ep.dr,{className:"gap-3",children:[(0,a.jsxs)(ep.SP,{value:"source",className:"gap-2",children:[(0,a.jsx)(ev.Z,{size:14}),"Source"]}),(0,a.jsxs)(ep.SP,{value:"preview",className:"gap-2",children:[(0,a.jsx)(eS.Z,{size:14}),"Preview"]})]}),(0,a.jsxs)(ep.nU,{value:"source",className:"-space-y-px",children:[(0,a.jsx)(eE.Z,{id:"code-id",language:"html",isReadOnly:!u,className:"!mb-0 relative h-96 overflow-hidden rounded border rounded-b-none",onInputChange:e=>{I(null!=e?e:""),P!==e&&O(!0)},options:{wordWrap:"on",contextmenu:!1},value:P}),(0,a.jsx)(eI,{validationResult:C})]}),(0,a.jsxs)(ep.nU,{value:"preview",children:[(0,a.jsx)(es.J,{type:"default",title:"The preview may differ slightly from the actual rendering in the email client"}),(0,a.jsx)("iframe",{className:"!mb-0 overflow-hidden h-96 w-full rounded border",title:b,srcDoc:P})]})]})]}),(0,a.jsx)("div",{className:"col-span-12 flex w-full",children:(0,a.jsx)(d.i,{handleReset:()=>{var e;s({values:h,initialValues:h}),I(null!==(e=h&&h[N])&&void 0!==e?e:"")},form:S,isSubmitting:D,hasChanges:l,disabled:!u,helper:k?"Please rectify all spam warnings before saving while using the built-in email service":u?void 0:"You need additional permissions to update authentication settings"})})]})})]})}})},eO=()=>{let{ref:e}=(0,o.UO)(),{data:t,error:s,isLoading:n,isError:r,isSuccess:i}=(0,x.$E)({projectRef:e}),l=i&&t&&(!t.SMTP_HOST||!t.SMTP_USER||!t.SMTP_PASS);return(0,a.jsxs)("div",{className:"w-full","data-sentry-component":"EmailTemplates","data-sentry-source-file":"EmailTemplates.tsx",children:[(0,a.jsx)("div",{className:"w-full flex justify-between items-center",children:(0,a.jsx)(c.p,{title:"Email Templates",description:"Customize the emails that will be sent out to your users.",docsUrl:"https://supabase.com/docs/guides/auth/auth-email-templates","data-sentry-element":"FormHeader","data-sentry-source-file":"EmailTemplates.tsx"})}),r&&(0,a.jsx)(em.Z,{error:s,subject:"Failed to retrieve auth configuration"}),n&&(0,a.jsx)("div",{className:"w-[854px]",children:(0,a.jsx)(eh.A,{})}),i&&(0,a.jsx)(u.by,{children:(0,a.jsxs)(ep.mQ,{defaultValue:ey[0].title.trim().replace(/\s+/g,"-"),children:[(0,a.jsx)(ep.dr,{className:"px-4 md:px-8 pt-2 gap-5 overflow-x-scroll no-scrollbar",children:ey.map(e=>(0,a.jsx)(ep.SP,{value:e.title.trim().replace(/\s+/g,"-"),children:e.title}))}),ey.map(e=>{let t=e.title.trim().replace(/\s+/g,"-");return(0,a.jsxs)(ep.nU,{value:t,children:[l?(0,a.jsx)("div",{className:"px-4 md:px-8",children:(0,a.jsx)(eb,{})}):null,(0,a.jsx)(eM,{template:e},e.title)]},t)})]})})]})},eD=s(66164);let eL={SMTP_ADMIN_EMAIL:null,SMTP_SENDER_NAME:null,SMTP_USER:null,SMTP_HOST:null,SMTP_PASS:null,SMTP_PORT:null,SMTP_MAX_FREQUENCY:60};var eU=s(93433),eF=s(71770),ek=()=>{let{ref:e}=(0,o.UO)(),{data:t,error:s,isLoading:p,isError:g,isSuccess:y}=(0,x.$E)({projectRef:e}),{mutate:b,isLoading:v}=(0,f._)(),[S,T]=(0,r.useState)(!1),[_,A]=(0,r.useState)(!0),I="auth-config-smtp-form",M=(0,eU.F)(t),O=(0,j.Xo)(n.KA.READ,"custom_config_gotrue"),F=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue");(0,r.useEffect)(()=>{y&&(0,eU.n)(t)&&T(!0)},[y,t]);let k=(0,l.object)({SMTP_ADMIN_EMAIL:(0,l.string)().when([],{is:()=>S,then:e=>e.email("Must be a valid email").required("Sender email is required"),otherwise:e=>e}),SMTP_SENDER_NAME:(0,l.string)().when([],{is:()=>S,then:e=>e.required("Sender name is required"),otherwise:e=>e}),SMTP_HOST:(0,l.string)().when([],{is:()=>S,then:e=>e.matches((0,eD.y)({excludeSimpleDomains:!1}),"Must be a valid URL or IP address").required("Host URL is required."),otherwise:e=>e}),SMTP_PORT:(0,l.number)().when([],{is:()=>S,then:e=>e.required("Port number is required.").min(1,"Must be a valid port number more than 0").max(65535,"Must be a valid port number no more than 65535"),otherwise:e=>e}),SMTP_MAX_FREQUENCY:(0,l.number)().when([],{is:()=>S,then:e=>e.required("Rate limit is required.").min(1,"Must be more than 0").max(32767,"Must not be more than 32,767 an hour"),otherwise:e=>e}),SMTP_USER:(0,l.string)().when([],{is:()=>S,then:e=>e.required("SMTP Username is required"),otherwise:e=>e}),SMTP_PASS:(0,l.string)().when([],{is:()=>S&&(null==t?void 0:t.SMTP_PASS)===null,then:e=>e.required("SMTP password is required"),otherwise:e=>e})});return g?(0,a.jsxs)(D.bZ,{variant:"destructive",children:[(0,a.jsx)(L.aN,{}),(0,a.jsx)(D.Cd,{children:"Failed to retrieve auth configuration"}),(0,a.jsx)(D.X,{children:s.message})]}):O?(0,a.jsx)(U.Z,{id:I,initialValues:M,onSubmit:(t,s)=>{let{resetForm:a}=s,n=S?t:eL;delete n.ENABLE_SMTP,n.SMTP_PORT=n.SMTP_PORT?n.SMTP_PORT.toString():n.SMTP_PORT,""===n.SMTP_PASS&&delete n.SMTP_PASS,b({projectRef:e,config:n},{onError:e=>{i.Am.error("Failed to update settings: ".concat(e.message))},onSuccess:()=>{A(!0),i.Am.success("Successfully updated settings");let e=(0,eU.F)(n);a({values:e,initialValues:e})}})},validationSchema:k,"data-sentry-element":"Form","data-sentry-component":"SmtpForm","data-sentry-source-file":"SmtpForm.tsx",children:s=>{let{resetForm:n,values:i}=s,l=(0,eU.n)(i),o=JSON.stringify(i)!==JSON.stringify(M);return(0,r.useEffect)(()=>{if(y){let e=(0,eU.F)(t);n({values:e,initialValues:e})}},[y,t]),(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(c.p,{title:"SMTP Settings",description:"You can use your own SMTP server instead of the built-in email service."}),(0,a.jsxs)(u.by,{footer:(0,a.jsx)("div",{className:"flex py-4 px-8",children:(0,a.jsx)(d.i,{form:I,isSubmitting:v,hasChanges:o,handleReset:()=>{T((0,eU.n)(M)),n({values:M})},disabled:!F,helper:F?void 0:"You need additional permissions to update authentication settings"})}),children:[(0,a.jsx)(m.hj,{children:(0,a.jsxs)(m.B4,{className:"!col-span-12 !gap-y-2",loading:p,children:[(0,a.jsx)(P.Z,{size:"small",layout:"flex",name:"ENABLE_SMTP",label:"Enable Custom SMTP",checked:S,disabled:!F,onChange:e=>T(e),descriptionText:(0,a.jsxs)("p",{className:"max-w-full prose text-sm text-foreground-lighter",children:["Emails will be sent using your custom SMTP provider. Email rate limits can be adjusted"," ",(0,a.jsx)(Y(),{className:"underline",href:"/project/".concat(e,"/auth/rate-limits"),children:"here"}),"."]})}),S?!l&&(0,a.jsx)("div",{className:"",children:(0,a.jsxs)(D.bZ,{variant:"warning",children:[(0,a.jsx)(eF.Z,{strokeWidth:2}),(0,a.jsx)(D.Cd,{children:"All fields below must be filled"}),(0,a.jsx)(D.X,{children:"The following fields must be filled before custom SMTP can be properly enabled"})]})}):(0,a.jsx)("div",{className:"",children:(0,a.jsx)(eb,{})})]})}),(0,a.jsx)(m.hj,{visible:S,header:(0,a.jsx)(m.S0,{children:"Sender details"}),disabled:!S,children:(0,a.jsxs)(m.B4,{loading:p,children:[(0,a.jsx)(w.Z,{name:"SMTP_ADMIN_EMAIL",id:"SMTP_ADMIN_EMAIL",label:"Sender email",descriptionText:"This is the email address the emails are sent from",placeholder:"noreply@yourdomain.com",disabled:!F}),(0,a.jsx)(w.Z,{name:"SMTP_SENDER_NAME",id:"SMTP_SENDER_NAME",label:"Sender name",descriptionText:"Name displayed in the recipient's inbox",placeholder:"The name shown on the email",disabled:!F})]})}),(0,a.jsx)(m.hj,{visible:S,disabled:!S,header:(0,a.jsxs)(m.S0,{children:[(0,a.jsx)("span",{children:"SMTP Provider Settings"}),(0,a.jsx)("p",{className:"my-4 text-foreground-lighter",children:"Your SMTP Credentials will always be encrypted in our database."})]}),children:(0,a.jsxs)(m.B4,{loading:p,children:[i.SMTP_HOST&&i.SMTP_HOST.endsWith(".gmail.com")&&(0,a.jsxs)(D.bZ,{variant:"warning",children:[(0,a.jsx)(eF.Z,{strokeWidth:2}),(0,a.jsx)(D.Cd,{children:"Check your SMTP provider"}),(0,a.jsx)(D.X,{children:"Not all SMTP providers are designed for the email sending required by Supabase Auth. It looks like the SMTP provider you entered is designed for sending personal email messages and not for sending transactional messages. Although you can ignore this warning, email deliverability may be impacted."})]}),(0,a.jsx)(w.Z,{name:"SMTP_HOST",placeholder:"your.smtp.host.com",id:"SMTP_HOST",label:"Host",descriptionText:"Hostname or IP address of your SMTP server.",disabled:!F}),(0,a.jsx)(R.Z,{name:"SMTP_PORT",id:"SMTP_PORT",placeholder:"587",label:"Port number",descriptionText:(0,a.jsxs)(a.Fragment,{children:[(0,a.jsxs)("span",{className:"block",children:["Port used by your SMTP server. Common ports include 25, 465, and 587."," "]}),(0,a.jsx)("span",{className:"mt-2 block",children:"Avoid using port 25 as modern SMTP email clients shouldn't use this port, it is traditionally blocked by residential ISPs and Cloud Hosting Providers, to curb the amount of spam."})]}),disabled:!F}),(0,a.jsx)(R.Z,{id:"SMTP_MAX_FREQUENCY",name:"SMTP_MAX_FREQUENCY",label:"Minimum interval between emails being sent",descriptionText:"How long between each email can a new email be sent via your SMTP server.",actions:(0,a.jsx)("span",{className:"mr-3 text-foreground-lighter",children:"seconds"}),disabled:!F}),(0,a.jsx)(w.Z,{name:"SMTP_USER",id:"SMTP_USER",label:"Username",placeholder:"SMTP Username",disabled:!F}),(0,a.jsx)(w.Z,{name:"SMTP_PASS",id:"SMTP_PASS",type:_?"password":"text",label:"Password",placeholder:(null==t?void 0:t.SMTP_PASS)===null?"SMTP Password":"••••••••",actions:(0,a.jsx)(C.z,{icon:_?(0,a.jsx)(E.Z,{}):(0,a.jsx)(N.Z,{}),type:"default",onClick:()=>A(!_)}),disabled:!F,descriptionText:(0,a.jsx)("span",{children:"For security reasons, the password is write-only. Once saved, it cannot be retrieved or displayed."})})]})})]})]})}}):(0,a.jsx)(h.Z,{resourceText:"view SMTP settings"})},eZ=s(52675),eB=s(36457);let eH=e=>["auth",e,"third-party-auth"];async function ez(e){let{projectRef:t,tpaId:s}=e,{data:a,error:n}=await (0,e_.IV)("/v1/projects/{ref}/config/auth/third-party-auth/{tpa_id}",{params:{path:{ref:t,tpa_id:s}}});return n&&(0,e_.S3)(n),a}let eV=function(){let{onSuccess:e,onError:t,...s}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},a=(0,eB.NL)();return(0,eT.D)(e=>ez(e),{async onSuccess(t,s,n){let{projectRef:r}=s;await a.invalidateQueries(eH(r)),await (null==e?void 0:e(t,s,n))},async onError(e,s,a){void 0===t?i.Am.error("Failed to delete third party auth integration: ".concat(e.message)):t(e,s,a)},...s})};var eY=s(28894);async function eW(e,t){let{projectRef:s}=e;if(!s)throw Error("projectRef is required");let{data:a,error:n}=await (0,e_.U2)("/v1/projects/{ref}/config/auth/third-party-auth",{params:{path:{ref:s}},signal:t});return n&&(0,e_.S3)(n),a}let eX=function(e){let{projectRef:t}=e,{enabled:s=!0,...a}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return(0,eY.a)(eH(t),e=>{let{signal:s}=e;return eW({projectRef:t},s)},{enabled:s&&void 0!==t,...a})};var eq=s(32002),eG=s(98601),eK=s(51650),eJ=s.n(eK),eQ=s(14500);let e$=e=>(null==e?void 0:e.oidc_issuer_url)&&(null==e?void 0:e.oidc_issuer_url.startsWith("https://securetoken.google.com/"))?"firebase":(null==e?void 0:e.oidc_issuer_url)&&(null==e?void 0:e.oidc_issuer_url.includes("amazonaws.com"))?"awsCognito":(null==e?void 0:e.oidc_issuer_url)&&(null==e?void 0:e.oidc_issuer_url.includes("auth0.com"))?"auth0":"custom",e0=e=>{switch(e){case"firebase":return"Firebase";case"auth0":return"Auth0";case"awsCognito":return"Amazon Cognito";default:return"Custom"}},e1=e=>{switch(e){case"firebase":return"".concat(b.GW,"/img/icons/firebase-icon.svg");case"auth0":return"".concat(b.GW,"/img/icons/auth0-icon.svg");default:return"".concat(b.GW,"/img/icons/cognito-icon.svg")}},e2=e=>{let{disabled:t,type:s,onSelectIntegrationType:n}=e;return(0,a.jsxs)(eQ.Xi,{onClick:()=>n(s),className:(0,eC.cn)("flex items-center gap-x-2 p-2",t&&"cursor-not-allowed"),disabled:t,"data-sentry-element":"DropdownMenuItem","data-sentry-component":"ProviderDropdownItem","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:[(0,a.jsx)(eJ(),{src:e1(s),width:16,height:16,alt:"".concat(s," icon"),"data-sentry-element":"Image","data-sentry-source-file":"AddIntegrationDropdown.tsx"}),(0,a.jsx)("span",{children:e0(s)})]},s)},e4=e=>{let{onSelectIntegrationType:t}=e,s=(0,y.l)(),{data:n}=(0,g.Gl)({orgSlug:null==s?void 0:s.slug},{enabled:o.Qy});return(0,a.jsxs)(eQ.h_,{modal:!1,"data-sentry-element":"DropdownMenu","data-sentry-component":"AddIntegrationDropdown","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:[(0,a.jsx)(eQ.$F,{asChild:!0,"data-sentry-element":"DropdownMenuTrigger","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:(0,a.jsx)(C.z,{type:"primary",iconRight:(0,a.jsx)(eG.Z,{size:14,strokeWidth:1}),"data-sentry-element":"Button","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:"Add provider"})}),(0,a.jsxs)(eQ.AW,{align:"end",className:"w-56","data-sentry-element":"DropdownMenuContent","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:[(0,a.jsx)(eQ.Ju,{"data-sentry-element":"DropdownMenuLabel","data-sentry-source-file":"AddIntegrationDropdown.tsx",children:"Select Provider"}),(0,a.jsx)(eQ.VD,{"data-sentry-element":"DropdownMenuSeparator","data-sentry-source-file":"AddIntegrationDropdown.tsx"}),(0,a.jsx)(e2,{type:"firebase",onSelectIntegrationType:t,"data-sentry-element":"ProviderDropdownItem","data-sentry-source-file":"AddIntegrationDropdown.tsx"}),(null==n?void 0:n.plan.id)==="free"?(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(eQ.VD,{}),(0,a.jsxs)("div",{className:"bg-surface-200 -m-1 p-2",children:[(0,a.jsxs)(eQ.Ju,{className:"grid gap-1",children:[(0,a.jsx)("p",{className:"text-foreground-light",children:"Unavailable on the Free plan"}),(0,a.jsxs)("p",{className:"text-foreground-lighter text-xs",children:[(0,a.jsx)(Y(),{target:"_href",rel:"noreferrer",className:"underline hover:text-foreground-light transition",href:"/org/".concat(null==s?void 0:s.slug,"/billing"),children:"Upgrade your plan"})," ","to add the following providers to your project."]})]}),(0,a.jsx)(e2,{disabled:!0,type:"auth0",onSelectIntegrationType:t}),(0,a.jsx)(e2,{disabled:!0,type:"awsCognito",onSelectIntegrationType:t})]})]}):(0,a.jsxs)(a.Fragment,{children:[(0,a.jsx)(e2,{type:"auth0",onSelectIntegrationType:t}),(0,a.jsx)(e2,{type:"awsCognito",onSelectIntegrationType:t})]})]})]})};var e3=s(78751),e5=(s(74304),s(86848)),e6=s(5394);async function e9(e){let{projectRef:t,customJwks:s,jwksUrl:a,oidcIssuerUrl:n}=e,{data:r,error:i}=await (0,e_.v_)("/v1/projects/{ref}/config/auth/third-party-auth",{params:{path:{ref:t}},body:{custom_jwks:s,jwks_url:a,oidc_issuer_url:n}});return i&&(0,e_.S3)(i),r}let e8=function(){let{onSuccess:e,onError:t,...s}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},a=(0,eB.NL)();return(0,eT.D)(e=>e9(e),{async onSuccess(t,s,n){let{projectRef:r}=s;await a.invalidateQueries(eH(r)),await (null==e?void 0:e(t,s,n))},async onError(e,s,a){void 0===t?i.Am.error("Failed to create third party auth integration: ".concat(e.message)):t(e,s,a)},...s})};var e7=s(36210),te=s(49142),tt=s(56740),ts=s(78366);let ta="create-auth0-auth-integration-form",tn=e6.Ry({enabled:e6.O7(),auth0DomainName:e6.Z_().trim().min(1).regex(/^[A-Za-z0-9-.]+$/,"Project IDs should only have alphanumeric characters and hyphens.")}),tr=e=>{let{visible:t,onClose:s,onDelete:n}=e,{ref:l}=(0,o.UO)(),{mutate:d,isLoading:c}=e8({onSuccess:()=>{i.Am.success("Successfully created a new Auth0 Auth integration."),s()}}),u=(0,e5.cI)({resolver:(0,e3.F)(tn),defaultValues:{enabled:!0,auth0DomainName:""}});(0,r.useEffect)(()=>{t&&(u.reset({enabled:!0,auth0DomainName:""}),setTimeout(()=>{u.setFocus("auth0DomainName")},25))},[t]);let m=async e=>{d({projectRef:l,oidcIssuerUrl:"https://".concat(e.auth0DomainName,".auth0.com")})};return(0,a.jsx)(e7.Vq,{open:t,onOpenChange:()=>s(),"data-sentry-element":"Dialog","data-sentry-component":"CreateAuth0IntegrationDialog","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:(0,a.jsxs)(e7.cZ,{"data-sentry-element":"DialogContent","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:[(0,a.jsx)(e7.fK,{"data-sentry-element":"DialogHeader","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:(0,a.jsx)(e7.$N,{className:"truncate","data-sentry-element":"DialogTitle","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:"Add new Auth0 connection"})}),(0,a.jsx)(eP.Z,{"data-sentry-element":"Separator","data-sentry-source-file":"CreateAuth0Dialog.tsx"}),(0,a.jsx)(e7.VO,{"data-sentry-element":"DialogSection","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:(0,a.jsx)(te.l0,{...u,"data-sentry-element":"Form_Shadcn_","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:(0,a.jsxs)("form",{id:ta,onSubmit:u.handleSubmit(m),className:"space-y-4",children:[(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"This will enable a JWT token from your Auth0 project to access data from this Supabase project."}),(0,a.jsx)(te.Wi,{control:u.control,name:"auth0DomainName",render:e=>{let{field:t}=e;return(0,a.jsx)(ts.E,{label:"Auth0 domain name",children:(0,a.jsxs)("div",{className:"flex flex-row",children:[(0,a.jsx)(C.z,{type:"default",size:"small",className:"px-2 text-foreground-light rounded-r-none",onClick:()=>u.setFocus("auth0DomainName"),children:"https://"}),(0,a.jsx)(te.NI,{children:(0,a.jsx)(tt.I,{className:"border-l-0 rounded-none border-r-0 z-50",...t})}),(0,a.jsx)(C.z,{type:"default",size:"small",className:"px-2 text-foreground-light rounded-l-none",onClick:()=>u.setFocus("auth0DomainName"),children:".auth0.com"})]})})},"data-sentry-element":"FormField_Shadcn_","data-sentry-source-file":"CreateAuth0Dialog.tsx"},"auth0DomainName")]})})}),(0,a.jsxs)(e7.cN,{"data-sentry-element":"DialogFooter","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:[!1,(0,a.jsx)(C.z,{disabled:c,type:"default",onClick:()=>s(),"data-sentry-element":"Button","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:"Cancel"}),(0,a.jsx)(C.z,{form:ta,htmlType:"submit",disabled:c,loading:c,"data-sentry-element":"Button","data-sentry-source-file":"CreateAuth0Dialog.tsx",children:"Create connection"})]})]})})};var ti=s(50416),tl=s(42026),to=s(47482),td=s(64890);let tc=["af-south-1","ap-northeast-1","ap-northeast-2","ap-northeast-3","ap-south-1 ","ap-south-2 ","ap-southeast-1","ap-southeast-2","ap-southeast-3","ap-southeast-4","ca-central-1","eu-central-1","eu-central-2","eu-north-1","eu-south-1","eu-south-2","eu-west-1","eu-west-2","eu-west-3","il-central-1","me-central-1","me-south-1","sa-east-1","us-east-1","us-east-2","us-gov-west-1","us-west-1","us-west-2"],tu=e=>{let{value:t,onChange:s}=e,[n,i]=(0,r.useState)(!1);return(0,a.jsxs)(tl.J2,{open:n,onOpenChange:i,"data-sentry-element":"Popover_Shadcn_","data-sentry-component":"AwsRegionSelector","data-sentry-source-file":"AwsRegionSelector.tsx",children:[(0,a.jsx)(tl.xo,{asChild:!0,"data-sentry-element":"PopoverTrigger_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:(0,a.jsx)(te.NI,{"data-sentry-element":"FormControl_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:(0,a.jsx)(C.z,{type:"default",role:"combobox",className:(0,eC.cn)("w-full justify-between",!t&&"text-muted-foreground"),size:"small",iconRight:(0,a.jsx)(ti.Z,{className:"ml-2 h-4 w-4 shrink-0 opacity-50",strokeWidth:1}),"data-sentry-element":"Button","data-sentry-source-file":"AwsRegionSelector.tsx",children:null!=t?t:"Select a region"})})}),(0,a.jsx)(tl.yk,{className:"p-0",sameWidthAsTrigger:!0,"data-sentry-element":"PopoverContent_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:(0,a.jsxs)(to.mY,{"data-sentry-element":"Command_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:[(0,a.jsx)(to.sZ,{placeholder:"Search AWS regions...","data-sentry-element":"CommandInput_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx"}),(0,a.jsxs)(to.e8,{"data-sentry-element":"CommandList_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:[(0,a.jsx)(to.rb,{"data-sentry-element":"CommandEmpty_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:"No regions found."}),(0,a.jsx)(to.fu,{"data-sentry-element":"CommandGroup_Shadcn_","data-sentry-source-file":"AwsRegionSelector.tsx",children:(0,a.jsx)(td.x,{className:"h-72","data-sentry-element":"ScrollArea","data-sentry-source-file":"AwsRegionSelector.tsx",children:tc.map(e=>(0,a.jsxs)(to.di,{value:e,onSelect:e=>{s(e===t?"":e),i(!1)},children:[(0,a.jsx)(K.Z,{className:(0,eC.cn)("mr-2 h-4 w-4",e===t?"opacity-100":"opacity-0")}),e]},e))})})]})]})})]})},tm="create-aws-cognito-auth-integration-form",th=e6.Ry({enabled:e6.O7(),awsCognitoUserPoolId:e6.Z_().trim().min(1).regex(/^[A-Za-z0-9-_]+$/,"The project ID contains invalid characters."),awsRegion:e6.Z_()}),tp=e=>{let{visible:t,onClose:s,onDelete:n}=e,{ref:l}=(0,o.UO)(),{mutate:d,isLoading:c}=e8({onSuccess:()=>{i.Am.success("Successfully created a new Amazon Cognito Auth integration."),s()}}),u=(0,e5.cI)({resolver:(0,e3.F)(th),defaultValues:{enabled:!0,awsCognitoUserPoolId:"",awsRegion:"us-east-1"}});(0,r.useEffect)(()=>{t&&(u.reset({enabled:!0,awsCognitoUserPoolId:"",awsRegion:"us-east-1"}),setTimeout(()=>{u.setFocus("awsCognitoUserPoolId")},25))},[t]);let m=async e=>{d({projectRef:l,oidcIssuerUrl:"https://cognito-idp.".concat(e.awsRegion,".amazonaws.com/").concat(e.awsCognitoUserPoolId)})},h=u.watch("awsRegion");return(0,a.jsx)(e7.Vq,{open:t,onOpenChange:()=>s(),"data-sentry-element":"Dialog","data-sentry-component":"CreateAwsCognitoAuthIntegrationDialog","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:(0,a.jsxs)(e7.cZ,{size:"large","data-sentry-element":"DialogContent","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:[(0,a.jsxs)(e7.fK,{"data-sentry-element":"DialogHeader","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:[(0,a.jsx)(e7.$N,{className:"truncate","data-sentry-element":"DialogTitle","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:"Add new Amazon Cognito Auth connection"}),(0,a.jsx)(e7.Be,{"data-sentry-element":"DialogDescription","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:"By adding an Amazon Cognito Auth connection, you can authenticate users using Amazon Cognito User Pools."})]}),(0,a.jsx)(eP.Z,{"data-sentry-element":"Separator","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx"}),(0,a.jsx)(e7.VO,{"data-sentry-element":"DialogSection","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:(0,a.jsx)(te.l0,{...u,"data-sentry-element":"Form_Shadcn_","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:(0,a.jsxs)("form",{id:tm,onSubmit:u.handleSubmit(m),className:"space-y-4",children:[(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"This will enable a JWT token from Amazon Cognito project to access data from this Supabase project."}),(0,a.jsx)(te.Wi,{control:u.control,name:"awsCognitoUserPoolId",render:e=>{let{field:t}=e;return(0,a.jsx)(ts.E,{label:"Amazon Cognito User Pool ID",children:(0,a.jsxs)("div",{className:"flex flex-row",children:[(0,a.jsxs)(C.z,{type:"default",size:"small",className:"px-2 text-foreground-light rounded-r-none",onClick:()=>u.setFocus("awsCognitoUserPoolId"),children:["https://cognito-idp.",h,".amazonaws.com/"]}),(0,a.jsx)(te.NI,{children:(0,a.jsx)(tt.I,{className:"rounded-l-none border-l-0 z-50",...t})})]})})},"data-sentry-element":"FormField_Shadcn_","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx"},"awsCognitoUserPoolId"),(0,a.jsx)(te.Wi,{control:u.control,name:"awsRegion",render:e=>{let{field:t}=e;return(0,a.jsx)(ts.E,{label:"AWS Region",children:(0,a.jsx)(tu,{value:t.value,onChange:t.onChange})})},"data-sentry-element":"FormField_Shadcn_","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx"})]})})}),(0,a.jsxs)(e7.cN,{"data-sentry-element":"DialogFooter","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:[!1,(0,a.jsx)(C.z,{disabled:c,type:"default",onClick:()=>s(),"data-sentry-element":"Button","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:"Cancel"}),(0,a.jsx)(C.z,{form:tm,htmlType:"submit",disabled:c,loading:c,"data-sentry-element":"Button","data-sentry-source-file":"CreateAwsCognitoAuthDialog.tsx",children:"Create connection"})]})]})})},tx="create-firebase-auth-integration-form",tf=e6.Ry({enabled:e6.O7(),firebaseProjectId:e6.Z_().trim().min(1).regex(/^[A-Za-z0-9-]+$/,"The project ID contains invalid characters.")}),tg=e=>{let{visible:t,onClose:s,onDelete:n}=e,{ref:l}=(0,o.UO)(),{mutate:d,isLoading:c}=e8({onSuccess:()=>{i.Am.success("Successfully created a new Firebase Auth integration."),s()}}),u=(0,e5.cI)({resolver:(0,e3.F)(tf),defaultValues:{enabled:!0,firebaseProjectId:""}});(0,r.useEffect)(()=>{t&&(u.reset({enabled:!0,firebaseProjectId:""}),setTimeout(()=>{u.setFocus("firebaseProjectId")},25))},[t]);let m=async e=>{d({projectRef:l,oidcIssuerUrl:"https://securetoken.google.com/".concat(e.firebaseProjectId)})};return(0,a.jsx)(e7.Vq,{open:t,onOpenChange:()=>s(),"data-sentry-element":"Dialog","data-sentry-component":"CreateFirebaseAuthIntegrationDialog","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:(0,a.jsxs)(e7.cZ,{"data-sentry-element":"DialogContent","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:[(0,a.jsx)(e7.fK,{"data-sentry-element":"DialogHeader","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:(0,a.jsx)(e7.$N,{className:"truncate","data-sentry-element":"DialogTitle","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:"Add new Firebase Auth connection"})}),(0,a.jsx)(eP.Z,{"data-sentry-element":"Separator","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx"}),(0,a.jsx)(e7.VO,{"data-sentry-element":"DialogSection","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:(0,a.jsx)(te.l0,{...u,"data-sentry-element":"Form_Shadcn_","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:(0,a.jsxs)("form",{id:tx,onSubmit:u.handleSubmit(m),className:"space-y-4",children:[(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"This will enable a JWT token from a specific Firebase project to access data from this Supabase project."}),(0,a.jsx)(te.Wi,{control:u.control,name:"firebaseProjectId",render:e=>{let{field:t}=e;return(0,a.jsx)(ts.E,{label:"Firebase Auth Project ID",children:(0,a.jsx)(te.NI,{children:(0,a.jsx)(tt.I,{...t})})})},"data-sentry-element":"FormField_Shadcn_","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx"},"firebaseProjectId")]})})}),(0,a.jsxs)(e7.cN,{"data-sentry-element":"DialogFooter","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:[!1,(0,a.jsx)(C.z,{disabled:c,type:"default",onClick:()=>s(),"data-sentry-element":"Button","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:"Cancel"}),(0,a.jsx)(C.z,{form:tx,htmlType:"submit",disabled:c,loading:c,"data-sentry-element":"Button","data-sentry-source-file":"CreateFirebaseAuthDialog.tsx",children:"Create connection"})]})]})})};var tj=s(73565);let ty=e=>{switch(e){case"firebase":return(0,a.jsxs)(a.Fragment,{children:["Allow users to use Supabase with Firebase project. You'll need to setup RLS policies for all tables that you want to access with a Firebase JWT token. Additionally, you'll need to add custom code to set the ",(0,a.jsx)("code",{children:"authenticated"})," role to all your present and future users. You can read more in the"," ",(0,a.jsx)("a",{className:"hover:decoration-brand underline hover:text-foreground transition",href:"https://supabase.com/docs/guides/auth",children:"documentation"}),"."]});case"auth0":return(0,a.jsxs)(a.Fragment,{children:["Allow users to use Supabase with Auth0 project. Additional setup may be required. You can read more in the"," ",(0,a.jsx)("a",{className:"hover:decoration-brand underline hover:text-foreground transition",href:"https://supabase.com/docs/guides/auth",children:"documentation"}),"."]});case"awsCognito":return(0,a.jsxs)(a.Fragment,{children:["Allow users to use Supabase with an Amazon Cognito. Additional setup may be required. You can read more in the"," ",(0,a.jsx)("a",{className:"hover:decoration-brand underline hover:text-foreground transition",href:"https://supabase.com/docs/guides/auth/third-party/aws-cognito",children:"documentation"}),"."]});default:return"Custom"}},tb=e=>{var t,s,n,r;let{type:i,integration:l}=e;switch(i){case"firebase":{let e=(null===(t=l.oidc_issuer_url)||void 0===t?void 0:t.replace("https://securetoken.google.com/",""))||"";return(0,a.jsxs)("div",{className:"text-sm flex flex-row gap-x-4",children:[(0,a.jsx)("span",{className:"text-foreground-light w-36",children:"Firebase Project ID"}),(0,a.jsx)("span",{className:"text-foreground",children:e})]})}case"auth0":let o=(null===(s=l.oidc_issuer_url)||void 0===s?void 0:s.replace("https://","").replace(".auth0.com",""))||"";return(0,a.jsxs)("div",{className:"text-sm flex flex-row gap-x-4",children:[(0,a.jsx)("span",{className:"text-foreground-light w-36",children:"Auth0 Domain Name"}),(0,a.jsx)("span",{className:"text-foreground",children:o})]});case"awsCognito":{let e=(null===(n=l.oidc_issuer_url)||void 0===n?void 0:n.split(".").filter(e=>tc.includes(e))[0])||"",t=(null===(r=l.oidc_issuer_url)||void 0===r?void 0:r.split("/").filter(t=>t.startsWith(e||""))[0])||"";return(0,a.jsxs)("div",{className:"text-sm flex flex-col gap-y-2",children:[(0,a.jsxs)("div",{className:"flex flex-row gap-x-4",children:[(0,a.jsx)("span",{className:"text-foreground-light w-36",children:"Region"}),(0,a.jsx)("span",{className:"text-foreground",children:e})]}),(0,a.jsxs)("div",{className:"flex flex-row gap-x-4",children:[(0,a.jsx)("span",{className:"text-foreground-light w-36",children:"User Pool ID"}),(0,a.jsx)("span",{className:"text-foreground",children:t})]})]})}default:return(0,a.jsx)(a.Fragment,{children:"Custom"})}},tv=e=>{let{integration:t,canUpdateConfig:s,onDelete:n}=e,{ref:r}=(0,o.UO)(),i=e$(t);return"custom"===i?null:(0,a.jsx)(a.Fragment,{children:(0,a.jsxs)("div",{className:"bg-surface-100 border overflow-hidden shadow px-5 py-4 flex flex-row first:rounded-t-md last:rounded-b-md space-x-4",children:[(0,a.jsx)("div",{className:"py-1",children:(0,a.jsx)(eJ(),{src:e1(i),width:21,height:21,alt:"".concat(i," icon"),"data-sentry-element":"Image","data-sentry-source-file":"IntegrationCard.tsx"})}),(0,a.jsxs)("div",{className:"flex flex-col flex-0 overflow-y-auto w-full gap-y-4",children:[(0,a.jsxs)("div",{className:"text-sm flex flex-col",children:[(0,a.jsx)("span",{className:"text-foreground",children:e0(i)}),(0,a.jsx)("div",{className:"text-foreground-lighter",children:ty(i)})]}),(0,a.jsx)(tb,{type:i,integration:t,"data-sentry-element":"IntegrationTypeContent","data-sentry-source-file":"IntegrationCard.tsx"}),(0,a.jsx)("div",{children:(0,a.jsx)(C.z,{type:"danger",disabled:!s,onClick:()=>n(),"data-sentry-element":"Button","data-sentry-source-file":"IntegrationCard.tsx",children:"Delete integration"})})]}),(0,a.jsx)("div",{className:"flex-1",children:(0,a.jsxs)(tj.C,{className:"space-x-1",size:"large",variant:"brand",children:[(0,a.jsx)("div",{className:"h-3.5 w-3.5 bg-brand rounded-full flex justify-center items-center",children:(0,a.jsx)(K.Z,{className:"h-2 w-2 text-background-overlay",strokeWidth:6})}),(0,a.jsx)("span",{children:"Enabled"})]})})]})})},tS=()=>{let{ref:e}=(0,o.UO)(),{data:t,isLoading:s,isError:l,isSuccess:d,error:u}=eX({projectRef:e}),m=t||[],[h,p]=(0,r.useState)(),[x,f]=(0,r.useState)(),{mutateAsync:g}=eV(),y=(0,j.Xo)(n.KA.UPDATE,"custom_config_gotrue");return l?(0,a.jsx)(em.Z,{error:u,subject:"Failed to retrieve auth configuration for Third Party Auth Integrations"}):(0,a.jsxs)("div",{className:"pb-4","data-sentry-component":"ThirdPartyAuthForm","data-sentry-source-file":"index.tsx",children:[(0,a.jsx)(c.p,{title:"Third Party Auth",className:"mb-1",description:"Use third-party authentication (TPA) systems based on JWTs to access your project.",actions:0!==m.length?(0,a.jsx)(e4,{onSelectIntegrationType:p}):null,docsUrl:"https://supabase.com/docs/guides/auth/third-party/overview","data-sentry-element":"FormHeader","data-sentry-source-file":"index.tsx"}),(0,a.jsxs)("div",{className:"prose text-sm mb-6 max-w-full",children:[(0,a.jsxs)("span",{children:["Billing is based on the number of monthly active users (MAUs) requesting your API throughout the billing period (50 included then you'll be charged"," "]}),(0,a.jsx)("span",{className:"text-brand",children:"$0.00325"}),(0,a.jsx)("span",{children:" per MAU)."})]}),s&&(0,a.jsx)("div",{className:(0,eC.cn)("border rounded border-default px-20 py-16 flex flex-col items-center justify-center space-y-4"),children:(0,a.jsx)(eZ.Z,{size:24,className:"animate-spin"})}),d?0===m.length?(0,a.jsxs)("div",{className:(0,eC.cn)("border rounded border-default px-20 py-16 flex flex-col items-center justify-center space-y-4"),children:[(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"No providers configured yet"}),(0,a.jsx)(e4,{buttonText:"Add a new integration",onSelectIntegrationType:p})]}):(0,a.jsx)("div",{className:"-space-y-px",children:m.map(e=>(0,a.jsx)(tv,{integration:e,canUpdateConfig:y,onDelete:()=>{f(e)}},e.id))}):null,(0,a.jsx)(tg,{visible:"firebase"===h,onDelete:()=>{},onClose:()=>p(void 0),"data-sentry-element":"CreateFirebaseAuthIntegrationDialog","data-sentry-source-file":"index.tsx"}),(0,a.jsx)(tp,{visible:"awsCognito"===h,onDelete:()=>{},onClose:()=>p(void 0),"data-sentry-element":"CreateAwsCognitoAuthIntegrationDialog","data-sentry-source-file":"index.tsx"}),(0,a.jsx)(tr,{visible:"auth0"===h,onDelete:()=>{},onClose:()=>p(void 0),"data-sentry-element":"CreateAuth0IntegrationDialog","data-sentry-source-file":"index.tsx"}),(0,a.jsx)(eq.Z,{visible:!!x,variant:"destructive",title:"Confirm to delete",confirmLabel:"Delete",confirmLabelLoading:"Deleting",onCancel:()=>f(void 0),onConfirm:async()=>{if(!x)return;let t=e$(x);try{await g({projectRef:e,tpaId:x.id}),i.Am.success("Successfully deleted ".concat(e0(t),".")),f(void 0),p(void 0)}catch(e){i.Am.error("Failed to delete ".concat(e0(t),".")),console.error(e)}},"data-sentry-element":"ConfirmationModal","data-sentry-source-file":"index.tsx",children:(0,a.jsx)("p",{className:"py-4 text-sm text-foreground-light",children:"Are you sure you want to delete the ".concat(e0(e$(x))," integration?")})})]})}},59461:function(e,t,s){"use strict";s.d(t,{i:function(){return r}});var a=s(97458),n=s(90839);let r=e=>{let{form:t,hasChanges:s,handleReset:r,helper:i,disabled:l=!1,isSubmitting:o,submitText:d="Save"}=e,c=o||l||!s&&void 0!==s;return(0,a.jsxs)("div",{className:["flex w-full items-center gap-2",i?"justify-between":"justify-end"].join(" "),"data-sentry-component":"FormActions","data-sentry-source-file":"FormActions.tsx",children:[i&&(0,a.jsx)("span",{className:"text-sm text-foreground-lighter",children:i}),(0,a.jsxs)("div",{className:"flex items-center gap-2",children:[(0,a.jsx)(n.z,{disabled:c,type:"default",htmlType:"reset",onClick:()=>r(),"data-sentry-element":"Button","data-sentry-source-file":"FormActions.tsx",children:"Cancel"}),(0,a.jsx)(n.z,{form:t,type:"primary",htmlType:"submit",disabled:c,loading:o,"data-sentry-element":"Button","data-sentry-source-file":"FormActions.tsx",children:d})]})]})}},87696:function(e,t,s){"use strict";s.d(t,{DO:function(){return d},Tq:function(){return l},by:function(){return i},iL:function(){return o},m9:function(){return c}});var a=s(97458),n=s(52983),r=s(65092);let i=e=>{let{children:t,header:s,footer:n}=e;return(0,a.jsxs)(l,{"data-sentry-element":"FormPanelContainer","data-sentry-component":"FormPanel","data-sentry-source-file":"FormPanel.tsx",children:[s&&(0,a.jsx)(o,{children:s}),(0,a.jsx)(d,{className:"divide-y","data-sentry-element":"FormPanelContent","data-sentry-source-file":"FormPanel.tsx",children:t}),n&&(0,a.jsx)(c,{children:n})]})},l=(0,n.forwardRef)((e,t)=>{let{children:s,...n}=e;return(0,a.jsx)("div",{ref:t,...n,className:(0,r.cn)("bg-surface-100 border overflow-hidden rounded-md shadow max-w-full",n.className),children:s})});l.displayName=l.displayName;let o=(0,n.forwardRef)((e,t)=>{let{children:s,...n}=e;return(0,a.jsx)("div",{ref:t,...n,className:(0,r.cn)("border-default border-b px-8 py-4",n.className),children:s})});o.displayName=o.displayName;let d=(0,n.forwardRef)((e,t)=>{let{children:s,...n}=e;return(0,a.jsx)("div",{ref:t,...n,className:(0,r.cn)("divide-border flex flex-col gap-0",n.className),children:s})});d.displayName=d.displayName;let c=(0,n.forwardRef)((e,t)=>{let{children:s,...n}=e;return(0,a.jsx)("div",{ref:t,...n,className:(0,r.cn)("border-t",n.className),children:s})});c.displayName=c.displayName},46993:function(e,t,s){"use strict";s.d(t,{B4:function(){return o},S0:function(){return i},hj:function(){return r}});var a=s(97458),n=s(52983);let r=e=>{let{children:t,id:s,header:n,disabled:r,className:i}=e;return(0,a.jsxs)("div",{id:s,className:["grid grid-cols-12 gap-6 px-4 md:px-8 py-4 md:py-8","".concat(r?" opacity-30":" opacity-100"),"".concat(i)].join(" "),"data-sentry-component":"FormSection","data-sentry-source-file":"FormSection.tsx",children:[n,t]})},i=e=>{let{children:t,className:s="",description:n}=e;return void 0!==n?(0,a.jsxs)("div",{className:"flex flex-col space-y-2 col-span-12 lg:col-span-5 ".concat(s),children:[(0,a.jsx)("label",{className:"text-foreground text-sm",children:t}),n]}):(0,a.jsx)("label",{className:"text-foreground col-span-12 text-sm lg:col-span-5 ".concat(s),children:t})},l=()=>(0,a.jsxs)("div",{className:"flex w-full flex-col gap-2","data-sentry-component":"Shimmer","data-sentry-source-file":"FormSection.tsx",children:[(0,a.jsx)("div",{className:"shimmering-loader h-2 w-1/3 rounded"}),(0,a.jsx)("div",{className:"flex flex-col justify-between space-y-2",children:(0,a.jsx)("div",{className:"shimmering-loader h-[34px] w-2/3 rounded"})})]}),o=e=>{let{children:t,loading:s=!0,fullWidth:r,className:i}=e;return(0,a.jsx)("div",{className:"\n        relative col-span-12 flex flex-col gap-6 lg:col-span-7\n        ".concat(r&&"!col-span-12","\n        ").concat(i,"\n      "),"data-sentry-component":"FormSectionContent","data-sentry-source-file":"FormSection.tsx",children:s?n.Children.map(t,()=>(0,a.jsx)(l,{})):t})}},13064:function(e,t,s){"use strict";var a=s(97458),n=s(1707),r=s(38232),i=s(4839),l=s(83145),o=s.n(l),d=s(52983),c=s(90839);let u=(0,d.forwardRef)((e,t)=>{let{icon:s,title:l,description:u,url:m,urlLabel:h="Read more",defaultVisibility:p=!1,hideCollapse:x=!1,button:f,className:g="",block:j=!1}=e,[y,b]=(0,d.useState)(p);return(0,a.jsx)("div",{ref:t,role:"alert",className:"".concat(j?"block w-full":"","\n      block w-full rounded-md border bg-surface-300/25 py-3 ").concat(g),children:(0,a.jsxs)("div",{className:"flex flex-col px-4",children:[(0,a.jsxs)("div",{className:"flex items-center justify-between",children:[(0,a.jsxs)("div",{className:"flex w-full space-x-3 items-center",children:[s&&(0,a.jsx)("span",{className:"text-foreground-lighter",children:s}),(0,a.jsx)("div",{className:"flex-grow",children:(0,a.jsx)("h5",{className:"text-sm text-foreground",children:l})})]}),u&&!x?(0,a.jsx)("div",{className:"cursor-pointer text-foreground-lighter",onClick:()=>b(!y),children:y?(0,a.jsx)(n.Z,{size:14,strokeWidth:1.5}):(0,a.jsx)(r.Z,{size:14,strokeWidth:1.5})}):null]}),(u||m||f)&&(0,a.jsxs)("div",{className:"flex flex-col space-y-3 overflow-hidden transition-all ".concat(y?"mt-3":""),style:{maxHeight:y?500:0},children:[(0,a.jsx)("div",{className:"text-foreground-light text-sm",children:u}),m&&(0,a.jsx)("div",{children:(0,a.jsx)(c.z,{asChild:!0,type:"default",icon:(0,a.jsx)(i.Z,{}),children:(0,a.jsx)(o(),{href:m,target:"_blank",rel:"noreferrer",children:h})})}),f&&(0,a.jsx)("div",{children:f})]})]})})});u.displayName="InformationBox",t.Z=u},61767:function(e,t,s){"use strict";var a=s(97458),n=s(44735);t.Z=e=>{let{resourceText:t,isFullPage:s=!1}=e,r=()=>(0,a.jsx)("div",{className:"block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200","data-sentry-component":"NoPermissionMessage","data-sentry-source-file":"NoPermission.tsx",children:(0,a.jsxs)("div",{className:"flex space-x-3",children:[(0,a.jsx)("div",{className:"mt-1",children:(0,a.jsx)(n.Z,{size:20,"data-sentry-element":"AlertCircle","data-sentry-source-file":"NoPermission.tsx"})}),(0,a.jsx)("div",{className:"flex w-full items-center justify-between",children:(0,a.jsxs)("div",{className:"space-y-1",children:[(0,a.jsxs)("p",{className:"text-sm",children:["You need additional permissions to ",t]}),(0,a.jsx)("div",{children:(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"Contact your organization owner or administrator for assistance."})})]})})]})});return s?(0,a.jsx)("div",{className:"flex h-full items-center justify-center",children:(0,a.jsx)("div",{className:"w-[550px]",children:(0,a.jsx)(r,{})})}):(0,a.jsx)(r,{})}},55228:function(e,t,s){"use strict";var a=s(97458),n=s(83145),r=s.n(n),i=s(94059),l=s(73565),o=s(90839);t.Z=e=>{let{name:t="",isActive:s,isExternal:n,icon:d,rightIcon:c,url:u="",target:m="_self",onClick:h,textClassName:p="",hoverText:x="",label:f}=e,g=(0,a.jsx)(i.ZP.Item,{icon:d,rounded:!0,active:s,onClick:h,children:(0,a.jsxs)("div",{className:"flex w-full items-center justify-between gap-1",children:[(0,a.jsxs)("div",{title:x||("string"==typeof t?t:""),className:"flex items-center gap-2 truncate w-full "+p,children:[(0,a.jsxs)("span",{className:"truncate",children:[t," "]}),void 0!==f&&(0,a.jsx)(l.C,{variant:"warning",className:"py-0 px-1.5 capitalize",children:f})]}),c&&(0,a.jsx)("div",{children:c})]})});return u?n?(0,a.jsx)(o.z,{asChild:!0,block:!0,className:"!justify-start",type:"text",size:"small",icon:d,children:(0,a.jsx)(r(),{href:u,target:"_blank",rel:"noreferrer",children:t})}):(0,a.jsx)(r(),{href:u,className:"block",target:m,children:g}):g}},756:function(e,t,s){"use strict";s.d(t,{p:function(){return n}});var a=s(97458);let n=()=>(0,a.jsxs)("div",{className:"flex w-full flex-row items-center justify-between gap-2","data-sentry-component":"HorizontalShimmerWithIcon","data-sentry-source-file":"Shimmers.tsx",children:[(0,a.jsxs)("div",{className:"flex flex-row items-center gap-3",children:[(0,a.jsx)("div",{className:"shimmering-loader h-6 w-6 rounded-full"}),(0,a.jsx)("div",{className:"shimmering-loader h-2 w-32 rounded"})]}),(0,a.jsx)("div",{className:"shimmering-loader h-6 w-20 rounded"})]})},35336:function(e,t,s){"use strict";var a=s(97458),n=s(198),r=s(83145),i=s.n(r),l=s(69951),o=s(90817),d=s(75541),c=s(62432),u=s(21786),m=s(65092),h=s(90839),p=s(359);t.Z=e=>{var t,s,r;let{icon:x,primaryText:f,secondaryText:g,addon:j,buttonText:y,disabled:b=!1}=e,v=(0,c.Vm)(),S=(0,d.l)(),{data:E}=(0,l.Gl)({orgSlug:null==S?void 0:S.slug}),N=null==E?void 0:null===(t=E.plan)||void 0===t?void 0:t.id,T=(0,o.Xo)(n.KA.BILLING_WRITE,"stripe.subscriptions"),_=(0,u.P)("disableProjectCreationAndUpdate");return(0,a.jsx)("div",{className:(0,m.cn)("block w-full rounded border border-opacity-20 py-4 px-6","border-overlay bg-surface-200"),"data-sentry-component":"UpgradeToPro","data-sentry-source-file":"UpgradeToPro.tsx",children:(0,a.jsxs)("div",{className:"flex gap-x-3",children:[x&&(0,a.jsx)("div",{className:"mt-1",children:x}),(0,a.jsxs)("div",{className:"flex flex-col md:flex-row w-full md:items-center justify-between gap-4 md:gap-x-8 xl:gap-x-32",children:[(0,a.jsxs)("div",{className:"space-y-1",children:[(0,a.jsx)("p",{className:"text-sm",children:f}),(0,a.jsx)("div",{children:(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:g})})]}),!T||_?(0,a.jsx)(p.u,{disabled:!0,type:"primary",tooltip:{content:{side:"bottom",text:_?"Subscription changes are currently disabled, our engineers are working on a fix":T?void 0:"You need additional permissions to amend subscriptions"}},children:"Reset database password"}):(0,a.jsx)(h.z,{asChild:!0,type:"primary",disabled:!T||_||b,children:(0,a.jsx)(i(),{href:"free"===N?"/org/".concat(null!==(s=null==S?void 0:S.slug)&&void 0!==s?s:"_","/billing?panel=subscriptionPlan"):"/project/".concat(null!==(r=null==v?void 0:v.ref)&&void 0!==r?r:"_","/settings/addons?panel=").concat(j),children:y||("free"===N?"Upgrade to Pro":"Enable add on")})})]})]})})}},9450:function(e,t,s){"use strict";var a=s(97458),n=s(99517);s(52983);var r=s(25843);let i=e=>{let{open:t,children:s,className:r,...i}=e;return(0,a.jsx)(n.fC,{asChild:i.asChild,defaultOpen:i.defaultOpen,open:t,onOpenChange:i.onOpenChange,disabled:i.disabled,className:r,"data-sentry-element":"unknown","data-sentry-component":"Collapsible","data-sentry-source-file":"Collapsible.tsx",children:s})};i.Trigger=function(e){let{children:t,asChild:s}=e;return(0,a.jsx)(n.xz,{asChild:s,"data-sentry-element":"unknown","data-sentry-component":"Trigger","data-sentry-source-file":"Collapsible.tsx",children:t})},i.Content=function(e){let{asChild:t,children:s,className:i}=e,l=(0,r.Z)("collapsible");return(0,a.jsx)(n.VY,{asChild:t,className:[l.content,i].join(" "),"data-sentry-element":"unknown","data-sentry-component":"Content","data-sentry-source-file":"Collapsible.tsx",children:s})},t.ZP=i},19540:function(e,t,s){"use strict";s.d(t,{Z:function(){return o}});var a=s(97458),n=s(52983),r=s(68985),i=s(11499);function l(e,t){if(!t.error)return delete e[t.key],e;if(t)return{...e,[t.key]:t.error};throw Error()}function o(e){let{validate:t,...s}=e,[o,d]=(0,n.useReducer)(l,null),c=(0,r.TA)({validateOnBlur:!0,...s,validationSchema:s.validationSchema,initialValues:s.initialValues,onSubmit:s.onSubmit,validate:t||function(){return o}});return(0,a.jsx)("form",{id:s.id,name:s.name,onSubmit:c.handleSubmit,className:s.className,style:s.style,method:"POST","data-sentry-component":"Form","data-sentry-source-file":"Form.tsx",children:(0,a.jsx)(i.o,{values:c.values,errors:c.errors,formContextOnChange:c.handleChange,handleBlur:c.handleBlur,touched:c.touched,fieldLevelValidation:function(e,t){d({key:e,error:t})},"data-sentry-element":"FormContextProvider","data-sentry-source-file":"Form.tsx",children:s.children({errors:c.errors,touched:c.touched,isSubmitting:c.isSubmitting,isValidating:c.isValidating,submitCount:c.submitCount,initialValues:c.initialValues,values:c.values,handleReset:c.handleReset,resetForm:c.resetForm,setFieldValue:c.setFieldValue})})})}},73500:function(e,t,s){"use strict";var a=s(97458),n=s(52983),r=s(68249),i=s(51487),l=s(16720),o=s(25843),d=s(11499);t.Z=function(e){let{defaultValue:t,descriptionText:s,error:c,icon:u,inputRef:m,label:h,afterLabel:p,beforeLabel:x,labelOptional:f,layout:g,value:j,actions:y,size:b="medium",validation:v,id:S="",name:E="",...N}=e,T=(0,o.Z)("inputNumber"),{formContextOnChange:_,values:A,errors:w,handleBlur:C,touched:R,fieldLevelValidation:P}=(0,d.G)();A&&!j&&(j=A[S||E]),c||(w&&!c&&(c=w[S||E]),c=R&&R[S||E]?c:void 0),(0,n.useEffect)(()=>{v&&P(S,v(j))},[]);let I=[T.base];return c&&I.push(T.variants.error),c||I.push(T.variants.standard),u&&I.push(T.with_icon),b&&I.push(T.size[b]),N.disabled&&I.push(T.disabled),(0,a.jsx)("div",{className:N.className,"data-sentry-component":"InputNumber","data-sentry-source-file":"InputNumber.tsx",children:(0,a.jsx)(r.l,{label:h,afterLabel:p,beforeLabel:x,labelOptional:f,layout:g,id:S,error:c,descriptionText:s,style:N.style,size:b,"data-sentry-element":"FormLayout","data-sentry-source-file":"InputNumber.tsx",children:(0,a.jsxs)("div",{className:T.container,children:[(0,a.jsx)("input",{"data-size":b,id:S,name:E,onChange:function(e){N.onChange&&N.onChange(e),_&&_(e),v&&P(S,v(e.target.value))},onBlur:function(e){C&&C(e),N.onBlur&&N.onBlur(e)},type:"number",ref:m,value:j,className:I.join(" "),...N}),u&&(0,a.jsx)(l.Z,{size:b,icon:u}),c||y?(0,a.jsxs)("div",{className:T.actions_container,children:[c&&(0,a.jsx)(i.Z,{size:b}),y&&y]}):null]})})})}},85818:function(e,t,s){"use strict";s.d(t,{Z:function(){return g}});var a=s(97458),n=s(44809),r=s(62923),i=s.n(r),l=s(52983),o=s(68249),d=s(51487),c=s(16720),u=s(25843),m=s(65092),h=s(11499);let p=(0,l.createContext)({onChange:e=>{},selected:void 0});var x=s(62507);function f(e){let{children:t,className:s,buttonClassName:r,descriptionText:x,error:f,icon:g,id:j="",name:y="",label:b,labelOptional:v,layout:S,value:E,onChange:N,onFocus:T,onBlur:_,style:A,size:w="medium",defaultValue:C,validation:R,disabled:P,optionsWidth:I}=e,[M,O]=(0,l.useState)(void 0),[D,L]=(0,l.useState)({}),U=(0,u.Z)("listbox"),F=(0,l.useRef)(null),{formContextOnChange:k,values:Z,errors:B,handleBlur:H,touched:z,fieldLevelValidation:V}=(0,h.G)();Z&&!E&&(E=Z[j||y],C=Z[j||y]),f||(B&&!f&&(f=B[j||y]),f=z&&z[j||y]?f:void 0),(0,l.useEffect)(()=>{void 0!==E&&O(E)},[E]),(0,l.useEffect)(()=>{function e(){var e;document.documentElement.style.setProperty("--width-listbox","".concat(I||(null===(e=F.current)||void 0===e?void 0:e.offsetWidth),"px"))}return window.addEventListener("resize",e),e(),()=>window.removeEventListener("resize",e)},[]),(0,l.useEffect)(()=>{var e;let s=i()(t);function a(e){return s.find(t=>t.props.value===e)}if(E){O(E);let e=a(E);L((null==e?void 0:e.props)?e.props:void 0);return}if(M){let e=a(M);L((null==e?void 0:e.props)?e.props:void 0);return}if(C){O(C);let e=a(M);L((null==e?void 0:e.props)?e.props:void 0);return}L(null===(e=s[0])||void 0===e?void 0:e.props)},[M]);let Y=[U.container,U.base,r],W=[U.addOnBefore];return f&&Y.push(U.variants.error),f||Y.push(U.variants.standard),g&&W.push(U.with_icon),w&&Y.push(U.size[w]),P&&Y.push(U.disabled),(0,a.jsx)(o.l,{label:b,labelOptional:v,layout:S,id:j,error:f,descriptionText:x,className:s,style:A,size:w,"data-sentry-element":"FormLayout","data-sentry-component":"Listbox","data-sentry-source-file":"Listbox2.tsx",children:(0,a.jsxs)(n.fC,{"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:[(0,a.jsx)(n.xz,{asChild:!0,disabled:P,"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:(0,a.jsxs)("button",{"data-size":w,ref:F,className:(0,m.cn)(Y),onBlur:function(e){H&&H(e),_&&_(e)},onFocus:T,name:y,id:j,children:[(0,a.jsxs)("span",{className:(0,m.cn)(W),children:[g&&(0,a.jsx)(c.Z,{size:w,icon:g}),(null==D?void 0:D.addOnBefore)&&(0,a.jsx)(D.addOnBefore,{}),(0,a.jsx)("span",{className:U.label,children:null==D?void 0:D.label})]}),(0,a.jsx)("span",{className:U.chevron_container,children:(0,a.jsx)("svg",{className:U.chevron,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor","aria-hidden":"true","data-sentry-element":"svg","data-sentry-source-file":"Listbox2.tsx",children:(0,a.jsx)("path",{fillRule:"evenodd",d:"M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z",clipRule:"evenodd","data-sentry-element":"path","data-sentry-source-file":"Listbox2.tsx"})})}),f&&(0,a.jsx)("div",{className:U.actions_container,children:f&&(0,a.jsx)(d.Z,{size:w})})]})}),(0,a.jsx)(n.VY,{sideOffset:6,loop:!0,side:"bottom",align:"center",className:U.options_container,"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:(0,a.jsx)("div",{children:(0,a.jsx)(p.Provider,{value:{onChange:function(e){N&&N(e),O(e);let t={};t.target={type:"select",name:y,id:j,value:e,checked:void 0},k&&k(t),R&&V(j,R(e))},selected:M},"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:t})})})]})})}f.Option=function(e){let{id:t,value:s,label:r,disabled:i=!1,children:l,className:o="",addOnBefore:d}=e,c=(0,u.Z)("listbox");return(0,a.jsx)(p.Consumer,{"data-sentry-element":"unknown","data-sentry-component":"SelectOption","data-sentry-source-file":"Listbox2.tsx",children:e=>{let{onChange:r,selected:u}=e,h=u===s;return(0,a.jsxs)(n.ck,{className:(0,m.cn)(c.option,h?c.option_active:" ",i?c.option_disabled:" ",o),onSelect:()=>i?{}:r(s),children:[(0,a.jsxs)("div",{className:c.option_inner,children:[d&&d({active:h,selected:u}),(0,a.jsx)("span",{children:"function"==typeof l?l({active:h,selected:u}):l})]}),h?(0,a.jsx)("span",{className:(0,m.cn)(c.option_check,h?c.option_check_active:""),children:(0,a.jsx)(x.Z,{className:c.option_check_icon,"aria-hidden":"true"})}):null]},t)}})};var g=f},94059:function(e,t,s){"use strict";s.d(t,{ZP:function(){return m}});var a=s(97458),n=s(52983),r=s(25843),i=s(65092);function l(e){let{children:t,className:s,tag:n="div",style:r}=e;return(0,a.jsx)("".concat(n),{style:r,"data-sentry-element":"CustomTag","data-sentry-component":"Typography","data-sentry-source-file":"Typography.tsx",children:t})}l.Title=function(e){let{className:t,level:s=1,children:n,style:r}=e;return(0,a.jsx)("h".concat(s),{style:r,"data-sentry-element":"CustomTag","data-sentry-component":"Title","data-sentry-source-file":"Title.tsx",children:n})},l.Text=function(e){let{className:t,children:s,style:n,type:r,disabled:i,mark:l,code:o,keyboard:d,underline:c,strikethrough:u,strong:m,small:h}=e;return o?(0,a.jsx)("code",{style:n,children:s}):l?(0,a.jsx)("mark",{style:n,children:s}):d?(0,a.jsx)("kbd",{style:n,children:s}):m?(0,a.jsx)("strong",{style:n,children:s}):(0,a.jsx)("span",{style:n,"data-sentry-component":"Text","data-sentry-source-file":"Text.tsx",children:s})},l.Link=function(e){let{children:t,target:s="_blank",href:n,className:r,onClick:i,style:l}=e;return(0,a.jsx)("a",{onClick:i,href:n,target:s,rel:"noopener noreferrer",style:l,"data-sentry-component":"Link","data-sentry-source-file":"Link.tsx",children:t})};let o=(0,n.createContext)({type:"text"}),d=e=>{let{type:t}=e;return(0,a.jsx)(o.Provider,{value:{type:t},"data-sentry-element":"unknown","data-sentry-component":"MenuContextProvider","data-sentry-source-file":"MenuContext.tsx",children:e.children})},c=()=>{let e=(0,n.useContext)(o);if(void 0===e)throw Error("MenuContext must be used within a MenuContextProvider.");return e};function u(e){let{children:t,className:s,ulClassName:n,style:r,type:i="text"}=e;return(0,a.jsx)("nav",{role:"menu","aria-label":"Sidebar","aria-orientation":"vertical","aria-labelledby":"options-menu",className:s,style:r,"data-sentry-component":"Menu","data-sentry-source-file":"Menu.tsx",children:(0,a.jsx)(d,{type:i,"data-sentry-element":"MenuContextProvider","data-sentry-source-file":"Menu.tsx",children:(0,a.jsx)("ul",{className:n,children:t})})})}u.Item=function(e){let{children:t,icon:s,active:n,rounded:l,onClick:o,doNotCloseOverlay:d=!1,showActiveBar:u=!1,style:m}=e,h=(0,r.Z)("menu"),{type:p}=c(),x=[h.item.base];x.push(h.item.variants[p].base),n?x.push(h.item.variants[p].active):x.push(h.item.variants[p].normal);let f=[h.item.content.base];n?f.push(h.item.content.active):f.push(h.item.content.normal);let g=[h.item.icon.base];return n?g.push(h.item.icon.active):g.push(h.item.icon.normal),(0,a.jsxs)("li",{role:"menuitem",className:(0,i.cn)("outline-none",x),style:m,onClick:o,"aria-current":n?"page":void 0,"data-sentry-component":"Item","data-sentry-source-file":"Menu.tsx",children:[s&&(0,a.jsx)("div",{className:"".concat(g.join(" ")," min-w-fit"),children:s}),(0,a.jsx)("span",{className:f.join(" "),children:t})]})},u.Group=function(e){let{children:t,icon:s,title:n}=e,i=(0,r.Z)("menu"),{type:l}=c();return(0,a.jsxs)("div",{className:[i.group.base,i.group.variants[l]].join(" "),"data-sentry-component":"Group","data-sentry-source-file":"Menu.tsx",children:[s&&(0,a.jsx)("span",{className:i.group.icon,children:s}),(0,a.jsx)("span",{className:i.group.content,children:n}),t]})},u.Misc=function(e){let{children:t}=e;return(0,a.jsx)("div",{"data-sentry-component":"Misc","data-sentry-source-file":"Menu.tsx",children:(0,a.jsx)(l.Text,{"data-sentry-element":"unknown","data-sentry-source-file":"Menu.tsx",children:(0,a.jsx)("span",{children:t})})})};var m=u},78258:function(e,t,s){"use strict";s.d(t,{RM:function(){return o},Rn:function(){return m},SC:function(){return d},iA:function(){return i},pj:function(){return u},ss:function(){return c},xD:function(){return l}});var a=s(97458),n=s(52983),r=s(65092);let i=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("div",{className:"w-full overflow-auto",children:(0,a.jsx)("table",{ref:t,className:(0,r.cn)("w-full caption-bottom text-sm",s),...n})})});i.displayName="Table";let l=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("thead",{ref:t,className:(0,r.cn)("[&_tr]:border-b",s),...n})});l.displayName="TableHeader";let o=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("tbody",{ref:t,className:(0,r.cn)("[&_tr:last-child]:border-0",s),...n})});o.displayName="TableBody",n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("tfoot",{ref:t,className:(0,r.cn)("bg-primary font-medium text-primary-foreground",s),...n})}).displayName="TableFooter";let d=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("tr",{ref:t,className:(0,r.cn)("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",s),...n})});d.displayName="TableRow";let c=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("th",{ref:t,className:(0,r.cn)("h-12 px-4 text-left align-middle font-medium text-foreground-muted [&:has([role=checkbox])]:pr-0",s),...n})});c.displayName="TableHead";let u=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("td",{ref:t,className:(0,r.cn)("p-4 align-middle [&:has([role=checkbox])]:pr-0",s),...n})});u.displayName="TableCell";let m=n.forwardRef((e,t)=>{let{className:s,...n}=e;return(0,a.jsx)("caption",{ref:t,className:(0,r.cn)("mt-4 text-sm text-foreground-muted",s),...n})});m.displayName="TableCaption"}}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      t = new e.Error().stack;
+    t &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[t] = 'f86bcaac-4d5b-4618-84ea-7a268f38cada'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-f86bcaac-4d5b-4618-84ea-7a268f38cada'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [9874],
+    {
+      62923: function (e, t, s) {
+        var a = s(22825);
+        e.exports = function (e) {
+          return (null == e ? 0 : e.length) ? a(e, 1) : [];
+        };
+      },
+      67628: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          Q: function () {
+            return l;
+          },
+        });
+        var a = s(97458),
+          n = s(94059),
+          r = s(73565),
+          i = s(55228),
+          l = e => {
+            let { page: t, menu: s } = e;
+            return (0, a.jsx)('div', {
+              className: 'flex flex-col space-y-8 overflow-y-auto',
+              'data-sentry-component': 'ProductMenu',
+              'data-sentry-source-file': 'ProductMenu.tsx',
+              children: (0, a.jsx)(n.ZP, {
+                type: 'pills',
+                'data-sentry-element': 'Menu',
+                'data-sentry-source-file': 'ProductMenu.tsx',
+                children: s.map((e, l) =>
+                  (0, a.jsxs)(
+                    'div',
+                    {
+                      children: [
+                        (0, a.jsx)('div', {
+                          className: 'my-6 space-y-8',
+                          children: (0, a.jsxs)('div', {
+                            className: 'mx-3',
+                            children: [
+                              (0, a.jsx)(n.ZP.Group, {
+                                title: e.title
+                                  ? (0, a.jsxs)('div', {
+                                      className:
+                                        'flex flex-col space-y-2 uppercase font-mono',
+                                      children: [
+                                        (0, a.jsx)('span', {
+                                          children: e.title,
+                                        }),
+                                        e.isPreview &&
+                                          (0, a.jsx)(r.C, {
+                                            variant: 'warning',
+                                            children: 'Not production ready',
+                                          }),
+                                      ],
+                                    })
+                                  : null,
+                              }),
+                              (0, a.jsx)('div', {
+                                children: e.items.map(e =>
+                                  (0, a.jsx)(
+                                    i.Z,
+                                    {
+                                      url: e.url,
+                                      name: e.name,
+                                      icon: e.icon,
+                                      rightIcon: e.rightIcon,
+                                      isActive: t === e.key,
+                                      isExternal: e.isExternal,
+                                      target: e.isExternal ? '_blank' : '_self',
+                                      label: e.label,
+                                    },
+                                    e.key
+                                  )
+                                ),
+                              }),
+                            ],
+                          }),
+                        }),
+                        l !== s.length - 1 &&
+                          (0, a.jsx)('div', {
+                            className: 'h-px w-full bg-border-overlay',
+                          }),
+                      ],
+                    },
+                    e.key || e.title
+                  )
+                ),
+              }),
+            });
+          };
+      },
+      94724: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          _: function () {
+            return d;
+          },
+        });
+        var a = s(36457),
+          n = s(64618),
+          r = s(34549),
+          i = s(6464),
+          l = s(26600);
+        async function o(e) {
+          let { projectRef: t, config: s } = e,
+            { data: a, error: n } = await (0, i.r$)(
+              '/platform/auth/{ref}/config',
+              { params: { path: { ref: t } }, body: { ...s } }
+            );
+          return (n && (0, i.S3)(n), a);
+        }
+        let d = function () {
+          let {
+              onSuccess: e,
+              onError: t,
+              ...s
+            } = arguments.length > 0 && void 0 !== arguments[0]
+              ? arguments[0]
+              : {},
+            i = (0, a.NL)();
+          return (0, n.D)(e => o(e), {
+            async onSuccess(t, s, a) {
+              let { projectRef: n } = s;
+              (await i.invalidateQueries(l.o.authConfig(n)),
+                await (null == e ? void 0 : e(t, s, a)));
+            },
+            async onError(e, s, a) {
+              void 0 === t
+                ? r.Am.error(
+                    'Failed to update auth configuration: '.concat(e.message)
+                  )
+                : t(e, s, a);
+            },
+            ...s,
+          });
+        };
+      },
+      52682: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          U7: function () {
+            return H;
+          },
+          dU: function () {
+            return en;
+          },
+          SK: function () {
+            return eu;
+          },
+          uW: function () {
+            return eO;
+          },
+          m9: function () {
+            return ek;
+          },
+          gn: function () {
+            return tS;
+          },
+        });
+        var a = s(97458),
+          n = s(198),
+          r = s(52983),
+          i = s(34549),
+          l = s(18648),
+          o = s(12436),
+          d = s(59461),
+          c = s(24083),
+          u = s(87696),
+          m = s(46993),
+          h = s(61767),
+          p = s(35336),
+          x = s(72909),
+          f = s(94724),
+          g = s(69951),
+          j = s(90817),
+          y = s(75541),
+          b = s(37756),
+          v = s(28977),
+          S = s.n(v),
+          E = s(97224),
+          N = s(50963),
+          T = s(87831),
+          _ = s(49996),
+          A = s(85817),
+          w = s(51571),
+          C = s(90839),
+          R = s(73500),
+          P = s(30739),
+          I = s(85818);
+        function M(e) {
+          return S()(e).format('dddd, MMMM D, YYYY HH:mm:ss Z');
+        }
+        var O = e => {
+            let {
+                name: t,
+                properties: s,
+                formValues: n,
+                disabled: i = !1,
+                setFieldValue: l,
+              } = e,
+              [o, d] = (0, r.useState)(!!s.isSecret),
+              [c, u] = (0, r.useState)(n[t] ? M(new Date(n[t])) : '');
+            if (
+              ((0, r.useEffect)(() => {
+                s.show && s.show.key && !n[s.show.key] && (l(t, ''), u(''));
+              }, [s.show && s.show.key && !n[s.show.key]]),
+              s.show)
+            ) {
+              if (s.show.matches) {
+                if (!s.show.matches.includes(n[s.show.key])) return null;
+              } else if (!n[s.show.key]) return null;
+            }
+            switch (s.type) {
+              case 'datetime':
+                return (0, a.jsx)(w.Z, {
+                  size: 'small',
+                  layout: 'vertical',
+                  id: t,
+                  name: t,
+                  type: 'text',
+                  value: c,
+                  readOnly: !0,
+                  label: s.title,
+                  labelOptional: s.descriptionOptional
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        children: s.descriptionOptional,
+                      })
+                    : null,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        children: s.description,
+                      })
+                    : null,
+                  actions: (0, a.jsx)(A.M, {
+                    selectsRange: !1,
+                    minDate: new Date(),
+                    from: n[t],
+                    to: n[t],
+                    onChange: e => {
+                      e && e.to
+                        ? (l(t, e.to), u(M(new Date(e.to))))
+                        : (u(''), l(t, ''));
+                    },
+                    children: (0, a.jsx)('span', { children: 'Pick' }),
+                  }),
+                });
+              case 'string':
+                return (0, a.jsx)(w.Z, {
+                  size: 'small',
+                  layout: 'vertical',
+                  id: t,
+                  name: t,
+                  disabled: i,
+                  type: o ? 'password' : 'text',
+                  label: s.title,
+                  labelOptional: s.descriptionOptional
+                    ? (0, a.jsx)(_.U, {
+                        content: s.descriptionOptional,
+                        className: 'text-foreground-lighter',
+                      })
+                    : null,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(_.U, {
+                        content: s.description,
+                        className: 'text-foreground-lighter',
+                      })
+                    : null,
+                  actions: s.isSecret
+                    ? (0, a.jsx)(C.z, {
+                        icon: o ? (0, a.jsx)(E.Z, {}) : (0, a.jsx)(N.Z, {}),
+                        type: 'default',
+                        onClick: () => d(!o),
+                      })
+                    : (0, a.jsx)('span', {
+                        className: 'mr-3 text-foreground-lighter',
+                        children: s.units
+                          ? (0, a.jsx)(T.D, {
+                              unwrapDisallowed: !0,
+                              disallowedElements: ['p'],
+                              children: s.units,
+                            })
+                          : null,
+                      }),
+                });
+              case 'multiline-string':
+                return (0, a.jsx)(w.Z.TextArea, {
+                  size: 'small',
+                  layout: 'vertical',
+                  id: t,
+                  name: t,
+                  disabled: i,
+                  type: o ? 'password' : 'text',
+                  label: s.title,
+                  labelOptional: s.descriptionOptional
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        children: s.descriptionOptional,
+                      })
+                    : void 0,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(_.U, {
+                        content: s.description,
+                        className: 'text-foreground-lighter',
+                      })
+                    : null,
+                  actions: s.isSecret
+                    ? (0, a.jsx)(C.z, {
+                        icon: o ? (0, a.jsx)(E.Z, {}) : (0, a.jsx)(N.Z, {}),
+                        type: 'default',
+                        onClick: () => d(!o),
+                      })
+                    : (0, a.jsx)('span', {
+                        className: 'mr-3 text-scale-900',
+                        children: s.units
+                          ? (0, a.jsx)(T.D, {
+                              unwrapDisallowed: !0,
+                              disallowedElements: ['p'],
+                              children: s.units,
+                            })
+                          : null,
+                      }),
+                });
+              case 'number':
+                return (0, a.jsx)(R.Z, {
+                  size: 'small',
+                  layout: 'vertical',
+                  id: t,
+                  name: t,
+                  disabled: i,
+                  label: s.title,
+                  labelOptional: s.descriptionOptional
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        children: s.descriptionOptional,
+                      })
+                    : null,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(_.U, {
+                        content: s.description,
+                        className: 'text-foreground-lighter',
+                      })
+                    : null,
+                  actions: (0, a.jsx)('span', {
+                    className: 'mr-3 text-foreground-lighter',
+                    children: s.units
+                      ? (0, a.jsx)(T.D, {
+                          unwrapDisallowed: !0,
+                          disallowedElements: ['p'],
+                          children: s.units,
+                        })
+                      : null,
+                  }),
+                });
+              case 'boolean':
+                return (0, a.jsx)(P.Z, {
+                  size: 'small',
+                  id: t,
+                  name: t,
+                  disabled: i,
+                  label: s.title,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        className: 'form-field-markdown',
+                        children: s.description,
+                      })
+                    : null,
+                });
+              case 'select':
+                return (0, a.jsx)(I.Z, {
+                  size: 'small',
+                  name: t,
+                  disabled: i,
+                  label: s.title,
+                  descriptionText: s.description
+                    ? (0, a.jsx)(T.D, {
+                        unwrapDisallowed: !0,
+                        disallowedElements: ['p'],
+                        className: 'form-field-markdown',
+                        children: s.description,
+                      })
+                    : null,
+                  defaultValue: s.enum[0],
+                  children: s.enum.map(e =>
+                    (0, a.jsx)(
+                      I.Z.Option,
+                      {
+                        id: e.value,
+                        label: e.label,
+                        value: e.value,
+                        addOnBefore: () =>
+                          e.icon
+                            ? (0, a.jsx)('img', {
+                                className: 'h-6 w-6',
+                                src: ''
+                                  .concat(b.GW, '/img/icons/')
+                                  .concat(e.icon),
+                              })
+                            : null,
+                        children: e.label,
+                      },
+                      e.value
+                    )
+                  ),
+                });
+            }
+            return (0, a.jsx)(a.Fragment, {});
+          },
+          D = s(10947),
+          L = s(7756),
+          U = s(19540);
+        let F = (0, l.object)({
+          JWT_EXP: (0, l.number)()
+            .max(604800, 'Must be less than 604800')
+            .required('Must have a JWT expiry value'),
+          REFRESH_TOKEN_ROTATION_ENABLED: (0, l.boolean)().required(),
+          SECURITY_REFRESH_TOKEN_REUSE_INTERVAL: (0, l.number)()
+            .min(0, 'Must be a value more than 0')
+            .required('Must have a Reuse Interval value'),
+          MFA_PHONE_OTP_LENGTH: (0, l.number)()
+            .min(6, 'Must be a value 6 or larger')
+            .max(30, 'must be a value no greater than 30'),
+          MFA_PHONE_TEMPLATE: (0, l.string)().required(
+            'SMS template is required.'
+          ),
+          MFA_MAX_ENROLLED_FACTORS: (0, l.number)()
+            .min(0, 'Must be be a value more than 0')
+            .max(30, 'Must be a value no greater than 30'),
+          DB_MAX_POOL_SIZE: (0, l.number)()
+            .min(1, 'Must be 1 or larger')
+            .max(200, 'Must be a value no greater than 200'),
+          API_MAX_REQUEST_DURATION: (0, l.number)()
+            .min(5, 'Must be 5 or larger')
+            .max(30, 'Must be a value no greater than 30'),
+          MFA_TOTP: (0, l.string)().required(),
+          MFA_PHONE: (0, l.string)().required(),
+        });
+        function k(e, t) {
+          return e ? (t ? 'Enabled' : 'Verify Enabled') : 'Disabled';
+        }
+        let Z = [
+            { label: 'Enabled', value: 'Enabled' },
+            { label: 'Verify Enabled', value: 'Verify Enabled' },
+            { label: 'Disabled', value: 'Disabled' },
+          ],
+          B = e =>
+            'Enabled' === e
+              ? { verifyEnabled: !0, enrollEnabled: !0 }
+              : 'Verify Enabled' === e
+                ? { verifyEnabled: !0, enrollEnabled: !1 }
+                : { verifyEnabled: !1, enrollEnabled: !1 };
+        var H = () => {
+            var e, t, s;
+            let { ref: l } = (0, o.UO)(),
+              {
+                data: v,
+                error: S,
+                isLoading: E,
+                isError: N,
+                isSuccess: T,
+              } = (0, x.$E)({ projectRef: l }),
+              { mutate: _, isLoading: A } = (0, f._)(),
+              w = 'auth-config-advanced-form',
+              C = (0, j.Xo)(n.KA.READ, 'custom_config_gotrue'),
+              I = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue'),
+              M = (0, y.l)(),
+              { data: H, isSuccess: z } = (0, g.Gl)({
+                orgSlug: null == M ? void 0 : M.slug,
+              }),
+              V = z && 'free' !== H.plan.id && 'pro' !== H.plan.id,
+              Y =
+                z &&
+                (null == H
+                  ? void 0
+                  : null === (e = H.plan) || void 0 === e
+                    ? void 0
+                    : e.id) !== 'free',
+              W = b.Qy && !Y,
+              X = null == H ? void 0 : H.project_addons.find(e => e.ref === l);
+            null == X || X.addons.some(e => 'auth_mfa_phone' === e.type);
+            let q = b.Qy && !V,
+              G = {
+                SITE_URL: null == v ? void 0 : v.SITE_URL,
+                JWT_EXP: null == v ? void 0 : v.JWT_EXP,
+                REFRESH_TOKEN_ROTATION_ENABLED:
+                  (null == v ? void 0 : v.REFRESH_TOKEN_ROTATION_ENABLED) || !1,
+                MFA_PHONE_OTP_LENGTH:
+                  (null == v ? void 0 : v.MFA_PHONE_OTP_LENGTH) || 6,
+                MFA_PHONE_TEMPLATE:
+                  (null == v ? void 0 : v.MFA_PHONE_TEMPLATE) ||
+                  'Your code is {{ .Code }}',
+                SECURITY_REFRESH_TOKEN_REUSE_INTERVAL:
+                  null == v ? void 0 : v.SECURITY_REFRESH_TOKEN_REUSE_INTERVAL,
+                MFA_MAX_ENROLLED_FACTORS:
+                  (null == v ? void 0 : v.MFA_MAX_ENROLLED_FACTORS) || 10,
+                DB_MAX_POOL_SIZE:
+                  (null == v ? void 0 : v.DB_MAX_POOL_SIZE) || 10,
+                API_MAX_REQUEST_DURATION:
+                  (null == v ? void 0 : v.API_MAX_REQUEST_DURATION) || 10,
+                MFA_TOTP:
+                  k(
+                    null ===
+                      (t = null == v ? void 0 : v.MFA_TOTP_VERIFY_ENABLED) ||
+                      void 0 === t ||
+                      t,
+                    null ===
+                      (s = null == v ? void 0 : v.MFA_TOTP_ENROLL_ENABLED) ||
+                      void 0 === s ||
+                      s
+                  ) || 'Enabled',
+                MFA_PHONE:
+                  k(
+                    (null == v ? void 0 : v.MFA_PHONE_VERIFY_ENABLED) || !1,
+                    (null == v ? void 0 : v.MFA_PHONE_ENROLL_ENABLED) || !1
+                  ) || 'Disabled',
+              },
+              K =
+                (null == v ? void 0 : v.HOOK_SEND_SMS_URI) !== null &&
+                (null == v ? void 0 : v.HOOK_SEND_SMS_ENABLED) === !0,
+              J = (null == v ? void 0 : v.EXTERNAL_PHONE_ENABLED) === !0 || K;
+            return N
+              ? (0, a.jsxs)(D.bZ, {
+                  variant: 'destructive',
+                  children: [
+                    (0, a.jsx)(L.aN, {}),
+                    (0, a.jsx)(D.Cd, {
+                      children: 'Failed to retrieve auth configuration',
+                    }),
+                    (0, a.jsx)(D.X, { children: S.message }),
+                  ],
+                })
+              : C
+                ? (0, a.jsx)(U.Z, {
+                    id: w,
+                    initialValues: G,
+                    onSubmit: (e, t) => {
+                      let { resetForm: s } = t,
+                        a = { ...e },
+                        { verifyEnabled: n, enrollEnabled: r } = B(e.MFA_TOTP);
+                      if (Y) {
+                        let { verifyEnabled: t, enrollEnabled: s } = B(
+                          e.MFA_PHONE
+                        );
+                        a = {
+                          ...a,
+                          MFA_PHONE_ENROLL_ENABLED: s,
+                          MFA_PHONE_VERIFY_ENABLED: t,
+                        };
+                      }
+                      ((a = {
+                        ...a,
+                        MFA_TOTP_ENROLL_ENABLED: r,
+                        MFA_TOTP_VERIFY_ENABLED: n,
+                      }),
+                        delete a.MFA_TOTP,
+                        delete a.MFA_PHONE,
+                        V ||
+                          (delete a.DB_MAX_POOL_SIZE,
+                          delete a.API_MAX_REQUEST_DURATION),
+                        _(
+                          { projectRef: l, config: a },
+                          {
+                            onError: e => {
+                              i.Am.error(
+                                'Failed to update settings: '.concat(
+                                  null == e ? void 0 : e.message
+                                )
+                              );
+                            },
+                            onSuccess: () => {
+                              (i.Am.success('Successfully updated settings'),
+                                s({ values: e, initialValues: e }));
+                            },
+                          }
+                        ));
+                    },
+                    validationSchema: F,
+                    'data-sentry-element': 'Form',
+                    'data-sentry-component': 'AdvancedAuthSettingsForm',
+                    'data-sentry-source-file': 'AdvancedAuthSettingsForm.tsx',
+                    children: e => {
+                      let {
+                          handleReset: t,
+                          resetForm: s,
+                          values: n,
+                          initialValues: i,
+                          setFieldValue: l,
+                        } = e,
+                        o = JSON.stringify(n) !== JSON.stringify(i);
+                      (0, r.useEffect)(() => {
+                        T && s({ values: G, initialValues: G });
+                      }, [T]);
+                      let h =
+                          'Disabled' === G.MFA_PHONE &&
+                          n.MFA_PHONE !== G.MFA_PHONE,
+                        x =
+                          'Enabled' === n.MFA_PHONE ||
+                          'Verify Enabled' === n.MFA_PHONE;
+                      return (0, a.jsxs)(a.Fragment, {
+                        children: [
+                          (0, a.jsx)(c.p, {
+                            title: 'Advanced Settings',
+                            description:
+                              'These settings rarely need to be changed.',
+                          }),
+                          (0, a.jsxs)(u.by, {
+                            disabled: !0,
+                            footer: (0, a.jsx)('div', {
+                              className: 'flex py-4 px-8',
+                              children: (0, a.jsx)(d.i, {
+                                form: w,
+                                isSubmitting: A,
+                                hasChanges: o,
+                                handleReset: t,
+                                disabled: !I,
+                                helper: I
+                                  ? void 0
+                                  : 'You need additional permissions to update authentication settings',
+                              }),
+                            }),
+                            children: [
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Access Tokens (JWT)',
+                                }),
+                                children: (0, a.jsx)(m.B4, {
+                                  loading: E,
+                                  children: (0, a.jsx)(R.Z, {
+                                    id: 'JWT_EXP',
+                                    size: 'small',
+                                    label: 'Access token (JWT) expiry time',
+                                    descriptionText:
+                                      'How long access tokens are valid for before a refresh token has to be used. Recommendation: 3600 (1 hour).',
+                                    actions: (0, a.jsx)('span', {
+                                      className: 'mr-3 text-foreground-lighter',
+                                      children: 'seconds',
+                                    }),
+                                    disabled: !I,
+                                  }),
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Refresh Tokens',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: E,
+                                  children: [
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'REFRESH_TOKEN_ROTATION_ENABLED',
+                                      size: 'small',
+                                      label:
+                                        'Detect and revoke potentially compromised refresh tokens',
+                                      layout: 'flex',
+                                      descriptionText:
+                                        'Prevent replay attacks from potentially compromised refresh tokens. Recommendation: ON.',
+                                      disabled: !I,
+                                    }),
+                                    n.REFRESH_TOKEN_ROTATION_ENABLED &&
+                                      (0, a.jsx)(R.Z, {
+                                        id: 'SECURITY_REFRESH_TOKEN_REUSE_INTERVAL',
+                                        size: 'small',
+                                        min: 0,
+                                        label: 'Refresh token reuse interval',
+                                        descriptionText:
+                                          'Time interval where the same refresh token can be used multiple times to request for an access token. Recommendation: 10 seconds.',
+                                        actions: (0, a.jsx)('span', {
+                                          className:
+                                            'mr-3 text-foreground-lighter',
+                                          children: 'seconds',
+                                        }),
+                                        disabled: !I,
+                                      }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Multi-Factor Authentication (MFA)',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: E,
+                                  children: [
+                                    (0, a.jsx)(O, {
+                                      name: 'MFA_TOTP',
+                                      properties: {
+                                        type: 'select',
+                                        title: 'TOTP (App Authenticator)',
+                                        description:
+                                          'Control use of TOTP (App Authenticator) factors',
+                                        enum: Z,
+                                      },
+                                      formValues: n,
+                                      disabled: !I,
+                                      setFieldValue: l,
+                                    }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'MFA_MAX_ENROLLED_FACTORS',
+                                      size: 'small',
+                                      label:
+                                        'Maximum number of per-user MFA factors',
+                                      descriptionText:
+                                        'How many MFA factors can be enrolled at once per user.',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: 'factors',
+                                      }),
+                                      disabled: !I,
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Advanced MFA',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: E,
+                                  children: [
+                                    W &&
+                                      (0, a.jsx)(p.Z, {
+                                        primaryText: 'Upgrade to Pro',
+                                        secondaryText:
+                                          'Advanced MFA requires the Pro Plan',
+                                      }),
+                                    (0, a.jsx)(O, {
+                                      name: 'MFA_PHONE',
+                                      properties: {
+                                        type: 'select',
+                                        title: 'Phone',
+                                        description:
+                                          'Control use of phone factors',
+                                        enum: Z,
+                                      },
+                                      formValues: n,
+                                      disabled: !I || !Y,
+                                      setFieldValue: l,
+                                    }),
+                                    !J &&
+                                      x &&
+                                      (0, a.jsxs)(D.bZ, {
+                                        variant: 'warning',
+                                        children: [
+                                          (0, a.jsx)(L.aN, {}),
+                                          (0, a.jsx)(D.Cd, {
+                                            children:
+                                              'To use MFA with Phone you should set up a Phone provider or Send SMS Hook.',
+                                          }),
+                                        ],
+                                      }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'MFA_PHONE_OTP_LENGTH',
+                                      size: 'small',
+                                      label: 'Phone OTP Length',
+                                      descriptionText:
+                                        'Number of digits in OTP',
+                                      disabled: !I || !Y,
+                                    }),
+                                    (0, a.jsx)(O, {
+                                      name: 'MFA_PHONE_TEMPLATE',
+                                      properties: {
+                                        title: 'Phone verification message',
+                                        type: 'multiline-string',
+                                        description:
+                                          'To format the OTP code use `{{ .Code }}`',
+                                      },
+                                      formValues: n,
+                                      disabled: !I || !Y,
+                                      setFieldValue: l,
+                                    }),
+                                    h &&
+                                      (0, a.jsxs)(D.bZ, {
+                                        variant: 'warning',
+                                        children: [
+                                          (0, a.jsx)(L.aN, {}),
+                                          (0, a.jsx)(D.Cd, {
+                                            children:
+                                              'Enabling advanced MFA with phone will result in an additional charge of $75 per month for the first project in the organization and an additional $10 per month for additional projects.',
+                                          }),
+                                        ],
+                                      }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Max Direct Database Connections',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: E,
+                                  children: [
+                                    q &&
+                                      (0, a.jsx)(p.Z, {
+                                        primaryText:
+                                          'Upgrade to Team or Enterprise',
+                                        secondaryText:
+                                          'Max Direct Database Connections settings are only available on the Team Plan and up.',
+                                        buttonText: 'Upgrade to Team',
+                                      }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'DB_MAX_POOL_SIZE',
+                                      size: 'small',
+                                      label:
+                                        'Max direct database connections used by Auth',
+                                      descriptionText:
+                                        'Auth will take up no more than this number of connections from the total number of available connections to serve requests. These connections are not reserved, so when unused they are released.',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: 'connections',
+                                      }),
+                                      disabled: !I || !V,
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Max Request Duration',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: E,
+                                  children: [
+                                    q &&
+                                      (0, a.jsx)(p.Z, {
+                                        primaryText:
+                                          'Upgrade to Team or Enterprise',
+                                        secondaryText:
+                                          'Max Request Duration settings are only available on the Team Plan and up.',
+                                        buttonText: 'Upgrade to Team',
+                                      }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'API_MAX_REQUEST_DURATION',
+                                      size: 'small',
+                                      label:
+                                        'Maximum time allowed for an Auth request to last',
+                                      descriptionText:
+                                        'Number of seconds to wait for an Auth request to complete before canceling it. In certain high-load situations setting a larger or smaller value can be used to control load-shedding. Recommended: 10 seconds.',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: 'seconds',
+                                      }),
+                                      disabled: !I || !V,
+                                    }),
+                                  ],
+                                }),
+                              }),
+                            ],
+                          }),
+                        ],
+                      });
+                    },
+                  })
+                : (0, a.jsx)(h.Z, {
+                    resourceText: 'view auth configuration settings',
+                  });
+          },
+          z = s(4839),
+          V = s(83145),
+          Y = s.n(V),
+          W = s(756),
+          X = s(94102);
+        let q = [
+          'bg-surface-100',
+          'hover:bg-overlay-hover',
+          'data-open:bg-selection',
+          'border-default',
+          'hover:border-strong data-open:border-strong',
+          'data-open:pb-px col-span-12 mx-auto',
+          '-space-y-px overflow-hidden',
+          'border shadow',
+          'transition',
+          'first:rounded-tl',
+          'first:rounded-tr',
+          'last:rounded-bl',
+          'last:rounded-br',
+          'hover:z-50',
+        ];
+        var G = s(37393),
+          K = s(62507),
+          J = s(359),
+          Q = s(67096),
+          $ = s(31485),
+          ee = s(79600),
+          et = s(9450),
+          es = s(33526),
+          ea = e => {
+            var t, s, l, d;
+            let { config: c, provider: u } = e,
+              m = (0, r.useRef)(null),
+              [h, p] = (0, r.useState)(!1),
+              { ref: x, provider: g } = (0, o.UO)(),
+              { mutate: y, isLoading: v } = (0, f._)(),
+              S = ['MAILER_AUTOCONFIRM', 'SMS_AUTOCONFIRM'],
+              E = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue'),
+              N = e => {
+                let t =
+                  c.HOOK_SEND_SMS_ENABLED &&
+                  e.startsWith('SMS_') &&
+                  ![
+                    'SMS_AUTOCONFIRM',
+                    'SMS_OTP_EXP',
+                    'SMS_OTP_LENGTH',
+                    'SMS_OTP_LENGTH',
+                    'SMS_TEMPLATE',
+                    'SMS_TEST_OTP',
+                    'SMS_TEST_OTP_VALID_UNTIL',
+                  ].includes(e);
+                return (
+                  [
+                    'EXTERNAL_SLACK_CLIENT_ID',
+                    'EXTERNAL_SLACK_SECRET',
+                  ].includes(e) || t
+                );
+              },
+              A = e => {
+                switch (e) {
+                  case 'Slack (Deprecated)':
+                    return (0, a.jsxs)(D.bZ, {
+                      variant: 'warning',
+                      children: [
+                        (0, a.jsx)(L.aN, {}),
+                        (0, a.jsx)(D.Cd, {
+                          children: 'Slack (Deprecated) Provider',
+                        }),
+                        (0, a.jsxs)(D.X, {
+                          children: [
+                            'Recently, Slack has updated their OAuth API. Please use the new Slack (OIDC) provider below. Developers using this provider should move over to the new provider. Please refer to our',
+                            ' ',
+                            (0, a.jsx)('a', {
+                              href: 'https://supabase.com/docs/guides/auth/social-login/auth-slack',
+                              className: 'underline',
+                              target: '_blank',
+                              children: 'documentation',
+                            }),
+                            ' ',
+                            'for more details.',
+                          ],
+                        }),
+                      ],
+                    });
+                  case 'Phone':
+                    return (
+                      c.HOOK_SEND_SMS_ENABLED &&
+                      (0, a.jsxs)(D.bZ, {
+                        children: [
+                          (0, a.jsx)(L.aN, {}),
+                          (0, a.jsx)(D.Cd, {
+                            children:
+                              'SMS provider settings are disabled while the SMS hook is enabled.',
+                          }),
+                          (0, a.jsxs)(D.X, {
+                            className: 'flex flex-col gap-y-3',
+                            children: [
+                              (0, a.jsx)('p', {
+                                children:
+                                  'The SMS hook will be used in place of the SMS provider configured',
+                              }),
+                              (0, a.jsx)(C.z, {
+                                asChild: !0,
+                                type: 'default',
+                                className: 'w-min',
+                                icon: (0, a.jsx)(z.Z, {}),
+                                children: (0, a.jsx)(Y(), {
+                                  href: '/project/'.concat(x, '/auth/hooks'),
+                                  children: 'View auth hooks',
+                                }),
+                              }),
+                            ],
+                          }),
+                        ],
+                      })
+                    );
+                  default:
+                    return null;
+                }
+              },
+              { data: R } = (0, $.zR)({ projectRef: x }),
+              P =
+                null !==
+                  (d =
+                    null == R
+                      ? void 0
+                      : null === (t = R.app_config) || void 0 === t
+                        ? void 0
+                        : t.protocol) && void 0 !== d
+                  ? d
+                  : 'https',
+              I =
+                null == R
+                  ? void 0
+                  : null === (s = R.app_config) || void 0 === s
+                    ? void 0
+                    : s.endpoint,
+              M = ''.concat(P, '://').concat(I),
+              { data: F } = (0, ee.z)({ projectRef: x }),
+              k = 'SAML 2.0' === u.title && c && c.SAML_ENABLED,
+              Z =
+                'LinkedIn (OIDC)' === u.title &&
+                c &&
+                c.EXTERNAL_LINKEDIN_OIDC_ENABLED,
+              B = 'Slack (OIDC)' === u.title && c.EXTERNAL_SLACK_OIDC_ENABLED,
+              H =
+                c &&
+                c[
+                  'EXTERNAL_'.concat(
+                    null == u
+                      ? void 0
+                      : null === (l = u.title) || void 0 === l
+                        ? void 0
+                        : l.toUpperCase(),
+                    '_ENABLED'
+                  )
+                ],
+              V = (() => {
+                let e = {};
+                return (
+                  Object.keys(u.properties).forEach(t => {
+                    let s = S.includes(t);
+                    if ('SAML 2.0' === u.title) {
+                      let s = c[t];
+                      e[t] = s || ('boolean' !== u.properties[t].type && '');
+                    } else if (s) e[t] = !c[t];
+                    else {
+                      let s = c[t];
+                      e[t] = s || ('boolean' !== u.properties[t].type && '');
+                    }
+                  }),
+                  e
+                );
+              })();
+            return (
+              (0, r.useEffect)(() => {
+                if (
+                  (null == g ? void 0 : g.toLowerCase()) ===
+                  u.title.toLowerCase()
+                ) {
+                  var e;
+                  (p(!0),
+                    null === (e = m.current) ||
+                      void 0 === e ||
+                      e.scrollIntoView({ behavior: 'smooth', block: 'start' }));
+                }
+              }, [g]),
+              (0, a.jsxs)(et.ZP, {
+                open: h,
+                onOpenChange: p,
+                className: q.join(' '),
+                'data-sentry-element': 'Collapsible',
+                'data-sentry-component': 'ProviderForm',
+                'data-sentry-source-file': 'ProviderForm.tsx',
+                children: [
+                  (0, a.jsx)(et.ZP.Trigger, {
+                    asChild: !0,
+                    'data-sentry-element': 'unknown',
+                    'data-sentry-source-file': 'ProviderForm.tsx',
+                    children: (0, a.jsxs)('button', {
+                      ref: m,
+                      type: 'button',
+                      className:
+                        'group flex w-full items-center justify-between rounded py-3 px-4 text-foreground',
+                      children: [
+                        (0, a.jsxs)('div', {
+                          className: 'flex items-center gap-3',
+                          children: [
+                            (0, a.jsx)(G.Z, {
+                              className:
+                                'text-border-stronger transition data-open-parent:rotate-0 data-closed-parent:rotate-180',
+                              strokeWidth: 2,
+                              width: 14,
+                              'data-sentry-element': 'ChevronUp',
+                              'data-sentry-source-file': 'ProviderForm.tsx',
+                            }),
+                            (0, a.jsx)('img', {
+                              src: ''
+                                .concat(b.GW, '/img/icons/')
+                                .concat(u.misc.iconKey, '.svg'),
+                              width: 18,
+                              alt: ''.concat(u.title, ' auth icon'),
+                            }),
+                            (0, a.jsx)('span', {
+                              className: 'text-sm',
+                              children: u.title,
+                            }),
+                          ],
+                        }),
+                        (0, a.jsx)('div', {
+                          className: 'flex items-center gap-3',
+                          children:
+                            k || H || Z || B
+                              ? (0, a.jsxs)('div', {
+                                  className:
+                                    'flex items-center gap-1 rounded-full border border-brand-400 bg-brand-200 py-1 px-1 text-xs text-brand',
+                                  children: [
+                                    (0, a.jsx)('span', {
+                                      className:
+                                        'rounded-full bg-brand p-0.5 text-xs text-brand-200',
+                                      children: (0, a.jsx)(K.Z, {
+                                        strokeWidth: 2,
+                                        size: 12,
+                                      }),
+                                    }),
+                                    (0, a.jsx)('span', {
+                                      className: 'px-1',
+                                      children: 'Enabled',
+                                    }),
+                                  ],
+                                })
+                              : (0, a.jsx)('div', {
+                                  className:
+                                    'rounded-md border border-strong bg-surface-100 py-1 px-3 text-xs text-foreground-lighter',
+                                  children: 'Disabled',
+                                }),
+                        }),
+                      ],
+                    }),
+                  }),
+                  (0, a.jsx)(U.Z, {
+                    name: 'provider-'.concat(u.title, '-form'),
+                    initialValues: V,
+                    validationSchema: u.validationSchema,
+                    onSubmit: (e, t) => {
+                      let { resetForm: s } = t,
+                        a = { ...e };
+                      (Object.keys(e).map(t => {
+                        (S.includes(t) && (a[t] = !e[t]),
+                          '' === a[t] && (a[t] = null));
+                      }),
+                        y(
+                          { projectRef: x, config: a },
+                          {
+                            onSuccess: () => {
+                              (s({ values: { ...e }, initialValues: { ...e } }),
+                                p(!1),
+                                i.Am.success('Successfully updated settings'));
+                            },
+                          }
+                        ));
+                    },
+                    'data-sentry-element': 'Form',
+                    'data-sentry-source-file': 'ProviderForm.tsx',
+                    children: e => {
+                      var t, s, n;
+                      let {
+                          handleReset: r,
+                          initialValues: i,
+                          values: l,
+                          setFieldValue: o,
+                        } = e,
+                        d = JSON.stringify(i) === JSON.stringify(l);
+                      return (0, a.jsx)(et.ZP.Content, {
+                        children: (0, a.jsx)('div', {
+                          className:
+                            'group border-t border-strong bg-surface-100 py-6 px-4 md:px-6 text-foreground',
+                          children: (0, a.jsxs)('div', {
+                            className:
+                              'mx-auto my-2 md:my-6 max-w-lg space-y-6',
+                            children: [
+                              A(u.title),
+                              Object.keys(u.properties).map(e =>
+                                (0, a.jsx)(
+                                  O,
+                                  {
+                                    name: e,
+                                    setFieldValue: o,
+                                    properties: u.properties[e],
+                                    formValues: l,
+                                    disabled: N(e) || !E,
+                                  },
+                                  e
+                                )
+                              ),
+                              (null == u
+                                ? void 0
+                                : null === (t = u.misc) || void 0 === t
+                                  ? void 0
+                                  : t.alert) &&
+                                (0, a.jsx)(es.J, {
+                                  type: 'warning',
+                                  title: u.misc.alert.title,
+                                  description: (0, a.jsx)(a.Fragment, {
+                                    children: (0, a.jsx)(T.D, {
+                                      children: u.misc.alert.description,
+                                    }),
+                                  }),
+                                }),
+                              u.misc.requiresRedirect &&
+                                (0, a.jsx)(a.Fragment, {
+                                  children: (0, a.jsx)(w.Z, {
+                                    copy: !0,
+                                    readOnly: !0,
+                                    disabled: !0,
+                                    label: 'Callback URL (for OAuth)',
+                                    value:
+                                      (null == F
+                                        ? void 0
+                                        : null === (s = F.customDomain) ||
+                                            void 0 === s
+                                          ? void 0
+                                          : s.status) === 'active'
+                                        ? 'https://'.concat(
+                                            null === (n = F.customDomain) ||
+                                              void 0 === n
+                                              ? void 0
+                                              : n.hostname,
+                                            '/auth/v1/callback'
+                                          )
+                                        : ''.concat(M, '/auth/v1/callback'),
+                                    descriptionText: (0, a.jsx)(_.U, {
+                                      content: u.misc.helper,
+                                      className: 'text-foreground-lighter',
+                                    }),
+                                  }),
+                                }),
+                              (0, a.jsxs)('div', {
+                                className: 'flex items-center justify-between',
+                                children: [
+                                  (0, a.jsx)(Q.G, { href: u.link }),
+                                  (0, a.jsxs)('div', {
+                                    className: 'flex items-center gap-x-3',
+                                    children: [
+                                      (0, a.jsx)(C.z, {
+                                        type: 'default',
+                                        htmlType: 'reset',
+                                        onClick: () => {
+                                          (r(), p(!1));
+                                        },
+                                        disabled: v,
+                                        children: 'Cancel',
+                                      }),
+                                      (0, a.jsx)(J.u, {
+                                        htmlType: 'submit',
+                                        loading: v,
+                                        disabled: v || !E || d,
+                                        tooltip: {
+                                          content: {
+                                            side: 'bottom',
+                                            text: E
+                                              ? void 0
+                                              : 'You need additional permissions to update provider settings',
+                                          },
+                                        },
+                                        children: 'Save',
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                        }),
+                      });
+                    },
+                  }),
+                ],
+              })
+            );
+          },
+          en = () => {
+            let { ref: e } = (0, o.UO)(),
+              {
+                isLoading: t,
+                error: s,
+                isError: n,
+                data: r,
+                isSuccess: i,
+              } = (0, x.$E)({ projectRef: e });
+            return (0, a.jsxs)('div', {
+              'data-sentry-component': 'AuthProvidersForm',
+              'data-sentry-source-file': 'AuthProvidersForm.tsx',
+              children: [
+                (0, a.jsx)(c.p, {
+                  title: 'Auth Providers',
+                  description:
+                    'Authenticate your users through a suite of providers and login methods',
+                  'data-sentry-element': 'FormHeader',
+                  'data-sentry-source-file': 'AuthProvidersForm.tsx',
+                }),
+                (0, a.jsxs)('div', {
+                  className: '-space-y-px',
+                  children: [
+                    (null == r ? void 0 : r.EXTERNAL_EMAIL_ENABLED) &&
+                      (null == r ? void 0 : r.MAILER_OTP_EXP) > 3600 &&
+                      (0, a.jsxs)(D.bZ, {
+                        className:
+                          'flex w-full items-center justify-between my-3',
+                        variant: 'warning',
+                        children: [
+                          (0, a.jsx)(L.aN, {}),
+                          (0, a.jsxs)('div', {
+                            children: [
+                              (0, a.jsx)(D.Cd, {
+                                children:
+                                  'OTP expiry exceeds recommended threshold',
+                              }),
+                              (0, a.jsxs)(D.X, {
+                                className: 'flex flex-col gap-y-3',
+                                children: [
+                                  (0, a.jsx)('p', {
+                                    children:
+                                      'We have detected that you have enabled the email provider with the OTP expiry set to more than an hour. It is recommended to set this value to less than an hour.',
+                                  }),
+                                  (0, a.jsx)(C.z, {
+                                    asChild: !0,
+                                    type: 'default',
+                                    className: 'w-min',
+                                    icon: (0, a.jsx)(z.Z, {}),
+                                    children: (0, a.jsx)(Y(), {
+                                      href: 'https://supabase.com/docs/guides/platform/going-into-prod#security',
+                                      children: 'View security recommendations',
+                                    }),
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    t &&
+                      X.Wm.map(e =>
+                        (0, a.jsx)(
+                          'div',
+                          {
+                            className: [...q, 'px-6 py-3'].join(' '),
+                            children: (0, a.jsx)(W.p, {}),
+                          },
+                          'provider_'.concat(e.title)
+                        )
+                      ),
+                    n &&
+                      (0, a.jsxs)(D.bZ, {
+                        variant: 'destructive',
+                        children: [
+                          (0, a.jsx)(L.aN, {}),
+                          (0, a.jsx)(D.Cd, {
+                            children: 'Failed to retrieve auth configuration',
+                          }),
+                          (0, a.jsx)(D.X, { children: s.message }),
+                        ],
+                      }),
+                    i &&
+                      X.Wm.map(e => {
+                        let t =
+                          'Phone' === e.title
+                            ? { ...e, validationSchema: (0, X.OK)(r) }
+                            : e;
+                        return (0, a.jsx)(
+                          ea,
+                          { config: r, provider: t },
+                          'provider_'.concat(t.title)
+                        );
+                      }),
+                  ],
+                }),
+              ],
+            });
+          };
+        let er = 'NO_REQUIRED_CHARS',
+          ei =
+            'abcdefghijklmnopqrstuvwxyz:ABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789',
+          el = ei + ':!@#$%^&*()_+-=[]{};\'\\\\:"|<>?,./`~',
+          eo = (0, l.object)({
+            DISABLE_SIGNUP: (0, l.boolean)().required(),
+            EXTERNAL_ANONYMOUS_USERS_ENABLED: (0, l.boolean)().required(),
+            SECURITY_MANUAL_LINKING_ENABLED: (0, l.boolean)().required(),
+            SITE_URL: (0, l.string)().required('Must have a Site URL'),
+            SECURITY_CAPTCHA_ENABLED: (0, l.boolean)().required(),
+            SECURITY_CAPTCHA_SECRET: (0, l.string)().when(
+              'SECURITY_CAPTCHA_ENABLED',
+              { is: !0, then: e => e.required('Must have a Captcha secret') }
+            ),
+            SECURITY_CAPTCHA_PROVIDER: (0, l.string)().when(
+              'SECURITY_CAPTCHA_ENABLED',
+              {
+                is: !0,
+                then: e =>
+                  e
+                    .oneOf(['hcaptcha', 'turnstile'])
+                    .required(
+                      'Captcha provider must be either hcaptcha or turnstile'
+                    ),
+              }
+            ),
+            SESSIONS_TIMEBOX: (0, l.number)().min(
+              0,
+              'Must be a positive number'
+            ),
+            SESSIONS_INACTIVITY_TIMEOUT: (0, l.number)().min(
+              0,
+              'Must be a positive number'
+            ),
+            SESSIONS_SINGLE_PER_USER: (0, l.boolean)(),
+            PASSWORD_MIN_LENGTH: (0, l.number)().min(
+              6,
+              'Must be greater or equal to 6.'
+            ),
+            PASSWORD_REQUIRED_CHARACTERS: (0, l.string)(),
+            PASSWORD_HIBP_ENABLED: (0, l.boolean)(),
+          });
+        function ed(e) {
+          let { value: t } = e;
+          return 0 === t ? 'never' : 1 === t ? 'hour' : 'hours';
+        }
+        let ec = 'auth-config-basic-settings';
+        var eu = () => {
+            var e;
+            let { ref: t } = (0, o.UO)(),
+              {
+                data: s,
+                error: l,
+                isLoading: c,
+                isError: v,
+                isSuccess: S,
+              } = (0, x.$E)({ projectRef: t }),
+              { mutate: T, isLoading: A } = (0, f._)(),
+              [I, M] = (0, r.useState)(!0),
+              F = (0, j.Xo)(n.KA.READ, 'custom_config_gotrue'),
+              k = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue'),
+              Z = (0, y.l)(),
+              { data: B, isSuccess: H } = (0, g.Gl)(
+                { orgSlug: null == Z ? void 0 : Z.slug },
+                { enabled: b.Qy }
+              ),
+              V =
+                H &&
+                (null == B
+                  ? void 0
+                  : null === (e = B.plan) || void 0 === e
+                    ? void 0
+                    : e.id) !== 'free',
+              W = b.Qy && !V,
+              X = {
+                DISABLE_SIGNUP: !(null == s ? void 0 : s.DISABLE_SIGNUP),
+                EXTERNAL_ANONYMOUS_USERS_ENABLED:
+                  null == s ? void 0 : s.EXTERNAL_ANONYMOUS_USERS_ENABLED,
+                SECURITY_MANUAL_LINKING_ENABLED:
+                  (null == s ? void 0 : s.SECURITY_MANUAL_LINKING_ENABLED) ||
+                  !1,
+                SITE_URL: null == s ? void 0 : s.SITE_URL,
+                SECURITY_CAPTCHA_ENABLED:
+                  (null == s ? void 0 : s.SECURITY_CAPTCHA_ENABLED) || !1,
+                SECURITY_CAPTCHA_SECRET:
+                  (null == s ? void 0 : s.SECURITY_CAPTCHA_SECRET) || '',
+                SECURITY_CAPTCHA_PROVIDER:
+                  (null == s ? void 0 : s.SECURITY_CAPTCHA_PROVIDER) ||
+                  'hcaptcha',
+                SESSIONS_TIMEBOX:
+                  (null == s ? void 0 : s.SESSIONS_TIMEBOX) || 0,
+                SESSIONS_INACTIVITY_TIMEOUT:
+                  (null == s ? void 0 : s.SESSIONS_INACTIVITY_TIMEOUT) || 0,
+                SESSIONS_SINGLE_PER_USER:
+                  (null == s ? void 0 : s.SESSIONS_SINGLE_PER_USER) || !1,
+                PASSWORD_MIN_LENGTH:
+                  (null == s ? void 0 : s.PASSWORD_MIN_LENGTH) || 6,
+                PASSWORD_REQUIRED_CHARACTERS:
+                  (null == s ? void 0 : s.PASSWORD_REQUIRED_CHARACTERS) || er,
+                PASSWORD_HIBP_ENABLED:
+                  (null == s ? void 0 : s.PASSWORD_HIBP_ENABLED) || !1,
+              };
+            return v
+              ? (0, a.jsxs)(D.bZ, {
+                  variant: 'destructive',
+                  children: [
+                    (0, a.jsx)(L.aN, {}),
+                    (0, a.jsx)(D.Cd, {
+                      children: 'Failed to retrieve auth configuration',
+                    }),
+                    (0, a.jsx)(D.X, { children: l.message }),
+                  ],
+                })
+              : F
+                ? (0, a.jsx)(U.Z, {
+                    id: ec,
+                    initialValues: X,
+                    onSubmit: (e, s) => {
+                      let { resetForm: a } = s,
+                        n = { ...e };
+                      ((n.DISABLE_SIGNUP = !e.DISABLE_SIGNUP),
+                        n.PASSWORD_REQUIRED_CHARACTERS === er &&
+                          (n.PASSWORD_REQUIRED_CHARACTERS = ''),
+                        T(
+                          { projectRef: t, config: n },
+                          {
+                            onError: e => {
+                              i.Am.error(
+                                'Failed to update settings:  '.concat(
+                                  null == e ? void 0 : e.message
+                                )
+                              );
+                            },
+                            onSuccess: () => {
+                              (i.Am.success('Successfully updated settings'),
+                                a({ values: e, initialValues: e }));
+                            },
+                          }
+                        ));
+                    },
+                    validationSchema: eo,
+                    'data-sentry-element': 'Form',
+                    'data-sentry-component': 'BasicAuthSettingsForm',
+                    'data-sentry-source-file': 'BasicAuthSettingsForm.tsx',
+                    children: e => {
+                      let {
+                          handleReset: s,
+                          resetForm: n,
+                          values: i,
+                          initialValues: l,
+                          setFieldValue: o,
+                        } = e,
+                        h = JSON.stringify(i) !== JSON.stringify(l);
+                      return (
+                        (0, r.useEffect)(() => {
+                          S && n({ values: X, initialValues: X });
+                        }, [S]),
+                        (0, a.jsx)(a.Fragment, {
+                          children: (0, a.jsxs)(u.by, {
+                            disabled: !0,
+                            footer: (0, a.jsx)('div', {
+                              className: 'flex py-4 px-8',
+                              children: (0, a.jsx)(d.i, {
+                                form: ec,
+                                isSubmitting: A,
+                                hasChanges: h,
+                                handleReset: s,
+                                disabled: !k,
+                                helper: k
+                                  ? void 0
+                                  : 'You need additional permissions to update authentication settings',
+                              }),
+                            }),
+                            children: [
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'User Signups',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: c,
+                                  children: [
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'DISABLE_SIGNUP',
+                                      size: 'small',
+                                      label: 'Allow new users to sign up',
+                                      layout: 'flex',
+                                      descriptionText:
+                                        'If this is disabled, new users will not be able to sign up to your application.',
+                                      disabled: !k,
+                                    }),
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'SECURITY_MANUAL_LINKING_ENABLED',
+                                      size: 'small',
+                                      label: 'Allow manual linking',
+                                      layout: 'flex',
+                                      descriptionText: (0, a.jsx)(_.U, {
+                                        extLinks: !0,
+                                        className:
+                                          '[&>p>a]:text-foreground-light [&>p>a]:transition-all [&>p>a]:hover:text-foreground [&>p>a]:hover:decoration-brand',
+                                        content:
+                                          'Enable [manual linking APIs](https://supabase.com/docs/guides/auth/auth-identity-linking#manual-linking-beta) for your project.',
+                                      }),
+                                      disabled: !k,
+                                    }),
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'EXTERNAL_ANONYMOUS_USERS_ENABLED',
+                                      size: 'small',
+                                      label: 'Allow anonymous sign-ins',
+                                      layout: 'flex',
+                                      descriptionText: (0, a.jsx)(_.U, {
+                                        extLinks: !0,
+                                        className:
+                                          '[&>p>a]:text-foreground-light [&>p>a]:transition-all [&>p>a]:hover:text-foreground [&>p>a]:hover:decoration-brand',
+                                        content:
+                                          'Enable [anonymous sign-ins](https://supabase.com/docs/guides/auth/auth-anonymous) for your project.',
+                                      }),
+                                      disabled: !k,
+                                    }),
+                                    i.EXTERNAL_ANONYMOUS_USERS_ENABLED &&
+                                      (0, a.jsxs)('div', {
+                                        className: 'flex flex-col gap-y-2',
+                                        children: [
+                                          (0, a.jsxs)(D.bZ, {
+                                            className:
+                                              'flex w-full items-center justify-between',
+                                            variant: 'warning',
+                                            children: [
+                                              (0, a.jsx)(L.aN, {}),
+                                              (0, a.jsxs)('div', {
+                                                children: [
+                                                  (0, a.jsxs)(D.Cd, {
+                                                    children: [
+                                                      'Anonymous users will use the',
+                                                      ' ',
+                                                      (0, a.jsx)('code', {
+                                                        className: 'text-xs',
+                                                        children:
+                                                          'authenticated',
+                                                      }),
+                                                      ' role when signing in',
+                                                    ],
+                                                  }),
+                                                  (0, a.jsxs)(D.X, {
+                                                    className:
+                                                      'flex flex-col gap-y-3',
+                                                    children: [
+                                                      (0, a.jsxs)('p', {
+                                                        children: [
+                                                          'As a result, anonymous users will be subjected to RLS policies that apply to the ',
+                                                          (0, a.jsx)('code', {
+                                                            className:
+                                                              'text-xs',
+                                                            children: 'public',
+                                                          }),
+                                                          ' and',
+                                                          ' ',
+                                                          (0, a.jsx)('code', {
+                                                            className:
+                                                              'text-xs',
+                                                            children:
+                                                              'authenticated',
+                                                          }),
+                                                          ' roles. We strongly advise',
+                                                          ' ',
+                                                          (0, a.jsx)(Y(), {
+                                                            href: '/project/'.concat(
+                                                              t,
+                                                              '/auth/policies'
+                                                            ),
+                                                            className:
+                                                              'text-foreground underline',
+                                                            children:
+                                                              'reviewing your RLS policies',
+                                                          }),
+                                                          ' ',
+                                                          'to ensure that access to your data is restricted where required.',
+                                                        ],
+                                                      }),
+                                                      (0, a.jsx)(C.z, {
+                                                        asChild: !0,
+                                                        type: 'default',
+                                                        className: 'w-min',
+                                                        icon: (0, a.jsx)(
+                                                          z.Z,
+                                                          {}
+                                                        ),
+                                                        children: (0, a.jsx)(
+                                                          Y(),
+                                                          {
+                                                            href: 'https://supabase.com/docs/guides/auth/auth-anonymous#access-control',
+                                                            children:
+                                                              'View access control docs',
+                                                          }
+                                                        ),
+                                                      }),
+                                                    ],
+                                                  }),
+                                                ],
+                                              }),
+                                            ],
+                                          }),
+                                          !i.SECURITY_CAPTCHA_ENABLED &&
+                                            (0, a.jsxs)(D.bZ, {
+                                              children: [
+                                                (0, a.jsx)(L.aN, {}),
+                                                (0, a.jsxs)(D.Cd, {
+                                                  children: [
+                                                    'We highly recommend',
+                                                    ' ',
+                                                    (0, a.jsx)('span', {
+                                                      tabIndex: 1,
+                                                      className:
+                                                        'cursor-pointer underline',
+                                                      onClick: () => {
+                                                        let e =
+                                                          document.getElementById(
+                                                            'enable-captcha'
+                                                          );
+                                                        e &&
+                                                          e.scrollIntoView({
+                                                            behavior: 'smooth',
+                                                            block: 'center',
+                                                          });
+                                                      },
+                                                      children:
+                                                        'enabling captcha',
+                                                    }),
+                                                    ' ',
+                                                    'for anonymous sign-ins',
+                                                  ],
+                                                }),
+                                                (0, a.jsx)(D.X, {
+                                                  children:
+                                                    'This will prevent potential abuse on sign-ins which may bloat your database and incur costs for monthly active users (MAU)',
+                                                }),
+                                              ],
+                                            }),
+                                        ],
+                                      }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Passwords',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: c,
+                                  children: [
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'PASSWORD_MIN_LENGTH',
+                                      size: 'small',
+                                      label: 'Minimum password length',
+                                      descriptionText:
+                                        'Passwords shorter than this value will be rejected as weak. Minimum 6, recommended 8 or more.',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: 'characters',
+                                      }),
+                                      disabled: !k,
+                                    }),
+                                    (0, a.jsx)(O, {
+                                      name: 'PASSWORD_REQUIRED_CHARACTERS',
+                                      properties: {
+                                        type: 'select',
+                                        title: 'Password Requirements',
+                                        description:
+                                          'Passwords that do not have at least one of each will be rejected as weak.',
+                                        enum: [
+                                          {
+                                            label:
+                                              'No required characters (default)',
+                                            value: er,
+                                          },
+                                          {
+                                            label: 'Letters and digits',
+                                            value:
+                                              'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ:0123456789',
+                                          },
+                                          {
+                                            label:
+                                              'Lowercase, uppercase letters and digits',
+                                            value: ei,
+                                          },
+                                          {
+                                            label:
+                                              'Lowercase, uppercase letters, digits and symbols (recommended)',
+                                            value: el,
+                                          },
+                                        ],
+                                      },
+                                      formValues: i,
+                                      setFieldValue: o,
+                                    }),
+                                    W
+                                      ? (0, a.jsx)(p.Z, {
+                                          primaryText: 'Upgrade to Pro',
+                                          secondaryText:
+                                            'Leaked password protection available on Pro plans and up.',
+                                        })
+                                      : (0, a.jsx)(a.Fragment, {}),
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'PASSWORD_HIBP_ENABLED',
+                                      size: 'small',
+                                      label: 'Prevent use of leaked passwords',
+                                      afterLabel: ' (recommended)',
+                                      layout: 'flex',
+                                      descriptionText:
+                                        'Rejects the use of known or easy to guess passwords on sign up or password change. Powered by the HaveIBeenPwned.org Pwned Passwords API.',
+                                      disabled: !k || !V,
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'User Sessions',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: c,
+                                  children: [
+                                    W
+                                      ? (0, a.jsx)(p.Z, {
+                                          primaryText: 'Upgrade to Pro',
+                                          secondaryText:
+                                            'Configuring user sessions requires the Pro Plan.',
+                                        })
+                                      : (0, a.jsx)(a.Fragment, {}),
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'SESSIONS_SINGLE_PER_USER',
+                                      size: 'small',
+                                      label: 'Enforce single session per user',
+                                      layout: 'flex',
+                                      descriptionText:
+                                        "If enabled, all but a user's most recently active session will be terminated.",
+                                      disabled: !k || !V,
+                                    }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'SESSIONS_TIMEBOX',
+                                      size: 'small',
+                                      label: 'Time-box user sessions',
+                                      descriptionText:
+                                        'The amount of time before a user is forced to sign in again. Use 0 for never',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: (0, a.jsx)(ed, {
+                                          value: i.SESSIONS_TIMEBOX,
+                                        }),
+                                      }),
+                                      disabled: !k || !V,
+                                    }),
+                                    (0, a.jsx)(R.Z, {
+                                      id: 'SESSIONS_INACTIVITY_TIMEOUT',
+                                      size: 'small',
+                                      label: 'Inactivity timeout',
+                                      descriptionText:
+                                        'The amount of time a user needs to be inactive to be forced to sign in again. Use 0 for never.',
+                                      actions: (0, a.jsx)('span', {
+                                        className:
+                                          'mr-3 text-foreground-lighter',
+                                        children: (0, a.jsx)(ed, {
+                                          value: i.SESSIONS_INACTIVITY_TIMEOUT,
+                                        }),
+                                      }),
+                                      disabled: !k || !V,
+                                    }),
+                                  ],
+                                }),
+                              }),
+                              (0, a.jsx)(m.hj, {
+                                id: 'enable-captcha',
+                                header: (0, a.jsx)(m.S0, {
+                                  children: 'Bot and Abuse Protection',
+                                }),
+                                children: (0, a.jsxs)(m.B4, {
+                                  loading: c,
+                                  children: [
+                                    (0, a.jsx)(P.Z, {
+                                      id: 'SECURITY_CAPTCHA_ENABLED',
+                                      size: 'small',
+                                      label: 'Enable Captcha protection',
+                                      layout: 'flex',
+                                      descriptionText:
+                                        'Protect authentication endpoints from bots and abuse.',
+                                      disabled: !k,
+                                    }),
+                                    i.SECURITY_CAPTCHA_ENABLED &&
+                                      (0, a.jsxs)(a.Fragment, {
+                                        children: [
+                                          (0, a.jsx)(O, {
+                                            name: 'SECURITY_CAPTCHA_PROVIDER',
+                                            properties: {
+                                              type: 'select',
+                                              title: 'Choose Captcha Provider',
+                                              description: '',
+                                              enum: [
+                                                {
+                                                  label: 'hCaptcha',
+                                                  value: 'hcaptcha',
+                                                  icon: 'hcaptcha-icon.png',
+                                                },
+                                                {
+                                                  label:
+                                                    'Turnstile by Cloudflare',
+                                                  value: 'turnstile',
+                                                  icon: 'cloudflare-icon.png',
+                                                },
+                                              ],
+                                            },
+                                            formValues: i,
+                                            setFieldValue: o,
+                                          }),
+                                          (0, a.jsx)(w.Z, {
+                                            id: 'SECURITY_CAPTCHA_SECRET',
+                                            type: I ? 'password' : 'text',
+                                            size: 'small',
+                                            label: 'Captcha secret',
+                                            descriptionText:
+                                              'Obtain this secret from the provider.',
+                                            disabled: !k,
+                                            actions: (0, a.jsx)(C.z, {
+                                              icon: I
+                                                ? (0, a.jsx)(E.Z, {})
+                                                : (0, a.jsx)(N.Z, {}),
+                                              type: 'default',
+                                              onClick: () => M(!I),
+                                            }),
+                                          }),
+                                        ],
+                                      }),
+                                  ],
+                                }),
+                              }),
+                            ],
+                          }),
+                        })
+                      );
+                    },
+                  })
+                : (0, a.jsx)(h.Z, {
+                    resourceText: 'view auth configuration settings',
+                  });
+          },
+          em = s(5529),
+          eh = s(63621),
+          ep = s(92240);
+        let ex = 'http://json-schema.org/draft-07/schema#',
+          ef = {
+            $schema: ex,
+            id: 'CONFIRMATION',
+            type: 'object',
+            title: 'Confirm signup',
+            properties: {
+              MAILER_SUBJECTS_CONFIRMATION: {
+                title: 'Subject heading',
+                type: 'string',
+              },
+              MAILER_TEMPLATES_CONFIRMATION_CONTENT: {
+                title: 'Message body',
+                descriptionOptional: 'HTML body of your email',
+                type: 'code',
+                description:
+                  " \n- `{{ .ConfirmationURL }}` : URL to confirm the e-mail address for the new account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n",
+              },
+            },
+            validationSchema: (0, l.object)().shape({
+              MAILER_SUBJECTS_CONFIRMATION: (0, l.string)().required(
+                '"Subject heading is required.'
+              ),
+            }),
+            misc: {
+              iconKey: 'email-icon2',
+              helper:
+                "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+            },
+          },
+          eg = {
+            $schema: ex,
+            id: 'INVITE',
+            type: 'object',
+            title: 'Invite user',
+            properties: {
+              MAILER_SUBJECTS_INVITE: {
+                title: 'Subject heading',
+                type: 'string',
+              },
+              MAILER_TEMPLATES_INVITE_CONTENT: {
+                title: 'Message body',
+                descriptionOptional: 'HTML body of your email',
+                type: 'code',
+                description:
+                  " \n- `{{ .ConfirmationURL }}` : URL to accept the invitation to create an account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `redirectTo` passed in options\n",
+              },
+            },
+            validationSchema: (0, l.object)().shape({
+              MAILER_SUBJECTS_INVITE: (0, l.string)().required(
+                '"Subject heading is required.'
+              ),
+            }),
+            misc: {
+              iconKey: 'email-icon2',
+              helper:
+                "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+            },
+          },
+          ej = {
+            $schema: ex,
+            id: 'MAGIC_LINK',
+            type: 'object',
+            title: 'Magic Link',
+            properties: {
+              MAILER_SUBJECTS_MAGIC_LINK: {
+                title: 'Subject heading',
+                type: 'string',
+              },
+              MAILER_TEMPLATES_MAGIC_LINK_CONTENT: {
+                title: 'Message body',
+                descriptionOptional: 'HTML body of your email',
+                type: 'code',
+                description:
+                  " \n- `{{ .ConfirmationURL }}` : URL for a one-time login to the user's account\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n",
+              },
+            },
+            validationSchema: (0, l.object)().shape({
+              MAILER_SUBJECTS_MAGIC_LINK: (0, l.string)().required(
+                '"Subject heading is required.'
+              ),
+            }),
+            misc: {
+              iconKey: 'email-icon2',
+              helper:
+                "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+            },
+          },
+          ey = [
+            ef,
+            eg,
+            ej,
+            {
+              $schema: ex,
+              id: 'EMAIL_CHANGE',
+              type: 'object',
+              title: 'Change Email Address',
+              properties: {
+                MAILER_SUBJECTS_EMAIL_CHANGE: {
+                  title: 'Subject heading',
+                  type: 'string',
+                },
+                MAILER_TEMPLATES_EMAIL_CHANGE_CONTENT: {
+                  title: 'Message body',
+                  descriptionOptional: 'HTML body of your email',
+                  type: 'code',
+                  description:
+                    " \n- `{{ .ConfirmationURL }}` : URL to confirm the email change\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The original user's email address\n- `{{ .NewEmail }}` : The user's new email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `emailRedirectTo` passed in options\n",
+                },
+              },
+              validationSchema: (0, l.object)().shape({
+                MAILER_SUBJECTS_EMAIL_CHANGE: (0, l.string)().required(
+                  '"Subject heading is required.'
+                ),
+              }),
+              misc: {
+                iconKey: 'email-icon2',
+                helper:
+                  "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+              },
+            },
+            {
+              $schema: ex,
+              id: 'RECOVERY',
+              type: 'object',
+              title: 'Reset Password',
+              properties: {
+                MAILER_SUBJECTS_RECOVERY: {
+                  title: 'Subject heading',
+                  type: 'string',
+                },
+                MAILER_TEMPLATES_RECOVERY_CONTENT: {
+                  title: 'Message body',
+                  descriptionOptional: 'HTML body of your email',
+                  type: 'code',
+                  description:
+                    " \n- `{{ .ConfirmationURL }}` : URL to confirm the password reset\n- `{{ .Token }}` : The 6-digit numeric email OTP \n- `{{ .TokenHash }}` : The hashed token used in the URL\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n- `{{ .RedirectTo }}` : The URL of `redirectTo` passed in options\n",
+                },
+              },
+              validationSchema: (0, l.object)().shape({
+                MAILER_SUBJECTS_RECOVERY: (0, l.string)().required(
+                  '"Subject heading is required.'
+                ),
+              }),
+              misc: {
+                iconKey: 'email-icon2',
+                helper:
+                  "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+              },
+            },
+            {
+              $schema: ex,
+              id: 'REAUTHENTICATION',
+              type: 'object',
+              title: 'Reauthentication',
+              properties: {
+                MAILER_SUBJECTS_REAUTHENTICATION: {
+                  title: 'Subject heading',
+                  type: 'string',
+                },
+                MAILER_TEMPLATES_REAUTHENTICATION_CONTENT: {
+                  title: 'Message body',
+                  descriptionOptional: 'HTML body of your email',
+                  type: 'code',
+                  description:
+                    "\n- `{{ .Token }}` : The 6-digit numeric email OTP\n- `{{ .SiteURL }}` : The URL of the site\n- `{{ .Email }}` : The user's email address\n- `{{ .Data }}` : The user's `user_metadata`\n",
+                },
+              },
+              validationSchema: (0, l.object)().shape({
+                MAILER_SUBJECTS_REAUTHENTICATION: (0, l.string)().required(
+                  '"Subject heading is required.'
+                ),
+              }),
+              misc: {
+                iconKey: 'email-icon2',
+                helper:
+                  "To complete setup, add this authorisation callback URL to your app's configuration in the Apple Developer Console.\n            [Learn more](https://supabase.com/docs/guides/auth/social-login/auth-apple#configure-your-services-id)",
+              },
+            },
+          ];
+        var eb = function () {
+            let { ref: e } = (0, o.UO)();
+            return (0, a.jsxs)(D.bZ, {
+              variant: 'warning',
+              'data-sentry-element': 'Alert_Shadcn_',
+              'data-sentry-component': 'EmailRateLimitsAlert',
+              'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+              children: [
+                (0, a.jsx)(L.aN, {
+                  'data-sentry-element': 'WarningIcon',
+                  'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+                }),
+                (0, a.jsx)(D.Cd, {
+                  'data-sentry-element': 'AlertTitle_Shadcn_',
+                  'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+                  children: 'Email rate-limits and restrictions',
+                }),
+                (0, a.jsxs)(D.X, {
+                  'data-sentry-element': 'AlertDescription_Shadcn_',
+                  'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+                  children: [
+                    "You're using the built-in email service. The service has rate limits and it's not meant to be used for production apps. Check the",
+                    ' ',
+                    (0, a.jsx)('a', {
+                      href: 'https://supabase.com/docs/guides/platform/going-into-prod#auth-rate-limits',
+                      className: 'underline',
+                      target: '_blank',
+                      rel: 'noreferrer noopener',
+                      children: 'documentation',
+                    }),
+                    ' ',
+                    'for an up-to-date information on the current rate limits.',
+                    (0, a.jsx)(C.z, {
+                      asChild: !0,
+                      type: 'default',
+                      className: 'mt-2',
+                      'data-sentry-element': 'Button',
+                      'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+                      children: (0, a.jsx)(Y(), {
+                        target: '_blank',
+                        href: '/project/'.concat(
+                          e,
+                          '/settings/auth#auth-config-smtp-form'
+                        ),
+                        'data-sentry-element': 'Link',
+                        'data-sentry-source-file': 'EmailRateLimitsAlert.tsx',
+                        children: 'Set up custom SMTP server',
+                      }),
+                    }),
+                  ],
+                }),
+              ],
+            });
+          },
+          ev = s(10839),
+          eS = s(44619),
+          eE = s(20022),
+          eN = s(13064),
+          eT = s(64618),
+          e_ = s(6464);
+        async function eA(e) {
+          let { projectRef: t, template: s } = e,
+            { data: a, error: n } = await (0, e_.v_)(
+              '/platform/auth/{ref}/validate/spam',
+              { params: { path: { ref: t } }, body: s }
+            );
+          return (n && (0, e_.S3)(n), a);
+        }
+        let ew = function () {
+          let {
+            onSuccess: e,
+            onError: t,
+            ...s
+          } = arguments.length > 0 && void 0 !== arguments[0]
+            ? arguments[0]
+            : {};
+          return (0, eT.D)(e => eA(e), {
+            async onSuccess(t, s, a) {
+              await (null == e ? void 0 : e(t, s, a));
+            },
+            async onError(e, s, a) {
+              void 0 === t
+                ? i.Am.error('Failed to validate template: '.concat(e.message))
+                : t(e, s, a);
+            },
+            ...s,
+          });
+        };
+        var eC = s(65092),
+          eR = s(78258),
+          eP = s(11221);
+        let eI = e => {
+          var t;
+          let { validationResult: s } = e,
+            n = (
+              null !== (t = null == s ? void 0 : s.rules) && void 0 !== t
+                ? t
+                : []
+            ).filter(e => e.score >= 0),
+            r = n.length > 0;
+          return (0, a.jsx)(eN.Z, {
+            className: (0, eC.cn)(
+              'mb-2',
+              r && '!bg-alternative/75',
+              '!px-0',
+              'rounded-t-none'
+            ),
+            icon: r && (0, a.jsx)(L.aN, {}),
+            title: r
+              ? 'Email has a high probability of being marked as spam and deliverability may be affected'
+              : 'Email content is unlikely to be marked as spam',
+            description: r
+              ? (0, a.jsxs)(a.Fragment, {
+                  children: [
+                    (0, a.jsxs)('div', {
+                      className: 'flex flex-col gap-y-3',
+                      children: [
+                        (0, a.jsx)('p', {
+                          children: r
+                            ? " Rectify the following issues to improve your email's deliverability in order of priority:"
+                            : " Address the following issues to improve your email's deliverability:",
+                        }),
+                        (0, a.jsxs)(eR.iA, {
+                          children: [
+                            (0, a.jsx)(eR.xD, {
+                              className:
+                                'font-mono uppercase text-xs [&_th]:h-auto [&_th]:py-2',
+                              children: (0, a.jsxs)(eR.SC, {
+                                className: 'hover:bg-transparent',
+                                children: [
+                                  (0, a.jsx)(eR.ss, {
+                                    className: 'pl-0',
+                                    children: 'Warning',
+                                  }),
+                                  (0, a.jsx)(eR.ss, {
+                                    className: 'pr-0',
+                                    children: 'Description',
+                                  }),
+                                ],
+                              }),
+                            }),
+                            (0, a.jsx)(eR.RM, {
+                              children: n.map(e =>
+                                (0, a.jsxs)(
+                                  eR.SC,
+                                  {
+                                    className: 'hover:bg-transparent',
+                                    children: [
+                                      (0, a.jsx)(eR.pj, {
+                                        className:
+                                          'pl-0 font-mono text-xs text-foreground',
+                                        children: e.name,
+                                      }),
+                                      (0, a.jsx)(eR.pj, {
+                                        className: 'pr-0',
+                                        children: e.desc,
+                                      }),
+                                    ],
+                                  },
+                                  e.name
+                                )
+                              ),
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                    (0, a.jsx)(eP.Z, {}),
+                    (0, a.jsx)(_.U, {
+                      className:
+                        '!max-w-none text-foreground-muted text-xs [&_a]:text-foreground-lighter mt-2',
+                      content:
+                        'Spam validation is powered by [SpamAssassin](https://spamassassin.apache.org/doc.html). Full list of all available warnings can be found [here](https://gist.github.com/ychaouche/a2faff159c2a1fea16019156972c7f8b).',
+                    }),
+                  ],
+                })
+              : null,
+            'data-sentry-element': 'InformationBox',
+            'data-sentry-component': 'SpamValidation',
+            'data-sentry-source-file': 'SpamValidation.tsx',
+          });
+        };
+        var eM = e => {
+            var t, s;
+            let { template: l } = e,
+              { ref: c } = (0, o.UO)(),
+              u = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue'),
+              { data: h, isSuccess: p } = (0, x.$E)({ projectRef: c }),
+              { mutate: g } = ew({ onSuccess: e => R(e) }),
+              { mutate: y } = (0, f._)({
+                onError: e => {
+                  (L(!1),
+                    i.Am.error(
+                      'Failed to update email templates: '.concat(e.message)
+                    ));
+                },
+              }),
+              { id: b, properties: v } = l,
+              S = 'auth-config-email-templates-'.concat(b),
+              E = (0, r.useMemo)(() => {
+                let e = {};
+                return (
+                  Object.keys(v).forEach(t => {
+                    var s;
+                    e[t] = null !== (s = h && h[t]) && void 0 !== s ? s : '';
+                  }),
+                  e
+                );
+              }, [h, v]),
+              N = 'MAILER_TEMPLATES_'.concat(b, '_CONTENT'),
+              _ = v[N],
+              A = p && h && (!h.SMTP_HOST || !h.SMTP_USER || !h.SMTP_PASS),
+              [C, R] = (0, r.useState)(),
+              [P, I] = (0, r.useState)(
+                null !== (t = h && h[N]) && void 0 !== t ? t : ''
+              ),
+              [M, O] = (0, r.useState)(!1),
+              [D, L] = (0, r.useState)(!1),
+              F = (
+                null !== (s = null == C ? void 0 : C.rules) && void 0 !== s
+                  ? s
+                  : []
+              ).filter(e => e.score > 0),
+              k = A && F.length > 0;
+            return (
+              (0, r.useEffect)(() => {
+                let e = e => {
+                  M && (e.preventDefault(), (e.returnValue = ''));
+                };
+                return (
+                  window.addEventListener('beforeunload', e),
+                  () => {
+                    window.removeEventListener('beforeunload', e);
+                  }
+                );
+              }, [M]),
+              (0, r.useEffect)(() => {
+                if (c && b && h) {
+                  let [e] = Object.keys(v);
+                  g({
+                    projectRef: c,
+                    template: { subject: h[e], content: h[N] },
+                  });
+                }
+              }, [b]),
+              (0, a.jsx)(U.Z, {
+                id: S,
+                className: '!border-t-0',
+                initialValues: E,
+                onSubmit: (e, t) => {
+                  let { resetForm: s } = t;
+                  if (!c) return console.error('Project ref is required');
+                  L(!0);
+                  let a = { ...e };
+                  (delete a[N], _ && (a[N] = P));
+                  let [n] = Object.keys(v);
+                  g(
+                    {
+                      projectRef: c,
+                      template: { subject: a[n], content: a[N] },
+                    },
+                    {
+                      onSuccess: t => {
+                        var n;
+                        let r = (
+                          null !== (n = null == t ? void 0 : t.rules) &&
+                          void 0 !== n
+                            ? n
+                            : []
+                        ).filter(e => e.score > 0);
+                        A && r.length > 0
+                          ? (L(!1),
+                            i.Am.error(
+                              'Please rectify all spam warnings before saving while using the built-in email service'
+                            ))
+                          : y(
+                              { projectRef: c, config: a },
+                              {
+                                onSuccess: () => {
+                                  (L(!1),
+                                    i.Am.success(
+                                      'Successfully updated settings'
+                                    ),
+                                    s({ values: e, initialValues: e }),
+                                    O(!1));
+                                },
+                              }
+                            );
+                      },
+                      onError: () => L(!1),
+                    }
+                  );
+                },
+                'data-sentry-element': 'Form',
+                'data-sentry-component': 'TemplateEditor',
+                'data-sentry-source-file': 'TemplateEditor.tsx',
+                children: e => {
+                  var t;
+                  let { resetForm: s, values: n, initialValues: r } = e,
+                    i = null !== (t = h && h[N]) && void 0 !== t ? t : '',
+                    l = JSON.stringify(n) !== JSON.stringify(r) || i !== P;
+                  return (0, a.jsxs)(a.Fragment, {
+                    children: [
+                      (0, a.jsx)(m.hj, {
+                        className: '!border-t-0 pb-8 pt-4',
+                        children: (0, a.jsx)(m.B4, {
+                          loading: !1,
+                          children: Object.keys(v).map(e => {
+                            let t = v[e];
+                            if ('string' === t.type)
+                              return (0, a.jsxs)(
+                                'div',
+                                {
+                                  className: 'space-y-3',
+                                  children: [
+                                    (0, a.jsx)('label', {
+                                      className:
+                                        'col-span-12 text-sm text-foreground lg:col-span-5',
+                                      children: t.title,
+                                    }),
+                                    (0, a.jsx)(
+                                      w.Z,
+                                      {
+                                        size: 'small',
+                                        layout: 'vertical',
+                                        id: e,
+                                        name: e,
+                                        descriptionText: t.description
+                                          ? (0, a.jsx)(T.D, {
+                                              unwrapDisallowed: !0,
+                                              disallowedElements: ['p'],
+                                              children: t.description,
+                                            })
+                                          : null,
+                                        labelOptional: t.descriptionOptional
+                                          ? (0, a.jsx)(T.D, {
+                                              unwrapDisallowed: !0,
+                                              disallowedElements: ['p'],
+                                              children: t.descriptionOptional,
+                                            })
+                                          : null,
+                                        disabled: !u,
+                                      },
+                                      e
+                                    ),
+                                  ],
+                                },
+                                e
+                              );
+                          }),
+                        }),
+                      }),
+                      (0, a.jsx)(m.hj, {
+                        className: '!mt-0 grid-cols-12 !border-t-0 !pt-0 pb-7',
+                        children: (0, a.jsxs)(m.B4, {
+                          fullWidth: !0,
+                          loading: !1,
+                          children: [
+                            _ &&
+                              (0, a.jsxs)(a.Fragment, {
+                                children: [
+                                  (0, a.jsxs)('div', {
+                                    className: 'space-y-3',
+                                    children: [
+                                      (0, a.jsx)(m.S0, {
+                                        children: (0, a.jsx)('span', {
+                                          children: _.title,
+                                        }),
+                                      }),
+                                      (0, a.jsx)(eN.Z, {
+                                        defaultVisibility: !0,
+                                        title: 'Message variables',
+                                        hideCollapse: !1,
+                                        description:
+                                          _.description &&
+                                          (0, a.jsx)(T.D, {
+                                            children: _.description,
+                                          }),
+                                      }),
+                                    ],
+                                  }),
+                                  (0, a.jsxs)(ep.mQ, {
+                                    defaultValue: 'source',
+                                    children: [
+                                      (0, a.jsxs)(ep.dr, {
+                                        className: 'gap-3',
+                                        children: [
+                                          (0, a.jsxs)(ep.SP, {
+                                            value: 'source',
+                                            className: 'gap-2',
+                                            children: [
+                                              (0, a.jsx)(ev.Z, { size: 14 }),
+                                              'Source',
+                                            ],
+                                          }),
+                                          (0, a.jsxs)(ep.SP, {
+                                            value: 'preview',
+                                            className: 'gap-2',
+                                            children: [
+                                              (0, a.jsx)(eS.Z, { size: 14 }),
+                                              'Preview',
+                                            ],
+                                          }),
+                                        ],
+                                      }),
+                                      (0, a.jsxs)(ep.nU, {
+                                        value: 'source',
+                                        className: '-space-y-px',
+                                        children: [
+                                          (0, a.jsx)(eE.Z, {
+                                            id: 'code-id',
+                                            language: 'html',
+                                            isReadOnly: !u,
+                                            className:
+                                              '!mb-0 relative h-96 overflow-hidden rounded border rounded-b-none',
+                                            onInputChange: e => {
+                                              (I(null != e ? e : ''),
+                                                P !== e && O(!0));
+                                            },
+                                            options: {
+                                              wordWrap: 'on',
+                                              contextmenu: !1,
+                                            },
+                                            value: P,
+                                          }),
+                                          (0, a.jsx)(eI, {
+                                            validationResult: C,
+                                          }),
+                                        ],
+                                      }),
+                                      (0, a.jsxs)(ep.nU, {
+                                        value: 'preview',
+                                        children: [
+                                          (0, a.jsx)(es.J, {
+                                            type: 'default',
+                                            title:
+                                              'The preview may differ slightly from the actual rendering in the email client',
+                                          }),
+                                          (0, a.jsx)('iframe', {
+                                            className:
+                                              '!mb-0 overflow-hidden h-96 w-full rounded border',
+                                            title: b,
+                                            srcDoc: P,
+                                          }),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                ],
+                              }),
+                            (0, a.jsx)('div', {
+                              className: 'col-span-12 flex w-full',
+                              children: (0, a.jsx)(d.i, {
+                                handleReset: () => {
+                                  var e;
+                                  (s({ values: h, initialValues: h }),
+                                    I(
+                                      null !== (e = h && h[N]) && void 0 !== e
+                                        ? e
+                                        : ''
+                                    ));
+                                },
+                                form: S,
+                                isSubmitting: D,
+                                hasChanges: l,
+                                disabled: !u,
+                                helper: k
+                                  ? 'Please rectify all spam warnings before saving while using the built-in email service'
+                                  : u
+                                    ? void 0
+                                    : 'You need additional permissions to update authentication settings',
+                              }),
+                            }),
+                          ],
+                        }),
+                      }),
+                    ],
+                  });
+                },
+              })
+            );
+          },
+          eO = () => {
+            let { ref: e } = (0, o.UO)(),
+              {
+                data: t,
+                error: s,
+                isLoading: n,
+                isError: r,
+                isSuccess: i,
+              } = (0, x.$E)({ projectRef: e }),
+              l = i && t && (!t.SMTP_HOST || !t.SMTP_USER || !t.SMTP_PASS);
+            return (0, a.jsxs)('div', {
+              className: 'w-full',
+              'data-sentry-component': 'EmailTemplates',
+              'data-sentry-source-file': 'EmailTemplates.tsx',
+              children: [
+                (0, a.jsx)('div', {
+                  className: 'w-full flex justify-between items-center',
+                  children: (0, a.jsx)(c.p, {
+                    title: 'Email Templates',
+                    description:
+                      'Customize the emails that will be sent out to your users.',
+                    docsUrl:
+                      'https://supabase.com/docs/guides/auth/auth-email-templates',
+                    'data-sentry-element': 'FormHeader',
+                    'data-sentry-source-file': 'EmailTemplates.tsx',
+                  }),
+                }),
+                r &&
+                  (0, a.jsx)(em.Z, {
+                    error: s,
+                    subject: 'Failed to retrieve auth configuration',
+                  }),
+                n &&
+                  (0, a.jsx)('div', {
+                    className: 'w-[854px]',
+                    children: (0, a.jsx)(eh.A, {}),
+                  }),
+                i &&
+                  (0, a.jsx)(u.by, {
+                    children: (0, a.jsxs)(ep.mQ, {
+                      defaultValue: ey[0].title.trim().replace(/\s+/g, '-'),
+                      children: [
+                        (0, a.jsx)(ep.dr, {
+                          className:
+                            'px-4 md:px-8 pt-2 gap-5 overflow-x-scroll no-scrollbar',
+                          children: ey.map(e =>
+                            (0, a.jsx)(ep.SP, {
+                              value: e.title.trim().replace(/\s+/g, '-'),
+                              children: e.title,
+                            })
+                          ),
+                        }),
+                        ey.map(e => {
+                          let t = e.title.trim().replace(/\s+/g, '-');
+                          return (0, a.jsxs)(
+                            ep.nU,
+                            {
+                              value: t,
+                              children: [
+                                l
+                                  ? (0, a.jsx)('div', {
+                                      className: 'px-4 md:px-8',
+                                      children: (0, a.jsx)(eb, {}),
+                                    })
+                                  : null,
+                                (0, a.jsx)(eM, { template: e }, e.title),
+                              ],
+                            },
+                            t
+                          );
+                        }),
+                      ],
+                    }),
+                  }),
+              ],
+            });
+          },
+          eD = s(66164);
+        let eL = {
+          SMTP_ADMIN_EMAIL: null,
+          SMTP_SENDER_NAME: null,
+          SMTP_USER: null,
+          SMTP_HOST: null,
+          SMTP_PASS: null,
+          SMTP_PORT: null,
+          SMTP_MAX_FREQUENCY: 60,
+        };
+        var eU = s(93433),
+          eF = s(71770),
+          ek = () => {
+            let { ref: e } = (0, o.UO)(),
+              {
+                data: t,
+                error: s,
+                isLoading: p,
+                isError: g,
+                isSuccess: y,
+              } = (0, x.$E)({ projectRef: e }),
+              { mutate: b, isLoading: v } = (0, f._)(),
+              [S, T] = (0, r.useState)(!1),
+              [_, A] = (0, r.useState)(!0),
+              I = 'auth-config-smtp-form',
+              M = (0, eU.F)(t),
+              O = (0, j.Xo)(n.KA.READ, 'custom_config_gotrue'),
+              F = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue');
+            (0, r.useEffect)(() => {
+              y && (0, eU.n)(t) && T(!0);
+            }, [y, t]);
+            let k = (0, l.object)({
+              SMTP_ADMIN_EMAIL: (0, l.string)().when([], {
+                is: () => S,
+                then: e =>
+                  e
+                    .email('Must be a valid email')
+                    .required('Sender email is required'),
+                otherwise: e => e,
+              }),
+              SMTP_SENDER_NAME: (0, l.string)().when([], {
+                is: () => S,
+                then: e => e.required('Sender name is required'),
+                otherwise: e => e,
+              }),
+              SMTP_HOST: (0, l.string)().when([], {
+                is: () => S,
+                then: e =>
+                  e
+                    .matches(
+                      (0, eD.y)({ excludeSimpleDomains: !1 }),
+                      'Must be a valid URL or IP address'
+                    )
+                    .required('Host URL is required.'),
+                otherwise: e => e,
+              }),
+              SMTP_PORT: (0, l.number)().when([], {
+                is: () => S,
+                then: e =>
+                  e
+                    .required('Port number is required.')
+                    .min(1, 'Must be a valid port number more than 0')
+                    .max(
+                      65535,
+                      'Must be a valid port number no more than 65535'
+                    ),
+                otherwise: e => e,
+              }),
+              SMTP_MAX_FREQUENCY: (0, l.number)().when([], {
+                is: () => S,
+                then: e =>
+                  e
+                    .required('Rate limit is required.')
+                    .min(1, 'Must be more than 0')
+                    .max(32767, 'Must not be more than 32,767 an hour'),
+                otherwise: e => e,
+              }),
+              SMTP_USER: (0, l.string)().when([], {
+                is: () => S,
+                then: e => e.required('SMTP Username is required'),
+                otherwise: e => e,
+              }),
+              SMTP_PASS: (0, l.string)().when([], {
+                is: () => S && (null == t ? void 0 : t.SMTP_PASS) === null,
+                then: e => e.required('SMTP password is required'),
+                otherwise: e => e,
+              }),
+            });
+            return g
+              ? (0, a.jsxs)(D.bZ, {
+                  variant: 'destructive',
+                  children: [
+                    (0, a.jsx)(L.aN, {}),
+                    (0, a.jsx)(D.Cd, {
+                      children: 'Failed to retrieve auth configuration',
+                    }),
+                    (0, a.jsx)(D.X, { children: s.message }),
+                  ],
+                })
+              : O
+                ? (0, a.jsx)(U.Z, {
+                    id: I,
+                    initialValues: M,
+                    onSubmit: (t, s) => {
+                      let { resetForm: a } = s,
+                        n = S ? t : eL;
+                      (delete n.ENABLE_SMTP,
+                        (n.SMTP_PORT = n.SMTP_PORT
+                          ? n.SMTP_PORT.toString()
+                          : n.SMTP_PORT),
+                        '' === n.SMTP_PASS && delete n.SMTP_PASS,
+                        b(
+                          { projectRef: e, config: n },
+                          {
+                            onError: e => {
+                              i.Am.error(
+                                'Failed to update settings: '.concat(e.message)
+                              );
+                            },
+                            onSuccess: () => {
+                              (A(!0),
+                                i.Am.success('Successfully updated settings'));
+                              let e = (0, eU.F)(n);
+                              a({ values: e, initialValues: e });
+                            },
+                          }
+                        ));
+                    },
+                    validationSchema: k,
+                    'data-sentry-element': 'Form',
+                    'data-sentry-component': 'SmtpForm',
+                    'data-sentry-source-file': 'SmtpForm.tsx',
+                    children: s => {
+                      let { resetForm: n, values: i } = s,
+                        l = (0, eU.n)(i),
+                        o = JSON.stringify(i) !== JSON.stringify(M);
+                      return (
+                        (0, r.useEffect)(() => {
+                          if (y) {
+                            let e = (0, eU.F)(t);
+                            n({ values: e, initialValues: e });
+                          }
+                        }, [y, t]),
+                        (0, a.jsxs)(a.Fragment, {
+                          children: [
+                            (0, a.jsx)(c.p, {
+                              title: 'SMTP Settings',
+                              description:
+                                'You can use your own SMTP server instead of the built-in email service.',
+                            }),
+                            (0, a.jsxs)(u.by, {
+                              footer: (0, a.jsx)('div', {
+                                className: 'flex py-4 px-8',
+                                children: (0, a.jsx)(d.i, {
+                                  form: I,
+                                  isSubmitting: v,
+                                  hasChanges: o,
+                                  handleReset: () => {
+                                    (T((0, eU.n)(M)), n({ values: M }));
+                                  },
+                                  disabled: !F,
+                                  helper: F
+                                    ? void 0
+                                    : 'You need additional permissions to update authentication settings',
+                                }),
+                              }),
+                              children: [
+                                (0, a.jsx)(m.hj, {
+                                  children: (0, a.jsxs)(m.B4, {
+                                    className: '!col-span-12 !gap-y-2',
+                                    loading: p,
+                                    children: [
+                                      (0, a.jsx)(P.Z, {
+                                        size: 'small',
+                                        layout: 'flex',
+                                        name: 'ENABLE_SMTP',
+                                        label: 'Enable Custom SMTP',
+                                        checked: S,
+                                        disabled: !F,
+                                        onChange: e => T(e),
+                                        descriptionText: (0, a.jsxs)('p', {
+                                          className:
+                                            'max-w-full prose text-sm text-foreground-lighter',
+                                          children: [
+                                            'Emails will be sent using your custom SMTP provider. Email rate limits can be adjusted',
+                                            ' ',
+                                            (0, a.jsx)(Y(), {
+                                              className: 'underline',
+                                              href: '/project/'.concat(
+                                                e,
+                                                '/auth/rate-limits'
+                                              ),
+                                              children: 'here',
+                                            }),
+                                            '.',
+                                          ],
+                                        }),
+                                      }),
+                                      S
+                                        ? !l &&
+                                          (0, a.jsx)('div', {
+                                            className: '',
+                                            children: (0, a.jsxs)(D.bZ, {
+                                              variant: 'warning',
+                                              children: [
+                                                (0, a.jsx)(eF.Z, {
+                                                  strokeWidth: 2,
+                                                }),
+                                                (0, a.jsx)(D.Cd, {
+                                                  children:
+                                                    'All fields below must be filled',
+                                                }),
+                                                (0, a.jsx)(D.X, {
+                                                  children:
+                                                    'The following fields must be filled before custom SMTP can be properly enabled',
+                                                }),
+                                              ],
+                                            }),
+                                          })
+                                        : (0, a.jsx)('div', {
+                                            className: '',
+                                            children: (0, a.jsx)(eb, {}),
+                                          }),
+                                    ],
+                                  }),
+                                }),
+                                (0, a.jsx)(m.hj, {
+                                  visible: S,
+                                  header: (0, a.jsx)(m.S0, {
+                                    children: 'Sender details',
+                                  }),
+                                  disabled: !S,
+                                  children: (0, a.jsxs)(m.B4, {
+                                    loading: p,
+                                    children: [
+                                      (0, a.jsx)(w.Z, {
+                                        name: 'SMTP_ADMIN_EMAIL',
+                                        id: 'SMTP_ADMIN_EMAIL',
+                                        label: 'Sender email',
+                                        descriptionText:
+                                          'This is the email address the emails are sent from',
+                                        placeholder: 'noreply@yourdomain.com',
+                                        disabled: !F,
+                                      }),
+                                      (0, a.jsx)(w.Z, {
+                                        name: 'SMTP_SENDER_NAME',
+                                        id: 'SMTP_SENDER_NAME',
+                                        label: 'Sender name',
+                                        descriptionText:
+                                          "Name displayed in the recipient's inbox",
+                                        placeholder:
+                                          'The name shown on the email',
+                                        disabled: !F,
+                                      }),
+                                    ],
+                                  }),
+                                }),
+                                (0, a.jsx)(m.hj, {
+                                  visible: S,
+                                  disabled: !S,
+                                  header: (0, a.jsxs)(m.S0, {
+                                    children: [
+                                      (0, a.jsx)('span', {
+                                        children: 'SMTP Provider Settings',
+                                      }),
+                                      (0, a.jsx)('p', {
+                                        className:
+                                          'my-4 text-foreground-lighter',
+                                        children:
+                                          'Your SMTP Credentials will always be encrypted in our database.',
+                                      }),
+                                    ],
+                                  }),
+                                  children: (0, a.jsxs)(m.B4, {
+                                    loading: p,
+                                    children: [
+                                      i.SMTP_HOST &&
+                                        i.SMTP_HOST.endsWith('.gmail.com') &&
+                                        (0, a.jsxs)(D.bZ, {
+                                          variant: 'warning',
+                                          children: [
+                                            (0, a.jsx)(eF.Z, {
+                                              strokeWidth: 2,
+                                            }),
+                                            (0, a.jsx)(D.Cd, {
+                                              children:
+                                                'Check your SMTP provider',
+                                            }),
+                                            (0, a.jsx)(D.X, {
+                                              children:
+                                                'Not all SMTP providers are designed for the email sending required by Supabase Auth. It looks like the SMTP provider you entered is designed for sending personal email messages and not for sending transactional messages. Although you can ignore this warning, email deliverability may be impacted.',
+                                            }),
+                                          ],
+                                        }),
+                                      (0, a.jsx)(w.Z, {
+                                        name: 'SMTP_HOST',
+                                        placeholder: 'your.smtp.host.com',
+                                        id: 'SMTP_HOST',
+                                        label: 'Host',
+                                        descriptionText:
+                                          'Hostname or IP address of your SMTP server.',
+                                        disabled: !F,
+                                      }),
+                                      (0, a.jsx)(R.Z, {
+                                        name: 'SMTP_PORT',
+                                        id: 'SMTP_PORT',
+                                        placeholder: '587',
+                                        label: 'Port number',
+                                        descriptionText: (0, a.jsxs)(
+                                          a.Fragment,
+                                          {
+                                            children: [
+                                              (0, a.jsxs)('span', {
+                                                className: 'block',
+                                                children: [
+                                                  'Port used by your SMTP server. Common ports include 25, 465, and 587.',
+                                                  ' ',
+                                                ],
+                                              }),
+                                              (0, a.jsx)('span', {
+                                                className: 'mt-2 block',
+                                                children:
+                                                  "Avoid using port 25 as modern SMTP email clients shouldn't use this port, it is traditionally blocked by residential ISPs and Cloud Hosting Providers, to curb the amount of spam.",
+                                              }),
+                                            ],
+                                          }
+                                        ),
+                                        disabled: !F,
+                                      }),
+                                      (0, a.jsx)(R.Z, {
+                                        id: 'SMTP_MAX_FREQUENCY',
+                                        name: 'SMTP_MAX_FREQUENCY',
+                                        label:
+                                          'Minimum interval between emails being sent',
+                                        descriptionText:
+                                          'How long between each email can a new email be sent via your SMTP server.',
+                                        actions: (0, a.jsx)('span', {
+                                          className:
+                                            'mr-3 text-foreground-lighter',
+                                          children: 'seconds',
+                                        }),
+                                        disabled: !F,
+                                      }),
+                                      (0, a.jsx)(w.Z, {
+                                        name: 'SMTP_USER',
+                                        id: 'SMTP_USER',
+                                        label: 'Username',
+                                        placeholder: 'SMTP Username',
+                                        disabled: !F,
+                                      }),
+                                      (0, a.jsx)(w.Z, {
+                                        name: 'SMTP_PASS',
+                                        id: 'SMTP_PASS',
+                                        type: _ ? 'password' : 'text',
+                                        label: 'Password',
+                                        placeholder:
+                                          (null == t ? void 0 : t.SMTP_PASS) ===
+                                          null
+                                            ? 'SMTP Password'
+                                            : '••••••••',
+                                        actions: (0, a.jsx)(C.z, {
+                                          icon: _
+                                            ? (0, a.jsx)(E.Z, {})
+                                            : (0, a.jsx)(N.Z, {}),
+                                          type: 'default',
+                                          onClick: () => A(!_),
+                                        }),
+                                        disabled: !F,
+                                        descriptionText: (0, a.jsx)('span', {
+                                          children:
+                                            'For security reasons, the password is write-only. Once saved, it cannot be retrieved or displayed.',
+                                        }),
+                                      }),
+                                    ],
+                                  }),
+                                }),
+                              ],
+                            }),
+                          ],
+                        })
+                      );
+                    },
+                  })
+                : (0, a.jsx)(h.Z, { resourceText: 'view SMTP settings' });
+          },
+          eZ = s(52675),
+          eB = s(36457);
+        let eH = e => ['auth', e, 'third-party-auth'];
+        async function ez(e) {
+          let { projectRef: t, tpaId: s } = e,
+            { data: a, error: n } = await (0, e_.IV)(
+              '/v1/projects/{ref}/config/auth/third-party-auth/{tpa_id}',
+              { params: { path: { ref: t, tpa_id: s } } }
+            );
+          return (n && (0, e_.S3)(n), a);
+        }
+        let eV = function () {
+          let {
+              onSuccess: e,
+              onError: t,
+              ...s
+            } = arguments.length > 0 && void 0 !== arguments[0]
+              ? arguments[0]
+              : {},
+            a = (0, eB.NL)();
+          return (0, eT.D)(e => ez(e), {
+            async onSuccess(t, s, n) {
+              let { projectRef: r } = s;
+              (await a.invalidateQueries(eH(r)),
+                await (null == e ? void 0 : e(t, s, n)));
+            },
+            async onError(e, s, a) {
+              void 0 === t
+                ? i.Am.error(
+                    'Failed to delete third party auth integration: '.concat(
+                      e.message
+                    )
+                  )
+                : t(e, s, a);
+            },
+            ...s,
+          });
+        };
+        var eY = s(28894);
+        async function eW(e, t) {
+          let { projectRef: s } = e;
+          if (!s) throw Error('projectRef is required');
+          let { data: a, error: n } = await (0, e_.U2)(
+            '/v1/projects/{ref}/config/auth/third-party-auth',
+            { params: { path: { ref: s } }, signal: t }
+          );
+          return (n && (0, e_.S3)(n), a);
+        }
+        let eX = function (e) {
+          let { projectRef: t } = e,
+            { enabled: s = !0, ...a } =
+              arguments.length > 1 && void 0 !== arguments[1]
+                ? arguments[1]
+                : {};
+          return (0, eY.a)(
+            eH(t),
+            e => {
+              let { signal: s } = e;
+              return eW({ projectRef: t }, s);
+            },
+            { enabled: s && void 0 !== t, ...a }
+          );
+        };
+        var eq = s(32002),
+          eG = s(98601),
+          eK = s(51650),
+          eJ = s.n(eK),
+          eQ = s(14500);
+        let e$ = e =>
+            (null == e ? void 0 : e.oidc_issuer_url) &&
+            (null == e
+              ? void 0
+              : e.oidc_issuer_url.startsWith('https://securetoken.google.com/'))
+              ? 'firebase'
+              : (null == e ? void 0 : e.oidc_issuer_url) &&
+                  (null == e
+                    ? void 0
+                    : e.oidc_issuer_url.includes('amazonaws.com'))
+                ? 'awsCognito'
+                : (null == e ? void 0 : e.oidc_issuer_url) &&
+                    (null == e
+                      ? void 0
+                      : e.oidc_issuer_url.includes('auth0.com'))
+                  ? 'auth0'
+                  : 'custom',
+          e0 = e => {
+            switch (e) {
+              case 'firebase':
+                return 'Firebase';
+              case 'auth0':
+                return 'Auth0';
+              case 'awsCognito':
+                return 'Amazon Cognito';
+              default:
+                return 'Custom';
+            }
+          },
+          e1 = e => {
+            switch (e) {
+              case 'firebase':
+                return ''.concat(b.GW, '/img/icons/firebase-icon.svg');
+              case 'auth0':
+                return ''.concat(b.GW, '/img/icons/auth0-icon.svg');
+              default:
+                return ''.concat(b.GW, '/img/icons/cognito-icon.svg');
+            }
+          },
+          e2 = e => {
+            let { disabled: t, type: s, onSelectIntegrationType: n } = e;
+            return (0, a.jsxs)(
+              eQ.Xi,
+              {
+                onClick: () => n(s),
+                className: (0, eC.cn)(
+                  'flex items-center gap-x-2 p-2',
+                  t && 'cursor-not-allowed'
+                ),
+                disabled: t,
+                'data-sentry-element': 'DropdownMenuItem',
+                'data-sentry-component': 'ProviderDropdownItem',
+                'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                children: [
+                  (0, a.jsx)(eJ(), {
+                    src: e1(s),
+                    width: 16,
+                    height: 16,
+                    alt: ''.concat(s, ' icon'),
+                    'data-sentry-element': 'Image',
+                    'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                  }),
+                  (0, a.jsx)('span', { children: e0(s) }),
+                ],
+              },
+              s
+            );
+          },
+          e4 = e => {
+            let { onSelectIntegrationType: t } = e,
+              s = (0, y.l)(),
+              { data: n } = (0, g.Gl)(
+                { orgSlug: null == s ? void 0 : s.slug },
+                { enabled: o.Qy }
+              );
+            return (0, a.jsxs)(eQ.h_, {
+              modal: !1,
+              'data-sentry-element': 'DropdownMenu',
+              'data-sentry-component': 'AddIntegrationDropdown',
+              'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+              children: [
+                (0, a.jsx)(eQ.$F, {
+                  asChild: !0,
+                  'data-sentry-element': 'DropdownMenuTrigger',
+                  'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                  children: (0, a.jsx)(C.z, {
+                    type: 'primary',
+                    iconRight: (0, a.jsx)(eG.Z, { size: 14, strokeWidth: 1 }),
+                    'data-sentry-element': 'Button',
+                    'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                    children: 'Add provider',
+                  }),
+                }),
+                (0, a.jsxs)(eQ.AW, {
+                  align: 'end',
+                  className: 'w-56',
+                  'data-sentry-element': 'DropdownMenuContent',
+                  'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                  children: [
+                    (0, a.jsx)(eQ.Ju, {
+                      'data-sentry-element': 'DropdownMenuLabel',
+                      'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                      children: 'Select Provider',
+                    }),
+                    (0, a.jsx)(eQ.VD, {
+                      'data-sentry-element': 'DropdownMenuSeparator',
+                      'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                    }),
+                    (0, a.jsx)(e2, {
+                      type: 'firebase',
+                      onSelectIntegrationType: t,
+                      'data-sentry-element': 'ProviderDropdownItem',
+                      'data-sentry-source-file': 'AddIntegrationDropdown.tsx',
+                    }),
+                    (null == n ? void 0 : n.plan.id) === 'free'
+                      ? (0, a.jsxs)(a.Fragment, {
+                          children: [
+                            (0, a.jsx)(eQ.VD, {}),
+                            (0, a.jsxs)('div', {
+                              className: 'bg-surface-200 -m-1 p-2',
+                              children: [
+                                (0, a.jsxs)(eQ.Ju, {
+                                  className: 'grid gap-1',
+                                  children: [
+                                    (0, a.jsx)('p', {
+                                      className: 'text-foreground-light',
+                                      children: 'Unavailable on the Free plan',
+                                    }),
+                                    (0, a.jsxs)('p', {
+                                      className:
+                                        'text-foreground-lighter text-xs',
+                                      children: [
+                                        (0, a.jsx)(Y(), {
+                                          target: '_href',
+                                          rel: 'noreferrer',
+                                          className:
+                                            'underline hover:text-foreground-light transition',
+                                          href: '/org/'.concat(
+                                            null == s ? void 0 : s.slug,
+                                            '/billing'
+                                          ),
+                                          children: 'Upgrade your plan',
+                                        }),
+                                        ' ',
+                                        'to add the following providers to your project.',
+                                      ],
+                                    }),
+                                  ],
+                                }),
+                                (0, a.jsx)(e2, {
+                                  disabled: !0,
+                                  type: 'auth0',
+                                  onSelectIntegrationType: t,
+                                }),
+                                (0, a.jsx)(e2, {
+                                  disabled: !0,
+                                  type: 'awsCognito',
+                                  onSelectIntegrationType: t,
+                                }),
+                              ],
+                            }),
+                          ],
+                        })
+                      : (0, a.jsxs)(a.Fragment, {
+                          children: [
+                            (0, a.jsx)(e2, {
+                              type: 'auth0',
+                              onSelectIntegrationType: t,
+                            }),
+                            (0, a.jsx)(e2, {
+                              type: 'awsCognito',
+                              onSelectIntegrationType: t,
+                            }),
+                          ],
+                        }),
+                  ],
+                }),
+              ],
+            });
+          };
+        var e3 = s(78751),
+          e5 = (s(74304), s(86848)),
+          e6 = s(5394);
+        async function e9(e) {
+          let {
+              projectRef: t,
+              customJwks: s,
+              jwksUrl: a,
+              oidcIssuerUrl: n,
+            } = e,
+            { data: r, error: i } = await (0, e_.v_)(
+              '/v1/projects/{ref}/config/auth/third-party-auth',
+              {
+                params: { path: { ref: t } },
+                body: { custom_jwks: s, jwks_url: a, oidc_issuer_url: n },
+              }
+            );
+          return (i && (0, e_.S3)(i), r);
+        }
+        let e8 = function () {
+          let {
+              onSuccess: e,
+              onError: t,
+              ...s
+            } = arguments.length > 0 && void 0 !== arguments[0]
+              ? arguments[0]
+              : {},
+            a = (0, eB.NL)();
+          return (0, eT.D)(e => e9(e), {
+            async onSuccess(t, s, n) {
+              let { projectRef: r } = s;
+              (await a.invalidateQueries(eH(r)),
+                await (null == e ? void 0 : e(t, s, n)));
+            },
+            async onError(e, s, a) {
+              void 0 === t
+                ? i.Am.error(
+                    'Failed to create third party auth integration: '.concat(
+                      e.message
+                    )
+                  )
+                : t(e, s, a);
+            },
+            ...s,
+          });
+        };
+        var e7 = s(36210),
+          te = s(49142),
+          tt = s(56740),
+          ts = s(78366);
+        let ta = 'create-auth0-auth-integration-form',
+          tn = e6.Ry({
+            enabled: e6.O7(),
+            auth0DomainName: e6
+              .Z_()
+              .trim()
+              .min(1)
+              .regex(
+                /^[A-Za-z0-9-.]+$/,
+                'Project IDs should only have alphanumeric characters and hyphens.'
+              ),
+          }),
+          tr = e => {
+            let { visible: t, onClose: s, onDelete: n } = e,
+              { ref: l } = (0, o.UO)(),
+              { mutate: d, isLoading: c } = e8({
+                onSuccess: () => {
+                  (i.Am.success(
+                    'Successfully created a new Auth0 Auth integration.'
+                  ),
+                    s());
+                },
+              }),
+              u = (0, e5.cI)({
+                resolver: (0, e3.F)(tn),
+                defaultValues: { enabled: !0, auth0DomainName: '' },
+              });
+            (0, r.useEffect)(() => {
+              t &&
+                (u.reset({ enabled: !0, auth0DomainName: '' }),
+                setTimeout(() => {
+                  u.setFocus('auth0DomainName');
+                }, 25));
+            }, [t]);
+            let m = async e => {
+              d({
+                projectRef: l,
+                oidcIssuerUrl: 'https://'.concat(
+                  e.auth0DomainName,
+                  '.auth0.com'
+                ),
+              });
+            };
+            return (0, a.jsx)(e7.Vq, {
+              open: t,
+              onOpenChange: () => s(),
+              'data-sentry-element': 'Dialog',
+              'data-sentry-component': 'CreateAuth0IntegrationDialog',
+              'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+              children: (0, a.jsxs)(e7.cZ, {
+                'data-sentry-element': 'DialogContent',
+                'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                children: [
+                  (0, a.jsx)(e7.fK, {
+                    'data-sentry-element': 'DialogHeader',
+                    'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                    children: (0, a.jsx)(e7.$N, {
+                      className: 'truncate',
+                      'data-sentry-element': 'DialogTitle',
+                      'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                      children: 'Add new Auth0 connection',
+                    }),
+                  }),
+                  (0, a.jsx)(eP.Z, {
+                    'data-sentry-element': 'Separator',
+                    'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                  }),
+                  (0, a.jsx)(e7.VO, {
+                    'data-sentry-element': 'DialogSection',
+                    'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                    children: (0, a.jsx)(te.l0, {
+                      ...u,
+                      'data-sentry-element': 'Form_Shadcn_',
+                      'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                      children: (0, a.jsxs)('form', {
+                        id: ta,
+                        onSubmit: u.handleSubmit(m),
+                        className: 'space-y-4',
+                        children: [
+                          (0, a.jsx)('p', {
+                            className: 'text-sm text-foreground-light',
+                            children:
+                              'This will enable a JWT token from your Auth0 project to access data from this Supabase project.',
+                          }),
+                          (0, a.jsx)(
+                            te.Wi,
+                            {
+                              control: u.control,
+                              name: 'auth0DomainName',
+                              render: e => {
+                                let { field: t } = e;
+                                return (0, a.jsx)(ts.E, {
+                                  label: 'Auth0 domain name',
+                                  children: (0, a.jsxs)('div', {
+                                    className: 'flex flex-row',
+                                    children: [
+                                      (0, a.jsx)(C.z, {
+                                        type: 'default',
+                                        size: 'small',
+                                        className:
+                                          'px-2 text-foreground-light rounded-r-none',
+                                        onClick: () =>
+                                          u.setFocus('auth0DomainName'),
+                                        children: 'https://',
+                                      }),
+                                      (0, a.jsx)(te.NI, {
+                                        children: (0, a.jsx)(tt.I, {
+                                          className:
+                                            'border-l-0 rounded-none border-r-0 z-50',
+                                          ...t,
+                                        }),
+                                      }),
+                                      (0, a.jsx)(C.z, {
+                                        type: 'default',
+                                        size: 'small',
+                                        className:
+                                          'px-2 text-foreground-light rounded-l-none',
+                                        onClick: () =>
+                                          u.setFocus('auth0DomainName'),
+                                        children: '.auth0.com',
+                                      }),
+                                    ],
+                                  }),
+                                });
+                              },
+                              'data-sentry-element': 'FormField_Shadcn_',
+                              'data-sentry-source-file':
+                                'CreateAuth0Dialog.tsx',
+                            },
+                            'auth0DomainName'
+                          ),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, a.jsxs)(e7.cN, {
+                    'data-sentry-element': 'DialogFooter',
+                    'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                    children: [
+                      !1,
+                      (0, a.jsx)(C.z, {
+                        disabled: c,
+                        type: 'default',
+                        onClick: () => s(),
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                        children: 'Cancel',
+                      }),
+                      (0, a.jsx)(C.z, {
+                        form: ta,
+                        htmlType: 'submit',
+                        disabled: c,
+                        loading: c,
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file': 'CreateAuth0Dialog.tsx',
+                        children: 'Create connection',
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            });
+          };
+        var ti = s(50416),
+          tl = s(42026),
+          to = s(47482),
+          td = s(64890);
+        let tc = [
+            'af-south-1',
+            'ap-northeast-1',
+            'ap-northeast-2',
+            'ap-northeast-3',
+            'ap-south-1 ',
+            'ap-south-2 ',
+            'ap-southeast-1',
+            'ap-southeast-2',
+            'ap-southeast-3',
+            'ap-southeast-4',
+            'ca-central-1',
+            'eu-central-1',
+            'eu-central-2',
+            'eu-north-1',
+            'eu-south-1',
+            'eu-south-2',
+            'eu-west-1',
+            'eu-west-2',
+            'eu-west-3',
+            'il-central-1',
+            'me-central-1',
+            'me-south-1',
+            'sa-east-1',
+            'us-east-1',
+            'us-east-2',
+            'us-gov-west-1',
+            'us-west-1',
+            'us-west-2',
+          ],
+          tu = e => {
+            let { value: t, onChange: s } = e,
+              [n, i] = (0, r.useState)(!1);
+            return (0, a.jsxs)(tl.J2, {
+              open: n,
+              onOpenChange: i,
+              'data-sentry-element': 'Popover_Shadcn_',
+              'data-sentry-component': 'AwsRegionSelector',
+              'data-sentry-source-file': 'AwsRegionSelector.tsx',
+              children: [
+                (0, a.jsx)(tl.xo, {
+                  asChild: !0,
+                  'data-sentry-element': 'PopoverTrigger_Shadcn_',
+                  'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                  children: (0, a.jsx)(te.NI, {
+                    'data-sentry-element': 'FormControl_Shadcn_',
+                    'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                    children: (0, a.jsx)(C.z, {
+                      type: 'default',
+                      role: 'combobox',
+                      className: (0, eC.cn)(
+                        'w-full justify-between',
+                        !t && 'text-muted-foreground'
+                      ),
+                      size: 'small',
+                      iconRight: (0, a.jsx)(ti.Z, {
+                        className: 'ml-2 h-4 w-4 shrink-0 opacity-50',
+                        strokeWidth: 1,
+                      }),
+                      'data-sentry-element': 'Button',
+                      'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                      children: null != t ? t : 'Select a region',
+                    }),
+                  }),
+                }),
+                (0, a.jsx)(tl.yk, {
+                  className: 'p-0',
+                  sameWidthAsTrigger: !0,
+                  'data-sentry-element': 'PopoverContent_Shadcn_',
+                  'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                  children: (0, a.jsxs)(to.mY, {
+                    'data-sentry-element': 'Command_Shadcn_',
+                    'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                    children: [
+                      (0, a.jsx)(to.sZ, {
+                        placeholder: 'Search AWS regions...',
+                        'data-sentry-element': 'CommandInput_Shadcn_',
+                        'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                      }),
+                      (0, a.jsxs)(to.e8, {
+                        'data-sentry-element': 'CommandList_Shadcn_',
+                        'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                        children: [
+                          (0, a.jsx)(to.rb, {
+                            'data-sentry-element': 'CommandEmpty_Shadcn_',
+                            'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                            children: 'No regions found.',
+                          }),
+                          (0, a.jsx)(to.fu, {
+                            'data-sentry-element': 'CommandGroup_Shadcn_',
+                            'data-sentry-source-file': 'AwsRegionSelector.tsx',
+                            children: (0, a.jsx)(td.x, {
+                              className: 'h-72',
+                              'data-sentry-element': 'ScrollArea',
+                              'data-sentry-source-file':
+                                'AwsRegionSelector.tsx',
+                              children: tc.map(e =>
+                                (0, a.jsxs)(
+                                  to.di,
+                                  {
+                                    value: e,
+                                    onSelect: e => {
+                                      (s(e === t ? '' : e), i(!1));
+                                    },
+                                    children: [
+                                      (0, a.jsx)(K.Z, {
+                                        className: (0, eC.cn)(
+                                          'mr-2 h-4 w-4',
+                                          e === t ? 'opacity-100' : 'opacity-0'
+                                        ),
+                                      }),
+                                      e,
+                                    ],
+                                  },
+                                  e
+                                )
+                              ),
+                            }),
+                          }),
+                        ],
+                      }),
+                    ],
+                  }),
+                }),
+              ],
+            });
+          },
+          tm = 'create-aws-cognito-auth-integration-form',
+          th = e6.Ry({
+            enabled: e6.O7(),
+            awsCognitoUserPoolId: e6
+              .Z_()
+              .trim()
+              .min(1)
+              .regex(
+                /^[A-Za-z0-9-_]+$/,
+                'The project ID contains invalid characters.'
+              ),
+            awsRegion: e6.Z_(),
+          }),
+          tp = e => {
+            let { visible: t, onClose: s, onDelete: n } = e,
+              { ref: l } = (0, o.UO)(),
+              { mutate: d, isLoading: c } = e8({
+                onSuccess: () => {
+                  (i.Am.success(
+                    'Successfully created a new Amazon Cognito Auth integration.'
+                  ),
+                    s());
+                },
+              }),
+              u = (0, e5.cI)({
+                resolver: (0, e3.F)(th),
+                defaultValues: {
+                  enabled: !0,
+                  awsCognitoUserPoolId: '',
+                  awsRegion: 'us-east-1',
+                },
+              });
+            (0, r.useEffect)(() => {
+              t &&
+                (u.reset({
+                  enabled: !0,
+                  awsCognitoUserPoolId: '',
+                  awsRegion: 'us-east-1',
+                }),
+                setTimeout(() => {
+                  u.setFocus('awsCognitoUserPoolId');
+                }, 25));
+            }, [t]);
+            let m = async e => {
+                d({
+                  projectRef: l,
+                  oidcIssuerUrl: 'https://cognito-idp.'
+                    .concat(e.awsRegion, '.amazonaws.com/')
+                    .concat(e.awsCognitoUserPoolId),
+                });
+              },
+              h = u.watch('awsRegion');
+            return (0, a.jsx)(e7.Vq, {
+              open: t,
+              onOpenChange: () => s(),
+              'data-sentry-element': 'Dialog',
+              'data-sentry-component': 'CreateAwsCognitoAuthIntegrationDialog',
+              'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+              children: (0, a.jsxs)(e7.cZ, {
+                size: 'large',
+                'data-sentry-element': 'DialogContent',
+                'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+                children: [
+                  (0, a.jsxs)(e7.fK, {
+                    'data-sentry-element': 'DialogHeader',
+                    'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+                    children: [
+                      (0, a.jsx)(e7.$N, {
+                        className: 'truncate',
+                        'data-sentry-element': 'DialogTitle',
+                        'data-sentry-source-file':
+                          'CreateAwsCognitoAuthDialog.tsx',
+                        children: 'Add new Amazon Cognito Auth connection',
+                      }),
+                      (0, a.jsx)(e7.Be, {
+                        'data-sentry-element': 'DialogDescription',
+                        'data-sentry-source-file':
+                          'CreateAwsCognitoAuthDialog.tsx',
+                        children:
+                          'By adding an Amazon Cognito Auth connection, you can authenticate users using Amazon Cognito User Pools.',
+                      }),
+                    ],
+                  }),
+                  (0, a.jsx)(eP.Z, {
+                    'data-sentry-element': 'Separator',
+                    'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+                  }),
+                  (0, a.jsx)(e7.VO, {
+                    'data-sentry-element': 'DialogSection',
+                    'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+                    children: (0, a.jsx)(te.l0, {
+                      ...u,
+                      'data-sentry-element': 'Form_Shadcn_',
+                      'data-sentry-source-file':
+                        'CreateAwsCognitoAuthDialog.tsx',
+                      children: (0, a.jsxs)('form', {
+                        id: tm,
+                        onSubmit: u.handleSubmit(m),
+                        className: 'space-y-4',
+                        children: [
+                          (0, a.jsx)('p', {
+                            className: 'text-sm text-foreground-light',
+                            children:
+                              'This will enable a JWT token from Amazon Cognito project to access data from this Supabase project.',
+                          }),
+                          (0, a.jsx)(
+                            te.Wi,
+                            {
+                              control: u.control,
+                              name: 'awsCognitoUserPoolId',
+                              render: e => {
+                                let { field: t } = e;
+                                return (0, a.jsx)(ts.E, {
+                                  label: 'Amazon Cognito User Pool ID',
+                                  children: (0, a.jsxs)('div', {
+                                    className: 'flex flex-row',
+                                    children: [
+                                      (0, a.jsxs)(C.z, {
+                                        type: 'default',
+                                        size: 'small',
+                                        className:
+                                          'px-2 text-foreground-light rounded-r-none',
+                                        onClick: () =>
+                                          u.setFocus('awsCognitoUserPoolId'),
+                                        children: [
+                                          'https://cognito-idp.',
+                                          h,
+                                          '.amazonaws.com/',
+                                        ],
+                                      }),
+                                      (0, a.jsx)(te.NI, {
+                                        children: (0, a.jsx)(tt.I, {
+                                          className:
+                                            'rounded-l-none border-l-0 z-50',
+                                          ...t,
+                                        }),
+                                      }),
+                                    ],
+                                  }),
+                                });
+                              },
+                              'data-sentry-element': 'FormField_Shadcn_',
+                              'data-sentry-source-file':
+                                'CreateAwsCognitoAuthDialog.tsx',
+                            },
+                            'awsCognitoUserPoolId'
+                          ),
+                          (0, a.jsx)(te.Wi, {
+                            control: u.control,
+                            name: 'awsRegion',
+                            render: e => {
+                              let { field: t } = e;
+                              return (0, a.jsx)(ts.E, {
+                                label: 'AWS Region',
+                                children: (0, a.jsx)(tu, {
+                                  value: t.value,
+                                  onChange: t.onChange,
+                                }),
+                              });
+                            },
+                            'data-sentry-element': 'FormField_Shadcn_',
+                            'data-sentry-source-file':
+                              'CreateAwsCognitoAuthDialog.tsx',
+                          }),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, a.jsxs)(e7.cN, {
+                    'data-sentry-element': 'DialogFooter',
+                    'data-sentry-source-file': 'CreateAwsCognitoAuthDialog.tsx',
+                    children: [
+                      !1,
+                      (0, a.jsx)(C.z, {
+                        disabled: c,
+                        type: 'default',
+                        onClick: () => s(),
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file':
+                          'CreateAwsCognitoAuthDialog.tsx',
+                        children: 'Cancel',
+                      }),
+                      (0, a.jsx)(C.z, {
+                        form: tm,
+                        htmlType: 'submit',
+                        disabled: c,
+                        loading: c,
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file':
+                          'CreateAwsCognitoAuthDialog.tsx',
+                        children: 'Create connection',
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            });
+          },
+          tx = 'create-firebase-auth-integration-form',
+          tf = e6.Ry({
+            enabled: e6.O7(),
+            firebaseProjectId: e6
+              .Z_()
+              .trim()
+              .min(1)
+              .regex(
+                /^[A-Za-z0-9-]+$/,
+                'The project ID contains invalid characters.'
+              ),
+          }),
+          tg = e => {
+            let { visible: t, onClose: s, onDelete: n } = e,
+              { ref: l } = (0, o.UO)(),
+              { mutate: d, isLoading: c } = e8({
+                onSuccess: () => {
+                  (i.Am.success(
+                    'Successfully created a new Firebase Auth integration.'
+                  ),
+                    s());
+                },
+              }),
+              u = (0, e5.cI)({
+                resolver: (0, e3.F)(tf),
+                defaultValues: { enabled: !0, firebaseProjectId: '' },
+              });
+            (0, r.useEffect)(() => {
+              t &&
+                (u.reset({ enabled: !0, firebaseProjectId: '' }),
+                setTimeout(() => {
+                  u.setFocus('firebaseProjectId');
+                }, 25));
+            }, [t]);
+            let m = async e => {
+              d({
+                projectRef: l,
+                oidcIssuerUrl: 'https://securetoken.google.com/'.concat(
+                  e.firebaseProjectId
+                ),
+              });
+            };
+            return (0, a.jsx)(e7.Vq, {
+              open: t,
+              onOpenChange: () => s(),
+              'data-sentry-element': 'Dialog',
+              'data-sentry-component': 'CreateFirebaseAuthIntegrationDialog',
+              'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+              children: (0, a.jsxs)(e7.cZ, {
+                'data-sentry-element': 'DialogContent',
+                'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                children: [
+                  (0, a.jsx)(e7.fK, {
+                    'data-sentry-element': 'DialogHeader',
+                    'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                    children: (0, a.jsx)(e7.$N, {
+                      className: 'truncate',
+                      'data-sentry-element': 'DialogTitle',
+                      'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                      children: 'Add new Firebase Auth connection',
+                    }),
+                  }),
+                  (0, a.jsx)(eP.Z, {
+                    'data-sentry-element': 'Separator',
+                    'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                  }),
+                  (0, a.jsx)(e7.VO, {
+                    'data-sentry-element': 'DialogSection',
+                    'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                    children: (0, a.jsx)(te.l0, {
+                      ...u,
+                      'data-sentry-element': 'Form_Shadcn_',
+                      'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                      children: (0, a.jsxs)('form', {
+                        id: tx,
+                        onSubmit: u.handleSubmit(m),
+                        className: 'space-y-4',
+                        children: [
+                          (0, a.jsx)('p', {
+                            className: 'text-sm text-foreground-light',
+                            children:
+                              'This will enable a JWT token from a specific Firebase project to access data from this Supabase project.',
+                          }),
+                          (0, a.jsx)(
+                            te.Wi,
+                            {
+                              control: u.control,
+                              name: 'firebaseProjectId',
+                              render: e => {
+                                let { field: t } = e;
+                                return (0, a.jsx)(ts.E, {
+                                  label: 'Firebase Auth Project ID',
+                                  children: (0, a.jsx)(te.NI, {
+                                    children: (0, a.jsx)(tt.I, { ...t }),
+                                  }),
+                                });
+                              },
+                              'data-sentry-element': 'FormField_Shadcn_',
+                              'data-sentry-source-file':
+                                'CreateFirebaseAuthDialog.tsx',
+                            },
+                            'firebaseProjectId'
+                          ),
+                        ],
+                      }),
+                    }),
+                  }),
+                  (0, a.jsxs)(e7.cN, {
+                    'data-sentry-element': 'DialogFooter',
+                    'data-sentry-source-file': 'CreateFirebaseAuthDialog.tsx',
+                    children: [
+                      !1,
+                      (0, a.jsx)(C.z, {
+                        disabled: c,
+                        type: 'default',
+                        onClick: () => s(),
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file':
+                          'CreateFirebaseAuthDialog.tsx',
+                        children: 'Cancel',
+                      }),
+                      (0, a.jsx)(C.z, {
+                        form: tx,
+                        htmlType: 'submit',
+                        disabled: c,
+                        loading: c,
+                        'data-sentry-element': 'Button',
+                        'data-sentry-source-file':
+                          'CreateFirebaseAuthDialog.tsx',
+                        children: 'Create connection',
+                      }),
+                    ],
+                  }),
+                ],
+              }),
+            });
+          };
+        var tj = s(73565);
+        let ty = e => {
+            switch (e) {
+              case 'firebase':
+                return (0, a.jsxs)(a.Fragment, {
+                  children: [
+                    "Allow users to use Supabase with Firebase project. You'll need to setup RLS policies for all tables that you want to access with a Firebase JWT token. Additionally, you'll need to add custom code to set the ",
+                    (0, a.jsx)('code', { children: 'authenticated' }),
+                    ' role to all your present and future users. You can read more in the',
+                    ' ',
+                    (0, a.jsx)('a', {
+                      className:
+                        'hover:decoration-brand underline hover:text-foreground transition',
+                      href: 'https://supabase.com/docs/guides/auth',
+                      children: 'documentation',
+                    }),
+                    '.',
+                  ],
+                });
+              case 'auth0':
+                return (0, a.jsxs)(a.Fragment, {
+                  children: [
+                    'Allow users to use Supabase with Auth0 project. Additional setup may be required. You can read more in the',
+                    ' ',
+                    (0, a.jsx)('a', {
+                      className:
+                        'hover:decoration-brand underline hover:text-foreground transition',
+                      href: 'https://supabase.com/docs/guides/auth',
+                      children: 'documentation',
+                    }),
+                    '.',
+                  ],
+                });
+              case 'awsCognito':
+                return (0, a.jsxs)(a.Fragment, {
+                  children: [
+                    'Allow users to use Supabase with an Amazon Cognito. Additional setup may be required. You can read more in the',
+                    ' ',
+                    (0, a.jsx)('a', {
+                      className:
+                        'hover:decoration-brand underline hover:text-foreground transition',
+                      href: 'https://supabase.com/docs/guides/auth/third-party/aws-cognito',
+                      children: 'documentation',
+                    }),
+                    '.',
+                  ],
+                });
+              default:
+                return 'Custom';
+            }
+          },
+          tb = e => {
+            var t, s, n, r;
+            let { type: i, integration: l } = e;
+            switch (i) {
+              case 'firebase': {
+                let e =
+                  (null === (t = l.oidc_issuer_url) || void 0 === t
+                    ? void 0
+                    : t.replace('https://securetoken.google.com/', '')) || '';
+                return (0, a.jsxs)('div', {
+                  className: 'text-sm flex flex-row gap-x-4',
+                  children: [
+                    (0, a.jsx)('span', {
+                      className: 'text-foreground-light w-36',
+                      children: 'Firebase Project ID',
+                    }),
+                    (0, a.jsx)('span', {
+                      className: 'text-foreground',
+                      children: e,
+                    }),
+                  ],
+                });
+              }
+              case 'auth0':
+                let o =
+                  (null === (s = l.oidc_issuer_url) || void 0 === s
+                    ? void 0
+                    : s.replace('https://', '').replace('.auth0.com', '')) ||
+                  '';
+                return (0, a.jsxs)('div', {
+                  className: 'text-sm flex flex-row gap-x-4',
+                  children: [
+                    (0, a.jsx)('span', {
+                      className: 'text-foreground-light w-36',
+                      children: 'Auth0 Domain Name',
+                    }),
+                    (0, a.jsx)('span', {
+                      className: 'text-foreground',
+                      children: o,
+                    }),
+                  ],
+                });
+              case 'awsCognito': {
+                let e =
+                    (null === (n = l.oidc_issuer_url) || void 0 === n
+                      ? void 0
+                      : n.split('.').filter(e => tc.includes(e))[0]) || '',
+                  t =
+                    (null === (r = l.oidc_issuer_url) || void 0 === r
+                      ? void 0
+                      : r.split('/').filter(t => t.startsWith(e || ''))[0]) ||
+                    '';
+                return (0, a.jsxs)('div', {
+                  className: 'text-sm flex flex-col gap-y-2',
+                  children: [
+                    (0, a.jsxs)('div', {
+                      className: 'flex flex-row gap-x-4',
+                      children: [
+                        (0, a.jsx)('span', {
+                          className: 'text-foreground-light w-36',
+                          children: 'Region',
+                        }),
+                        (0, a.jsx)('span', {
+                          className: 'text-foreground',
+                          children: e,
+                        }),
+                      ],
+                    }),
+                    (0, a.jsxs)('div', {
+                      className: 'flex flex-row gap-x-4',
+                      children: [
+                        (0, a.jsx)('span', {
+                          className: 'text-foreground-light w-36',
+                          children: 'User Pool ID',
+                        }),
+                        (0, a.jsx)('span', {
+                          className: 'text-foreground',
+                          children: t,
+                        }),
+                      ],
+                    }),
+                  ],
+                });
+              }
+              default:
+                return (0, a.jsx)(a.Fragment, { children: 'Custom' });
+            }
+          },
+          tv = e => {
+            let { integration: t, canUpdateConfig: s, onDelete: n } = e,
+              { ref: r } = (0, o.UO)(),
+              i = e$(t);
+            return 'custom' === i
+              ? null
+              : (0, a.jsx)(a.Fragment, {
+                  children: (0, a.jsxs)('div', {
+                    className:
+                      'bg-surface-100 border overflow-hidden shadow px-5 py-4 flex flex-row first:rounded-t-md last:rounded-b-md space-x-4',
+                    children: [
+                      (0, a.jsx)('div', {
+                        className: 'py-1',
+                        children: (0, a.jsx)(eJ(), {
+                          src: e1(i),
+                          width: 21,
+                          height: 21,
+                          alt: ''.concat(i, ' icon'),
+                          'data-sentry-element': 'Image',
+                          'data-sentry-source-file': 'IntegrationCard.tsx',
+                        }),
+                      }),
+                      (0, a.jsxs)('div', {
+                        className:
+                          'flex flex-col flex-0 overflow-y-auto w-full gap-y-4',
+                        children: [
+                          (0, a.jsxs)('div', {
+                            className: 'text-sm flex flex-col',
+                            children: [
+                              (0, a.jsx)('span', {
+                                className: 'text-foreground',
+                                children: e0(i),
+                              }),
+                              (0, a.jsx)('div', {
+                                className: 'text-foreground-lighter',
+                                children: ty(i),
+                              }),
+                            ],
+                          }),
+                          (0, a.jsx)(tb, {
+                            type: i,
+                            integration: t,
+                            'data-sentry-element': 'IntegrationTypeContent',
+                            'data-sentry-source-file': 'IntegrationCard.tsx',
+                          }),
+                          (0, a.jsx)('div', {
+                            children: (0, a.jsx)(C.z, {
+                              type: 'danger',
+                              disabled: !s,
+                              onClick: () => n(),
+                              'data-sentry-element': 'Button',
+                              'data-sentry-source-file': 'IntegrationCard.tsx',
+                              children: 'Delete integration',
+                            }),
+                          }),
+                        ],
+                      }),
+                      (0, a.jsx)('div', {
+                        className: 'flex-1',
+                        children: (0, a.jsxs)(tj.C, {
+                          className: 'space-x-1',
+                          size: 'large',
+                          variant: 'brand',
+                          children: [
+                            (0, a.jsx)('div', {
+                              className:
+                                'h-3.5 w-3.5 bg-brand rounded-full flex justify-center items-center',
+                              children: (0, a.jsx)(K.Z, {
+                                className: 'h-2 w-2 text-background-overlay',
+                                strokeWidth: 6,
+                              }),
+                            }),
+                            (0, a.jsx)('span', { children: 'Enabled' }),
+                          ],
+                        }),
+                      }),
+                    ],
+                  }),
+                });
+          },
+          tS = () => {
+            let { ref: e } = (0, o.UO)(),
+              {
+                data: t,
+                isLoading: s,
+                isError: l,
+                isSuccess: d,
+                error: u,
+              } = eX({ projectRef: e }),
+              m = t || [],
+              [h, p] = (0, r.useState)(),
+              [x, f] = (0, r.useState)(),
+              { mutateAsync: g } = eV(),
+              y = (0, j.Xo)(n.KA.UPDATE, 'custom_config_gotrue');
+            return l
+              ? (0, a.jsx)(em.Z, {
+                  error: u,
+                  subject:
+                    'Failed to retrieve auth configuration for Third Party Auth Integrations',
+                })
+              : (0, a.jsxs)('div', {
+                  className: 'pb-4',
+                  'data-sentry-component': 'ThirdPartyAuthForm',
+                  'data-sentry-source-file': 'index.tsx',
+                  children: [
+                    (0, a.jsx)(c.p, {
+                      title: 'Third Party Auth',
+                      className: 'mb-1',
+                      description:
+                        'Use third-party authentication (TPA) systems based on JWTs to access your project.',
+                      actions:
+                        0 !== m.length
+                          ? (0, a.jsx)(e4, { onSelectIntegrationType: p })
+                          : null,
+                      docsUrl:
+                        'https://supabase.com/docs/guides/auth/third-party/overview',
+                      'data-sentry-element': 'FormHeader',
+                      'data-sentry-source-file': 'index.tsx',
+                    }),
+                    (0, a.jsxs)('div', {
+                      className: 'prose text-sm mb-6 max-w-full',
+                      children: [
+                        (0, a.jsxs)('span', {
+                          children: [
+                            "Billing is based on the number of monthly active users (MAUs) requesting your API throughout the billing period (50 included then you'll be charged",
+                            ' ',
+                          ],
+                        }),
+                        (0, a.jsx)('span', {
+                          className: 'text-brand',
+                          children: '$0.00325',
+                        }),
+                        (0, a.jsx)('span', { children: ' per MAU).' }),
+                      ],
+                    }),
+                    s &&
+                      (0, a.jsx)('div', {
+                        className: (0, eC.cn)(
+                          'border rounded border-default px-20 py-16 flex flex-col items-center justify-center space-y-4'
+                        ),
+                        children: (0, a.jsx)(eZ.Z, {
+                          size: 24,
+                          className: 'animate-spin',
+                        }),
+                      }),
+                    d
+                      ? 0 === m.length
+                        ? (0, a.jsxs)('div', {
+                            className: (0, eC.cn)(
+                              'border rounded border-default px-20 py-16 flex flex-col items-center justify-center space-y-4'
+                            ),
+                            children: [
+                              (0, a.jsx)('p', {
+                                className: 'text-sm text-foreground-light',
+                                children: 'No providers configured yet',
+                              }),
+                              (0, a.jsx)(e4, {
+                                buttonText: 'Add a new integration',
+                                onSelectIntegrationType: p,
+                              }),
+                            ],
+                          })
+                        : (0, a.jsx)('div', {
+                            className: '-space-y-px',
+                            children: m.map(e =>
+                              (0, a.jsx)(
+                                tv,
+                                {
+                                  integration: e,
+                                  canUpdateConfig: y,
+                                  onDelete: () => {
+                                    f(e);
+                                  },
+                                },
+                                e.id
+                              )
+                            ),
+                          })
+                      : null,
+                    (0, a.jsx)(tg, {
+                      visible: 'firebase' === h,
+                      onDelete: () => {},
+                      onClose: () => p(void 0),
+                      'data-sentry-element':
+                        'CreateFirebaseAuthIntegrationDialog',
+                      'data-sentry-source-file': 'index.tsx',
+                    }),
+                    (0, a.jsx)(tp, {
+                      visible: 'awsCognito' === h,
+                      onDelete: () => {},
+                      onClose: () => p(void 0),
+                      'data-sentry-element':
+                        'CreateAwsCognitoAuthIntegrationDialog',
+                      'data-sentry-source-file': 'index.tsx',
+                    }),
+                    (0, a.jsx)(tr, {
+                      visible: 'auth0' === h,
+                      onDelete: () => {},
+                      onClose: () => p(void 0),
+                      'data-sentry-element': 'CreateAuth0IntegrationDialog',
+                      'data-sentry-source-file': 'index.tsx',
+                    }),
+                    (0, a.jsx)(eq.Z, {
+                      visible: !!x,
+                      variant: 'destructive',
+                      title: 'Confirm to delete',
+                      confirmLabel: 'Delete',
+                      confirmLabelLoading: 'Deleting',
+                      onCancel: () => f(void 0),
+                      onConfirm: async () => {
+                        if (!x) return;
+                        let t = e$(x);
+                        try {
+                          (await g({ projectRef: e, tpaId: x.id }),
+                            i.Am.success(
+                              'Successfully deleted '.concat(e0(t), '.')
+                            ),
+                            f(void 0),
+                            p(void 0));
+                        } catch (e) {
+                          (i.Am.error('Failed to delete '.concat(e0(t), '.')),
+                            console.error(e));
+                        }
+                      },
+                      'data-sentry-element': 'ConfirmationModal',
+                      'data-sentry-source-file': 'index.tsx',
+                      children: (0, a.jsx)('p', {
+                        className: 'py-4 text-sm text-foreground-light',
+                        children: 'Are you sure you want to delete the '.concat(
+                          e0(e$(x)),
+                          ' integration?'
+                        ),
+                      }),
+                    }),
+                  ],
+                });
+          };
+      },
+      59461: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          i: function () {
+            return r;
+          },
+        });
+        var a = s(97458),
+          n = s(90839);
+        let r = e => {
+          let {
+              form: t,
+              hasChanges: s,
+              handleReset: r,
+              helper: i,
+              disabled: l = !1,
+              isSubmitting: o,
+              submitText: d = 'Save',
+            } = e,
+            c = o || l || (!s && void 0 !== s);
+          return (0, a.jsxs)('div', {
+            className: [
+              'flex w-full items-center gap-2',
+              i ? 'justify-between' : 'justify-end',
+            ].join(' '),
+            'data-sentry-component': 'FormActions',
+            'data-sentry-source-file': 'FormActions.tsx',
+            children: [
+              i &&
+                (0, a.jsx)('span', {
+                  className: 'text-sm text-foreground-lighter',
+                  children: i,
+                }),
+              (0, a.jsxs)('div', {
+                className: 'flex items-center gap-2',
+                children: [
+                  (0, a.jsx)(n.z, {
+                    disabled: c,
+                    type: 'default',
+                    htmlType: 'reset',
+                    onClick: () => r(),
+                    'data-sentry-element': 'Button',
+                    'data-sentry-source-file': 'FormActions.tsx',
+                    children: 'Cancel',
+                  }),
+                  (0, a.jsx)(n.z, {
+                    form: t,
+                    type: 'primary',
+                    htmlType: 'submit',
+                    disabled: c,
+                    loading: o,
+                    'data-sentry-element': 'Button',
+                    'data-sentry-source-file': 'FormActions.tsx',
+                    children: d,
+                  }),
+                ],
+              }),
+            ],
+          });
+        };
+      },
+      87696: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          DO: function () {
+            return d;
+          },
+          Tq: function () {
+            return l;
+          },
+          by: function () {
+            return i;
+          },
+          iL: function () {
+            return o;
+          },
+          m9: function () {
+            return c;
+          },
+        });
+        var a = s(97458),
+          n = s(52983),
+          r = s(65092);
+        let i = e => {
+            let { children: t, header: s, footer: n } = e;
+            return (0, a.jsxs)(l, {
+              'data-sentry-element': 'FormPanelContainer',
+              'data-sentry-component': 'FormPanel',
+              'data-sentry-source-file': 'FormPanel.tsx',
+              children: [
+                s && (0, a.jsx)(o, { children: s }),
+                (0, a.jsx)(d, {
+                  className: 'divide-y',
+                  'data-sentry-element': 'FormPanelContent',
+                  'data-sentry-source-file': 'FormPanel.tsx',
+                  children: t,
+                }),
+                n && (0, a.jsx)(c, { children: n }),
+              ],
+            });
+          },
+          l = (0, n.forwardRef)((e, t) => {
+            let { children: s, ...n } = e;
+            return (0, a.jsx)('div', {
+              ref: t,
+              ...n,
+              className: (0, r.cn)(
+                'bg-surface-100 border overflow-hidden rounded-md shadow max-w-full',
+                n.className
+              ),
+              children: s,
+            });
+          });
+        l.displayName = l.displayName;
+        let o = (0, n.forwardRef)((e, t) => {
+          let { children: s, ...n } = e;
+          return (0, a.jsx)('div', {
+            ref: t,
+            ...n,
+            className: (0, r.cn)(
+              'border-default border-b px-8 py-4',
+              n.className
+            ),
+            children: s,
+          });
+        });
+        o.displayName = o.displayName;
+        let d = (0, n.forwardRef)((e, t) => {
+          let { children: s, ...n } = e;
+          return (0, a.jsx)('div', {
+            ref: t,
+            ...n,
+            className: (0, r.cn)(
+              'divide-border flex flex-col gap-0',
+              n.className
+            ),
+            children: s,
+          });
+        });
+        d.displayName = d.displayName;
+        let c = (0, n.forwardRef)((e, t) => {
+          let { children: s, ...n } = e;
+          return (0, a.jsx)('div', {
+            ref: t,
+            ...n,
+            className: (0, r.cn)('border-t', n.className),
+            children: s,
+          });
+        });
+        c.displayName = c.displayName;
+      },
+      46993: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          B4: function () {
+            return o;
+          },
+          S0: function () {
+            return i;
+          },
+          hj: function () {
+            return r;
+          },
+        });
+        var a = s(97458),
+          n = s(52983);
+        let r = e => {
+            let {
+              children: t,
+              id: s,
+              header: n,
+              disabled: r,
+              className: i,
+            } = e;
+            return (0, a.jsxs)('div', {
+              id: s,
+              className: [
+                'grid grid-cols-12 gap-6 px-4 md:px-8 py-4 md:py-8',
+                ''.concat(r ? ' opacity-30' : ' opacity-100'),
+                ''.concat(i),
+              ].join(' '),
+              'data-sentry-component': 'FormSection',
+              'data-sentry-source-file': 'FormSection.tsx',
+              children: [n, t],
+            });
+          },
+          i = e => {
+            let { children: t, className: s = '', description: n } = e;
+            return void 0 !== n
+              ? (0, a.jsxs)('div', {
+                  className:
+                    'flex flex-col space-y-2 col-span-12 lg:col-span-5 '.concat(
+                      s
+                    ),
+                  children: [
+                    (0, a.jsx)('label', {
+                      className: 'text-foreground text-sm',
+                      children: t,
+                    }),
+                    n,
+                  ],
+                })
+              : (0, a.jsx)('label', {
+                  className:
+                    'text-foreground col-span-12 text-sm lg:col-span-5 '.concat(
+                      s
+                    ),
+                  children: t,
+                });
+          },
+          l = () =>
+            (0, a.jsxs)('div', {
+              className: 'flex w-full flex-col gap-2',
+              'data-sentry-component': 'Shimmer',
+              'data-sentry-source-file': 'FormSection.tsx',
+              children: [
+                (0, a.jsx)('div', {
+                  className: 'shimmering-loader h-2 w-1/3 rounded',
+                }),
+                (0, a.jsx)('div', {
+                  className: 'flex flex-col justify-between space-y-2',
+                  children: (0, a.jsx)('div', {
+                    className: 'shimmering-loader h-[34px] w-2/3 rounded',
+                  }),
+                }),
+              ],
+            }),
+          o = e => {
+            let {
+              children: t,
+              loading: s = !0,
+              fullWidth: r,
+              className: i,
+            } = e;
+            return (0, a.jsx)('div', {
+              className:
+                '\n        relative col-span-12 flex flex-col gap-6 lg:col-span-7\n        '
+                  .concat(r && '!col-span-12', '\n        ')
+                  .concat(i, '\n      '),
+              'data-sentry-component': 'FormSectionContent',
+              'data-sentry-source-file': 'FormSection.tsx',
+              children: s ? n.Children.map(t, () => (0, a.jsx)(l, {})) : t,
+            });
+          };
+      },
+      13064: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(1707),
+          r = s(38232),
+          i = s(4839),
+          l = s(83145),
+          o = s.n(l),
+          d = s(52983),
+          c = s(90839);
+        let u = (0, d.forwardRef)((e, t) => {
+          let {
+              icon: s,
+              title: l,
+              description: u,
+              url: m,
+              urlLabel: h = 'Read more',
+              defaultVisibility: p = !1,
+              hideCollapse: x = !1,
+              button: f,
+              className: g = '',
+              block: j = !1,
+            } = e,
+            [y, b] = (0, d.useState)(p);
+          return (0, a.jsx)('div', {
+            ref: t,
+            role: 'alert',
+            className: ''
+              .concat(
+                j ? 'block w-full' : '',
+                '\n      block w-full rounded-md border bg-surface-300/25 py-3 '
+              )
+              .concat(g),
+            children: (0, a.jsxs)('div', {
+              className: 'flex flex-col px-4',
+              children: [
+                (0, a.jsxs)('div', {
+                  className: 'flex items-center justify-between',
+                  children: [
+                    (0, a.jsxs)('div', {
+                      className: 'flex w-full space-x-3 items-center',
+                      children: [
+                        s &&
+                          (0, a.jsx)('span', {
+                            className: 'text-foreground-lighter',
+                            children: s,
+                          }),
+                        (0, a.jsx)('div', {
+                          className: 'flex-grow',
+                          children: (0, a.jsx)('h5', {
+                            className: 'text-sm text-foreground',
+                            children: l,
+                          }),
+                        }),
+                      ],
+                    }),
+                    u && !x
+                      ? (0, a.jsx)('div', {
+                          className: 'cursor-pointer text-foreground-lighter',
+                          onClick: () => b(!y),
+                          children: y
+                            ? (0, a.jsx)(n.Z, { size: 14, strokeWidth: 1.5 })
+                            : (0, a.jsx)(r.Z, { size: 14, strokeWidth: 1.5 }),
+                        })
+                      : null,
+                  ],
+                }),
+                (u || m || f) &&
+                  (0, a.jsxs)('div', {
+                    className:
+                      'flex flex-col space-y-3 overflow-hidden transition-all '.concat(
+                        y ? 'mt-3' : ''
+                      ),
+                    style: { maxHeight: y ? 500 : 0 },
+                    children: [
+                      (0, a.jsx)('div', {
+                        className: 'text-foreground-light text-sm',
+                        children: u,
+                      }),
+                      m &&
+                        (0, a.jsx)('div', {
+                          children: (0, a.jsx)(c.z, {
+                            asChild: !0,
+                            type: 'default',
+                            icon: (0, a.jsx)(i.Z, {}),
+                            children: (0, a.jsx)(o(), {
+                              href: m,
+                              target: '_blank',
+                              rel: 'noreferrer',
+                              children: h,
+                            }),
+                          }),
+                        }),
+                      f && (0, a.jsx)('div', { children: f }),
+                    ],
+                  }),
+              ],
+            }),
+          });
+        });
+        ((u.displayName = 'InformationBox'), (t.Z = u));
+      },
+      61767: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(44735);
+        t.Z = e => {
+          let { resourceText: t, isFullPage: s = !1 } = e,
+            r = () =>
+              (0, a.jsx)('div', {
+                className:
+                  'block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200',
+                'data-sentry-component': 'NoPermissionMessage',
+                'data-sentry-source-file': 'NoPermission.tsx',
+                children: (0, a.jsxs)('div', {
+                  className: 'flex space-x-3',
+                  children: [
+                    (0, a.jsx)('div', {
+                      className: 'mt-1',
+                      children: (0, a.jsx)(n.Z, {
+                        size: 20,
+                        'data-sentry-element': 'AlertCircle',
+                        'data-sentry-source-file': 'NoPermission.tsx',
+                      }),
+                    }),
+                    (0, a.jsx)('div', {
+                      className: 'flex w-full items-center justify-between',
+                      children: (0, a.jsxs)('div', {
+                        className: 'space-y-1',
+                        children: [
+                          (0, a.jsxs)('p', {
+                            className: 'text-sm',
+                            children: [
+                              'You need additional permissions to ',
+                              t,
+                            ],
+                          }),
+                          (0, a.jsx)('div', {
+                            children: (0, a.jsx)('p', {
+                              className: 'text-sm text-foreground-light',
+                              children:
+                                'Contact your organization owner or administrator for assistance.',
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              });
+          return s
+            ? (0, a.jsx)('div', {
+                className: 'flex h-full items-center justify-center',
+                children: (0, a.jsx)('div', {
+                  className: 'w-[550px]',
+                  children: (0, a.jsx)(r, {}),
+                }),
+              })
+            : (0, a.jsx)(r, {});
+        };
+      },
+      55228: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(83145),
+          r = s.n(n),
+          i = s(94059),
+          l = s(73565),
+          o = s(90839);
+        t.Z = e => {
+          let {
+              name: t = '',
+              isActive: s,
+              isExternal: n,
+              icon: d,
+              rightIcon: c,
+              url: u = '',
+              target: m = '_self',
+              onClick: h,
+              textClassName: p = '',
+              hoverText: x = '',
+              label: f,
+            } = e,
+            g = (0, a.jsx)(i.ZP.Item, {
+              icon: d,
+              rounded: !0,
+              active: s,
+              onClick: h,
+              children: (0, a.jsxs)('div', {
+                className: 'flex w-full items-center justify-between gap-1',
+                children: [
+                  (0, a.jsxs)('div', {
+                    title: x || ('string' == typeof t ? t : ''),
+                    className: 'flex items-center gap-2 truncate w-full ' + p,
+                    children: [
+                      (0, a.jsxs)('span', {
+                        className: 'truncate',
+                        children: [t, ' '],
+                      }),
+                      void 0 !== f &&
+                        (0, a.jsx)(l.C, {
+                          variant: 'warning',
+                          className: 'py-0 px-1.5 capitalize',
+                          children: f,
+                        }),
+                    ],
+                  }),
+                  c && (0, a.jsx)('div', { children: c }),
+                ],
+              }),
+            });
+          return u
+            ? n
+              ? (0, a.jsx)(o.z, {
+                  asChild: !0,
+                  block: !0,
+                  className: '!justify-start',
+                  type: 'text',
+                  size: 'small',
+                  icon: d,
+                  children: (0, a.jsx)(r(), {
+                    href: u,
+                    target: '_blank',
+                    rel: 'noreferrer',
+                    children: t,
+                  }),
+                })
+              : (0, a.jsx)(r(), {
+                  href: u,
+                  className: 'block',
+                  target: m,
+                  children: g,
+                })
+            : g;
+        };
+      },
+      756: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          p: function () {
+            return n;
+          },
+        });
+        var a = s(97458);
+        let n = () =>
+          (0, a.jsxs)('div', {
+            className:
+              'flex w-full flex-row items-center justify-between gap-2',
+            'data-sentry-component': 'HorizontalShimmerWithIcon',
+            'data-sentry-source-file': 'Shimmers.tsx',
+            children: [
+              (0, a.jsxs)('div', {
+                className: 'flex flex-row items-center gap-3',
+                children: [
+                  (0, a.jsx)('div', {
+                    className: 'shimmering-loader h-6 w-6 rounded-full',
+                  }),
+                  (0, a.jsx)('div', {
+                    className: 'shimmering-loader h-2 w-32 rounded',
+                  }),
+                ],
+              }),
+              (0, a.jsx)('div', {
+                className: 'shimmering-loader h-6 w-20 rounded',
+              }),
+            ],
+          });
+      },
+      35336: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(198),
+          r = s(83145),
+          i = s.n(r),
+          l = s(69951),
+          o = s(90817),
+          d = s(75541),
+          c = s(62432),
+          u = s(21786),
+          m = s(65092),
+          h = s(90839),
+          p = s(359);
+        t.Z = e => {
+          var t, s, r;
+          let {
+              icon: x,
+              primaryText: f,
+              secondaryText: g,
+              addon: j,
+              buttonText: y,
+              disabled: b = !1,
+            } = e,
+            v = (0, c.Vm)(),
+            S = (0, d.l)(),
+            { data: E } = (0, l.Gl)({ orgSlug: null == S ? void 0 : S.slug }),
+            N =
+              null == E
+                ? void 0
+                : null === (t = E.plan) || void 0 === t
+                  ? void 0
+                  : t.id,
+            T = (0, o.Xo)(n.KA.BILLING_WRITE, 'stripe.subscriptions'),
+            _ = (0, u.P)('disableProjectCreationAndUpdate');
+          return (0, a.jsx)('div', {
+            className: (0, m.cn)(
+              'block w-full rounded border border-opacity-20 py-4 px-6',
+              'border-overlay bg-surface-200'
+            ),
+            'data-sentry-component': 'UpgradeToPro',
+            'data-sentry-source-file': 'UpgradeToPro.tsx',
+            children: (0, a.jsxs)('div', {
+              className: 'flex gap-x-3',
+              children: [
+                x && (0, a.jsx)('div', { className: 'mt-1', children: x }),
+                (0, a.jsxs)('div', {
+                  className:
+                    'flex flex-col md:flex-row w-full md:items-center justify-between gap-4 md:gap-x-8 xl:gap-x-32',
+                  children: [
+                    (0, a.jsxs)('div', {
+                      className: 'space-y-1',
+                      children: [
+                        (0, a.jsx)('p', { className: 'text-sm', children: f }),
+                        (0, a.jsx)('div', {
+                          children: (0, a.jsx)('p', {
+                            className: 'text-sm text-foreground-light',
+                            children: g,
+                          }),
+                        }),
+                      ],
+                    }),
+                    !T || _
+                      ? (0, a.jsx)(p.u, {
+                          disabled: !0,
+                          type: 'primary',
+                          tooltip: {
+                            content: {
+                              side: 'bottom',
+                              text: _
+                                ? 'Subscription changes are currently disabled, our engineers are working on a fix'
+                                : T
+                                  ? void 0
+                                  : 'You need additional permissions to amend subscriptions',
+                            },
+                          },
+                          children: 'Reset database password',
+                        })
+                      : (0, a.jsx)(h.z, {
+                          asChild: !0,
+                          type: 'primary',
+                          disabled: !T || _ || b,
+                          children: (0, a.jsx)(i(), {
+                            href:
+                              'free' === N
+                                ? '/org/'.concat(
+                                    null !==
+                                      (s = null == S ? void 0 : S.slug) &&
+                                      void 0 !== s
+                                      ? s
+                                      : '_',
+                                    '/billing?panel=subscriptionPlan'
+                                  )
+                                : '/project/'
+                                    .concat(
+                                      null !==
+                                        (r = null == v ? void 0 : v.ref) &&
+                                        void 0 !== r
+                                        ? r
+                                        : '_',
+                                      '/settings/addons?panel='
+                                    )
+                                    .concat(j),
+                            children:
+                              y ||
+                              ('free' === N
+                                ? 'Upgrade to Pro'
+                                : 'Enable add on'),
+                          }),
+                        }),
+                  ],
+                }),
+              ],
+            }),
+          });
+        };
+      },
+      9450: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(99517);
+        s(52983);
+        var r = s(25843);
+        let i = e => {
+          let { open: t, children: s, className: r, ...i } = e;
+          return (0, a.jsx)(n.fC, {
+            asChild: i.asChild,
+            defaultOpen: i.defaultOpen,
+            open: t,
+            onOpenChange: i.onOpenChange,
+            disabled: i.disabled,
+            className: r,
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'Collapsible',
+            'data-sentry-source-file': 'Collapsible.tsx',
+            children: s,
+          });
+        };
+        ((i.Trigger = function (e) {
+          let { children: t, asChild: s } = e;
+          return (0, a.jsx)(n.xz, {
+            asChild: s,
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'Trigger',
+            'data-sentry-source-file': 'Collapsible.tsx',
+            children: t,
+          });
+        }),
+          (i.Content = function (e) {
+            let { asChild: t, children: s, className: i } = e,
+              l = (0, r.Z)('collapsible');
+            return (0, a.jsx)(n.VY, {
+              asChild: t,
+              className: [l.content, i].join(' '),
+              'data-sentry-element': 'unknown',
+              'data-sentry-component': 'Content',
+              'data-sentry-source-file': 'Collapsible.tsx',
+              children: s,
+            });
+          }),
+          (t.ZP = i));
+      },
+      19540: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          Z: function () {
+            return o;
+          },
+        });
+        var a = s(97458),
+          n = s(52983),
+          r = s(68985),
+          i = s(11499);
+        function l(e, t) {
+          if (!t.error) return (delete e[t.key], e);
+          if (t) return { ...e, [t.key]: t.error };
+          throw Error();
+        }
+        function o(e) {
+          let { validate: t, ...s } = e,
+            [o, d] = (0, n.useReducer)(l, null),
+            c = (0, r.TA)({
+              validateOnBlur: !0,
+              ...s,
+              validationSchema: s.validationSchema,
+              initialValues: s.initialValues,
+              onSubmit: s.onSubmit,
+              validate:
+                t ||
+                function () {
+                  return o;
+                },
+            });
+          return (0, a.jsx)('form', {
+            id: s.id,
+            name: s.name,
+            onSubmit: c.handleSubmit,
+            className: s.className,
+            style: s.style,
+            method: 'POST',
+            'data-sentry-component': 'Form',
+            'data-sentry-source-file': 'Form.tsx',
+            children: (0, a.jsx)(i.o, {
+              values: c.values,
+              errors: c.errors,
+              formContextOnChange: c.handleChange,
+              handleBlur: c.handleBlur,
+              touched: c.touched,
+              fieldLevelValidation: function (e, t) {
+                d({ key: e, error: t });
+              },
+              'data-sentry-element': 'FormContextProvider',
+              'data-sentry-source-file': 'Form.tsx',
+              children: s.children({
+                errors: c.errors,
+                touched: c.touched,
+                isSubmitting: c.isSubmitting,
+                isValidating: c.isValidating,
+                submitCount: c.submitCount,
+                initialValues: c.initialValues,
+                values: c.values,
+                handleReset: c.handleReset,
+                resetForm: c.resetForm,
+                setFieldValue: c.setFieldValue,
+              }),
+            }),
+          });
+        }
+      },
+      73500: function (e, t, s) {
+        'use strict';
+        var a = s(97458),
+          n = s(52983),
+          r = s(68249),
+          i = s(51487),
+          l = s(16720),
+          o = s(25843),
+          d = s(11499);
+        t.Z = function (e) {
+          let {
+              defaultValue: t,
+              descriptionText: s,
+              error: c,
+              icon: u,
+              inputRef: m,
+              label: h,
+              afterLabel: p,
+              beforeLabel: x,
+              labelOptional: f,
+              layout: g,
+              value: j,
+              actions: y,
+              size: b = 'medium',
+              validation: v,
+              id: S = '',
+              name: E = '',
+              ...N
+            } = e,
+            T = (0, o.Z)('inputNumber'),
+            {
+              formContextOnChange: _,
+              values: A,
+              errors: w,
+              handleBlur: C,
+              touched: R,
+              fieldLevelValidation: P,
+            } = (0, d.G)();
+          (A && !j && (j = A[S || E]),
+            c ||
+              (w && !c && (c = w[S || E]), (c = R && R[S || E] ? c : void 0)),
+            (0, n.useEffect)(() => {
+              v && P(S, v(j));
+            }, []));
+          let I = [T.base];
+          return (
+            c && I.push(T.variants.error),
+            c || I.push(T.variants.standard),
+            u && I.push(T.with_icon),
+            b && I.push(T.size[b]),
+            N.disabled && I.push(T.disabled),
+            (0, a.jsx)('div', {
+              className: N.className,
+              'data-sentry-component': 'InputNumber',
+              'data-sentry-source-file': 'InputNumber.tsx',
+              children: (0, a.jsx)(r.l, {
+                label: h,
+                afterLabel: p,
+                beforeLabel: x,
+                labelOptional: f,
+                layout: g,
+                id: S,
+                error: c,
+                descriptionText: s,
+                style: N.style,
+                size: b,
+                'data-sentry-element': 'FormLayout',
+                'data-sentry-source-file': 'InputNumber.tsx',
+                children: (0, a.jsxs)('div', {
+                  className: T.container,
+                  children: [
+                    (0, a.jsx)('input', {
+                      'data-size': b,
+                      id: S,
+                      name: E,
+                      onChange: function (e) {
+                        (N.onChange && N.onChange(e),
+                          _ && _(e),
+                          v && P(S, v(e.target.value)));
+                      },
+                      onBlur: function (e) {
+                        (C && C(e), N.onBlur && N.onBlur(e));
+                      },
+                      type: 'number',
+                      ref: m,
+                      value: j,
+                      className: I.join(' '),
+                      ...N,
+                    }),
+                    u && (0, a.jsx)(l.Z, { size: b, icon: u }),
+                    c || y
+                      ? (0, a.jsxs)('div', {
+                          className: T.actions_container,
+                          children: [c && (0, a.jsx)(i.Z, { size: b }), y && y],
+                        })
+                      : null,
+                  ],
+                }),
+              }),
+            })
+          );
+        };
+      },
+      85818: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          Z: function () {
+            return g;
+          },
+        });
+        var a = s(97458),
+          n = s(44809),
+          r = s(62923),
+          i = s.n(r),
+          l = s(52983),
+          o = s(68249),
+          d = s(51487),
+          c = s(16720),
+          u = s(25843),
+          m = s(65092),
+          h = s(11499);
+        let p = (0, l.createContext)({ onChange: e => {}, selected: void 0 });
+        var x = s(62507);
+        function f(e) {
+          let {
+              children: t,
+              className: s,
+              buttonClassName: r,
+              descriptionText: x,
+              error: f,
+              icon: g,
+              id: j = '',
+              name: y = '',
+              label: b,
+              labelOptional: v,
+              layout: S,
+              value: E,
+              onChange: N,
+              onFocus: T,
+              onBlur: _,
+              style: A,
+              size: w = 'medium',
+              defaultValue: C,
+              validation: R,
+              disabled: P,
+              optionsWidth: I,
+            } = e,
+            [M, O] = (0, l.useState)(void 0),
+            [D, L] = (0, l.useState)({}),
+            U = (0, u.Z)('listbox'),
+            F = (0, l.useRef)(null),
+            {
+              formContextOnChange: k,
+              values: Z,
+              errors: B,
+              handleBlur: H,
+              touched: z,
+              fieldLevelValidation: V,
+            } = (0, h.G)();
+          (Z && !E && ((E = Z[j || y]), (C = Z[j || y])),
+            f ||
+              (B && !f && (f = B[j || y]), (f = z && z[j || y] ? f : void 0)),
+            (0, l.useEffect)(() => {
+              void 0 !== E && O(E);
+            }, [E]),
+            (0, l.useEffect)(() => {
+              function e() {
+                var e;
+                document.documentElement.style.setProperty(
+                  '--width-listbox',
+                  ''.concat(
+                    I ||
+                      (null === (e = F.current) || void 0 === e
+                        ? void 0
+                        : e.offsetWidth),
+                    'px'
+                  )
+                );
+              }
+              return (
+                window.addEventListener('resize', e),
+                e(),
+                () => window.removeEventListener('resize', e)
+              );
+            }, []),
+            (0, l.useEffect)(() => {
+              var e;
+              let s = i()(t);
+              function a(e) {
+                return s.find(t => t.props.value === e);
+              }
+              if (E) {
+                O(E);
+                let e = a(E);
+                L((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              if (M) {
+                let e = a(M);
+                L((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              if (C) {
+                O(C);
+                let e = a(M);
+                L((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              L(null === (e = s[0]) || void 0 === e ? void 0 : e.props);
+            }, [M]));
+          let Y = [U.container, U.base, r],
+            W = [U.addOnBefore];
+          return (
+            f && Y.push(U.variants.error),
+            f || Y.push(U.variants.standard),
+            g && W.push(U.with_icon),
+            w && Y.push(U.size[w]),
+            P && Y.push(U.disabled),
+            (0, a.jsx)(o.l, {
+              label: b,
+              labelOptional: v,
+              layout: S,
+              id: j,
+              error: f,
+              descriptionText: x,
+              className: s,
+              style: A,
+              size: w,
+              'data-sentry-element': 'FormLayout',
+              'data-sentry-component': 'Listbox',
+              'data-sentry-source-file': 'Listbox2.tsx',
+              children: (0, a.jsxs)(n.fC, {
+                'data-sentry-element': 'unknown',
+                'data-sentry-source-file': 'Listbox2.tsx',
+                children: [
+                  (0, a.jsx)(n.xz, {
+                    asChild: !0,
+                    disabled: P,
+                    'data-sentry-element': 'unknown',
+                    'data-sentry-source-file': 'Listbox2.tsx',
+                    children: (0, a.jsxs)('button', {
+                      'data-size': w,
+                      ref: F,
+                      className: (0, m.cn)(Y),
+                      onBlur: function (e) {
+                        (H && H(e), _ && _(e));
+                      },
+                      onFocus: T,
+                      name: y,
+                      id: j,
+                      children: [
+                        (0, a.jsxs)('span', {
+                          className: (0, m.cn)(W),
+                          children: [
+                            g && (0, a.jsx)(c.Z, { size: w, icon: g }),
+                            (null == D ? void 0 : D.addOnBefore) &&
+                              (0, a.jsx)(D.addOnBefore, {}),
+                            (0, a.jsx)('span', {
+                              className: U.label,
+                              children: null == D ? void 0 : D.label,
+                            }),
+                          ],
+                        }),
+                        (0, a.jsx)('span', {
+                          className: U.chevron_container,
+                          children: (0, a.jsx)('svg', {
+                            className: U.chevron,
+                            xmlns: 'http://www.w3.org/2000/svg',
+                            viewBox: '0 0 20 20',
+                            fill: 'currentColor',
+                            'aria-hidden': 'true',
+                            'data-sentry-element': 'svg',
+                            'data-sentry-source-file': 'Listbox2.tsx',
+                            children: (0, a.jsx)('path', {
+                              fillRule: 'evenodd',
+                              d: 'M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z',
+                              clipRule: 'evenodd',
+                              'data-sentry-element': 'path',
+                              'data-sentry-source-file': 'Listbox2.tsx',
+                            }),
+                          }),
+                        }),
+                        f &&
+                          (0, a.jsx)('div', {
+                            className: U.actions_container,
+                            children: f && (0, a.jsx)(d.Z, { size: w }),
+                          }),
+                      ],
+                    }),
+                  }),
+                  (0, a.jsx)(n.VY, {
+                    sideOffset: 6,
+                    loop: !0,
+                    side: 'bottom',
+                    align: 'center',
+                    className: U.options_container,
+                    'data-sentry-element': 'unknown',
+                    'data-sentry-source-file': 'Listbox2.tsx',
+                    children: (0, a.jsx)('div', {
+                      children: (0, a.jsx)(p.Provider, {
+                        value: {
+                          onChange: function (e) {
+                            (N && N(e), O(e));
+                            let t = {};
+                            ((t.target = {
+                              type: 'select',
+                              name: y,
+                              id: j,
+                              value: e,
+                              checked: void 0,
+                            }),
+                              k && k(t),
+                              R && V(j, R(e)));
+                          },
+                          selected: M,
+                        },
+                        'data-sentry-element': 'unknown',
+                        'data-sentry-source-file': 'Listbox2.tsx',
+                        children: t,
+                      }),
+                    }),
+                  }),
+                ],
+              }),
+            })
+          );
+        }
+        f.Option = function (e) {
+          let {
+              id: t,
+              value: s,
+              label: r,
+              disabled: i = !1,
+              children: l,
+              className: o = '',
+              addOnBefore: d,
+            } = e,
+            c = (0, u.Z)('listbox');
+          return (0, a.jsx)(p.Consumer, {
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'SelectOption',
+            'data-sentry-source-file': 'Listbox2.tsx',
+            children: e => {
+              let { onChange: r, selected: u } = e,
+                h = u === s;
+              return (0, a.jsxs)(
+                n.ck,
+                {
+                  className: (0, m.cn)(
+                    c.option,
+                    h ? c.option_active : ' ',
+                    i ? c.option_disabled : ' ',
+                    o
+                  ),
+                  onSelect: () => (i ? {} : r(s)),
+                  children: [
+                    (0, a.jsxs)('div', {
+                      className: c.option_inner,
+                      children: [
+                        d && d({ active: h, selected: u }),
+                        (0, a.jsx)('span', {
+                          children:
+                            'function' == typeof l
+                              ? l({ active: h, selected: u })
+                              : l,
+                        }),
+                      ],
+                    }),
+                    h
+                      ? (0, a.jsx)('span', {
+                          className: (0, m.cn)(
+                            c.option_check,
+                            h ? c.option_check_active : ''
+                          ),
+                          children: (0, a.jsx)(x.Z, {
+                            className: c.option_check_icon,
+                            'aria-hidden': 'true',
+                          }),
+                        })
+                      : null,
+                  ],
+                },
+                t
+              );
+            },
+          });
+        };
+        var g = f;
+      },
+      94059: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          ZP: function () {
+            return m;
+          },
+        });
+        var a = s(97458),
+          n = s(52983),
+          r = s(25843),
+          i = s(65092);
+        function l(e) {
+          let { children: t, className: s, tag: n = 'div', style: r } = e;
+          return (0, a.jsx)(''.concat(n), {
+            style: r,
+            'data-sentry-element': 'CustomTag',
+            'data-sentry-component': 'Typography',
+            'data-sentry-source-file': 'Typography.tsx',
+            children: t,
+          });
+        }
+        ((l.Title = function (e) {
+          let { className: t, level: s = 1, children: n, style: r } = e;
+          return (0, a.jsx)('h'.concat(s), {
+            style: r,
+            'data-sentry-element': 'CustomTag',
+            'data-sentry-component': 'Title',
+            'data-sentry-source-file': 'Title.tsx',
+            children: n,
+          });
+        }),
+          (l.Text = function (e) {
+            let {
+              className: t,
+              children: s,
+              style: n,
+              type: r,
+              disabled: i,
+              mark: l,
+              code: o,
+              keyboard: d,
+              underline: c,
+              strikethrough: u,
+              strong: m,
+              small: h,
+            } = e;
+            return o
+              ? (0, a.jsx)('code', { style: n, children: s })
+              : l
+                ? (0, a.jsx)('mark', { style: n, children: s })
+                : d
+                  ? (0, a.jsx)('kbd', { style: n, children: s })
+                  : m
+                    ? (0, a.jsx)('strong', { style: n, children: s })
+                    : (0, a.jsx)('span', {
+                        style: n,
+                        'data-sentry-component': 'Text',
+                        'data-sentry-source-file': 'Text.tsx',
+                        children: s,
+                      });
+          }),
+          (l.Link = function (e) {
+            let {
+              children: t,
+              target: s = '_blank',
+              href: n,
+              className: r,
+              onClick: i,
+              style: l,
+            } = e;
+            return (0, a.jsx)('a', {
+              onClick: i,
+              href: n,
+              target: s,
+              rel: 'noopener noreferrer',
+              style: l,
+              'data-sentry-component': 'Link',
+              'data-sentry-source-file': 'Link.tsx',
+              children: t,
+            });
+          }));
+        let o = (0, n.createContext)({ type: 'text' }),
+          d = e => {
+            let { type: t } = e;
+            return (0, a.jsx)(o.Provider, {
+              value: { type: t },
+              'data-sentry-element': 'unknown',
+              'data-sentry-component': 'MenuContextProvider',
+              'data-sentry-source-file': 'MenuContext.tsx',
+              children: e.children,
+            });
+          },
+          c = () => {
+            let e = (0, n.useContext)(o);
+            if (void 0 === e)
+              throw Error(
+                'MenuContext must be used within a MenuContextProvider.'
+              );
+            return e;
+          };
+        function u(e) {
+          let {
+            children: t,
+            className: s,
+            ulClassName: n,
+            style: r,
+            type: i = 'text',
+          } = e;
+          return (0, a.jsx)('nav', {
+            role: 'menu',
+            'aria-label': 'Sidebar',
+            'aria-orientation': 'vertical',
+            'aria-labelledby': 'options-menu',
+            className: s,
+            style: r,
+            'data-sentry-component': 'Menu',
+            'data-sentry-source-file': 'Menu.tsx',
+            children: (0, a.jsx)(d, {
+              type: i,
+              'data-sentry-element': 'MenuContextProvider',
+              'data-sentry-source-file': 'Menu.tsx',
+              children: (0, a.jsx)('ul', { className: n, children: t }),
+            }),
+          });
+        }
+        ((u.Item = function (e) {
+          let {
+              children: t,
+              icon: s,
+              active: n,
+              rounded: l,
+              onClick: o,
+              doNotCloseOverlay: d = !1,
+              showActiveBar: u = !1,
+              style: m,
+            } = e,
+            h = (0, r.Z)('menu'),
+            { type: p } = c(),
+            x = [h.item.base];
+          (x.push(h.item.variants[p].base),
+            n
+              ? x.push(h.item.variants[p].active)
+              : x.push(h.item.variants[p].normal));
+          let f = [h.item.content.base];
+          n ? f.push(h.item.content.active) : f.push(h.item.content.normal);
+          let g = [h.item.icon.base];
+          return (
+            n ? g.push(h.item.icon.active) : g.push(h.item.icon.normal),
+            (0, a.jsxs)('li', {
+              role: 'menuitem',
+              className: (0, i.cn)('outline-none', x),
+              style: m,
+              onClick: o,
+              'aria-current': n ? 'page' : void 0,
+              'data-sentry-component': 'Item',
+              'data-sentry-source-file': 'Menu.tsx',
+              children: [
+                s &&
+                  (0, a.jsx)('div', {
+                    className: ''.concat(g.join(' '), ' min-w-fit'),
+                    children: s,
+                  }),
+                (0, a.jsx)('span', { className: f.join(' '), children: t }),
+              ],
+            })
+          );
+        }),
+          (u.Group = function (e) {
+            let { children: t, icon: s, title: n } = e,
+              i = (0, r.Z)('menu'),
+              { type: l } = c();
+            return (0, a.jsxs)('div', {
+              className: [i.group.base, i.group.variants[l]].join(' '),
+              'data-sentry-component': 'Group',
+              'data-sentry-source-file': 'Menu.tsx',
+              children: [
+                s &&
+                  (0, a.jsx)('span', { className: i.group.icon, children: s }),
+                (0, a.jsx)('span', { className: i.group.content, children: n }),
+                t,
+              ],
+            });
+          }),
+          (u.Misc = function (e) {
+            let { children: t } = e;
+            return (0, a.jsx)('div', {
+              'data-sentry-component': 'Misc',
+              'data-sentry-source-file': 'Menu.tsx',
+              children: (0, a.jsx)(l.Text, {
+                'data-sentry-element': 'unknown',
+                'data-sentry-source-file': 'Menu.tsx',
+                children: (0, a.jsx)('span', { children: t }),
+              }),
+            });
+          }));
+        var m = u;
+      },
+      78258: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          RM: function () {
+            return o;
+          },
+          Rn: function () {
+            return m;
+          },
+          SC: function () {
+            return d;
+          },
+          iA: function () {
+            return i;
+          },
+          pj: function () {
+            return u;
+          },
+          ss: function () {
+            return c;
+          },
+          xD: function () {
+            return l;
+          },
+        });
+        var a = s(97458),
+          n = s(52983),
+          r = s(65092);
+        let i = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('div', {
+            className: 'w-full overflow-auto',
+            children: (0, a.jsx)('table', {
+              ref: t,
+              className: (0, r.cn)('w-full caption-bottom text-sm', s),
+              ...n,
+            }),
+          });
+        });
+        i.displayName = 'Table';
+        let l = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('thead', {
+            ref: t,
+            className: (0, r.cn)('[&_tr]:border-b', s),
+            ...n,
+          });
+        });
+        l.displayName = 'TableHeader';
+        let o = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('tbody', {
+            ref: t,
+            className: (0, r.cn)('[&_tr:last-child]:border-0', s),
+            ...n,
+          });
+        });
+        ((o.displayName = 'TableBody'),
+          (n.forwardRef((e, t) => {
+            let { className: s, ...n } = e;
+            return (0, a.jsx)('tfoot', {
+              ref: t,
+              className: (0, r.cn)(
+                'bg-primary font-medium text-primary-foreground',
+                s
+              ),
+              ...n,
+            });
+          }).displayName = 'TableFooter'));
+        let d = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('tr', {
+            ref: t,
+            className: (0, r.cn)(
+              'border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted',
+              s
+            ),
+            ...n,
+          });
+        });
+        d.displayName = 'TableRow';
+        let c = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('th', {
+            ref: t,
+            className: (0, r.cn)(
+              'h-12 px-4 text-left align-middle font-medium text-foreground-muted [&:has([role=checkbox])]:pr-0',
+              s
+            ),
+            ...n,
+          });
+        });
+        c.displayName = 'TableHead';
+        let u = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('td', {
+            ref: t,
+            className: (0, r.cn)(
+              'p-4 align-middle [&:has([role=checkbox])]:pr-0',
+              s
+            ),
+            ...n,
+          });
+        });
+        u.displayName = 'TableCell';
+        let m = n.forwardRef((e, t) => {
+          let { className: s, ...n } = e;
+          return (0, a.jsx)('caption', {
+            ref: t,
+            className: (0, r.cn)('mt-4 text-sm text-foreground-muted', s),
+            ...n,
+          });
+        });
+        m.displayName = 'TableCaption';
+      },
+    },
+  ]));

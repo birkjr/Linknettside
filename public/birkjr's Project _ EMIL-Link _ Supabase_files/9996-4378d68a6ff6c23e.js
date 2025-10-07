@@ -1,1 +1,2164 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},t=(new e.Error).stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]="9f769e22-ea83-460d-a90c-6a4096a27a61",e._sentryDebugIdIdentifier="sentry-dbid-9f769e22-ea83-460d-a90c-6a4096a27a61")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[9996],{8660:function(e){e.exports=function(e,t,n,s){for(var a=-1,r=null==e?0:e.length;++a<r;){var l=e[a];t(s,l,n(l),e)}return s}},3792:function(e,t,n){var s=n(61701);e.exports=function(e,t,n,a){return s(e,function(e,s,r){t(a,e,n(e),r)}),a}},32586:function(e){var t=Object.prototype.hasOwnProperty;e.exports=function(e,n){return null!=e&&t.call(e,n)}},17325:function(e,t,n){var s=n(8660),a=n(3792),r=n(55833),l=n(55589);e.exports=function(e,t){return function(n,i){var o=l(n)?s:a,c=t?t():{};return o(n,e,r(i,2),c)}}},62923:function(e,t,n){var s=n(22825);e.exports=function(e){return(null==e?0:e.length)?s(e,1):[]}},45346:function(e,t,n){var s=n(32586),a=n(13544);e.exports=function(e,t){return null!=e&&a(e,t,s)}},29787:function(e,t,n){var s=n(41351),a=n(87493),r=n(79312),l=n(55589),i=n(30568),o=n(91052),c=n(32840),d=n(50922),u=Object.prototype.hasOwnProperty;e.exports=function(e){if(null==e)return!0;if(i(e)&&(l(e)||"string"==typeof e||"function"==typeof e.splice||o(e)||d(e)||r(e)))return!e.length;var t=a(e);if("[object Map]"==t||"[object Set]"==t)return!e.size;if(c(e))return!s(e).length;for(var n in e)if(u.call(e,n))return!1;return!0}},52417:function(e,t,n){"use strict";n.d(t,{z:function(){return i}});var s=n(28894),a=n(6464),r=n(77878);async function l(e,t){let{projectRef:n,connectionString:s}=e;if(!n)throw Error("projectRef is required");let r=new Headers;s&&r.set("x-connection-encrypted",s);let{data:l,error:i}=await (0,a.U2)("/platform/pg-meta/{ref}/publications",{params:{header:{"x-connection-encrypted":s},path:{ref:n}},headers:r,signal:t});return i&&(0,a.S3)(i),l}let i=function(e){let{projectRef:t,connectionString:n}=e,{enabled:a=!0,...i}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return(0,s.a)(r.z.list(t),e=>{let{signal:s}=e;return l({projectRef:t,connectionString:n},s)},{enabled:a&&void 0!==t,...i})}},1575:function(e,t,n){"use strict";n.d(t,{u:function(){return c}});var s=n(36457),a=n(64618),r=n(34549),l=n(6464),i=n(77878);async function o(e){let{projectRef:t,connectionString:n,id:s,tables:a,publish_insert:r,publish_update:i,publish_delete:o,publish_truncate:c}=e,d=new Headers;n&&d.set("x-connection-encrypted",n);let u={id:s};void 0!==a&&(u.tables=a),void 0!==r&&(u.publish_insert=r),void 0!==i&&(u.publish_update=i),void 0!==o&&(u.publish_delete=o),void 0!==c&&(u.publish_truncate=c);let{data:x,error:p}=await (0,l.r$)("/platform/pg-meta/{ref}/publications",{params:{header:{"x-connection-encrypted":n},path:{ref:t},query:{id:s}},body:u,headers:d});return p&&(0,l.S3)(p),x}let c=function(){let{onSuccess:e,onError:t,...n}=arguments.length>0&&void 0!==arguments[0]?arguments[0]:{},l=(0,s.NL)();return(0,a.D)(e=>o(e),{async onSuccess(t,n,s){let{projectRef:a}=n;await l.invalidateQueries(i.z.list(a)),await (null==e?void 0:e(t,n,s))},async onError(e,n,s){void 0===t?r.Am.error("Failed to update database publication: ".concat(e.message)):t(e,n,s)},...n})}},77878:function(e,t,n){"use strict";n.d(t,{z:function(){return s}});let s={list:e=>["projects",e,"database-publications"]}},323:function(e,t,n){"use strict";n.d(t,{k:function(){return i}});var s=n(28894),a=n(6464),r=n(31118);async function l(e,t){let{projectRef:n,connectionString:s}=e;if(!n)throw Error("projectRef is required");let r=new Headers;s&&r.set("x-connection-encrypted",s);let{data:l,error:i}=await (0,a.U2)("/platform/pg-meta/{ref}/types",{params:{header:{"x-connection-encrypted":s},path:{ref:n}},headers:Object.fromEntries(r),signal:t});return i&&(0,a.S3)(i),l}let i=function(e){let{projectRef:t,connectionString:n}=e,{enabled:a=!0,...i}=arguments.length>1&&void 0!==arguments[1]?arguments[1]:{};return(0,s.a)(r.P.list(t),e=>{let{signal:s}=e;return l({projectRef:t,connectionString:n},s)},{enabled:a&&void 0!==t,...i})}},2115:function(e,t,n){"use strict";n.d(t,{N:function(){return s}});let s={list:e=>["projects",e,"views"],listBySchema:(e,t)=>[...s.list(e),t]}},49296:function(e,t,n){"use strict";n.d(t,{Z:function(){return s}});let s=(0,n(98266).Z)("Ellipsis",[["circle",{cx:"12",cy:"12",r:"1",key:"41hilf"}],["circle",{cx:"19",cy:"12",r:"1",key:"1wjl8i"}],["circle",{cx:"5",cy:"12",r:"1",key:"1pcz8c"}]])},5211:function(e,t,n){"use strict";n.d(t,{Z:function(){return s}});let s=(0,n(98266).Z)("RefreshCw",[["path",{d:"M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8",key:"v9h5vc"}],["path",{d:"M21 3v5h-5",key:"1q7to0"}],["path",{d:"M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16",key:"3uifl3"}],["path",{d:"M8 16H3v5",key:"1cv678"}]])},29872:function(e,t,n){"use strict";n.d(t,{Z:function(){return eu}});var s=n(97458),a=n(198),r=n(52983),l=n(61767),i=n(90817),o=n(74334),c=n(50663),d=n.n(c),u=n(36950),x=n(41957),p=n(32691),m=n(12436),h=n(7676),f=n(5529),b=n(359),j=n(92844),v=n(66902),y=n(58015),g=n(33940),N=n(83402),w=n(39113),S=n(92261),C=n(17319),k=n(96444),E=n(96226),_=n(10947),L=n(90839),z=n(42026),T=n(61893),Z=n(36155),A=n(52114),I=n(88971),R=n(12887),O=n.n(R),P=n(61379),F=n(70840),M=n(97224),B=n(49296),D=n(57304),W=n(3977),V=n(58596),X=n(11024),Q=n(29790),q=n(74304),H=n(83145),G=n.n(H),J=n(49571),Y=n.n(J),K=n(34549),U=n(6600),$=n(27850),ee=n(99359),et=n(44353),en=n(83462),es=n(89199),ea=n(38650),er=n(45536),el=n(40577),ei=n(65092),eo=n(14500),ec=e=>{var t,n,a,r,l,i,o,c;let{id:d,projectRef:u,item:x,isLocked:p}=e,{project:h}=(0,I.d2)(),f=(0,E._2)(),{selectedSchema:b}=(0,C.B)(),j=Number(d)===x.id,v=j&&!p,{data:y=[]}=(0,et.U)({projectRef:null==h?void 0:h.ref}),N=(0,ee.R)(x.name,"rls_disabled_in_public",["ERROR"],y,b).hasLint,S=(0,ee.R)(x.name,"security_definer_view",["ERROR","WARN"],y,b).hasLint,k=(0,ee.R)(x.name,"materialized_view_in_api",["ERROR","WARN"],y,b).hasLint,_=async()=>{if(m.Qy&&!(null==h?void 0:h.connectionString))return console.error("Connection string is required");let e=K.Am.loading("Exporting ".concat(x.name," as CSV..."));try{let t=await (0,w.IV)({id:x.id,projectRef:u,connectionString:null==h?void 0:h.connectionString});if((0,es.N3)(t)&&t.live_rows_estimate>U.kI)return K.Am.error((0,s.jsx)("div",{className:"text-foreground prose text-sm",children:U.m0}),{id:e});let n=t&&(0,$.NK)(t);if(!n)return K.Am.error("Failed to export table: ".concat(x.name),{id:e});let a=(await (0,ea.wF)({projectRef:u,connectionString:null==h?void 0:h.connectionString,table:n})).map(e=>(Object.keys(e).map(t=>{"object"==typeof e[t]&&null!==e[t]&&(e[t]=JSON.stringify(e[t]))}),e));if(a.length>0){let e=Y().unparse(a,{columns:n.columns.map(e=>e.name)}),t=new Blob([e],{type:"text/csv;charset=utf-8;"});O()(t,"".concat(x.name,"_rows.csv"))}K.Am.success("Successfully exported ".concat(x.name," as CSV"),{id:e})}catch(t){K.Am.error("Failed to export table: ".concat(t.message),{id:e})}},L=async()=>{if(m.Qy&&!(null==h?void 0:h.connectionString))return console.error("Connection string is required");let e=K.Am.loading("Exporting ".concat(x.name," as SQL..."));try{let t=await (0,w.IV)({id:x.id,projectRef:u,connectionString:null==h?void 0:h.connectionString});if((0,es.N3)(t)&&t.live_rows_estimate>U.kI)return K.Am.error((0,s.jsx)("div",{className:"text-foreground prose text-sm",children:U.m0}),{id:e});let n=t&&(0,$.NK)(t);if(!n)return K.Am.error("Failed to export table: ".concat(x.name),{id:e});let a=(await (0,ea.wF)({projectRef:u,connectionString:null==h?void 0:h.connectionString,table:n})).map(e=>(Object.keys(e).map(t=>{"object"==typeof e[t]&&null!==e[t]&&(e[t]=JSON.stringify(e[t]))}),e));if(a.length>0){let e=(0,ee.k)(n,a),t=new Blob([e],{type:"text/sql;charset=utf-8;"});O()(t,"".concat(x.name,"_rows.sql"))}K.Am.success("Successfully exported ".concat(x.name," as SQL"),{id:e})}catch(t){K.Am.error("Failed to export table: ".concat(t.message),{id:e})}};return(0,s.jsx)("div",{className:"px-2","data-sentry-component":"EntityListItem","data-sentry-source-file":"EntityListItem.tsx",children:(0,s.jsxs)(en.Sf,{title:x.name,id:String(x.id),href:"/project/".concat(u,"/editor/").concat(x.id,"?schema=").concat(b),role:"button","aria-label":"View ".concat(x.name),className:(0,ei.cn)("w-full","flex items-center gap-2","py-1 px-2","text-light","rounded-md",j?"bg-selection":"hover:bg-surface-200 focus:bg-surface-200","group","transition"),"data-sentry-element":"EditorTablePageLink","data-sentry-source-file":"EntityListItem.tsx",children:[(0,s.jsxs)(el.u,{disableHoverableContent:!0,"data-sentry-element":"Tooltip","data-sentry-source-file":"EntityListItem.tsx",children:[(0,s.jsx)(el.aJ,{className:"min-w-4",asChild:!0,"data-sentry-element":"TooltipTrigger","data-sentry-source-file":"EntityListItem.tsx",children:x.type===g.l.TABLE?(0,s.jsx)(F.Z,{size:15,strokeWidth:1.5,className:(0,ei.cn)("text-foreground-muted group-hover:text-foreground-lighter",j&&"text-foreground-lighter","transition-colors")}):x.type===g.l.VIEW?(0,s.jsx)(M.Z,{size:15,strokeWidth:1.5,className:(0,ei.cn)("text-foreground-muted group-hover:text-foreground-lighter",j&&"text-foreground-lighter","transition-colors")}):(0,s.jsx)("div",{className:(0,ei.cn)("flex items-center justify-center text-xs h-4 w-4 rounded-[2px] font-bold",x.type===g.l.FOREIGN_TABLE&&"text-yellow-900 bg-yellow-500",x.type===g.l.MATERIALIZED_VIEW&&"text-purple-1000 bg-purple-500",x.type===g.l.PARTITIONED_TABLE&&"text-foreground-light bg-border-stronger"),children:null===(a=Object.entries(g.l).find(e=>{let[,t]=e;return t===x.type}))||void 0===a?void 0:null===(n=a[0])||void 0===n?void 0:null===(t=n[0])||void 0===t?void 0:t.toUpperCase()})}),(0,s.jsx)(el._v,{side:"bottom","data-sentry-element":"TooltipContent","data-sentry-source-file":"EntityListItem.tsx",children:(r=x.type,null===(c=Object.entries(g.l).find(e=>{let[,t]=e;return t===r}))||void 0===c?void 0:null===(o=c[0])||void 0===o?void 0:null===(i=o.toLowerCase())||void 0===i?void 0:null===(l=i.split("_"))||void 0===l?void 0:l.join(" "))})]}),(0,s.jsxs)("div",{className:(0,ei.cn)("truncate","overflow-hidden text-ellipsis whitespace-nowrap flex items-center gap-2 relative w-full",j&&"text-foreground"),children:[(0,s.jsx)("span",{className:(0,ei.cn)(j?"text-foreground":"text-foreground-light group-hover:text-foreground","text-sm","transition","truncate"),children:x.name}),(0,s.jsx)(e=>{let{entity:t}=e,n=null;switch(t.type){case g.l.TABLE:N&&(n="RLS disabled");break;case g.l.VIEW:S&&(n="Security definer view");break;case g.l.MATERIALIZED_VIEW:k&&(n="Security definer view");break;case g.l.FOREIGN_TABLE:n="RLS is not enforced on foreign tables"}return n?(0,s.jsxs)(el.u,{disableHoverableContent:!0,children:[(0,s.jsx)(el.aJ,{className:"min-w-4",asChild:!0,children:(0,s.jsx)(P.Z,{size:14,strokeWidth:2,className:(0,ei.cn)("min-w-4",j?"text-warning-600":"text-warning-500")})}),(0,s.jsx)(el._v,{side:"bottom",children:n})]}):null},{entity:x,"data-sentry-element":"EntityTooltipTrigger","data-sentry-source-file":"EntityListItem.tsx"})]}),v&&(0,s.jsxs)(eo.h_,{children:[(0,s.jsx)(eo.$F,{className:"text-foreground-lighter transition-all hover:text-foreground data-[state=open]:text-foreground",children:(0,s.jsx)(B.Z,{size:14,strokeWidth:2})}),(0,s.jsxs)(eo.AW,{side:"bottom",align:"start",className:"w-44",children:[(0,s.jsxs)(eo.Xi,{className:"space-x-2",onClick:e=>{e.stopPropagation(),(0,er.vQ)(x.name)},children:[(0,s.jsx)(D.Z,{size:12}),(0,s.jsx)("span",{children:"Copy name"})]},"copy-name"),x.type===g.l.TABLE&&(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)(eo.VD,{}),(0,s.jsxs)(eo.Xi,{className:"space-x-2",onClick:e=>{e.stopPropagation(),f.onEditTable()},children:[(0,s.jsx)(W.Z,{size:12}),(0,s.jsx)("span",{children:"Edit table"})]},"edit-table"),(0,s.jsxs)(eo.Xi,{className:"space-x-2",onClick:e=>{e.stopPropagation(),f.onDuplicateTable()},children:[(0,s.jsx)(V.Z,{size:12}),(0,s.jsx)("span",{children:"Duplicate table"})]},"duplicate-table"),(0,s.jsx)(eo.Xi,{className:"space-x-2",asChild:!0,children:(0,s.jsxs)(G(),{href:"/project/".concat(u,"/auth/policies?schema=").concat(b,"&search=").concat(x.id),children:[(0,s.jsx)(X.Z,{size:12}),(0,s.jsx)("span",{children:"View policies"})]},"view-policies")},"view-policies"),(0,s.jsxs)(eo.Ph,{children:[(0,s.jsxs)(eo.kt,{className:"gap-x-2",children:[(0,s.jsx)(Q.Z,{size:12}),"Export data"]}),(0,s.jsxs)(eo.TG,{children:[(0,s.jsx)(eo.Xi,{className:"space-x-2",onClick:e=>{e.stopPropagation(),_()},children:(0,s.jsx)("span",{children:"Export table as CSV"})},"download-table-csv"),(0,s.jsx)(eo.Xi,{className:"gap-x-2",onClick:e=>{e.stopPropagation(),L()},children:(0,s.jsx)("span",{children:"Export table as SQL"})},"download-table-sql")]})]}),(0,s.jsx)(eo.VD,{}),(0,s.jsxs)(eo.Xi,{className:"gap-x-2",onClick:e=>{e.stopPropagation(),f.onDeleteTable()},children:[(0,s.jsx)(q.Z,{size:12}),(0,s.jsx)("span",{children:"Delete table"})]},"delete-table")]})]})]})]})})},ed=()=>{var e,t,n;let{id:l}=(0,m.UO)(),o=(0,p.useRouter)(),c=l?Number(l):void 0,R=(0,E._2)(),{selectedSchema:O,setSelectedSchema:P}=(0,C.B)(),F=(0,m.Gc)(),[M,B]=(0,r.useState)(!1),[D,W]=(0,r.useState)(""),[V,X]=(0,r.useState)(Object.values(g.l)),[Q,q]=(0,S._)("table-editor-sort","alphabetical"),{project:H}=(0,I.d2)(),{data:G,isLoading:J,isSuccess:Y,isError:K,error:U,hasNextPage:$,isFetchingNextPage:ee,fetchNextPage:et}=(0,N.Hp)({projectRef:null==H?void 0:H.ref,connectionString:null==H?void 0:H.connectionString,schemas:[O],search:D.trim()||void 0,sort:Q,filterTypes:V},{keepPreviousData:!!D}),en=(0,r.useMemo)(()=>null==G?void 0:G.pages.flatMap(e=>e.data.entities),[null==G?void 0:G.pages]),{data:es}=(0,y.Q1)({projectRef:null==H?void 0:H.ref,connectionString:null==H?void 0:H.connectionString}),ea=null==es?void 0:es.find(e=>e.name===O),er=(0,i.Xo)(a.KA.TENANT_SQL_ADMIN_WRITE,"tables"),[el]=d()((null!=es?es:[]).sort((e,t)=>e.name.localeCompare(t.name)),e=>{var t;return k.s.includes(null!==(t=null==e?void 0:e.name)&&void 0!==t?t:"")}),ei=el.some(e=>e.id===(null==ea?void 0:ea.id)),{data:eo}=(0,w.iB)({projectRef:null==H?void 0:H.ref,connectionString:null==H?void 0:H.connectionString,id:c});return(0,r.useEffect)(()=>{(null==eo?void 0:eo.schema)&&P(eo.schema)},[null==eo?void 0:eo.schema]),(0,s.jsxs)(s.Fragment,{children:[(0,s.jsxs)("div",{className:"pt-5 flex flex-col flex-grow gap-5 h-full",style:{maxHeight:"calc(100vh - 48px)"},children:[(0,s.jsxs)("div",{className:"flex flex-col gap-y-1.5",children:[(0,s.jsx)(v.Z,{className:"mx-4",selectedSchemaName:O,onSelectSchema:e=>{W(""),P(e),o.push("/project/".concat(null==H?void 0:H.ref,"/editor"))},onSelectCreateSchema:()=>R.onAddSchema(),"data-sentry-element":"SchemaSelector","data-sentry-source-file":"TableEditorMenu.tsx"}),(0,s.jsx)("div",{className:"grid gap-3 mx-4",children:ei?(0,s.jsxs)(_.bZ,{children:[(0,s.jsx)(_.Cd,{className:"text-sm",children:"Viewing protected schema"}),(0,s.jsxs)(_.X,{className:"text-xs",children:[(0,s.jsx)("p",{className:"mb-2",children:"This schema is managed by Supabase and is read-only through the table editor"}),(0,s.jsx)(L.z,{type:"default",size:"tiny",onClick:()=>B(!0),children:"Learn more"})]})]}):(0,s.jsx)(b.u,{block:!0,title:"Create a new table",name:"New table",disabled:!er,size:"tiny",icon:(0,s.jsx)(u.Z,{size:14,strokeWidth:1.5,className:"text-foreground-muted"}),type:"default",className:"justify-start",onClick:R.onAddTable,tooltip:{content:{side:"bottom",text:er?void 0:"You need additional permissions to create tables"}},children:"New table"})})]}),(0,s.jsxs)("div",{className:"flex flex-auto flex-col gap-2 pb-4 px-2",children:[(0,s.jsxs)(A.nM,{"data-sentry-element":"InnerSideBarFilters","data-sentry-source-file":"TableEditorMenu.tsx",children:[(0,s.jsx)(A.nn,{autoFocus:!F,name:"search-tables","aria-labelledby":"Search tables",onChange:e=>{W(e.target.value)},value:D,placeholder:"Search tables...","data-sentry-element":"InnerSideBarFilterSearchInput","data-sentry-source-file":"TableEditorMenu.tsx",children:(0,s.jsxs)(A.ZY,{value:Q,onValueChange:e=>q(e),"data-sentry-element":"InnerSideBarFilterSortDropdown","data-sentry-source-file":"TableEditorMenu.tsx",children:[(0,s.jsx)(A.IR,{value:"alphabetical",className:"flex gap-2","data-sentry-element":"InnerSideBarFilterSortDropdownItem","data-sentry-source-file":"TableEditorMenu.tsx",children:"Alphabetical"},"alphabetical"),(0,s.jsx)(A.IR,{value:"grouped-alphabetical","data-sentry-element":"InnerSideBarFilterSortDropdownItem","data-sentry-source-file":"TableEditorMenu.tsx",children:"Entity Type"},"grouped-alphabetical")]})}),(0,s.jsxs)(z.J2,{"data-sentry-element":"Popover_Shadcn_","data-sentry-source-file":"TableEditorMenu.tsx",children:[(0,s.jsx)(z.xo,{asChild:!0,"data-sentry-element":"PopoverTrigger_Shadcn_","data-sentry-source-file":"TableEditorMenu.tsx",children:(0,s.jsx)(L.z,{type:5!==V.length?"default":"dashed",className:"h-[32px] md:h-[28px] px-1.5",icon:(0,s.jsx)(x.Z,{}),"data-sentry-element":"Button","data-sentry-source-file":"TableEditorMenu.tsx"})}),(0,s.jsx)(z.yk,{className:"p-0 w-56",side:"bottom",align:"center","data-sentry-element":"PopoverContent_Shadcn_","data-sentry-source-file":"TableEditorMenu.tsx",children:(0,s.jsxs)("div",{className:"px-3 pt-3 pb-2 flex flex-col gap-y-2",children:[(0,s.jsx)("p",{className:"text-xs",children:"Show entity types"}),(0,s.jsx)("div",{className:"flex flex-col",children:Object.entries(g.l).map(e=>{let[t,n]=e;return(0,s.jsxs)("div",{className:"group flex items-center justify-between py-0.5",children:[(0,s.jsxs)("div",{className:"flex items-center gap-x-2",children:[(0,s.jsx)(T.X,{id:t,name:t,checked:V.includes(n),onCheckedChange:()=>{V.includes(n)?X(V.filter(e=>e!==n)):X(V.concat([n]))}}),(0,s.jsx)(Z._,{htmlFor:t,className:"capitalize text-xs",children:t.toLowerCase().replace("_"," ")})]}),(0,s.jsx)(L.z,{size:"tiny",type:"default",onClick:()=>X([n]),className:"transition opacity-0 group-hover:opacity-100 h-auto px-1 py-0.5",children:"Select only"})]},t)})})]})})]})]}),J&&(0,s.jsx)(A.HJ,{}),K&&(0,s.jsx)(f.Z,{error:null!=U?U:null,subject:"Failed to retrieve tables"}),Y&&(0,s.jsxs)(s.Fragment,{children:[0===D.length&&(null!==(e=null==en?void 0:en.length)&&void 0!==e?e:0)<=0&&(0,s.jsx)(A.Cf,{className:"mx-2",title:"No entities available",description:"This schema has no entities available yet"}),D.length>0&&(null!==(t=null==en?void 0:en.length)&&void 0!==t?t:0)<=0&&(0,s.jsx)(A.Cf,{className:"mx-2",title:"No results found",description:'Your search for "'.concat(D,'" did not return any results')}),(null!==(n=null==en?void 0:en.length)&&void 0!==n?n:0)>0&&(0,s.jsx)("div",{className:"flex flex-1 -mx-2","data-testid":"tables-list",children:(0,s.jsx)(j.Z,{items:en,ItemComponent:ec,itemProps:{projectRef:null==H?void 0:H.ref,id:Number(c),isLocked:ei},getItemSize:()=>28,hasNextPage:$,isLoadingNextPage:ee,onLoadNextPage:()=>et()})})]})]})]}),(0,s.jsx)(h.b,{visible:M,onClose:()=>B(!1),"data-sentry-element":"ProtectedSchemaModal","data-sentry-source-file":"TableEditorMenu.tsx"})]})},eu=e=>{let{children:t}=e,n=(0,i.N4)(),c=(0,i.Xo)(a.KA.TENANT_SQL_ADMIN_READ,"tables"),d=(0,r.useMemo)(()=>(0,s.jsx)(ed,{}),[]);return n&&!c?(0,s.jsx)(o.$,{isBlocking:!1,children:(0,s.jsx)(l.Z,{isFullPage:!0,resourceText:"view tables from this project"})}):(0,s.jsx)(o.$,{product:"Table Editor",productMenu:d,isBlocking:!1,resizableSidebar:!0,"data-sentry-element":"ProjectLayoutWithAuth","data-sentry-component":"TableEditorLayout","data-sentry-source-file":"TableEditorLayout.tsx",children:t})}},61767:function(e,t,n){"use strict";var s=n(97458),a=n(44735);t.Z=e=>{let{resourceText:t,isFullPage:n=!1}=e,r=()=>(0,s.jsx)("div",{className:"block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200","data-sentry-component":"NoPermissionMessage","data-sentry-source-file":"NoPermission.tsx",children:(0,s.jsxs)("div",{className:"flex space-x-3",children:[(0,s.jsx)("div",{className:"mt-1",children:(0,s.jsx)(a.Z,{size:20,"data-sentry-element":"AlertCircle","data-sentry-source-file":"NoPermission.tsx"})}),(0,s.jsx)("div",{className:"flex w-full items-center justify-between",children:(0,s.jsxs)("div",{className:"space-y-1",children:[(0,s.jsxs)("p",{className:"text-sm",children:["You need additional permissions to ",t]}),(0,s.jsx)("div",{children:(0,s.jsx)("p",{className:"text-sm text-foreground-light",children:"Contact your organization owner or administrator for assistance."})})]})})]})});return n?(0,s.jsx)("div",{className:"flex h-full items-center justify-center",children:(0,s.jsx)("div",{className:"w-[550px]",children:(0,s.jsx)(r,{})})}):(0,s.jsx)(r,{})}},66902:function(e,t,n){"use strict";var s=n(97458),a=n(50416),r=n(62507),l=n(36950),i=n(52983),o=n(198),c=n(88971),d=n(58015),u=n(90817),x=n(90839),p=n(10947),m=n(42026),h=n(47482),f=n(64890);t.Z=e=>{let{className:t,disabled:n=!1,size:b="tiny",showError:j=!0,selectedSchemaName:v,supportSelectAll:y=!1,excludedSchemas:g=[],onSelectSchema:N,onSelectCreateSchema:w}=e,[S,C]=(0,i.useState)(!1),k=(0,u.Xo)(o.KA.TENANT_SQL_ADMIN_WRITE,"schemas"),{project:E}=(0,c.d2)(),{data:_,isLoading:L,isSuccess:z,isError:T,error:Z,refetch:A}=(0,d.Q1)({projectRef:null==E?void 0:E.ref,connectionString:null==E?void 0:E.connectionString}),I=(_||[]).filter(e=>!g.includes(e.name)).sort((e,t)=>e.name.localeCompare(t.name));return(0,s.jsxs)("div",{className:t,"data-sentry-component":"SchemaSelector","data-sentry-source-file":"SchemaSelector.tsx",children:[L&&(0,s.jsx)(x.z,{type:"default",className:"justify-start",block:!0,size:b,loading:!0,children:"Loading schemas..."}),j&&T&&(0,s.jsxs)(p.bZ,{variant:"warning",className:"!px-3 !py-3",children:[(0,s.jsx)(p.Cd,{className:"text-xs text-amber-900",children:"Failed to load schemas"}),(0,s.jsxs)(p.X,{className:"text-xs mb-2 break-words",children:["Error: ",null==Z?void 0:Z.message]}),(0,s.jsx)(x.z,{type:"default",size:"tiny",onClick:()=>A(),children:"Reload schemas"})]}),z&&(0,s.jsxs)(m.J2,{open:S,onOpenChange:C,modal:!1,children:[(0,s.jsx)(m.xo,{asChild:!0,children:(0,s.jsx)(x.z,{size:b,disabled:n,type:"default",className:"w-full [&>span]:w-full",iconRight:(0,s.jsx)(a.Z,{className:"text-foreground-muted",strokeWidth:2,size:14}),children:v?(0,s.jsxs)("div",{className:"w-full flex gap-1",children:[(0,s.jsx)("p",{className:"text-foreground-lighter",children:"schema:"}),(0,s.jsx)("p",{className:"text-foreground",children:"*"===v?"All schemas":v})]}):(0,s.jsx)("div",{className:"w-full flex gap-1",children:(0,s.jsx)("p",{className:"text-foreground-lighter",children:"Choose a schema…"})})})}),(0,s.jsx)(m.yk,{className:"p-0",side:"bottom",align:"start",sameWidthAsTrigger:!0,children:(0,s.jsxs)(h.mY,{children:[(0,s.jsx)(h.sZ,{placeholder:"Find schema..."}),(0,s.jsxs)(h.e8,{children:[(0,s.jsx)(h.rb,{children:"No schemas found"}),(0,s.jsx)(h.fu,{children:(0,s.jsxs)(f.x,{className:(I||[]).length>7?"h-[210px]":"",children:[y&&(0,s.jsxs)(h.di,{className:"cursor-pointer flex items-center justify-between space-x-2 w-full",onSelect:()=>{N("*"),C(!1)},onClick:()=>{N("*"),C(!1)},children:[(0,s.jsx)("span",{children:"All schemas"}),"*"===v&&(0,s.jsx)(r.Z,{className:"text-brand",strokeWidth:2,size:16})]},"select-all"),null==I?void 0:I.map(e=>(0,s.jsxs)(h.di,{className:"cursor-pointer flex items-center justify-between space-x-2 w-full",onSelect:()=>{N(e.name),C(!1)},onClick:()=>{N(e.name),C(!1)},children:[(0,s.jsx)("span",{children:e.name}),v===e.name&&(0,s.jsx)(r.Z,{className:"text-brand",strokeWidth:2,size:16})]},e.id))]})}),void 0!==w&&k&&(0,s.jsxs)(s.Fragment,{children:[(0,s.jsx)(h.zz,{}),(0,s.jsx)(h.fu,{children:(0,s.jsxs)(h.di,{className:"cursor-pointer flex items-center gap-x-2 w-full",onSelect:()=>{w(),C(!1)},onClick:()=>{w(),C(!1)},children:[(0,s.jsx)(l.Z,{size:12}),"Create a new schema"]})})]})]})]})})]})]})}},23078:function(e,t,n){"use strict";var s=n(97458),a=n(65092);t.Z=e=>{let{max:t=100,value:n=0,barClass:r="bg-foreground",bgClass:l="",type:i="vertical",borderClass:o="",labelBottom:c="",labelBottomClass:d="tabular-nums",labelTop:u="",labelTopClass:x=""}=e;if("horizontal"===i){let e=Number(n/t*100),i=c||u;return(0,s.jsxs)("div",{className:"flex flex-col w-full",children:[i&&(0,s.jsxs)("div",{className:"flex align-baseline justify-between pb-1 space-x-8",children:[(0,s.jsx)("p",{className:(0,a.cn)("text-foreground text-sm truncate capitalize-sentence",u.length>0&&"max-w-[75%]",d),children:c}),(0,s.jsx)("p",{className:(0,a.cn)("text-foreground-light text-sm",x),children:u})]}),(0,s.jsx)("div",{className:"relative rounded h-1 overflow-hidden w-full border p-0 ".concat(l||"bg-surface-400"," ").concat(o||"border-none"),children:(0,s.jsx)("div",{className:"absolute rounded inset-x-0 bottom-0 h-1 ".concat(r," transition-all"),style:{width:"".concat(e,"%")}})})]})}{let e=Number(n/t*35);return e<2&&(e=2),(0,s.jsx)("div",{className:"relative rounded w-5 overflow-hidden border p-1 ".concat(l||"bg-gray-400"," ").concat(o||"border-none"),style:{height:35},children:(0,s.jsx)("div",{className:"absolute inset-x-0 bottom-0 w-5 ".concat(r),style:{height:e}})})}}},10046:function(e,t,n){"use strict";n.d(t,{Z:function(){return d}});var s=n(97458),a=n(52983),r=n(68249),l=n(25843),i=n(11499);let o=(0,a.createContext)({parentCallback:e=>{},parentSize:""});function c(e){let{className:t,id:n="",name:a="",label:r,afterLabel:c,beforeLabel:d,description:u,checked:x,value:p,onChange:m,onBlur:h,size:f="medium",disabled:b=!1,...j}=e,{formContextOnChange:v,values:y,handleBlur:g}=(0,i.G)(),N=(0,l.Z)("checkbox");return(0,s.jsx)(o.Consumer,{"data-sentry-element":"unknown","data-sentry-component":"Checkbox","data-sentry-source-file":"Checkbox.tsx",children:e=>{let{parentCallback:l,parentSize:i}=e,o=n||a||(r?r.toLowerCase().replace(/^[^A-Z0-9]+/gi,"").replace(/ /g,"-"):void 0);f=i||f;let w=a||o,S=null!=x?x:void 0,C=[N.container];return t&&C.push(t),y&&void 0===x&&(S=y[n||a]),(0,s.jsxs)("div",{className:C.join(" "),children:[(0,s.jsx)("input",{id:o,name:w,type:"checkbox",className:[N.base,N.size[f]].join(" "),onChange:function(e){l&&l(e),m&&m(e),v&&v(e)},onBlur:function(e){g&&setTimeout(()=>{g(e)},100),h&&h(e)},checked:S,value:p||o,disabled:b,...j}),(0,s.jsxs)("label",{className:[N.label.base,N.label[f]].join(" "),htmlFor:o,children:[(0,s.jsxs)("span",{children:[d&&(0,s.jsx)("span",{className:[N.label_before.base,N.label_before[f]].join(" "),children:d}),r,c&&(0,s.jsx)("span",{className:[N.label_after.base,N.label_after[f]].join(" "),children:c})]}),u&&(0,s.jsx)("p",{className:[N.description.base,N.description[f]].join(" "),children:u})]})]})}})}c.Group=function(e){let{id:t,layout:n="vertical",error:a,descriptionText:i,label:d,afterLabel:u,beforeLabel:x,labelOptional:p,children:m,className:h,options:f,onChange:b,size:j="medium"}=e,v=(0,l.Z)("checkbox");return(0,s.jsx)(r.l,{label:d,afterLabel:u,beforeLabel:x,labelOptional:p,layout:n,id:t,error:a,descriptionText:i,className:h,size:j,"data-sentry-element":"FormLayout","data-sentry-component":"Group","data-sentry-source-file":"Checkbox.tsx",children:(0,s.jsx)(o.Provider,{value:{parentCallback:e=>{b&&b(e)},parentSize:j},"data-sentry-element":"unknown","data-sentry-source-file":"Checkbox.tsx",children:(0,s.jsx)("div",{className:v.group,children:f?f.map(e=>(0,s.jsx)(c,{id:e.id,value:e.value,label:e.label,beforeLabel:e.beforeLabel,afterLabel:e.afterLabel,checked:e.checked,name:e.name,description:e.description,defaultChecked:e.defaultChecked},e.id)):m})})})};var d=c},9450:function(e,t,n){"use strict";var s=n(97458),a=n(99517);n(52983);var r=n(25843);let l=e=>{let{open:t,children:n,className:r,...l}=e;return(0,s.jsx)(a.fC,{asChild:l.asChild,defaultOpen:l.defaultOpen,open:t,onOpenChange:l.onOpenChange,disabled:l.disabled,className:r,"data-sentry-element":"unknown","data-sentry-component":"Collapsible","data-sentry-source-file":"Collapsible.tsx",children:n})};l.Trigger=function(e){let{children:t,asChild:n}=e;return(0,s.jsx)(a.xz,{asChild:n,"data-sentry-element":"unknown","data-sentry-component":"Trigger","data-sentry-source-file":"Collapsible.tsx",children:t})},l.Content=function(e){let{asChild:t,children:n,className:l}=e,i=(0,r.Z)("collapsible");return(0,s.jsx)(a.VY,{asChild:t,className:[i.content,l].join(" "),"data-sentry-element":"unknown","data-sentry-component":"Content","data-sentry-source-file":"Collapsible.tsx",children:n})},t.ZP=l},85818:function(e,t,n){"use strict";n.d(t,{Z:function(){return b}});var s=n(97458),a=n(44809),r=n(62923),l=n.n(r),i=n(52983),o=n(68249),c=n(51487),d=n(16720),u=n(25843),x=n(65092),p=n(11499);let m=(0,i.createContext)({onChange:e=>{},selected:void 0});var h=n(62507);function f(e){let{children:t,className:n,buttonClassName:r,descriptionText:h,error:f,icon:b,id:j="",name:v="",label:y,labelOptional:g,layout:N,value:w,onChange:S,onFocus:C,onBlur:k,style:E,size:_="medium",defaultValue:L,validation:z,disabled:T,optionsWidth:Z}=e,[A,I]=(0,i.useState)(void 0),[R,O]=(0,i.useState)({}),P=(0,u.Z)("listbox"),F=(0,i.useRef)(null),{formContextOnChange:M,values:B,errors:D,handleBlur:W,touched:V,fieldLevelValidation:X}=(0,p.G)();B&&!w&&(w=B[j||v],L=B[j||v]),f||(D&&!f&&(f=D[j||v]),f=V&&V[j||v]?f:void 0),(0,i.useEffect)(()=>{void 0!==w&&I(w)},[w]),(0,i.useEffect)(()=>{function e(){var e;document.documentElement.style.setProperty("--width-listbox","".concat(Z||(null===(e=F.current)||void 0===e?void 0:e.offsetWidth),"px"))}return window.addEventListener("resize",e),e(),()=>window.removeEventListener("resize",e)},[]),(0,i.useEffect)(()=>{var e;let n=l()(t);function s(e){return n.find(t=>t.props.value===e)}if(w){I(w);let e=s(w);O((null==e?void 0:e.props)?e.props:void 0);return}if(A){let e=s(A);O((null==e?void 0:e.props)?e.props:void 0);return}if(L){I(L);let e=s(A);O((null==e?void 0:e.props)?e.props:void 0);return}O(null===(e=n[0])||void 0===e?void 0:e.props)},[A]);let Q=[P.container,P.base,r],q=[P.addOnBefore];return f&&Q.push(P.variants.error),f||Q.push(P.variants.standard),b&&q.push(P.with_icon),_&&Q.push(P.size[_]),T&&Q.push(P.disabled),(0,s.jsx)(o.l,{label:y,labelOptional:g,layout:N,id:j,error:f,descriptionText:h,className:n,style:E,size:_,"data-sentry-element":"FormLayout","data-sentry-component":"Listbox","data-sentry-source-file":"Listbox2.tsx",children:(0,s.jsxs)(a.fC,{"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:[(0,s.jsx)(a.xz,{asChild:!0,disabled:T,"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:(0,s.jsxs)("button",{"data-size":_,ref:F,className:(0,x.cn)(Q),onBlur:function(e){W&&W(e),k&&k(e)},onFocus:C,name:v,id:j,children:[(0,s.jsxs)("span",{className:(0,x.cn)(q),children:[b&&(0,s.jsx)(d.Z,{size:_,icon:b}),(null==R?void 0:R.addOnBefore)&&(0,s.jsx)(R.addOnBefore,{}),(0,s.jsx)("span",{className:P.label,children:null==R?void 0:R.label})]}),(0,s.jsx)("span",{className:P.chevron_container,children:(0,s.jsx)("svg",{className:P.chevron,xmlns:"http://www.w3.org/2000/svg",viewBox:"0 0 20 20",fill:"currentColor","aria-hidden":"true","data-sentry-element":"svg","data-sentry-source-file":"Listbox2.tsx",children:(0,s.jsx)("path",{fillRule:"evenodd",d:"M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z",clipRule:"evenodd","data-sentry-element":"path","data-sentry-source-file":"Listbox2.tsx"})})}),f&&(0,s.jsx)("div",{className:P.actions_container,children:f&&(0,s.jsx)(c.Z,{size:_})})]})}),(0,s.jsx)(a.VY,{sideOffset:6,loop:!0,side:"bottom",align:"center",className:P.options_container,"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:(0,s.jsx)("div",{children:(0,s.jsx)(m.Provider,{value:{onChange:function(e){S&&S(e),I(e);let t={};t.target={type:"select",name:v,id:j,value:e,checked:void 0},M&&M(t),z&&X(j,z(e))},selected:A},"data-sentry-element":"unknown","data-sentry-source-file":"Listbox2.tsx",children:t})})})]})})}f.Option=function(e){let{id:t,value:n,label:r,disabled:l=!1,children:i,className:o="",addOnBefore:c}=e,d=(0,u.Z)("listbox");return(0,s.jsx)(m.Consumer,{"data-sentry-element":"unknown","data-sentry-component":"SelectOption","data-sentry-source-file":"Listbox2.tsx",children:e=>{let{onChange:r,selected:u}=e,p=u===n;return(0,s.jsxs)(a.ck,{className:(0,x.cn)(d.option,p?d.option_active:" ",l?d.option_disabled:" ",o),onSelect:()=>l?{}:r(n),children:[(0,s.jsxs)("div",{className:d.option_inner,children:[c&&c({active:p,selected:u}),(0,s.jsx)("span",{children:"function"==typeof i?i({active:p,selected:u}):i})]}),p?(0,s.jsx)("span",{className:(0,x.cn)(d.option_check,p?d.option_check_active:""),children:(0,s.jsx)(h.Z,{className:d.option_check_icon,"aria-hidden":"true"})}):null]},t)}})};var b=f}}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      t = new e.Error().stack;
+    t &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[t] = '9f769e22-ea83-460d-a90c-6a4096a27a61'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-9f769e22-ea83-460d-a90c-6a4096a27a61'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [9996],
+    {
+      8660: function (e) {
+        e.exports = function (e, t, n, s) {
+          for (var a = -1, r = null == e ? 0 : e.length; ++a < r; ) {
+            var l = e[a];
+            t(s, l, n(l), e);
+          }
+          return s;
+        };
+      },
+      3792: function (e, t, n) {
+        var s = n(61701);
+        e.exports = function (e, t, n, a) {
+          return (
+            s(e, function (e, s, r) {
+              t(a, e, n(e), r);
+            }),
+            a
+          );
+        };
+      },
+      32586: function (e) {
+        var t = Object.prototype.hasOwnProperty;
+        e.exports = function (e, n) {
+          return null != e && t.call(e, n);
+        };
+      },
+      17325: function (e, t, n) {
+        var s = n(8660),
+          a = n(3792),
+          r = n(55833),
+          l = n(55589);
+        e.exports = function (e, t) {
+          return function (n, i) {
+            var o = l(n) ? s : a,
+              c = t ? t() : {};
+            return o(n, e, r(i, 2), c);
+          };
+        };
+      },
+      62923: function (e, t, n) {
+        var s = n(22825);
+        e.exports = function (e) {
+          return (null == e ? 0 : e.length) ? s(e, 1) : [];
+        };
+      },
+      45346: function (e, t, n) {
+        var s = n(32586),
+          a = n(13544);
+        e.exports = function (e, t) {
+          return null != e && a(e, t, s);
+        };
+      },
+      29787: function (e, t, n) {
+        var s = n(41351),
+          a = n(87493),
+          r = n(79312),
+          l = n(55589),
+          i = n(30568),
+          o = n(91052),
+          c = n(32840),
+          d = n(50922),
+          u = Object.prototype.hasOwnProperty;
+        e.exports = function (e) {
+          if (null == e) return !0;
+          if (
+            i(e) &&
+            (l(e) ||
+              'string' == typeof e ||
+              'function' == typeof e.splice ||
+              o(e) ||
+              d(e) ||
+              r(e))
+          )
+            return !e.length;
+          var t = a(e);
+          if ('[object Map]' == t || '[object Set]' == t) return !e.size;
+          if (c(e)) return !s(e).length;
+          for (var n in e) if (u.call(e, n)) return !1;
+          return !0;
+        };
+      },
+      52417: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          z: function () {
+            return i;
+          },
+        });
+        var s = n(28894),
+          a = n(6464),
+          r = n(77878);
+        async function l(e, t) {
+          let { projectRef: n, connectionString: s } = e;
+          if (!n) throw Error('projectRef is required');
+          let r = new Headers();
+          s && r.set('x-connection-encrypted', s);
+          let { data: l, error: i } = await (0, a.U2)(
+            '/platform/pg-meta/{ref}/publications',
+            {
+              params: {
+                header: { 'x-connection-encrypted': s },
+                path: { ref: n },
+              },
+              headers: r,
+              signal: t,
+            }
+          );
+          return (i && (0, a.S3)(i), l);
+        }
+        let i = function (e) {
+          let { projectRef: t, connectionString: n } = e,
+            { enabled: a = !0, ...i } =
+              arguments.length > 1 && void 0 !== arguments[1]
+                ? arguments[1]
+                : {};
+          return (0, s.a)(
+            r.z.list(t),
+            e => {
+              let { signal: s } = e;
+              return l({ projectRef: t, connectionString: n }, s);
+            },
+            { enabled: a && void 0 !== t, ...i }
+          );
+        };
+      },
+      1575: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          u: function () {
+            return c;
+          },
+        });
+        var s = n(36457),
+          a = n(64618),
+          r = n(34549),
+          l = n(6464),
+          i = n(77878);
+        async function o(e) {
+          let {
+              projectRef: t,
+              connectionString: n,
+              id: s,
+              tables: a,
+              publish_insert: r,
+              publish_update: i,
+              publish_delete: o,
+              publish_truncate: c,
+            } = e,
+            d = new Headers();
+          n && d.set('x-connection-encrypted', n);
+          let u = { id: s };
+          (void 0 !== a && (u.tables = a),
+            void 0 !== r && (u.publish_insert = r),
+            void 0 !== i && (u.publish_update = i),
+            void 0 !== o && (u.publish_delete = o),
+            void 0 !== c && (u.publish_truncate = c));
+          let { data: x, error: p } = await (0, l.r$)(
+            '/platform/pg-meta/{ref}/publications',
+            {
+              params: {
+                header: { 'x-connection-encrypted': n },
+                path: { ref: t },
+                query: { id: s },
+              },
+              body: u,
+              headers: d,
+            }
+          );
+          return (p && (0, l.S3)(p), x);
+        }
+        let c = function () {
+          let {
+              onSuccess: e,
+              onError: t,
+              ...n
+            } = arguments.length > 0 && void 0 !== arguments[0]
+              ? arguments[0]
+              : {},
+            l = (0, s.NL)();
+          return (0, a.D)(e => o(e), {
+            async onSuccess(t, n, s) {
+              let { projectRef: a } = n;
+              (await l.invalidateQueries(i.z.list(a)),
+                await (null == e ? void 0 : e(t, n, s)));
+            },
+            async onError(e, n, s) {
+              void 0 === t
+                ? r.Am.error(
+                    'Failed to update database publication: '.concat(e.message)
+                  )
+                : t(e, n, s);
+            },
+            ...n,
+          });
+        };
+      },
+      77878: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          z: function () {
+            return s;
+          },
+        });
+        let s = { list: e => ['projects', e, 'database-publications'] };
+      },
+      323: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          k: function () {
+            return i;
+          },
+        });
+        var s = n(28894),
+          a = n(6464),
+          r = n(31118);
+        async function l(e, t) {
+          let { projectRef: n, connectionString: s } = e;
+          if (!n) throw Error('projectRef is required');
+          let r = new Headers();
+          s && r.set('x-connection-encrypted', s);
+          let { data: l, error: i } = await (0, a.U2)(
+            '/platform/pg-meta/{ref}/types',
+            {
+              params: {
+                header: { 'x-connection-encrypted': s },
+                path: { ref: n },
+              },
+              headers: Object.fromEntries(r),
+              signal: t,
+            }
+          );
+          return (i && (0, a.S3)(i), l);
+        }
+        let i = function (e) {
+          let { projectRef: t, connectionString: n } = e,
+            { enabled: a = !0, ...i } =
+              arguments.length > 1 && void 0 !== arguments[1]
+                ? arguments[1]
+                : {};
+          return (0, s.a)(
+            r.P.list(t),
+            e => {
+              let { signal: s } = e;
+              return l({ projectRef: t, connectionString: n }, s);
+            },
+            { enabled: a && void 0 !== t, ...i }
+          );
+        };
+      },
+      2115: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          N: function () {
+            return s;
+          },
+        });
+        let s = {
+          list: e => ['projects', e, 'views'],
+          listBySchema: (e, t) => [...s.list(e), t],
+        };
+      },
+      49296: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          Z: function () {
+            return s;
+          },
+        });
+        let s = (0, n(98266).Z)('Ellipsis', [
+          ['circle', { cx: '12', cy: '12', r: '1', key: '41hilf' }],
+          ['circle', { cx: '19', cy: '12', r: '1', key: '1wjl8i' }],
+          ['circle', { cx: '5', cy: '12', r: '1', key: '1pcz8c' }],
+        ]);
+      },
+      5211: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          Z: function () {
+            return s;
+          },
+        });
+        let s = (0, n(98266).Z)('RefreshCw', [
+          [
+            'path',
+            {
+              d: 'M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8',
+              key: 'v9h5vc',
+            },
+          ],
+          ['path', { d: 'M21 3v5h-5', key: '1q7to0' }],
+          [
+            'path',
+            {
+              d: 'M21 12a9 9 0 0 1-9 9 9.75 9.75 0 0 1-6.74-2.74L3 16',
+              key: '3uifl3',
+            },
+          ],
+          ['path', { d: 'M8 16H3v5', key: '1cv678' }],
+        ]);
+      },
+      29872: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          Z: function () {
+            return eu;
+          },
+        });
+        var s = n(97458),
+          a = n(198),
+          r = n(52983),
+          l = n(61767),
+          i = n(90817),
+          o = n(74334),
+          c = n(50663),
+          d = n.n(c),
+          u = n(36950),
+          x = n(41957),
+          p = n(32691),
+          m = n(12436),
+          h = n(7676),
+          f = n(5529),
+          b = n(359),
+          j = n(92844),
+          v = n(66902),
+          y = n(58015),
+          g = n(33940),
+          N = n(83402),
+          w = n(39113),
+          S = n(92261),
+          C = n(17319),
+          k = n(96444),
+          E = n(96226),
+          _ = n(10947),
+          L = n(90839),
+          z = n(42026),
+          T = n(61893),
+          Z = n(36155),
+          A = n(52114),
+          I = n(88971),
+          R = n(12887),
+          O = n.n(R),
+          P = n(61379),
+          F = n(70840),
+          M = n(97224),
+          B = n(49296),
+          D = n(57304),
+          W = n(3977),
+          V = n(58596),
+          X = n(11024),
+          Q = n(29790),
+          q = n(74304),
+          H = n(83145),
+          G = n.n(H),
+          J = n(49571),
+          Y = n.n(J),
+          K = n(34549),
+          U = n(6600),
+          $ = n(27850),
+          ee = n(99359),
+          et = n(44353),
+          en = n(83462),
+          es = n(89199),
+          ea = n(38650),
+          er = n(45536),
+          el = n(40577),
+          ei = n(65092),
+          eo = n(14500),
+          ec = e => {
+            var t, n, a, r, l, i, o, c;
+            let { id: d, projectRef: u, item: x, isLocked: p } = e,
+              { project: h } = (0, I.d2)(),
+              f = (0, E._2)(),
+              { selectedSchema: b } = (0, C.B)(),
+              j = Number(d) === x.id,
+              v = j && !p,
+              { data: y = [] } = (0, et.U)({
+                projectRef: null == h ? void 0 : h.ref,
+              }),
+              N = (0, ee.R)(
+                x.name,
+                'rls_disabled_in_public',
+                ['ERROR'],
+                y,
+                b
+              ).hasLint,
+              S = (0, ee.R)(
+                x.name,
+                'security_definer_view',
+                ['ERROR', 'WARN'],
+                y,
+                b
+              ).hasLint,
+              k = (0, ee.R)(
+                x.name,
+                'materialized_view_in_api',
+                ['ERROR', 'WARN'],
+                y,
+                b
+              ).hasLint,
+              _ = async () => {
+                if (m.Qy && !(null == h ? void 0 : h.connectionString))
+                  return console.error('Connection string is required');
+                let e = K.Am.loading('Exporting '.concat(x.name, ' as CSV...'));
+                try {
+                  let t = await (0, w.IV)({
+                    id: x.id,
+                    projectRef: u,
+                    connectionString: null == h ? void 0 : h.connectionString,
+                  });
+                  if ((0, es.N3)(t) && t.live_rows_estimate > U.kI)
+                    return K.Am.error(
+                      (0, s.jsx)('div', {
+                        className: 'text-foreground prose text-sm',
+                        children: U.m0,
+                      }),
+                      { id: e }
+                    );
+                  let n = t && (0, $.NK)(t);
+                  if (!n)
+                    return K.Am.error(
+                      'Failed to export table: '.concat(x.name),
+                      { id: e }
+                    );
+                  let a = (
+                    await (0, ea.wF)({
+                      projectRef: u,
+                      connectionString: null == h ? void 0 : h.connectionString,
+                      table: n,
+                    })
+                  ).map(
+                    e => (
+                      Object.keys(e).map(t => {
+                        'object' == typeof e[t] &&
+                          null !== e[t] &&
+                          (e[t] = JSON.stringify(e[t]));
+                      }),
+                      e
+                    )
+                  );
+                  if (a.length > 0) {
+                    let e = Y().unparse(a, {
+                        columns: n.columns.map(e => e.name),
+                      }),
+                      t = new Blob([e], { type: 'text/csv;charset=utf-8;' });
+                    O()(t, ''.concat(x.name, '_rows.csv'));
+                  }
+                  K.Am.success(
+                    'Successfully exported '.concat(x.name, ' as CSV'),
+                    { id: e }
+                  );
+                } catch (t) {
+                  K.Am.error('Failed to export table: '.concat(t.message), {
+                    id: e,
+                  });
+                }
+              },
+              L = async () => {
+                if (m.Qy && !(null == h ? void 0 : h.connectionString))
+                  return console.error('Connection string is required');
+                let e = K.Am.loading('Exporting '.concat(x.name, ' as SQL...'));
+                try {
+                  let t = await (0, w.IV)({
+                    id: x.id,
+                    projectRef: u,
+                    connectionString: null == h ? void 0 : h.connectionString,
+                  });
+                  if ((0, es.N3)(t) && t.live_rows_estimate > U.kI)
+                    return K.Am.error(
+                      (0, s.jsx)('div', {
+                        className: 'text-foreground prose text-sm',
+                        children: U.m0,
+                      }),
+                      { id: e }
+                    );
+                  let n = t && (0, $.NK)(t);
+                  if (!n)
+                    return K.Am.error(
+                      'Failed to export table: '.concat(x.name),
+                      { id: e }
+                    );
+                  let a = (
+                    await (0, ea.wF)({
+                      projectRef: u,
+                      connectionString: null == h ? void 0 : h.connectionString,
+                      table: n,
+                    })
+                  ).map(
+                    e => (
+                      Object.keys(e).map(t => {
+                        'object' == typeof e[t] &&
+                          null !== e[t] &&
+                          (e[t] = JSON.stringify(e[t]));
+                      }),
+                      e
+                    )
+                  );
+                  if (a.length > 0) {
+                    let e = (0, ee.k)(n, a),
+                      t = new Blob([e], { type: 'text/sql;charset=utf-8;' });
+                    O()(t, ''.concat(x.name, '_rows.sql'));
+                  }
+                  K.Am.success(
+                    'Successfully exported '.concat(x.name, ' as SQL'),
+                    { id: e }
+                  );
+                } catch (t) {
+                  K.Am.error('Failed to export table: '.concat(t.message), {
+                    id: e,
+                  });
+                }
+              };
+            return (0, s.jsx)('div', {
+              className: 'px-2',
+              'data-sentry-component': 'EntityListItem',
+              'data-sentry-source-file': 'EntityListItem.tsx',
+              children: (0, s.jsxs)(en.Sf, {
+                title: x.name,
+                id: String(x.id),
+                href: '/project/'
+                  .concat(u, '/editor/')
+                  .concat(x.id, '?schema=')
+                  .concat(b),
+                role: 'button',
+                'aria-label': 'View '.concat(x.name),
+                className: (0, ei.cn)(
+                  'w-full',
+                  'flex items-center gap-2',
+                  'py-1 px-2',
+                  'text-light',
+                  'rounded-md',
+                  j
+                    ? 'bg-selection'
+                    : 'hover:bg-surface-200 focus:bg-surface-200',
+                  'group',
+                  'transition'
+                ),
+                'data-sentry-element': 'EditorTablePageLink',
+                'data-sentry-source-file': 'EntityListItem.tsx',
+                children: [
+                  (0, s.jsxs)(el.u, {
+                    disableHoverableContent: !0,
+                    'data-sentry-element': 'Tooltip',
+                    'data-sentry-source-file': 'EntityListItem.tsx',
+                    children: [
+                      (0, s.jsx)(el.aJ, {
+                        className: 'min-w-4',
+                        asChild: !0,
+                        'data-sentry-element': 'TooltipTrigger',
+                        'data-sentry-source-file': 'EntityListItem.tsx',
+                        children:
+                          x.type === g.l.TABLE
+                            ? (0, s.jsx)(F.Z, {
+                                size: 15,
+                                strokeWidth: 1.5,
+                                className: (0, ei.cn)(
+                                  'text-foreground-muted group-hover:text-foreground-lighter',
+                                  j && 'text-foreground-lighter',
+                                  'transition-colors'
+                                ),
+                              })
+                            : x.type === g.l.VIEW
+                              ? (0, s.jsx)(M.Z, {
+                                  size: 15,
+                                  strokeWidth: 1.5,
+                                  className: (0, ei.cn)(
+                                    'text-foreground-muted group-hover:text-foreground-lighter',
+                                    j && 'text-foreground-lighter',
+                                    'transition-colors'
+                                  ),
+                                })
+                              : (0, s.jsx)('div', {
+                                  className: (0, ei.cn)(
+                                    'flex items-center justify-center text-xs h-4 w-4 rounded-[2px] font-bold',
+                                    x.type === g.l.FOREIGN_TABLE &&
+                                      'text-yellow-900 bg-yellow-500',
+                                    x.type === g.l.MATERIALIZED_VIEW &&
+                                      'text-purple-1000 bg-purple-500',
+                                    x.type === g.l.PARTITIONED_TABLE &&
+                                      'text-foreground-light bg-border-stronger'
+                                  ),
+                                  children:
+                                    null ===
+                                      (a = Object.entries(g.l).find(e => {
+                                        let [, t] = e;
+                                        return t === x.type;
+                                      })) || void 0 === a
+                                      ? void 0
+                                      : null === (n = a[0]) || void 0 === n
+                                        ? void 0
+                                        : null === (t = n[0]) || void 0 === t
+                                          ? void 0
+                                          : t.toUpperCase(),
+                                }),
+                      }),
+                      (0, s.jsx)(el._v, {
+                        side: 'bottom',
+                        'data-sentry-element': 'TooltipContent',
+                        'data-sentry-source-file': 'EntityListItem.tsx',
+                        children:
+                          ((r = x.type),
+                          null ===
+                            (c = Object.entries(g.l).find(e => {
+                              let [, t] = e;
+                              return t === r;
+                            })) || void 0 === c
+                            ? void 0
+                            : null === (o = c[0]) || void 0 === o
+                              ? void 0
+                              : null === (i = o.toLowerCase()) || void 0 === i
+                                ? void 0
+                                : null === (l = i.split('_')) || void 0 === l
+                                  ? void 0
+                                  : l.join(' ')),
+                      }),
+                    ],
+                  }),
+                  (0, s.jsxs)('div', {
+                    className: (0, ei.cn)(
+                      'truncate',
+                      'overflow-hidden text-ellipsis whitespace-nowrap flex items-center gap-2 relative w-full',
+                      j && 'text-foreground'
+                    ),
+                    children: [
+                      (0, s.jsx)('span', {
+                        className: (0, ei.cn)(
+                          j
+                            ? 'text-foreground'
+                            : 'text-foreground-light group-hover:text-foreground',
+                          'text-sm',
+                          'transition',
+                          'truncate'
+                        ),
+                        children: x.name,
+                      }),
+                      (0, s.jsx)(
+                        e => {
+                          let { entity: t } = e,
+                            n = null;
+                          switch (t.type) {
+                            case g.l.TABLE:
+                              N && (n = 'RLS disabled');
+                              break;
+                            case g.l.VIEW:
+                              S && (n = 'Security definer view');
+                              break;
+                            case g.l.MATERIALIZED_VIEW:
+                              k && (n = 'Security definer view');
+                              break;
+                            case g.l.FOREIGN_TABLE:
+                              n = 'RLS is not enforced on foreign tables';
+                          }
+                          return n
+                            ? (0, s.jsxs)(el.u, {
+                                disableHoverableContent: !0,
+                                children: [
+                                  (0, s.jsx)(el.aJ, {
+                                    className: 'min-w-4',
+                                    asChild: !0,
+                                    children: (0, s.jsx)(P.Z, {
+                                      size: 14,
+                                      strokeWidth: 2,
+                                      className: (0, ei.cn)(
+                                        'min-w-4',
+                                        j
+                                          ? 'text-warning-600'
+                                          : 'text-warning-500'
+                                      ),
+                                    }),
+                                  }),
+                                  (0, s.jsx)(el._v, {
+                                    side: 'bottom',
+                                    children: n,
+                                  }),
+                                ],
+                              })
+                            : null;
+                        },
+                        {
+                          entity: x,
+                          'data-sentry-element': 'EntityTooltipTrigger',
+                          'data-sentry-source-file': 'EntityListItem.tsx',
+                        }
+                      ),
+                    ],
+                  }),
+                  v &&
+                    (0, s.jsxs)(eo.h_, {
+                      children: [
+                        (0, s.jsx)(eo.$F, {
+                          className:
+                            'text-foreground-lighter transition-all hover:text-foreground data-[state=open]:text-foreground',
+                          children: (0, s.jsx)(B.Z, {
+                            size: 14,
+                            strokeWidth: 2,
+                          }),
+                        }),
+                        (0, s.jsxs)(eo.AW, {
+                          side: 'bottom',
+                          align: 'start',
+                          className: 'w-44',
+                          children: [
+                            (0, s.jsxs)(
+                              eo.Xi,
+                              {
+                                className: 'space-x-2',
+                                onClick: e => {
+                                  (e.stopPropagation(), (0, er.vQ)(x.name));
+                                },
+                                children: [
+                                  (0, s.jsx)(D.Z, { size: 12 }),
+                                  (0, s.jsx)('span', { children: 'Copy name' }),
+                                ],
+                              },
+                              'copy-name'
+                            ),
+                            x.type === g.l.TABLE &&
+                              (0, s.jsxs)(s.Fragment, {
+                                children: [
+                                  (0, s.jsx)(eo.VD, {}),
+                                  (0, s.jsxs)(
+                                    eo.Xi,
+                                    {
+                                      className: 'space-x-2',
+                                      onClick: e => {
+                                        (e.stopPropagation(), f.onEditTable());
+                                      },
+                                      children: [
+                                        (0, s.jsx)(W.Z, { size: 12 }),
+                                        (0, s.jsx)('span', {
+                                          children: 'Edit table',
+                                        }),
+                                      ],
+                                    },
+                                    'edit-table'
+                                  ),
+                                  (0, s.jsxs)(
+                                    eo.Xi,
+                                    {
+                                      className: 'space-x-2',
+                                      onClick: e => {
+                                        (e.stopPropagation(),
+                                          f.onDuplicateTable());
+                                      },
+                                      children: [
+                                        (0, s.jsx)(V.Z, { size: 12 }),
+                                        (0, s.jsx)('span', {
+                                          children: 'Duplicate table',
+                                        }),
+                                      ],
+                                    },
+                                    'duplicate-table'
+                                  ),
+                                  (0, s.jsx)(
+                                    eo.Xi,
+                                    {
+                                      className: 'space-x-2',
+                                      asChild: !0,
+                                      children: (0, s.jsxs)(
+                                        G(),
+                                        {
+                                          href: '/project/'
+                                            .concat(u, '/auth/policies?schema=')
+                                            .concat(b, '&search=')
+                                            .concat(x.id),
+                                          children: [
+                                            (0, s.jsx)(X.Z, { size: 12 }),
+                                            (0, s.jsx)('span', {
+                                              children: 'View policies',
+                                            }),
+                                          ],
+                                        },
+                                        'view-policies'
+                                      ),
+                                    },
+                                    'view-policies'
+                                  ),
+                                  (0, s.jsxs)(eo.Ph, {
+                                    children: [
+                                      (0, s.jsxs)(eo.kt, {
+                                        className: 'gap-x-2',
+                                        children: [
+                                          (0, s.jsx)(Q.Z, { size: 12 }),
+                                          'Export data',
+                                        ],
+                                      }),
+                                      (0, s.jsxs)(eo.TG, {
+                                        children: [
+                                          (0, s.jsx)(
+                                            eo.Xi,
+                                            {
+                                              className: 'space-x-2',
+                                              onClick: e => {
+                                                (e.stopPropagation(), _());
+                                              },
+                                              children: (0, s.jsx)('span', {
+                                                children: 'Export table as CSV',
+                                              }),
+                                            },
+                                            'download-table-csv'
+                                          ),
+                                          (0, s.jsx)(
+                                            eo.Xi,
+                                            {
+                                              className: 'gap-x-2',
+                                              onClick: e => {
+                                                (e.stopPropagation(), L());
+                                              },
+                                              children: (0, s.jsx)('span', {
+                                                children: 'Export table as SQL',
+                                              }),
+                                            },
+                                            'download-table-sql'
+                                          ),
+                                        ],
+                                      }),
+                                    ],
+                                  }),
+                                  (0, s.jsx)(eo.VD, {}),
+                                  (0, s.jsxs)(
+                                    eo.Xi,
+                                    {
+                                      className: 'gap-x-2',
+                                      onClick: e => {
+                                        (e.stopPropagation(),
+                                          f.onDeleteTable());
+                                      },
+                                      children: [
+                                        (0, s.jsx)(q.Z, { size: 12 }),
+                                        (0, s.jsx)('span', {
+                                          children: 'Delete table',
+                                        }),
+                                      ],
+                                    },
+                                    'delete-table'
+                                  ),
+                                ],
+                              }),
+                          ],
+                        }),
+                      ],
+                    }),
+                ],
+              }),
+            });
+          },
+          ed = () => {
+            var e, t, n;
+            let { id: l } = (0, m.UO)(),
+              o = (0, p.useRouter)(),
+              c = l ? Number(l) : void 0,
+              R = (0, E._2)(),
+              { selectedSchema: O, setSelectedSchema: P } = (0, C.B)(),
+              F = (0, m.Gc)(),
+              [M, B] = (0, r.useState)(!1),
+              [D, W] = (0, r.useState)(''),
+              [V, X] = (0, r.useState)(Object.values(g.l)),
+              [Q, q] = (0, S._)('table-editor-sort', 'alphabetical'),
+              { project: H } = (0, I.d2)(),
+              {
+                data: G,
+                isLoading: J,
+                isSuccess: Y,
+                isError: K,
+                error: U,
+                hasNextPage: $,
+                isFetchingNextPage: ee,
+                fetchNextPage: et,
+              } = (0, N.Hp)(
+                {
+                  projectRef: null == H ? void 0 : H.ref,
+                  connectionString: null == H ? void 0 : H.connectionString,
+                  schemas: [O],
+                  search: D.trim() || void 0,
+                  sort: Q,
+                  filterTypes: V,
+                },
+                { keepPreviousData: !!D }
+              ),
+              en = (0, r.useMemo)(
+                () =>
+                  null == G ? void 0 : G.pages.flatMap(e => e.data.entities),
+                [null == G ? void 0 : G.pages]
+              ),
+              { data: es } = (0, y.Q1)({
+                projectRef: null == H ? void 0 : H.ref,
+                connectionString: null == H ? void 0 : H.connectionString,
+              }),
+              ea = null == es ? void 0 : es.find(e => e.name === O),
+              er = (0, i.Xo)(a.KA.TENANT_SQL_ADMIN_WRITE, 'tables'),
+              [el] = d()(
+                (null != es ? es : []).sort((e, t) =>
+                  e.name.localeCompare(t.name)
+                ),
+                e => {
+                  var t;
+                  return k.s.includes(
+                    null !== (t = null == e ? void 0 : e.name) && void 0 !== t
+                      ? t
+                      : ''
+                  );
+                }
+              ),
+              ei = el.some(e => e.id === (null == ea ? void 0 : ea.id)),
+              { data: eo } = (0, w.iB)({
+                projectRef: null == H ? void 0 : H.ref,
+                connectionString: null == H ? void 0 : H.connectionString,
+                id: c,
+              });
+            return (
+              (0, r.useEffect)(() => {
+                (null == eo ? void 0 : eo.schema) && P(eo.schema);
+              }, [null == eo ? void 0 : eo.schema]),
+              (0, s.jsxs)(s.Fragment, {
+                children: [
+                  (0, s.jsxs)('div', {
+                    className: 'pt-5 flex flex-col flex-grow gap-5 h-full',
+                    style: { maxHeight: 'calc(100vh - 48px)' },
+                    children: [
+                      (0, s.jsxs)('div', {
+                        className: 'flex flex-col gap-y-1.5',
+                        children: [
+                          (0, s.jsx)(v.Z, {
+                            className: 'mx-4',
+                            selectedSchemaName: O,
+                            onSelectSchema: e => {
+                              (W(''),
+                                P(e),
+                                o.push(
+                                  '/project/'.concat(
+                                    null == H ? void 0 : H.ref,
+                                    '/editor'
+                                  )
+                                ));
+                            },
+                            onSelectCreateSchema: () => R.onAddSchema(),
+                            'data-sentry-element': 'SchemaSelector',
+                            'data-sentry-source-file': 'TableEditorMenu.tsx',
+                          }),
+                          (0, s.jsx)('div', {
+                            className: 'grid gap-3 mx-4',
+                            children: ei
+                              ? (0, s.jsxs)(_.bZ, {
+                                  children: [
+                                    (0, s.jsx)(_.Cd, {
+                                      className: 'text-sm',
+                                      children: 'Viewing protected schema',
+                                    }),
+                                    (0, s.jsxs)(_.X, {
+                                      className: 'text-xs',
+                                      children: [
+                                        (0, s.jsx)('p', {
+                                          className: 'mb-2',
+                                          children:
+                                            'This schema is managed by Supabase and is read-only through the table editor',
+                                        }),
+                                        (0, s.jsx)(L.z, {
+                                          type: 'default',
+                                          size: 'tiny',
+                                          onClick: () => B(!0),
+                                          children: 'Learn more',
+                                        }),
+                                      ],
+                                    }),
+                                  ],
+                                })
+                              : (0, s.jsx)(b.u, {
+                                  block: !0,
+                                  title: 'Create a new table',
+                                  name: 'New table',
+                                  disabled: !er,
+                                  size: 'tiny',
+                                  icon: (0, s.jsx)(u.Z, {
+                                    size: 14,
+                                    strokeWidth: 1.5,
+                                    className: 'text-foreground-muted',
+                                  }),
+                                  type: 'default',
+                                  className: 'justify-start',
+                                  onClick: R.onAddTable,
+                                  tooltip: {
+                                    content: {
+                                      side: 'bottom',
+                                      text: er
+                                        ? void 0
+                                        : 'You need additional permissions to create tables',
+                                    },
+                                  },
+                                  children: 'New table',
+                                }),
+                          }),
+                        ],
+                      }),
+                      (0, s.jsxs)('div', {
+                        className: 'flex flex-auto flex-col gap-2 pb-4 px-2',
+                        children: [
+                          (0, s.jsxs)(A.nM, {
+                            'data-sentry-element': 'InnerSideBarFilters',
+                            'data-sentry-source-file': 'TableEditorMenu.tsx',
+                            children: [
+                              (0, s.jsx)(A.nn, {
+                                autoFocus: !F,
+                                name: 'search-tables',
+                                'aria-labelledby': 'Search tables',
+                                onChange: e => {
+                                  W(e.target.value);
+                                },
+                                value: D,
+                                placeholder: 'Search tables...',
+                                'data-sentry-element':
+                                  'InnerSideBarFilterSearchInput',
+                                'data-sentry-source-file':
+                                  'TableEditorMenu.tsx',
+                                children: (0, s.jsxs)(A.ZY, {
+                                  value: Q,
+                                  onValueChange: e => q(e),
+                                  'data-sentry-element':
+                                    'InnerSideBarFilterSortDropdown',
+                                  'data-sentry-source-file':
+                                    'TableEditorMenu.tsx',
+                                  children: [
+                                    (0, s.jsx)(
+                                      A.IR,
+                                      {
+                                        value: 'alphabetical',
+                                        className: 'flex gap-2',
+                                        'data-sentry-element':
+                                          'InnerSideBarFilterSortDropdownItem',
+                                        'data-sentry-source-file':
+                                          'TableEditorMenu.tsx',
+                                        children: 'Alphabetical',
+                                      },
+                                      'alphabetical'
+                                    ),
+                                    (0, s.jsx)(
+                                      A.IR,
+                                      {
+                                        value: 'grouped-alphabetical',
+                                        'data-sentry-element':
+                                          'InnerSideBarFilterSortDropdownItem',
+                                        'data-sentry-source-file':
+                                          'TableEditorMenu.tsx',
+                                        children: 'Entity Type',
+                                      },
+                                      'grouped-alphabetical'
+                                    ),
+                                  ],
+                                }),
+                              }),
+                              (0, s.jsxs)(z.J2, {
+                                'data-sentry-element': 'Popover_Shadcn_',
+                                'data-sentry-source-file':
+                                  'TableEditorMenu.tsx',
+                                children: [
+                                  (0, s.jsx)(z.xo, {
+                                    asChild: !0,
+                                    'data-sentry-element':
+                                      'PopoverTrigger_Shadcn_',
+                                    'data-sentry-source-file':
+                                      'TableEditorMenu.tsx',
+                                    children: (0, s.jsx)(L.z, {
+                                      type:
+                                        5 !== V.length ? 'default' : 'dashed',
+                                      className: 'h-[32px] md:h-[28px] px-1.5',
+                                      icon: (0, s.jsx)(x.Z, {}),
+                                      'data-sentry-element': 'Button',
+                                      'data-sentry-source-file':
+                                        'TableEditorMenu.tsx',
+                                    }),
+                                  }),
+                                  (0, s.jsx)(z.yk, {
+                                    className: 'p-0 w-56',
+                                    side: 'bottom',
+                                    align: 'center',
+                                    'data-sentry-element':
+                                      'PopoverContent_Shadcn_',
+                                    'data-sentry-source-file':
+                                      'TableEditorMenu.tsx',
+                                    children: (0, s.jsxs)('div', {
+                                      className:
+                                        'px-3 pt-3 pb-2 flex flex-col gap-y-2',
+                                      children: [
+                                        (0, s.jsx)('p', {
+                                          className: 'text-xs',
+                                          children: 'Show entity types',
+                                        }),
+                                        (0, s.jsx)('div', {
+                                          className: 'flex flex-col',
+                                          children: Object.entries(g.l).map(
+                                            e => {
+                                              let [t, n] = e;
+                                              return (0, s.jsxs)(
+                                                'div',
+                                                {
+                                                  className:
+                                                    'group flex items-center justify-between py-0.5',
+                                                  children: [
+                                                    (0, s.jsxs)('div', {
+                                                      className:
+                                                        'flex items-center gap-x-2',
+                                                      children: [
+                                                        (0, s.jsx)(T.X, {
+                                                          id: t,
+                                                          name: t,
+                                                          checked:
+                                                            V.includes(n),
+                                                          onCheckedChange:
+                                                            () => {
+                                                              V.includes(n)
+                                                                ? X(
+                                                                    V.filter(
+                                                                      e =>
+                                                                        e !== n
+                                                                    )
+                                                                  )
+                                                                : X(
+                                                                    V.concat([
+                                                                      n,
+                                                                    ])
+                                                                  );
+                                                            },
+                                                        }),
+                                                        (0, s.jsx)(Z._, {
+                                                          htmlFor: t,
+                                                          className:
+                                                            'capitalize text-xs',
+                                                          children: t
+                                                            .toLowerCase()
+                                                            .replace('_', ' '),
+                                                        }),
+                                                      ],
+                                                    }),
+                                                    (0, s.jsx)(L.z, {
+                                                      size: 'tiny',
+                                                      type: 'default',
+                                                      onClick: () => X([n]),
+                                                      className:
+                                                        'transition opacity-0 group-hover:opacity-100 h-auto px-1 py-0.5',
+                                                      children: 'Select only',
+                                                    }),
+                                                  ],
+                                                },
+                                                t
+                                              );
+                                            }
+                                          ),
+                                        }),
+                                      ],
+                                    }),
+                                  }),
+                                ],
+                              }),
+                            ],
+                          }),
+                          J && (0, s.jsx)(A.HJ, {}),
+                          K &&
+                            (0, s.jsx)(f.Z, {
+                              error: null != U ? U : null,
+                              subject: 'Failed to retrieve tables',
+                            }),
+                          Y &&
+                            (0, s.jsxs)(s.Fragment, {
+                              children: [
+                                0 === D.length &&
+                                  (null !==
+                                    (e = null == en ? void 0 : en.length) &&
+                                  void 0 !== e
+                                    ? e
+                                    : 0) <= 0 &&
+                                  (0, s.jsx)(A.Cf, {
+                                    className: 'mx-2',
+                                    title: 'No entities available',
+                                    description:
+                                      'This schema has no entities available yet',
+                                  }),
+                                D.length > 0 &&
+                                  (null !==
+                                    (t = null == en ? void 0 : en.length) &&
+                                  void 0 !== t
+                                    ? t
+                                    : 0) <= 0 &&
+                                  (0, s.jsx)(A.Cf, {
+                                    className: 'mx-2',
+                                    title: 'No results found',
+                                    description: 'Your search for "'.concat(
+                                      D,
+                                      '" did not return any results'
+                                    ),
+                                  }),
+                                (null !==
+                                  (n = null == en ? void 0 : en.length) &&
+                                void 0 !== n
+                                  ? n
+                                  : 0) > 0 &&
+                                  (0, s.jsx)('div', {
+                                    className: 'flex flex-1 -mx-2',
+                                    'data-testid': 'tables-list',
+                                    children: (0, s.jsx)(j.Z, {
+                                      items: en,
+                                      ItemComponent: ec,
+                                      itemProps: {
+                                        projectRef: null == H ? void 0 : H.ref,
+                                        id: Number(c),
+                                        isLocked: ei,
+                                      },
+                                      getItemSize: () => 28,
+                                      hasNextPage: $,
+                                      isLoadingNextPage: ee,
+                                      onLoadNextPage: () => et(),
+                                    }),
+                                  }),
+                              ],
+                            }),
+                        ],
+                      }),
+                    ],
+                  }),
+                  (0, s.jsx)(h.b, {
+                    visible: M,
+                    onClose: () => B(!1),
+                    'data-sentry-element': 'ProtectedSchemaModal',
+                    'data-sentry-source-file': 'TableEditorMenu.tsx',
+                  }),
+                ],
+              })
+            );
+          },
+          eu = e => {
+            let { children: t } = e,
+              n = (0, i.N4)(),
+              c = (0, i.Xo)(a.KA.TENANT_SQL_ADMIN_READ, 'tables'),
+              d = (0, r.useMemo)(() => (0, s.jsx)(ed, {}), []);
+            return n && !c
+              ? (0, s.jsx)(o.$, {
+                  isBlocking: !1,
+                  children: (0, s.jsx)(l.Z, {
+                    isFullPage: !0,
+                    resourceText: 'view tables from this project',
+                  }),
+                })
+              : (0, s.jsx)(o.$, {
+                  product: 'Table Editor',
+                  productMenu: d,
+                  isBlocking: !1,
+                  resizableSidebar: !0,
+                  'data-sentry-element': 'ProjectLayoutWithAuth',
+                  'data-sentry-component': 'TableEditorLayout',
+                  'data-sentry-source-file': 'TableEditorLayout.tsx',
+                  children: t,
+                });
+          };
+      },
+      61767: function (e, t, n) {
+        'use strict';
+        var s = n(97458),
+          a = n(44735);
+        t.Z = e => {
+          let { resourceText: t, isFullPage: n = !1 } = e,
+            r = () =>
+              (0, s.jsx)('div', {
+                className:
+                  'block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200',
+                'data-sentry-component': 'NoPermissionMessage',
+                'data-sentry-source-file': 'NoPermission.tsx',
+                children: (0, s.jsxs)('div', {
+                  className: 'flex space-x-3',
+                  children: [
+                    (0, s.jsx)('div', {
+                      className: 'mt-1',
+                      children: (0, s.jsx)(a.Z, {
+                        size: 20,
+                        'data-sentry-element': 'AlertCircle',
+                        'data-sentry-source-file': 'NoPermission.tsx',
+                      }),
+                    }),
+                    (0, s.jsx)('div', {
+                      className: 'flex w-full items-center justify-between',
+                      children: (0, s.jsxs)('div', {
+                        className: 'space-y-1',
+                        children: [
+                          (0, s.jsxs)('p', {
+                            className: 'text-sm',
+                            children: [
+                              'You need additional permissions to ',
+                              t,
+                            ],
+                          }),
+                          (0, s.jsx)('div', {
+                            children: (0, s.jsx)('p', {
+                              className: 'text-sm text-foreground-light',
+                              children:
+                                'Contact your organization owner or administrator for assistance.',
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              });
+          return n
+            ? (0, s.jsx)('div', {
+                className: 'flex h-full items-center justify-center',
+                children: (0, s.jsx)('div', {
+                  className: 'w-[550px]',
+                  children: (0, s.jsx)(r, {}),
+                }),
+              })
+            : (0, s.jsx)(r, {});
+        };
+      },
+      66902: function (e, t, n) {
+        'use strict';
+        var s = n(97458),
+          a = n(50416),
+          r = n(62507),
+          l = n(36950),
+          i = n(52983),
+          o = n(198),
+          c = n(88971),
+          d = n(58015),
+          u = n(90817),
+          x = n(90839),
+          p = n(10947),
+          m = n(42026),
+          h = n(47482),
+          f = n(64890);
+        t.Z = e => {
+          let {
+              className: t,
+              disabled: n = !1,
+              size: b = 'tiny',
+              showError: j = !0,
+              selectedSchemaName: v,
+              supportSelectAll: y = !1,
+              excludedSchemas: g = [],
+              onSelectSchema: N,
+              onSelectCreateSchema: w,
+            } = e,
+            [S, C] = (0, i.useState)(!1),
+            k = (0, u.Xo)(o.KA.TENANT_SQL_ADMIN_WRITE, 'schemas'),
+            { project: E } = (0, c.d2)(),
+            {
+              data: _,
+              isLoading: L,
+              isSuccess: z,
+              isError: T,
+              error: Z,
+              refetch: A,
+            } = (0, d.Q1)({
+              projectRef: null == E ? void 0 : E.ref,
+              connectionString: null == E ? void 0 : E.connectionString,
+            }),
+            I = (_ || [])
+              .filter(e => !g.includes(e.name))
+              .sort((e, t) => e.name.localeCompare(t.name));
+          return (0, s.jsxs)('div', {
+            className: t,
+            'data-sentry-component': 'SchemaSelector',
+            'data-sentry-source-file': 'SchemaSelector.tsx',
+            children: [
+              L &&
+                (0, s.jsx)(x.z, {
+                  type: 'default',
+                  className: 'justify-start',
+                  block: !0,
+                  size: b,
+                  loading: !0,
+                  children: 'Loading schemas...',
+                }),
+              j &&
+                T &&
+                (0, s.jsxs)(p.bZ, {
+                  variant: 'warning',
+                  className: '!px-3 !py-3',
+                  children: [
+                    (0, s.jsx)(p.Cd, {
+                      className: 'text-xs text-amber-900',
+                      children: 'Failed to load schemas',
+                    }),
+                    (0, s.jsxs)(p.X, {
+                      className: 'text-xs mb-2 break-words',
+                      children: ['Error: ', null == Z ? void 0 : Z.message],
+                    }),
+                    (0, s.jsx)(x.z, {
+                      type: 'default',
+                      size: 'tiny',
+                      onClick: () => A(),
+                      children: 'Reload schemas',
+                    }),
+                  ],
+                }),
+              z &&
+                (0, s.jsxs)(m.J2, {
+                  open: S,
+                  onOpenChange: C,
+                  modal: !1,
+                  children: [
+                    (0, s.jsx)(m.xo, {
+                      asChild: !0,
+                      children: (0, s.jsx)(x.z, {
+                        size: b,
+                        disabled: n,
+                        type: 'default',
+                        className: 'w-full [&>span]:w-full',
+                        iconRight: (0, s.jsx)(a.Z, {
+                          className: 'text-foreground-muted',
+                          strokeWidth: 2,
+                          size: 14,
+                        }),
+                        children: v
+                          ? (0, s.jsxs)('div', {
+                              className: 'w-full flex gap-1',
+                              children: [
+                                (0, s.jsx)('p', {
+                                  className: 'text-foreground-lighter',
+                                  children: 'schema:',
+                                }),
+                                (0, s.jsx)('p', {
+                                  className: 'text-foreground',
+                                  children: '*' === v ? 'All schemas' : v,
+                                }),
+                              ],
+                            })
+                          : (0, s.jsx)('div', {
+                              className: 'w-full flex gap-1',
+                              children: (0, s.jsx)('p', {
+                                className: 'text-foreground-lighter',
+                                children: 'Choose a schema…',
+                              }),
+                            }),
+                      }),
+                    }),
+                    (0, s.jsx)(m.yk, {
+                      className: 'p-0',
+                      side: 'bottom',
+                      align: 'start',
+                      sameWidthAsTrigger: !0,
+                      children: (0, s.jsxs)(h.mY, {
+                        children: [
+                          (0, s.jsx)(h.sZ, { placeholder: 'Find schema...' }),
+                          (0, s.jsxs)(h.e8, {
+                            children: [
+                              (0, s.jsx)(h.rb, {
+                                children: 'No schemas found',
+                              }),
+                              (0, s.jsx)(h.fu, {
+                                children: (0, s.jsxs)(f.x, {
+                                  className:
+                                    (I || []).length > 7 ? 'h-[210px]' : '',
+                                  children: [
+                                    y &&
+                                      (0, s.jsxs)(
+                                        h.di,
+                                        {
+                                          className:
+                                            'cursor-pointer flex items-center justify-between space-x-2 w-full',
+                                          onSelect: () => {
+                                            (N('*'), C(!1));
+                                          },
+                                          onClick: () => {
+                                            (N('*'), C(!1));
+                                          },
+                                          children: [
+                                            (0, s.jsx)('span', {
+                                              children: 'All schemas',
+                                            }),
+                                            '*' === v &&
+                                              (0, s.jsx)(r.Z, {
+                                                className: 'text-brand',
+                                                strokeWidth: 2,
+                                                size: 16,
+                                              }),
+                                          ],
+                                        },
+                                        'select-all'
+                                      ),
+                                    null == I
+                                      ? void 0
+                                      : I.map(e =>
+                                          (0, s.jsxs)(
+                                            h.di,
+                                            {
+                                              className:
+                                                'cursor-pointer flex items-center justify-between space-x-2 w-full',
+                                              onSelect: () => {
+                                                (N(e.name), C(!1));
+                                              },
+                                              onClick: () => {
+                                                (N(e.name), C(!1));
+                                              },
+                                              children: [
+                                                (0, s.jsx)('span', {
+                                                  children: e.name,
+                                                }),
+                                                v === e.name &&
+                                                  (0, s.jsx)(r.Z, {
+                                                    className: 'text-brand',
+                                                    strokeWidth: 2,
+                                                    size: 16,
+                                                  }),
+                                              ],
+                                            },
+                                            e.id
+                                          )
+                                        ),
+                                  ],
+                                }),
+                              }),
+                              void 0 !== w &&
+                                k &&
+                                (0, s.jsxs)(s.Fragment, {
+                                  children: [
+                                    (0, s.jsx)(h.zz, {}),
+                                    (0, s.jsx)(h.fu, {
+                                      children: (0, s.jsxs)(h.di, {
+                                        className:
+                                          'cursor-pointer flex items-center gap-x-2 w-full',
+                                        onSelect: () => {
+                                          (w(), C(!1));
+                                        },
+                                        onClick: () => {
+                                          (w(), C(!1));
+                                        },
+                                        children: [
+                                          (0, s.jsx)(l.Z, { size: 12 }),
+                                          'Create a new schema',
+                                        ],
+                                      }),
+                                    }),
+                                  ],
+                                }),
+                            ],
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+            ],
+          });
+        };
+      },
+      23078: function (e, t, n) {
+        'use strict';
+        var s = n(97458),
+          a = n(65092);
+        t.Z = e => {
+          let {
+            max: t = 100,
+            value: n = 0,
+            barClass: r = 'bg-foreground',
+            bgClass: l = '',
+            type: i = 'vertical',
+            borderClass: o = '',
+            labelBottom: c = '',
+            labelBottomClass: d = 'tabular-nums',
+            labelTop: u = '',
+            labelTopClass: x = '',
+          } = e;
+          if ('horizontal' === i) {
+            let e = Number((n / t) * 100),
+              i = c || u;
+            return (0, s.jsxs)('div', {
+              className: 'flex flex-col w-full',
+              children: [
+                i &&
+                  (0, s.jsxs)('div', {
+                    className:
+                      'flex align-baseline justify-between pb-1 space-x-8',
+                    children: [
+                      (0, s.jsx)('p', {
+                        className: (0, a.cn)(
+                          'text-foreground text-sm truncate capitalize-sentence',
+                          u.length > 0 && 'max-w-[75%]',
+                          d
+                        ),
+                        children: c,
+                      }),
+                      (0, s.jsx)('p', {
+                        className: (0, a.cn)(
+                          'text-foreground-light text-sm',
+                          x
+                        ),
+                        children: u,
+                      }),
+                    ],
+                  }),
+                (0, s.jsx)('div', {
+                  className:
+                    'relative rounded h-1 overflow-hidden w-full border p-0 '
+                      .concat(l || 'bg-surface-400', ' ')
+                      .concat(o || 'border-none'),
+                  children: (0, s.jsx)('div', {
+                    className:
+                      'absolute rounded inset-x-0 bottom-0 h-1 '.concat(
+                        r,
+                        ' transition-all'
+                      ),
+                    style: { width: ''.concat(e, '%') },
+                  }),
+                }),
+              ],
+            });
+          }
+          {
+            let e = Number((n / t) * 35);
+            return (
+              e < 2 && (e = 2),
+              (0, s.jsx)('div', {
+                className: 'relative rounded w-5 overflow-hidden border p-1 '
+                  .concat(l || 'bg-gray-400', ' ')
+                  .concat(o || 'border-none'),
+                style: { height: 35 },
+                children: (0, s.jsx)('div', {
+                  className: 'absolute inset-x-0 bottom-0 w-5 '.concat(r),
+                  style: { height: e },
+                }),
+              })
+            );
+          }
+        };
+      },
+      10046: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          Z: function () {
+            return d;
+          },
+        });
+        var s = n(97458),
+          a = n(52983),
+          r = n(68249),
+          l = n(25843),
+          i = n(11499);
+        let o = (0, a.createContext)({
+          parentCallback: e => {},
+          parentSize: '',
+        });
+        function c(e) {
+          let {
+              className: t,
+              id: n = '',
+              name: a = '',
+              label: r,
+              afterLabel: c,
+              beforeLabel: d,
+              description: u,
+              checked: x,
+              value: p,
+              onChange: m,
+              onBlur: h,
+              size: f = 'medium',
+              disabled: b = !1,
+              ...j
+            } = e,
+            { formContextOnChange: v, values: y, handleBlur: g } = (0, i.G)(),
+            N = (0, l.Z)('checkbox');
+          return (0, s.jsx)(o.Consumer, {
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'Checkbox',
+            'data-sentry-source-file': 'Checkbox.tsx',
+            children: e => {
+              let { parentCallback: l, parentSize: i } = e,
+                o =
+                  n ||
+                  a ||
+                  (r
+                    ? r
+                        .toLowerCase()
+                        .replace(/^[^A-Z0-9]+/gi, '')
+                        .replace(/ /g, '-')
+                    : void 0);
+              f = i || f;
+              let w = a || o,
+                S = null != x ? x : void 0,
+                C = [N.container];
+              return (
+                t && C.push(t),
+                y && void 0 === x && (S = y[n || a]),
+                (0, s.jsxs)('div', {
+                  className: C.join(' '),
+                  children: [
+                    (0, s.jsx)('input', {
+                      id: o,
+                      name: w,
+                      type: 'checkbox',
+                      className: [N.base, N.size[f]].join(' '),
+                      onChange: function (e) {
+                        (l && l(e), m && m(e), v && v(e));
+                      },
+                      onBlur: function (e) {
+                        (g &&
+                          setTimeout(() => {
+                            g(e);
+                          }, 100),
+                          h && h(e));
+                      },
+                      checked: S,
+                      value: p || o,
+                      disabled: b,
+                      ...j,
+                    }),
+                    (0, s.jsxs)('label', {
+                      className: [N.label.base, N.label[f]].join(' '),
+                      htmlFor: o,
+                      children: [
+                        (0, s.jsxs)('span', {
+                          children: [
+                            d &&
+                              (0, s.jsx)('span', {
+                                className: [
+                                  N.label_before.base,
+                                  N.label_before[f],
+                                ].join(' '),
+                                children: d,
+                              }),
+                            r,
+                            c &&
+                              (0, s.jsx)('span', {
+                                className: [
+                                  N.label_after.base,
+                                  N.label_after[f],
+                                ].join(' '),
+                                children: c,
+                              }),
+                          ],
+                        }),
+                        u &&
+                          (0, s.jsx)('p', {
+                            className: [
+                              N.description.base,
+                              N.description[f],
+                            ].join(' '),
+                            children: u,
+                          }),
+                      ],
+                    }),
+                  ],
+                })
+              );
+            },
+          });
+        }
+        c.Group = function (e) {
+          let {
+              id: t,
+              layout: n = 'vertical',
+              error: a,
+              descriptionText: i,
+              label: d,
+              afterLabel: u,
+              beforeLabel: x,
+              labelOptional: p,
+              children: m,
+              className: h,
+              options: f,
+              onChange: b,
+              size: j = 'medium',
+            } = e,
+            v = (0, l.Z)('checkbox');
+          return (0, s.jsx)(r.l, {
+            label: d,
+            afterLabel: u,
+            beforeLabel: x,
+            labelOptional: p,
+            layout: n,
+            id: t,
+            error: a,
+            descriptionText: i,
+            className: h,
+            size: j,
+            'data-sentry-element': 'FormLayout',
+            'data-sentry-component': 'Group',
+            'data-sentry-source-file': 'Checkbox.tsx',
+            children: (0, s.jsx)(o.Provider, {
+              value: {
+                parentCallback: e => {
+                  b && b(e);
+                },
+                parentSize: j,
+              },
+              'data-sentry-element': 'unknown',
+              'data-sentry-source-file': 'Checkbox.tsx',
+              children: (0, s.jsx)('div', {
+                className: v.group,
+                children: f
+                  ? f.map(e =>
+                      (0, s.jsx)(
+                        c,
+                        {
+                          id: e.id,
+                          value: e.value,
+                          label: e.label,
+                          beforeLabel: e.beforeLabel,
+                          afterLabel: e.afterLabel,
+                          checked: e.checked,
+                          name: e.name,
+                          description: e.description,
+                          defaultChecked: e.defaultChecked,
+                        },
+                        e.id
+                      )
+                    )
+                  : m,
+              }),
+            }),
+          });
+        };
+        var d = c;
+      },
+      9450: function (e, t, n) {
+        'use strict';
+        var s = n(97458),
+          a = n(99517);
+        n(52983);
+        var r = n(25843);
+        let l = e => {
+          let { open: t, children: n, className: r, ...l } = e;
+          return (0, s.jsx)(a.fC, {
+            asChild: l.asChild,
+            defaultOpen: l.defaultOpen,
+            open: t,
+            onOpenChange: l.onOpenChange,
+            disabled: l.disabled,
+            className: r,
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'Collapsible',
+            'data-sentry-source-file': 'Collapsible.tsx',
+            children: n,
+          });
+        };
+        ((l.Trigger = function (e) {
+          let { children: t, asChild: n } = e;
+          return (0, s.jsx)(a.xz, {
+            asChild: n,
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'Trigger',
+            'data-sentry-source-file': 'Collapsible.tsx',
+            children: t,
+          });
+        }),
+          (l.Content = function (e) {
+            let { asChild: t, children: n, className: l } = e,
+              i = (0, r.Z)('collapsible');
+            return (0, s.jsx)(a.VY, {
+              asChild: t,
+              className: [i.content, l].join(' '),
+              'data-sentry-element': 'unknown',
+              'data-sentry-component': 'Content',
+              'data-sentry-source-file': 'Collapsible.tsx',
+              children: n,
+            });
+          }),
+          (t.ZP = l));
+      },
+      85818: function (e, t, n) {
+        'use strict';
+        n.d(t, {
+          Z: function () {
+            return b;
+          },
+        });
+        var s = n(97458),
+          a = n(44809),
+          r = n(62923),
+          l = n.n(r),
+          i = n(52983),
+          o = n(68249),
+          c = n(51487),
+          d = n(16720),
+          u = n(25843),
+          x = n(65092),
+          p = n(11499);
+        let m = (0, i.createContext)({ onChange: e => {}, selected: void 0 });
+        var h = n(62507);
+        function f(e) {
+          let {
+              children: t,
+              className: n,
+              buttonClassName: r,
+              descriptionText: h,
+              error: f,
+              icon: b,
+              id: j = '',
+              name: v = '',
+              label: y,
+              labelOptional: g,
+              layout: N,
+              value: w,
+              onChange: S,
+              onFocus: C,
+              onBlur: k,
+              style: E,
+              size: _ = 'medium',
+              defaultValue: L,
+              validation: z,
+              disabled: T,
+              optionsWidth: Z,
+            } = e,
+            [A, I] = (0, i.useState)(void 0),
+            [R, O] = (0, i.useState)({}),
+            P = (0, u.Z)('listbox'),
+            F = (0, i.useRef)(null),
+            {
+              formContextOnChange: M,
+              values: B,
+              errors: D,
+              handleBlur: W,
+              touched: V,
+              fieldLevelValidation: X,
+            } = (0, p.G)();
+          (B && !w && ((w = B[j || v]), (L = B[j || v])),
+            f ||
+              (D && !f && (f = D[j || v]), (f = V && V[j || v] ? f : void 0)),
+            (0, i.useEffect)(() => {
+              void 0 !== w && I(w);
+            }, [w]),
+            (0, i.useEffect)(() => {
+              function e() {
+                var e;
+                document.documentElement.style.setProperty(
+                  '--width-listbox',
+                  ''.concat(
+                    Z ||
+                      (null === (e = F.current) || void 0 === e
+                        ? void 0
+                        : e.offsetWidth),
+                    'px'
+                  )
+                );
+              }
+              return (
+                window.addEventListener('resize', e),
+                e(),
+                () => window.removeEventListener('resize', e)
+              );
+            }, []),
+            (0, i.useEffect)(() => {
+              var e;
+              let n = l()(t);
+              function s(e) {
+                return n.find(t => t.props.value === e);
+              }
+              if (w) {
+                I(w);
+                let e = s(w);
+                O((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              if (A) {
+                let e = s(A);
+                O((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              if (L) {
+                I(L);
+                let e = s(A);
+                O((null == e ? void 0 : e.props) ? e.props : void 0);
+                return;
+              }
+              O(null === (e = n[0]) || void 0 === e ? void 0 : e.props);
+            }, [A]));
+          let Q = [P.container, P.base, r],
+            q = [P.addOnBefore];
+          return (
+            f && Q.push(P.variants.error),
+            f || Q.push(P.variants.standard),
+            b && q.push(P.with_icon),
+            _ && Q.push(P.size[_]),
+            T && Q.push(P.disabled),
+            (0, s.jsx)(o.l, {
+              label: y,
+              labelOptional: g,
+              layout: N,
+              id: j,
+              error: f,
+              descriptionText: h,
+              className: n,
+              style: E,
+              size: _,
+              'data-sentry-element': 'FormLayout',
+              'data-sentry-component': 'Listbox',
+              'data-sentry-source-file': 'Listbox2.tsx',
+              children: (0, s.jsxs)(a.fC, {
+                'data-sentry-element': 'unknown',
+                'data-sentry-source-file': 'Listbox2.tsx',
+                children: [
+                  (0, s.jsx)(a.xz, {
+                    asChild: !0,
+                    disabled: T,
+                    'data-sentry-element': 'unknown',
+                    'data-sentry-source-file': 'Listbox2.tsx',
+                    children: (0, s.jsxs)('button', {
+                      'data-size': _,
+                      ref: F,
+                      className: (0, x.cn)(Q),
+                      onBlur: function (e) {
+                        (W && W(e), k && k(e));
+                      },
+                      onFocus: C,
+                      name: v,
+                      id: j,
+                      children: [
+                        (0, s.jsxs)('span', {
+                          className: (0, x.cn)(q),
+                          children: [
+                            b && (0, s.jsx)(d.Z, { size: _, icon: b }),
+                            (null == R ? void 0 : R.addOnBefore) &&
+                              (0, s.jsx)(R.addOnBefore, {}),
+                            (0, s.jsx)('span', {
+                              className: P.label,
+                              children: null == R ? void 0 : R.label,
+                            }),
+                          ],
+                        }),
+                        (0, s.jsx)('span', {
+                          className: P.chevron_container,
+                          children: (0, s.jsx)('svg', {
+                            className: P.chevron,
+                            xmlns: 'http://www.w3.org/2000/svg',
+                            viewBox: '0 0 20 20',
+                            fill: 'currentColor',
+                            'aria-hidden': 'true',
+                            'data-sentry-element': 'svg',
+                            'data-sentry-source-file': 'Listbox2.tsx',
+                            children: (0, s.jsx)('path', {
+                              fillRule: 'evenodd',
+                              d: 'M10 3a1 1 0 01.707.293l3 3a1 1 0 01-1.414 1.414L10 5.414 7.707 7.707a1 1 0 01-1.414-1.414l3-3A1 1 0 0110 3zm-3.707 9.293a1 1 0 011.414 0L10 14.586l2.293-2.293a1 1 0 011.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z',
+                              clipRule: 'evenodd',
+                              'data-sentry-element': 'path',
+                              'data-sentry-source-file': 'Listbox2.tsx',
+                            }),
+                          }),
+                        }),
+                        f &&
+                          (0, s.jsx)('div', {
+                            className: P.actions_container,
+                            children: f && (0, s.jsx)(c.Z, { size: _ }),
+                          }),
+                      ],
+                    }),
+                  }),
+                  (0, s.jsx)(a.VY, {
+                    sideOffset: 6,
+                    loop: !0,
+                    side: 'bottom',
+                    align: 'center',
+                    className: P.options_container,
+                    'data-sentry-element': 'unknown',
+                    'data-sentry-source-file': 'Listbox2.tsx',
+                    children: (0, s.jsx)('div', {
+                      children: (0, s.jsx)(m.Provider, {
+                        value: {
+                          onChange: function (e) {
+                            (S && S(e), I(e));
+                            let t = {};
+                            ((t.target = {
+                              type: 'select',
+                              name: v,
+                              id: j,
+                              value: e,
+                              checked: void 0,
+                            }),
+                              M && M(t),
+                              z && X(j, z(e)));
+                          },
+                          selected: A,
+                        },
+                        'data-sentry-element': 'unknown',
+                        'data-sentry-source-file': 'Listbox2.tsx',
+                        children: t,
+                      }),
+                    }),
+                  }),
+                ],
+              }),
+            })
+          );
+        }
+        f.Option = function (e) {
+          let {
+              id: t,
+              value: n,
+              label: r,
+              disabled: l = !1,
+              children: i,
+              className: o = '',
+              addOnBefore: c,
+            } = e,
+            d = (0, u.Z)('listbox');
+          return (0, s.jsx)(m.Consumer, {
+            'data-sentry-element': 'unknown',
+            'data-sentry-component': 'SelectOption',
+            'data-sentry-source-file': 'Listbox2.tsx',
+            children: e => {
+              let { onChange: r, selected: u } = e,
+                p = u === n;
+              return (0, s.jsxs)(
+                a.ck,
+                {
+                  className: (0, x.cn)(
+                    d.option,
+                    p ? d.option_active : ' ',
+                    l ? d.option_disabled : ' ',
+                    o
+                  ),
+                  onSelect: () => (l ? {} : r(n)),
+                  children: [
+                    (0, s.jsxs)('div', {
+                      className: d.option_inner,
+                      children: [
+                        c && c({ active: p, selected: u }),
+                        (0, s.jsx)('span', {
+                          children:
+                            'function' == typeof i
+                              ? i({ active: p, selected: u })
+                              : i,
+                        }),
+                      ],
+                    }),
+                    p
+                      ? (0, s.jsx)('span', {
+                          className: (0, x.cn)(
+                            d.option_check,
+                            p ? d.option_check_active : ''
+                          ),
+                          children: (0, s.jsx)(h.Z, {
+                            className: d.option_check_icon,
+                            'aria-hidden': 'true',
+                          }),
+                        })
+                      : null,
+                  ],
+                },
+                t
+              );
+            },
+          });
+        };
+        var b = f;
+      },
+    },
+  ]));

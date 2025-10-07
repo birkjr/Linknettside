@@ -1,1 +1,165 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},t=(new e.Error).stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]="9d56c779-f7cb-4719-a548-194b0fc2ba96",e._sentryDebugIdIdentifier="sentry-dbid-9d56c779-f7cb-4719-a548-194b0fc2ba96")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[6374],{79682:function(e,t,s){(window.__NEXT_P=window.__NEXT_P||[]).push(["/project/[ref]/advisors/security",function(){return s(89773)}])},89773:function(e,t,s){"use strict";s.r(t);var n=s(97458),i=s(52983),r=s(12436),l=s(60689),a=s(19346),d=s(23662),c=s(28143),u=s(18812),f=s(23711),o=s(42509),y=s(24083),b=s(44353),m=s(62432),v=s(27246);let L=()=>{var e;let t=(0,m.Vm)(),{ref:s,preset:o,id:L}=(0,r.UO)(),[g,p]=(0,i.useState)([{level:a.l.ERROR,filters:[]},{level:a.l.WARN,filters:[]},{level:a.l.INFO,filters:[]}]),[x,_]=(0,i.useState)(null!=o?o:a.l.ERROR),[h,j]=(0,i.useState)(null),{data:w,isLoading:E,isRefetching:R,refetch:N}=(0,b.U)({projectRef:null==t?void 0:t.ref}),T=(null!=w?w:[]).filter(e=>e.categories.includes("SECURITY")),I=(null===(e=g.find(e=>e.level===x))||void 0===e?void 0:e.filters)||[],O=T.filter(e=>e.level===x).filter(e=>I.length>0?I.includes(e.name):e),k=d.EV.filter(e=>T.some(t=>t.name===e.name&&t.level===x)).map(e=>({name:e.title,value:e.name}));return(0,i.useEffect)(()=>{var e;L&&j(null!==(e=T.find(e=>e.cache_key===L))&&void 0!==e?e:null)},[L,T]),(0,n.jsxs)("div",{className:"h-full flex flex-col","data-sentry-component":"ProjectLints","data-sentry-source-file":"security.tsx",children:[(0,n.jsx)(y.p,{className:"py-4 px-6 !mb-0",title:"Security Advisor",docsUrl:"https://supabase.com/docs/guides/database/database-linter","data-sentry-element":"FormHeader","data-sentry-source-file":"security.tsx"}),(0,n.jsx)(l.Z,{activeLints:T,isLoading:E,currentTab:x,setCurrentTab:_,setSelectedLint:j,"data-sentry-element":"LintPageTabs","data-sentry-source-file":"security.tsx"}),(0,n.jsx)(u.Z,{filterOptions:k,filteredLints:O,activeLints:T,currentTab:x,filters:g,isLoading:E||R,setFilters:p,onClickRefresh:N,"data-sentry-element":"LinterFilters","data-sentry-source-file":"security.tsx"}),(0,n.jsx)(v.O,{loading:R,"data-sentry-element":"LoadingLine","data-sentry-source-file":"security.tsx"}),(0,n.jsx)(c.Z,{filteredLints:O,currentTab:x,selectedLint:h,setSelectedLint:j,isLoading:E,"data-sentry-element":"LinterDataGrid","data-sentry-source-file":"security.tsx"}),(0,n.jsx)(f.Z,{hideDbInspectCTA:!0,isLoading:E,isRefetching:R,refetch:N,"data-sentry-element":"LinterPageFooter","data-sentry-source-file":"security.tsx"})]})};L.getLayout=e=>(0,n.jsx)(o.Z,{title:"Linter",children:e}),t.default=L}},function(e){e.O(0,[6665,7623,588,783,1018,1706,1864,8703,2397,3954,9621,9911,659,7612,4637,9344,7726,6739,3302,3898,4851,793,3594,3861,6120,7094,4334,5669,9774,2888,179],function(){return e(e.s=79682)}),_N_E=e.O()}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      t = new e.Error().stack;
+    t &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[t] = '9d56c779-f7cb-4719-a548-194b0fc2ba96'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-9d56c779-f7cb-4719-a548-194b0fc2ba96'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [6374],
+    {
+      79682: function (e, t, s) {
+        (window.__NEXT_P = window.__NEXT_P || []).push([
+          '/project/[ref]/advisors/security',
+          function () {
+            return s(89773);
+          },
+        ]);
+      },
+      89773: function (e, t, s) {
+        'use strict';
+        s.r(t);
+        var n = s(97458),
+          i = s(52983),
+          r = s(12436),
+          l = s(60689),
+          a = s(19346),
+          d = s(23662),
+          c = s(28143),
+          u = s(18812),
+          f = s(23711),
+          o = s(42509),
+          y = s(24083),
+          b = s(44353),
+          m = s(62432),
+          v = s(27246);
+        let L = () => {
+          var e;
+          let t = (0, m.Vm)(),
+            { ref: s, preset: o, id: L } = (0, r.UO)(),
+            [g, p] = (0, i.useState)([
+              { level: a.l.ERROR, filters: [] },
+              { level: a.l.WARN, filters: [] },
+              { level: a.l.INFO, filters: [] },
+            ]),
+            [x, _] = (0, i.useState)(null != o ? o : a.l.ERROR),
+            [h, j] = (0, i.useState)(null),
+            {
+              data: w,
+              isLoading: E,
+              isRefetching: R,
+              refetch: N,
+            } = (0, b.U)({ projectRef: null == t ? void 0 : t.ref }),
+            T = (null != w ? w : []).filter(e =>
+              e.categories.includes('SECURITY')
+            ),
+            I =
+              (null === (e = g.find(e => e.level === x)) || void 0 === e
+                ? void 0
+                : e.filters) || [],
+            O = T.filter(e => e.level === x).filter(e =>
+              I.length > 0 ? I.includes(e.name) : e
+            ),
+            k = d.EV.filter(e =>
+              T.some(t => t.name === e.name && t.level === x)
+            ).map(e => ({ name: e.title, value: e.name }));
+          return (
+            (0, i.useEffect)(() => {
+              var e;
+              L &&
+                j(
+                  null !== (e = T.find(e => e.cache_key === L)) && void 0 !== e
+                    ? e
+                    : null
+                );
+            }, [L, T]),
+            (0, n.jsxs)('div', {
+              className: 'h-full flex flex-col',
+              'data-sentry-component': 'ProjectLints',
+              'data-sentry-source-file': 'security.tsx',
+              children: [
+                (0, n.jsx)(y.p, {
+                  className: 'py-4 px-6 !mb-0',
+                  title: 'Security Advisor',
+                  docsUrl:
+                    'https://supabase.com/docs/guides/database/database-linter',
+                  'data-sentry-element': 'FormHeader',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+                (0, n.jsx)(l.Z, {
+                  activeLints: T,
+                  isLoading: E,
+                  currentTab: x,
+                  setCurrentTab: _,
+                  setSelectedLint: j,
+                  'data-sentry-element': 'LintPageTabs',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+                (0, n.jsx)(u.Z, {
+                  filterOptions: k,
+                  filteredLints: O,
+                  activeLints: T,
+                  currentTab: x,
+                  filters: g,
+                  isLoading: E || R,
+                  setFilters: p,
+                  onClickRefresh: N,
+                  'data-sentry-element': 'LinterFilters',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+                (0, n.jsx)(v.O, {
+                  loading: R,
+                  'data-sentry-element': 'LoadingLine',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+                (0, n.jsx)(c.Z, {
+                  filteredLints: O,
+                  currentTab: x,
+                  selectedLint: h,
+                  setSelectedLint: j,
+                  isLoading: E,
+                  'data-sentry-element': 'LinterDataGrid',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+                (0, n.jsx)(f.Z, {
+                  hideDbInspectCTA: !0,
+                  isLoading: E,
+                  isRefetching: R,
+                  refetch: N,
+                  'data-sentry-element': 'LinterPageFooter',
+                  'data-sentry-source-file': 'security.tsx',
+                }),
+              ],
+            })
+          );
+        };
+        ((L.getLayout = e => (0, n.jsx)(o.Z, { title: 'Linter', children: e })),
+          (t.default = L));
+      },
+    },
+    function (e) {
+      (e.O(
+        0,
+        [
+          6665, 7623, 588, 783, 1018, 1706, 1864, 8703, 2397, 3954, 9621, 9911,
+          659, 7612, 4637, 9344, 7726, 6739, 3302, 3898, 4851, 793, 3594, 3861,
+          6120, 7094, 4334, 5669, 9774, 2888, 179,
+        ],
+        function () {
+          return e((e.s = 79682));
+        }
+      ),
+        (_N_E = e.O()));
+    },
+  ]));
