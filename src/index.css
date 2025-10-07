@@ -14,3 +14,28 @@ body {
   overflow-x: hidden;
   width: 100%;
 }
+
+/* Fix mobile scroll issues */
+html {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  height: 100%;
+  position: relative;
+}
+
+/* Prevent footer from sticking on mobile */
+@media (max-width: 768px) {
+  html, body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  /* Ensure proper scrolling on mobile */
+  #root {
+    min-height: 100vh;
+    position: relative;
+  }
+}
