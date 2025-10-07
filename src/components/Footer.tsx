@@ -118,7 +118,7 @@ export default function Footer() {
       {/* Password Modal */}
 
       {showPasswordModal && (
-        <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center">
+        <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center z-[100]">
           <div className="bg-yellow-50 p-6 rounded-lg shadow-lg w-100">
             <h2 className="text-lg font-bold mb-4 text-center">Admin Tilgang</h2>
             <div className="flex items-center mb-4"> {/* Flex container for input and button */}

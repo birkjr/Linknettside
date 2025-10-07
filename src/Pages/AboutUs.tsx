@@ -1,19 +1,18 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabaseClient";
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/subGroup/";
 import SubGroupPic from "../components/Tools/SubGroupPic";
 
 // Preload critical images
 const preloadImages = () => {
     const criticalImages = [
-        `${supabaseStorageUrl}styret.png`
+        `/images/subgroups/styret.png`
     ];
     
     const prefetchImages = [
-        `${supabaseStorageUrl}bedrift.png`,
-        `${supabaseStorageUrl}marked.png`,
-        `${supabaseStorageUrl}logistikk.png`,
-        `${supabaseStorageUrl}fa.png`
+        `/images/subgroups/bedrift.png`,
+        `/images/subgroups/marked.png`,
+        `/images/subgroups/logistikk.png`,
+        `/images/subgroups/fa.png`
     ];
     
     // Preload critical above-the-fold images
@@ -117,7 +116,7 @@ export default function OmOss() {
                     {/* Styret */}
                     <div>
                         <div>
-                            <SubGroupPic alt="Styret" className='rounded-xl' src={`${supabaseStorageUrl}styret.png`} priority={true}/>
+                            <SubGroupPic alt="Styret" className='rounded-xl' src={`/images/subgroups/styret.png`} priority={true}/>
                         </div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-sm sm:text-xl px-4 sm:px-0">
@@ -137,7 +136,7 @@ export default function OmOss() {
 
                     {/* Bedrift */}
                     <div>
-                        <div><SubGroupPic alt="Bedrift" className='rounded-xl' src={`${supabaseStorageUrl}bedrift.png`}/></div>
+                        <div><SubGroupPic alt="Bedrift" className='rounded-xl' src={`/images/subgroups/bedrift.png`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
                         <h3 className="text-4xl font-semibold py-4 text-center">Bedrift</h3>
@@ -148,7 +147,7 @@ export default function OmOss() {
 
                     {/* Marked */}
                     <div>
-                        <div><SubGroupPic alt="Markedsføring" className='rounded-xl' src={`${supabaseStorageUrl}marked.png`}/></div>
+                        <div><SubGroupPic alt="Markedsføring" className='rounded-xl' src={`/images/subgroups/marked.png`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
                         <h3 className="text-4xl font-semibold py-4 text-center">Marked</h3>
@@ -159,7 +158,7 @@ export default function OmOss() {
 
                     {/* Logistikk */}
                     <div>
-                        <div><SubGroupPic alt="Logistikk" className='rounded-xl' src={`${supabaseStorageUrl}logistikk.png`}/></div>
+                        <div><SubGroupPic alt="Logistikk" className='rounded-xl' src={`/images/subgroups/logistikk.png`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
                         <h3 className="text-4xl font-semibold py-4 text-center">Logistikk</h3>
@@ -170,7 +169,7 @@ export default function OmOss() {
 
                     {/* FA */}
                     <div>
-                        <div><SubGroupPic alt="FA" className='rounded-xl' src={`${supabaseStorageUrl}fa.png`}/></div>
+                        <div><SubGroupPic alt="FA" className='rounded-xl' src={`/images/subgroups/fa.png`}/></div>
                     </div>
                     <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
                         <h3 className="text-4xl font-semibold py-4 text-center">FA</h3>

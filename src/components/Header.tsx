@@ -3,9 +3,6 @@ import { Link, useLocation, useNavigate } from "react-router-dom"; // Import use
 import MenuIcon from "@mui/icons-material/Menu";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../auth";
-
-const supabaseStorageUrl =
-  "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
   
 
 export default function Header() {
@@ -38,7 +35,7 @@ export default function Header() {
           <Link to={"/"}>
             <img
               className="h-20 flex items-center transition-transform duration-300 hover:scale-105"
-              src={`${supabaseStorageUrl}logo_transparent.png`}
+              src={`/images/logos/logo_transparent.png`}
               alt="Logo"
             />
           </Link>
@@ -80,7 +77,7 @@ export default function Header() {
           </div>
           {/* Password Modal */}
           {showPasswordModal && (
-            <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center z-[60]">
+            <div className="fixed inset-0 backdrop-blur-xs bg-opacity-50 flex justify-center items-center z-[100]">
               <div className="bg-yellow-50 p-6 rounded-lg shadow-lg w-100">
                 <h2 className="text-lg font-bold mb-4 text-center">Admin Tilgang</h2>
                 <input

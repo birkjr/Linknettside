@@ -2,8 +2,6 @@ import Arrangementer from "../components/Tools/Events";
 import Nyheter from "../components/Schema/News";
 //import CoopPartners from "./components/CoopPartners"
 
-const supabaseStorageUrl = "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
-
 function App() {
 
   return (
@@ -21,7 +19,7 @@ function App() {
           <div className="flex flex-col justify-center items-center rounded-xl p-6 text-serif w-full lg:w-1/2 text-center">
               <img 
                   className="h-24 w-28 rounded-xl my-6" 
-                  src={`${supabaseStorageUrl}logo_transparent.png`} 
+                  src={`/images/logos/logo_transparent.png`} 
                   alt="EMIL-Link Logo"
               />
               <p className="text-sm sm:text-base">EMIL-Link er Energi og Miljø</p>
