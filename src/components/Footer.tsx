@@ -64,7 +64,7 @@ export default function Footer() {
 
       {/* Footer Section */}
       <footer
-        className="text-green-950 text-center py-6 mt-20"
+        className="sticky text-green-950 text-center py-6 mt-20"
         style={{ backgroundColor: '#A8D5A4' }}
       >
         <div className="grid grid-cols-2 justify-center items-center my-6">
