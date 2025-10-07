@@ -148,7 +148,7 @@ export default function Arrangementer() {
             ))}
         </div>
       ) : (
-        <p className="text-center text-white">Ingen arrangementer funnet.</p>
+        <p className="text-center text-white">Ingen arrangementer ute for øyeblikket.</p>
       )}
     </div>
   );

@@ -28,7 +28,7 @@ export default function Header() {
 
   return (
     <>
-      <nav className="bg-stone-100 sticky top-0 w-full shadow-md z-50">
+      <nav className="bg-stone-100 w-full shadow-md z-50 lg:sticky lg:top-0">
         <div className="flex lg:flex-col sm:flex-row justify-between items-center w-full px-6 py-4">
           {/* Logo */}
           <Link to={'/'}>
