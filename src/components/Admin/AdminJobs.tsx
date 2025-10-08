@@ -43,8 +43,18 @@ export default function AddJob() {
   // Function to add a new job
   const addNewJob = async () => {
     // Validering av påkrevde felt
-    if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place) {
-      showToast('Husk å fylle inn alle felt! (Bedrift, stillingstype, tittel, søknadsfrist, sted og lenke)', 'error');
+    if (
+      !newJob.bedrift ||
+      !newJob.jobType ||
+      !newJob.jobTitle ||
+      !newJob.deadline ||
+      !newJob.link ||
+      !newJob.place
+    ) {
+      showToast(
+        'Husk å fylle inn alle felt! (Bedrift, stillingstype, tittel, søknadsfrist, sted og lenke)',
+        'error'
+      );
       return;
     }
 
@@ -55,7 +65,10 @@ export default function AddJob() {
 
     if (error) {
       console.error('Feil ved legge til jobbannonse:', error);
-      showToast('Kunne ikke legge til jobbannonse. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
+      showToast(
+        'Kunne ikke legge til jobbannonse. Sjekk at alle felt er riktig utfylt og prøv igjen.',
+        'error'
+      );
     } else {
       showToast('Jobbannonse er opprettet!', 'success');
       setJobs([...job, ...data]); // Update the state with the new Job

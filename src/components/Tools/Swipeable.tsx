@@ -19,8 +19,12 @@ export default function Swipeable({
   threshold = 50,
   className = '',
 }: SwipeableProps) {
-  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(null);
-  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(null);
+  const [touchStart, setTouchStart] = useState<{ x: number; y: number } | null>(
+    null
+  );
+  const [touchEnd, setTouchEnd] = useState<{ x: number; y: number } | null>(
+    null
+  );
   const [isDragging, setIsDragging] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -42,9 +46,9 @@ export default function Swipeable({
 
   const onTouchEnd = () => {
     if (!touchStart || !touchEnd) return;
-    
+
     setIsDragging(false);
-    
+
     const distanceX = touchStart.x - touchEnd.x;
     const distanceY = touchStart.y - touchEnd.y;
     const isLeftSwipe = distanceX > threshold;

@@ -48,11 +48,12 @@ body {
 
 /* Prevent footer from sticking on mobile */
 @media (max-width: 768px) {
-  html, body {
+  html,
+  body {
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
   }
-  
+
   /* Ensure proper scrolling on mobile */
   #root {
     min-height: 100vh;

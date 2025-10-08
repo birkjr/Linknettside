@@ -65,7 +65,7 @@ export default function Arrangementer() {
   const handleRefresh = async () => {
     setLoading(true);
     const { data, error } = await supabase.from('events').select('*');
-    
+
     if (error) {
       console.error('Kunne ikke oppdatere arrangementer:', error);
     } else {
@@ -119,7 +119,7 @@ export default function Arrangementer() {
                       );
                     });
                     const currentEvent = sortedEvents[currentEventIndex];
-                    
+
                     return (
                       <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
                         <a
@@ -133,7 +133,8 @@ export default function Arrangementer() {
                             <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
                               <LazyImage
                                 src={
-                                  currentEvent.bedrift.toLowerCase() === 'teknologiporten'
+                                  currentEvent.bedrift.toLowerCase() ===
+                                  'teknologiporten'
                                     ? getOptimizedImageUrl(
                                         'teknologiporten.png',
                                         'events_jobads'
@@ -147,10 +148,15 @@ export default function Arrangementer() {
                                 className="w-full h-full object-contain rounded-xl"
                                 onError={e => {
                                   const fileName =
-                                    currentEvent.bedrift.toLowerCase() === 'teknologiporten'
+                                    currentEvent.bedrift.toLowerCase() ===
+                                    'teknologiporten'
                                       ? 'teknologiporten.png'
                                       : currentEvent.imageURL;
-                                  handleImageError(e, fileName, 'events_jobads');
+                                  handleImageError(
+                                    e,
+                                    fileName,
+                                    'events_jobads'
+                                  );
                                 }}
                               />
                             </div>
@@ -184,7 +190,7 @@ export default function Arrangementer() {
                       </div>
                     );
                   })()}
-                  
+
                   {/* Swipe indicator */}
                   <div className="flex justify-center mt-4 space-x-2">
                     {events.map((_, index) => (
@@ -200,7 +206,8 @@ export default function Arrangementer() {
                   </div>
                   {/* Swipe hint */}
                   <p className="text-center text-white text-sm mt-2">
-                    Swipe for å se flere arrangementer ({currentEventIndex + 1}/{events.length})
+                    Swipe for å se flere arrangementer ({currentEventIndex + 1}/
+                    {events.length})
                   </p>
                 </div>
               </Swipeable>
@@ -217,74 +224,77 @@ export default function Arrangementer() {
                   );
                 })
                 .map(event => (
-              <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
-                <a
-                  key={event.id}
-                  href={event.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
-                    {/* Logo Section */}
-                    <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <LazyImage
-                        src={
-                          event.bedrift.toLowerCase() === 'teknologiporten'
-                            ? getOptimizedImageUrl(
-                                'teknologiporten.png',
-                                'events_jobads'
-                              )
-                            : getOptimizedImageUrl(
-                                event.imageURL,
-                                'events_jobads'
-                              )
-                        }
-                        alt={event.bedrift}
-                        className="w-full h-full object-contain rounded-xl"
-                        onError={e => {
-                          const fileName =
-                            event.bedrift.toLowerCase() === 'teknologiporten'
-                              ? 'teknologiporten.png'
-                              : event.imageURL;
-                          handleImageError(e, fileName, 'events_jobads');
-                        }}
-                      />
-                    </div>
+                  <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
+                    <a
+                      key={event.id}
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
+                        {/* Logo Section */}
+                        <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <LazyImage
+                            src={
+                              event.bedrift.toLowerCase() === 'teknologiporten'
+                                ? getOptimizedImageUrl(
+                                    'teknologiporten.png',
+                                    'events_jobads'
+                                  )
+                                : getOptimizedImageUrl(
+                                    event.imageURL,
+                                    'events_jobads'
+                                  )
+                            }
+                            alt={event.bedrift}
+                            className="w-full h-full object-contain rounded-xl"
+                            onError={e => {
+                              const fileName =
+                                event.bedrift.toLowerCase() ===
+                                'teknologiporten'
+                                  ? 'teknologiporten.png'
+                                  : event.imageURL;
+                              handleImageError(e, fileName, 'events_jobads');
+                            }}
+                          />
+                        </div>
 
-                    {/* Event Info Section */}
-                    <div className="flex-1 text-center justify-center md:text-left px-6">
-                      <h2 className="text-lg sm:text-xl font-semibold">
-                        {event.title}
-                      </h2>
-                    </div>
+                        {/* Event Info Section */}
+                        <div className="flex-1 text-center justify-center md:text-left px-6">
+                          <h2 className="text-lg sm:text-xl font-semibold">
+                            {event.title}
+                          </h2>
+                        </div>
 
-                    {/* Event Details */}
-                    <div className="flex-1 text-center md:text-left flex-col md:items-start text-sm text-black font-serif md:mt-0">
-                      <p className="flex items-center space-x-4 py-1">
-                        <PlaceIcon fontSize="inherit" />
-                        <span>{event.location}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <RestaurantMenuIcon fontSize="inherit" />
-                        <span>{event.restaurant}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <CalendarMonthIcon fontSize="inherit" />
-                        <span>{formatDate(event.date)}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <AccessTimeIcon fontSize="inherit" />
-                        <span>{formatTime(event.time)}</span>
-                      </p>
-                    </div>
+                        {/* Event Details */}
+                        <div className="flex-1 text-center md:text-left flex-col md:items-start text-sm text-black font-serif md:mt-0">
+                          <p className="flex items-center space-x-4 py-1">
+                            <PlaceIcon fontSize="inherit" />
+                            <span>{event.location}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <RestaurantMenuIcon fontSize="inherit" />
+                            <span>{event.restaurant}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <CalendarMonthIcon fontSize="inherit" />
+                            <span>{formatDate(event.date)}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <AccessTimeIcon fontSize="inherit" />
+                            <span>{formatTime(event.time)}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
                   </div>
-                </a>
-              </div>
                 ))}
             </div>
           </div>
         ) : (
-          <p className="text-center text-white">Ingen arrangementer ute for øyeblikket.</p>
+          <p className="text-center text-white">
+            Ingen arrangementer ute for øyeblikket.
+          </p>
         )}
       </PullToRefresh>
     </div>

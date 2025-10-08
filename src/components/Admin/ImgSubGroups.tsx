@@ -62,7 +62,10 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingLocalFile) {
-      showToast(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`, 'error');
+      showToast(
+        `Bildet ${fileName} eksisterer allerede som lokalt bilde!`,
+        'error'
+      );
       setUploading(false);
       return;
     }
@@ -127,7 +130,10 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
 
       // Fjern fra lokale filer
       setLocalFiles(prev => prev.filter(file => file !== fileName));
-      showToast(`${fileName} er slettet fra både lokale og Supabase bilder!`, 'success');
+      showToast(
+        `${fileName} er slettet fra både lokale og Supabase bilder!`,
+        'success'
+      );
     }
   };
 

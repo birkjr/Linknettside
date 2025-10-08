@@ -43,7 +43,10 @@ export default function MobileNavigation() {
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
-        <div className="lg:hidden fixed inset-0 z-40 backdrop-blur-md" onClick={() => setIsOpen(false)} />
+        <div
+          className="lg:hidden fixed inset-0 z-40 backdrop-blur-md"
+          onClick={() => setIsOpen(false)}
+        />
       )}
 
       {/* Mobile Menu */}
@@ -56,7 +59,7 @@ export default function MobileNavigation() {
           {/* Navigation Items */}
           <nav className="flex-1 p-6 pt-6">
             <ul className="space-y-4">
-              {navItems.map((item) => {
+              {navItems.map(item => {
                 const Icon = item.icon;
                 return (
                   <li key={item.path}>
@@ -77,7 +80,6 @@ export default function MobileNavigation() {
               })}
             </ul>
           </nav>
-
         </div>
       </div>
     </>

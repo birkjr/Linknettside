@@ -33,7 +33,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
   const showToast = (message: string, type: ToastType, duration = 4000) => {
     const id = Math.random().toString(36).substr(2, 9);
     const newToast: ToastMessage = { id, message, type, duration };
-    
+
     setToasts(prev => [...prev, newToast]);
   };
 
@@ -44,7 +44,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
   return (
     <ToastContext.Provider value={{ showToast, hideToast }}>
       {children}
-      
+
       {/* Render all active toasts */}
       <div className="fixed top-4 right-4 z-[9999] space-y-2">
         {toasts.map((toast, index) => (
@@ -53,7 +53,7 @@ export default function ToastProvider({ children }: ToastProviderProps) {
             className="transform transition-all duration-300 ease-in-out"
             style={{
               transform: `translateY(${index * 10}px)`,
-              zIndex: 9999 - index
+              zIndex: 9999 - index,
             }}
           >
             <Toast

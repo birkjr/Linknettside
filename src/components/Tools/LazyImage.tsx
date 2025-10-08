@@ -8,7 +8,13 @@ interface LazyImageProps {
   style?: React.CSSProperties;
 }
 
-export default function LazyImage({ src, alt, className, onError, style }: LazyImageProps) {
+export default function LazyImage({
+  src,
+  alt,
+  className,
+  onError,
+  style,
+}: LazyImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -26,18 +32,18 @@ export default function LazyImage({ src, alt, className, onError, style }: LazyI
   // Get optimized image URL
   const getOptimizedSrc = (originalSrc: string) => {
     if (!originalSrc) return '';
-    
+
     // If it's already a WebP or external URL, return as is
     if (originalSrc.includes('supabase') || originalSrc.includes('.webp')) {
       return originalSrc;
     }
-    
+
     // For local images, try WebP first if supported
     if (supportsWebP() && originalSrc.includes('/images/')) {
       const webpSrc = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
       return webpSrc;
     }
-    
+
     return originalSrc;
   };
 
@@ -73,7 +79,7 @@ export default function LazyImage({ src, alt, className, onError, style }: LazyI
       setImageSrc(src);
       return;
     }
-    
+
     setHasError(true);
     setIsLoaded(true);
     if (onError) {
@@ -89,7 +95,7 @@ export default function LazyImage({ src, alt, className, onError, style }: LazyI
           <div className="w-8 h-8 bg-gray-300 rounded-full animate-spin"></div>
         </div>
       )}
-      
+
       {/* Error State */}
       {hasError && (
         <div className="absolute inset-0 bg-gray-100 flex items-center justify-center rounded">
