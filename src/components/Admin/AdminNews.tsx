@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type News = {
@@ -15,6 +16,7 @@ export default function AddNews() {
   const [newDescription, setNewDescription] = useState('');
   const [newLink, setNewLink] = useState('');
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
 
   // Fetch news on mount
   useEffect(() => {
@@ -34,6 +36,12 @@ export default function AddNews() {
 
   // Add a new news item
   const addNewsItem = async () => {
+    // Validering av påkrevde felt
+    if (!newTitle || !newDescription) {
+      showToast('Husk å fylle inn tittel og beskrivelse!', 'error');
+      return;
+    }
+
     const { data, error } = await supabase
       .from('news')
       .insert([{ title: newTitle, description: newDescription, link: newLink }])
@@ -41,9 +49,9 @@ export default function AddNews() {
 
     if (error) {
       console.error('Error adding news:', error);
-      alert('Kunne ikke legge til nyhet.');
+      showToast('Kunne ikke legge til nyhet. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
     } else {
-      alert('Nyhet lagt til!');
+      showToast('Nyhet lagt til!', 'success');
       setNews([...news, ...data]); // Update the local state
       setNewTitle('');
       setNewDescription('');
@@ -57,10 +65,10 @@ export default function AddNews() {
 
     if (error) {
       console.error('Error deleting news:', error);
-      alert('Kunne ikke slette nyhet.');
+      showToast('Kunne ikke slette nyhet.', 'error');
     } else {
       setNews(news.filter(item => item.id !== id)); // Remove from local state
-      alert('Nyhet slettet.');
+      showToast('Nyhet slettet.', 'success');
     }
   };
 

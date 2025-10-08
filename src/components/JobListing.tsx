@@ -34,7 +34,7 @@ export default function JobListing({
   };
 
   return (
-    <div className="w-full sm:max-w-2xl mx-auto bg-white rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md">
+    <div className="w-full sm:max-w-2xl mx-auto bg-white rounded-lg shadow-lg transition-all duration-300 lg:hover:shadow-md">
       <a
         href={link}
         target="_blank"

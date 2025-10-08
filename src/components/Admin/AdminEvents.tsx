@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import { useToast } from '../Tools/ToastProvider';
 
 type Event = {
   id: number;
@@ -28,6 +29,7 @@ export default function AddEvent() {
   });
 
   const [editingEvent, setEditingEvent] = useState<Event | null>(null);
+  const { showToast } = useToast();
 
   // Fetch events from Supabase on component mount
   useEffect(() => {
@@ -47,10 +49,10 @@ export default function AddEvent() {
     const { error } = await supabase.from('events').delete().eq('id', id);
     if (error) {
       console.error('Error deleting job:', error);
-      alert('Kunne ikke fjerne arrangement. Prøv igjen.');
+      showToast('Kunne ikke fjerne arrangement. Prøv igjen.', 'error');
     } else {
       setEvents(events.filter(event => event.id !== id)); // Update state to remove event
-      alert('Arrangement har blitt fjernet.');
+      showToast('Arrangement har blitt fjernet.', 'success');
     }
   };
 
@@ -85,6 +87,12 @@ export default function AddEvent() {
 
   // Function to add a new event
   const addNewEvent = async () => {
+    // Validering av påkrevde felt
+    if (!newEvent.title || !newEvent.bedrift || !newEvent.location || !newEvent.date || !newEvent.time || !newEvent.link) {
+      showToast('Husk å fylle inn alle felt! (Tittel, bedrift, sted, dato, tid og lenke)', 'error');
+      return;
+    }
+
     const { data, error } = await supabase
       .from('events')
       .insert([newEvent])
@@ -92,11 +100,9 @@ export default function AddEvent() {
 
     if (error) {
       console.error('Feil ved legge til arrangement:', error);
-      alert(
-        `Kunne ikke legge til arrangement. Prøv igjen. Error: ${error.message}`
-      );
+      showToast('Kunne ikke legge til arrangement. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
     } else {
-      alert('Arrangement er opprettet!');
+      showToast('Arrangement er opprettet!', 'success');
       setEvents([...events, ...data]); // Update the state with the new event
       setNewEvent({
         title: '',
@@ -134,7 +140,7 @@ export default function AddEvent() {
 
     if (error) {
       console.error('Error updating event:', error);
-      alert('Kunne ikke oppdatere arrangementet. Prøv igjen.');
+      showToast('Kunne ikke oppdatere arrangementet. Prøv igjen.', 'error');
     } else {
       setEvents(
         events.map(event =>

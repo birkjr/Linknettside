@@ -87,13 +87,14 @@ export default function PullToRefresh({
           zIndex: 10,
         }}
       >
-        <div className="bg-white rounded-full p-3 shadow-lg">
+        <div className="bg-gradient-to-br from-green-50 to-green-100 rounded-full p-2 shadow-md border border-green-200">
           <RefreshIcon
-            className={`text-blue-500 transition-transform duration-200 ${
+            className={`text-green-600 transition-transform duration-200 ${
               isRefreshing ? 'animate-spin' : ''
             }`}
             style={{
               transform: `rotate(${rotation}deg)`,
+              fontSize: '20px',
             }}
           />
         </div>

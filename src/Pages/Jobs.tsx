@@ -4,8 +4,8 @@ import JobListing from '../components/JobListing';
 import JobFilter from '../components/Tools/JobFilter';
 import JobCleaner from '../components/Tools/JobCleaner';
 import SkeletonLoader from '../components/Tools/SkeletonLoader';
-import Swipeable from '../components/Tools/Swipeable';
 import PullToRefresh from '../components/Tools/PullToRefresh';
+import Swipeable from '../components/Tools/Swipeable';
 
 type Job = {
   id: string; // Ensure this matches the type in JobCleaner
@@ -22,6 +22,7 @@ export default function Jobbtorget() {
   const [jobListings, setJobListings] = useState<Job[]>([]);
   const [filteredJobs, setFilteredJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
+  const [searchQuery, setSearchQuery] = useState('');
   const [currentJobIndex, setCurrentJobIndex] = useState(0);
 
   // Fetch jobs from Supabase
@@ -47,16 +48,38 @@ export default function Jobbtorget() {
 
   // Handle filter changes
   const handleFilterChange = (filters: { jobType: string; place: string }) => {
+    applyFiltersAndSearch(filters.jobType, filters.place, searchQuery);
+  };
+
+  // Handle search
+  const handleSearch = (query: string) => {
+    setSearchQuery(query);
+    const currentFilters = document.querySelector('select[name="jobType"]') as HTMLSelectElement;
+    const currentPlace = document.querySelector('input[name="place"]') as HTMLInputElement;
+    applyFiltersAndSearch(
+      currentFilters?.value || '',
+      currentPlace?.value || '',
+      query
+    );
+  };
+
+  // Apply both filters and search
+  const applyFiltersAndSearch = (jobType: string, place: string, query: string) => {
     const filtered = jobListings.filter(job => {
-      return (
-        (filters.jobType === '' || job.jobType === filters.jobType) &&
-        (filters.place === '' ||
-          job.place.toLowerCase().includes(filters.place.toLowerCase()))
-      );
+      const matchesFilter =
+        (jobType === '' || job.jobType === jobType) &&
+        (place === '' || job.place.toLowerCase().includes(place.toLowerCase()));
+      
+      const matchesSearch = query === '' || 
+        job.bedrift.toLowerCase().includes(query.toLowerCase()) ||
+        job.jobTitle.toLowerCase().includes(query.toLowerCase()) ||
+        job.place.toLowerCase().includes(query.toLowerCase());
+
+      return matchesFilter && matchesSearch;
     });
 
     setFilteredJobs(filtered);
-    setCurrentJobIndex(0); // Reset to first job when filtering
+    setCurrentJobIndex(0);
   };
 
   // Refresh jobs
@@ -105,7 +128,7 @@ export default function Jobbtorget() {
       <div className="flex flex-col sm:flex-row w-full max-w-6xl mx-auto mt-8">
         {/* Sidebar Filter - Full width on mobile, fixed width on desktop */}
         <div className="w-full sm:w-64 sm:mr-8 mb-6 sm:mb-0">
-          <JobFilter onFilterChange={handleFilterChange} />
+          <JobFilter onFilterChange={handleFilterChange} onSearch={handleSearch} />
         </div>
 
         {/* Job Listings Section - Full width on mobile */}

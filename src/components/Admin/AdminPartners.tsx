@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 
 type Partners = {
   id: number;
@@ -14,6 +15,7 @@ type Partners = {
 export default function AdminBoard() {
   const [partners, setPartners] = useState<Partners[]>([]);
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
   const [editRow, setEditRow] = useState<number | null>(null);
   const [editedPartner, setEditedPartner] = useState<Partners | null>(null);
   const [newPartner, setNewPartner] = useState<Partners>({
@@ -65,7 +67,7 @@ export default function AdminBoard() {
 
     // Valider at obligatoriske felt er fylt ut
     if (!editedPartner.bedrift.trim()) {
-      alert('Bedriftsnavn er påkrevd!');
+      showToast('Bedriftsnavn er påkrevd!', 'error');
       return;
     }
 
@@ -77,7 +79,7 @@ export default function AdminBoard() {
     if (error) {
       console.error('Error updating partner:', error);
       console.error('Error details:', error.message);
-      alert(`Kunne ikke oppdatere partner: ${error.message}`);
+      showToast(`Kunne ikke oppdatere partner: ${error.message}`, 'error');
     } else {
       setPartners(
         partners.map(p => (p.id === editedPartner.id ? editedPartner : p))
@@ -91,7 +93,7 @@ export default function AdminBoard() {
   const handleAddPartner = async () => {
     // Valider at obligatoriske felt er fylt ut
     if (!newPartner.bedrift.trim()) {
-      alert('Bedriftsnavn er påkrevd!');
+      showToast('Bedriftsnavn er påkrevd!', 'error');
       return;
     }
 
@@ -106,7 +108,7 @@ export default function AdminBoard() {
     if (error) {
       console.error('Error adding partner:', error);
       console.error('Error details:', error.message);
-      alert(`Kunne ikke legge til partner: ${error.message}`);
+      showToast(`Kunne ikke legge til partner: ${error.message}`, 'error');
     } else {
       setPartners([...partners, ...data]);
       setNewPartner({
@@ -126,7 +128,7 @@ export default function AdminBoard() {
     const { error } = await supabase.from('partners').delete().eq('id', id);
     if (error) {
       console.error('Error removing partner:', error);
-      alert('Could not remove the partner. Try again.');
+      showToast('Could not remove the partner. Try again.', 'error');
     } else {
       setPartners(partners.filter(partner => partner.id !== id));
     }

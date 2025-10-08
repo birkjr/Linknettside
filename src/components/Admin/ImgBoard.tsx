@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useToast } from '../Tools/ToastProvider';
 
 type EditBoardPics = {
   isOpen: boolean;
@@ -14,6 +15,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
   const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const { showToast } = useToast();
 
   // Fetch files when modal is open
   useEffect(() => {
@@ -68,7 +70,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingLocalFile) {
-      alert(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`);
+      showToast(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`, 'error');
       setUploading(false);
       return;
     }
@@ -78,7 +80,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingSupabaseFile) {
-      alert(`Bildet ${fileName} eksisterer allerede i Supabase!`);
+      showToast(`Bildet ${fileName} eksisterer allerede i Supabase!`, 'error');
       setUploading(false);
       return;
     }
@@ -95,7 +97,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     } else {
       // Legg til i lokale filer i stedet for Supabase-filer
       setLocalFiles(prev => [...prev, fileName]);
-      alert('Bildet ble lastet opp som lokalt bilde!');
+      showToast('Bildet ble lastet opp som lokalt bilde!', 'success');
     }
 
     setUploading(false);
@@ -112,7 +114,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
       console.error('Kunne ikke slette bilde:', error);
     } else {
       console.log('Suksessfull sletting av:', filePath); // Debugging line
-      alert('Bilde slettet suksessfullt!');
+      showToast('Bilde slettet suksessfullt!', 'success');
       fetchFiles(); // Refresh the file list
     }
   };
@@ -136,7 +138,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
 
       // Fjern fra lokale filer
       setLocalFiles(prev => prev.filter(file => file !== fileName));
-      alert(`${fileName} er slettet fra både lokale og Supabase bilder!`);
+      showToast(`${fileName} er slettet fra både lokale og Supabase bilder!`, 'success');
     }
   };
 
