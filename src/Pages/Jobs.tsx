@@ -54,8 +54,12 @@ export default function Jobbtorget() {
   // Handle search
   const handleSearch = (query: string) => {
     setSearchQuery(query);
-    const currentFilters = document.querySelector('select[name="jobType"]') as HTMLSelectElement;
-    const currentPlace = document.querySelector('input[name="place"]') as HTMLInputElement;
+    const currentFilters = document.querySelector(
+      'select[name="jobType"]'
+    ) as HTMLSelectElement;
+    const currentPlace = document.querySelector(
+      'input[name="place"]'
+    ) as HTMLInputElement;
     applyFiltersAndSearch(
       currentFilters?.value || '',
       currentPlace?.value || '',
@@ -64,13 +68,18 @@ export default function Jobbtorget() {
   };
 
   // Apply both filters and search
-  const applyFiltersAndSearch = (jobType: string, place: string, query: string) => {
+  const applyFiltersAndSearch = (
+    jobType: string,
+    place: string,
+    query: string
+  ) => {
     const filtered = jobListings.filter(job => {
       const matchesFilter =
         (jobType === '' || job.jobType === jobType) &&
         (place === '' || job.place.toLowerCase().includes(place.toLowerCase()));
-      
-      const matchesSearch = query === '' || 
+
+      const matchesSearch =
+        query === '' ||
         job.bedrift.toLowerCase().includes(query.toLowerCase()) ||
         job.jobTitle.toLowerCase().includes(query.toLowerCase()) ||
         job.place.toLowerCase().includes(query.toLowerCase());
@@ -86,7 +95,7 @@ export default function Jobbtorget() {
   const handleRefresh = async () => {
     setLoading(true);
     const { data, error } = await supabase.from('jobs').select('*');
-    
+
     if (error) {
       console.error('❌ Error refreshing jobs:', error);
     } else {
@@ -128,7 +137,10 @@ export default function Jobbtorget() {
       <div className="flex flex-col sm:flex-row w-full max-w-6xl mx-auto mt-8">
         {/* Sidebar Filter - Full width on mobile, fixed width on desktop */}
         <div className="w-full sm:w-64 sm:mr-8 mb-6 sm:mb-0">
-          <JobFilter onFilterChange={handleFilterChange} onSearch={handleSearch} />
+          <JobFilter
+            onFilterChange={handleFilterChange}
+            onSearch={handleSearch}
+          />
         </div>
 
         {/* Job Listings Section - Full width on mobile */}
@@ -170,7 +182,8 @@ export default function Jobbtorget() {
                       </div>
                       {/* Swipe hint */}
                       <p className="text-center text-gray-500 text-sm mt-2">
-                        Swipe for å se flere jobber ({currentJobIndex + 1}/{filteredJobs.length})
+                        Swipe for å se flere jobber ({currentJobIndex + 1}/
+                        {filteredJobs.length})
                       </p>
                     </div>
                   </Swipeable>

@@ -7,7 +7,10 @@ interface SearchBarProps {
   placeholder?: string;
 }
 
-export default function SearchBar({ onSearch, placeholder = 'Søk...' }: SearchBarProps) {
+export default function SearchBar({
+  onSearch,
+  placeholder = 'Søk...',
+}: SearchBarProps) {
   const [searchQuery, setSearchQuery] = useState('');
 
   const handleSearch = (value: string) => {
@@ -27,7 +30,7 @@ export default function SearchBar({ onSearch, placeholder = 'Søk...' }: SearchB
         <input
           type="text"
           value={searchQuery}
-          onChange={(e) => handleSearch(e.target.value)}
+          onChange={e => handleSearch(e.target.value)}
           placeholder={placeholder}
           className="w-full pl-10 pr-10 py-2 border border-gray-300 rounded focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent transition-all text-sm"
         />

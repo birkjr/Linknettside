@@ -88,8 +88,18 @@ export default function AddEvent() {
   // Function to add a new event
   const addNewEvent = async () => {
     // Validering av påkrevde felt
-    if (!newEvent.title || !newEvent.bedrift || !newEvent.location || !newEvent.date || !newEvent.time || !newEvent.link) {
-      showToast('Husk å fylle inn alle felt! (Tittel, bedrift, sted, dato, tid og lenke)', 'error');
+    if (
+      !newEvent.title ||
+      !newEvent.bedrift ||
+      !newEvent.location ||
+      !newEvent.date ||
+      !newEvent.time ||
+      !newEvent.link
+    ) {
+      showToast(
+        'Husk å fylle inn alle felt! (Tittel, bedrift, sted, dato, tid og lenke)',
+        'error'
+      );
       return;
     }
 
@@ -100,7 +110,10 @@ export default function AddEvent() {
 
     if (error) {
       console.error('Feil ved legge til arrangement:', error);
-      showToast('Kunne ikke legge til arrangement. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
+      showToast(
+        'Kunne ikke legge til arrangement. Sjekk at alle felt er riktig utfylt og prøv igjen.',
+        'error'
+      );
     } else {
       showToast('Arrangement er opprettet!', 'success');
       setEvents([...events, ...data]); // Update the state with the new event

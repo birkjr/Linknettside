@@ -49,7 +49,10 @@ export default function AddNews() {
 
     if (error) {
       console.error('Error adding news:', error);
-      showToast('Kunne ikke legge til nyhet. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
+      showToast(
+        'Kunne ikke legge til nyhet. Sjekk at alle felt er riktig utfylt og prøv igjen.',
+        'error'
+      );
     } else {
       showToast('Nyhet lagt til!', 'success');
       setNews([...news, ...data]); // Update the local state

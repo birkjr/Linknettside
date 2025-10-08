@@ -35,12 +35,16 @@ export default class ErrorBoundary extends Component<Props, State> {
       return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-gray-900 px-4">
           <div className="max-w-md w-full bg-white dark:bg-gray-800 rounded-lg shadow-xl p-8 text-center">
-            <ErrorOutlineIcon className="text-red-500 mx-auto mb-4" style={{ fontSize: 64 }} />
+            <ErrorOutlineIcon
+              className="text-red-500 mx-auto mb-4"
+              style={{ fontSize: 64 }}
+            />
             <h1 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
               Oops! Noe gikk galt
             </h1>
             <p className="text-gray-600 dark:text-gray-400 mb-6">
-              Vi beklager, men det oppstod en uventet feil. Prøv å laste siden på nytt.
+              Vi beklager, men det oppstod en uventet feil. Prøv å laste siden
+              på nytt.
             </p>
             {this.state.error && (
               <details className="mb-6 text-left">

@@ -86,7 +86,10 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
         return prev;
       });
 
-      showToast('Bildet ble lastet opp suksessfullt! Smart bildehåndtering sørger for optimal ytelse.', 'success');
+      showToast(
+        'Bildet ble lastet opp suksessfullt! Smart bildehåndtering sørger for optimal ytelse.',
+        'success'
+      );
     }
 
     setUploading(false);
@@ -107,7 +110,10 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
 
   const handleDeleteLocal = (fileName: string) => {
     // For lokale filer, be brukeren om å slette manuelt på serveren
-    showToast(`For å slette ${fileName} lokalt, må du slette filen manuelt fra /public/images/jobads_events/ mappen på serveren.`, 'info');
+    showToast(
+      `For å slette ${fileName} lokalt, må du slette filen manuelt fra /public/images/jobads_events/ mappen på serveren.`,
+      'info'
+    );
     // Oppdater UI umiddelbart
     setLocalFiles(prev => prev.filter(file => file !== fileName));
   };

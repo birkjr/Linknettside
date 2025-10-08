@@ -12,6 +12,26 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Separate vendor libraries
+          vendor: ['react', 'react-dom'],
+          router: ['react-router-dom'],
+          ui: ['@mui/icons-material', '@mui/material'],
+          supabase: ['@supabase/supabase-js'],
+          // Admin components (larger bundle)
+          admin: [
+            './src/components/Admin/AdminEvents.tsx',
+            './src/components/Admin/AdminJobs.tsx',
+            './src/components/Admin/AdminNews.tsx',
+            './src/components/Admin/AdminBoard.tsx',
+            './src/components/Admin/AdminPartners.tsx',
+          ],
+        },
+      },
+    },
+    chunkSizeWarningLimit: 600, // Increase limit slightly
   },
   base: '/',
 });

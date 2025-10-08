@@ -23,23 +23,23 @@ export default function PullToRefresh({
 
   const handleTouchStart = (e: React.TouchEvent) => {
     if (isRefreshing) return;
-    
+
     startY.current = e.touches[0].clientY;
     setIsPulling(false);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (isRefreshing) return;
-    
+
     const currentY = e.touches[0].clientY;
     const scrollTop = containerRef.current?.scrollTop || 0;
-    
+
     // Only trigger if at the top of the container
     if (scrollTop === 0 && currentY > startY.current) {
       const distance = Math.min(currentY - startY.current, maxPullDistance);
       setPullDistance(distance);
       setIsPulling(distance > 10);
-      
+
       // Prevent default scrolling
       e.preventDefault();
     }
@@ -47,7 +47,7 @@ export default function PullToRefresh({
 
   const handleTouchEnd = async () => {
     if (isRefreshing) return;
-    
+
     if (pullDistance >= threshold) {
       setIsRefreshing(true);
       try {

@@ -64,7 +64,10 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingLocalFile) {
-      showToast(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`, 'error');
+      showToast(
+        `Bildet ${fileName} eksisterer allerede som lokalt bilde!`,
+        'error'
+      );
       setUploading(false);
       return;
     }
@@ -91,7 +94,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
     } else {
       // Legg til i Supabase-filer
       setFiles(prev => [...prev, fileName]);
-      
+
       // Legg også til i lokale filer (simulerer at bildet nå er tilgjengelig lokalt)
       setLocalFiles(prev => {
         if (!prev.includes(fileName)) {
@@ -99,7 +102,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
         }
         return prev;
       });
-      
+
       showToast('Bildet ble lastet opp suksessfullt!', 'success');
     }
 
@@ -138,7 +141,10 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
 
       // Fjern fra lokale filer
       setLocalFiles(prev => prev.filter(file => file !== fileName));
-      showToast(`${fileName} er slettet fra både lokale og Supabase bilder!`, 'success');
+      showToast(
+        `${fileName} er slettet fra både lokale og Supabase bilder!`,
+        'success'
+      );
     }
   };
 
