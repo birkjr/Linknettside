@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useToast } from '../Tools/ToastProvider';
 
 type ImgEventsJobads = {
   isOpen: boolean;
@@ -13,11 +14,13 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
   const [files, setFiles] = useState<string[]>([]);
   const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const { showToast } = useToast();
 
   // ✅ Prevent fetching files when modal is closed
   useEffect(() => {
     if (!isOpen) return;
     fetchFiles();
+    fetchLocalFiles();
   }, [isOpen]);
 
   const fetchFiles = async () => {
@@ -29,24 +32,30 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
     } else {
       setFiles(data.map(file => file.name));
     }
+  };
 
-    // Sett lokale filer basert på kjente filer i jobads_events mappen
-    // Dette er de faktiske filene som ligger i public/images/jobads_events/
-    const knownLocalFiles = [
-      'asplanviak.png',
-      'cowi.png',
-      'dnv.JPG',
-      'elvia.jpg',
-      'equinor.JPG',
-      'fornybarnorge.png',
-      'logo.sintef.png',
-      'multiconsult.png',
-      'nexans.png',
-      'norconsult.jpg',
-      'norskenergi.jpg',
-      'siemensenergy.png',
-    ];
-    setLocalFiles(knownLocalFiles);
+  const fetchLocalFiles = async () => {
+    try {
+      // Sett lokale filer basert på kjente filer i jobads_events mappen
+      // Dette er de faktiske filene som ligger i public/images/jobads_events/
+      const knownLocalFiles = [
+        'asplanviak.png',
+        'cowi.png',
+        'dnv.JPG',
+        'elvia.jpg',
+        'equinor.JPG',
+        'fornybarnorge.png',
+        'logo.sintef.png',
+        'multiconsult.png',
+        'nexans.png',
+        'norconsult.jpg',
+        'norskenergi.jpg',
+        'siemensenergy.png',
+      ];
+      setLocalFiles(knownLocalFiles);
+    } catch (error) {
+      console.log('Kunne ikke hente lokale filer:', error);
+    }
   };
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +72,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
 
     if (error) {
       console.error('Error uploading file:', error);
-      alert('Feil ved opplasting.');
+      showToast('Feil ved opplasting.', 'error');
     } else {
       // Legg til i Supabase-filer - dette vil være tilgjengelig umiddelbart
       setFiles(prev => [...prev, fileName]);
@@ -77,9 +86,7 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
         return prev;
       });
 
-      alert(
-        'Bildet ble lastet opp suksessfullt! Smart bildehåndtering sørger for optimal ytelse.'
-      );
+      showToast('Bildet ble lastet opp suksessfullt! Smart bildehåndtering sørger for optimal ytelse.', 'success');
     }
 
     setUploading(false);
@@ -91,18 +98,16 @@ export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
 
     if (error) {
       console.error('Error deleting file:', error);
-      alert('Kunne ikke slette filen.');
+      showToast('Kunne ikke slette filen.', 'error');
     } else {
-      alert('Bildet er slettet');
+      showToast('Bildet er slettet', 'success');
       setFiles(prev => prev.filter(file => file !== fileName));
     }
   };
 
   const handleDeleteLocal = (fileName: string) => {
     // For lokale filer, be brukeren om å slette manuelt på serveren
-    alert(
-      `For å slette ${fileName} lokalt, må du slette filen manuelt fra /public/images/jobads_events/ mappen på serveren.`
-    );
+    showToast(`For å slette ${fileName} lokalt, må du slette filen manuelt fra /public/images/jobads_events/ mappen på serveren.`, 'info');
     // Oppdater UI umiddelbart
     setLocalFiles(prev => prev.filter(file => file !== fileName));
   };

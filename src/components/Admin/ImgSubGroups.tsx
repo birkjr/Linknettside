@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useToast } from '../Tools/ToastProvider';
 
 type EditSubGroup = {
   isOpen: boolean;
@@ -13,6 +14,7 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
   const [files, setFiles] = useState<string[]>([]);
   const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const { showToast } = useToast();
 
   // ✅ Prevent fetching files when modal is closed
   useEffect(() => {
@@ -60,7 +62,7 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingLocalFile) {
-      alert(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`);
+      showToast(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`, 'error');
       setUploading(false);
       return;
     }
@@ -70,7 +72,7 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingSupabaseFile) {
-      alert(`Bildet ${fileName} eksisterer allerede i Supabase!`);
+      showToast(`Bildet ${fileName} eksisterer allerede i Supabase!`, 'error');
       setUploading(false);
       return;
     }
@@ -83,11 +85,11 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
 
     if (error) {
       console.error('Error uploading file:', error);
-      alert('Feil ved opplasting.');
+      showToast('Feil ved opplasting.', 'error');
     } else {
       // Legg til i lokale filer i stedet for Supabase-filer
       setLocalFiles(prev => [...prev, fileName]);
-      alert('Bildet ble lastet opp som lokalt bilde!');
+      showToast('Bildet ble lastet opp som lokalt bilde!', 'success');
     }
 
     setUploading(false);
@@ -99,9 +101,9 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
 
     if (error) {
       console.error('Error deleting file:', error);
-      alert('Kunne ikke slette filen.');
+      showToast('Kunne ikke slette filen.', 'error');
     } else {
-      alert('Bildet er slettet');
+      showToast('Bildet er slettet', 'success');
       setFiles(prev => prev.filter(file => file !== fileName));
     }
   };
@@ -125,7 +127,7 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
 
       // Fjern fra lokale filer
       setLocalFiles(prev => prev.filter(file => file !== fileName));
-      alert(`${fileName} er slettet fra både lokale og Supabase bilder!`);
+      showToast(`${fileName} er slettet fra både lokale og Supabase bilder!`, 'success');
     }
   };
 

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type Job = {
@@ -25,6 +26,7 @@ export default function AddJob() {
     imageURL: '',
   });
   const [editingJob, setEditingJob] = useState<Job | null>(null);
+  const { showToast } = useToast();
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -40,12 +42,10 @@ export default function AddJob() {
 
   // Function to add a new job
   const addNewJob = async () => {
-    {
-      /*if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place || !newJob.imageURL) {
-            alert(`Fyll inn alle nødvendige felt.`);
-            return;
-        }
-        */
+    // Validering av påkrevde felt
+    if (!newJob.bedrift || !newJob.jobType || !newJob.jobTitle || !newJob.deadline || !newJob.link || !newJob.place) {
+      showToast('Husk å fylle inn alle felt! (Bedrift, stillingstype, tittel, søknadsfrist, sted og lenke)', 'error');
+      return;
     }
 
     const { data, error } = await supabase
@@ -55,11 +55,9 @@ export default function AddJob() {
 
     if (error) {
       console.error('Feil ved legge til jobbannonse:', error);
-      alert(
-        `Kunne ikke legge til jobbannonse. Prøv igjen. Error: ${error.message}`
-      );
+      showToast('Kunne ikke legge til jobbannonse. Sjekk at alle felt er riktig utfylt og prøv igjen.', 'error');
     } else {
-      alert('Jobbannonse er opprettet!');
+      showToast('Jobbannonse er opprettet!', 'success');
       setJobs([...job, ...data]); // Update the state with the new Job
       setNewJob({
         bedrift: '',
@@ -79,10 +77,10 @@ export default function AddJob() {
 
     if (error) {
       console.error('Error deleting job:', error);
-      alert('Kunne ikke fjerne jobbannonse. Prøv igjen.');
+      showToast('Kunne ikke fjerne jobbannonse. Prøv igjen.', 'error');
     } else {
       setJobs(job.filter(job => job.id !== id)); // Update state to remove event
-      alert('Jobbannonse har blitt fjernet.');
+      showToast('Jobbannonse har blitt fjernet.', 'success');
     }
   };
 
@@ -109,7 +107,7 @@ export default function AddJob() {
 
     if (error) {
       console.error('Error oppdatering jobber:', error);
-      alert('Kunne ikke oppdatere jobbannonse. Prøv igjen.');
+      showToast('Kunne ikke oppdatere jobbannonse. Prøv igjen.', 'error');
     } else {
       setJobs(job.map(job => (job.id === editingJob.id ? editingJob : job))); // Update UI
       setEditingJob(null);

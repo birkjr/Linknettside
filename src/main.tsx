@@ -12,6 +12,8 @@ import ContactUs from './Pages/ContactUs.tsx';
 import Admin from './Pages/admin.tsx';
 import NotFound from './Pages/NotFound.tsx';
 import { AuthProvider, useAuth } from './auth.tsx'; // ✅ Import authentication
+import ErrorBoundary from './components/Tools/ErrorBoundary.tsx';
+import ToastProvider from './components/Tools/ToastProvider.tsx';
 
 // ✅ Private Route Component
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
@@ -19,13 +21,15 @@ const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   return isAuthenticated ? children : <Navigate to="/" />;
 };
 
-// ✅ Wrap the whole app in AuthProvider
+// ✅ Wrap the whole app in AuthProvider, ErrorBoundary and ToastProvider
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <AuthProvider>
-      <HashRouter>
-        <Routes>
-          <Route path="/" element={<Layout />}>
+    <ErrorBoundary>
+      <ToastProvider>
+        <AuthProvider>
+          <HashRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
             <Route index element={<App />} />
             <Route path="faq" element={<FAQ />} />
             <Route path="for_bedrifter" element={<ForBedrifter />} />
@@ -48,5 +52,7 @@ createRoot(document.getElementById('root')!).render(
         </Routes>
       </HashRouter>
     </AuthProvider>
+    </ToastProvider>
+    </ErrorBoundary>
   </StrictMode>
 );

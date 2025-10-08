@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 
 type StyretMember = {
   id: number;
@@ -14,6 +15,7 @@ export default function AdminBoard() {
   const [loading, setLoading] = useState(true);
   const [editRow, setEditRow] = useState<number | null>(null);
   const [editedMember, setEditedMember] = useState<StyretMember | null>(null);
+  const { showToast } = useToast();
 
   // Fetch members from Supabase
   useEffect(() => {
@@ -57,7 +59,7 @@ export default function AdminBoard() {
 
     if (error) {
       console.error('Error updating member:', error);
-      alert('Could not update the board member. Try again.');
+      showToast('Could not update the board member. Try again.', 'error');
     } else {
       setMembers(
         members.map(m => (m.id === editedMember.id ? editedMember : m))

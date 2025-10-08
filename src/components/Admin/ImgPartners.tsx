@@ -3,6 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
+import { useToast } from '../Tools/ToastProvider';
 
 type AddCompanyLogoProps = {
   isOpen: boolean;
@@ -13,6 +14,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
   const [files, setFiles] = useState<string[]>([]);
   const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const { showToast } = useToast();
 
   // ✅ Prevent fetching files when modal is closed
   useEffect(() => {
@@ -34,21 +36,17 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
 
   const fetchLocalFiles = async () => {
     try {
-      // Sjekk hvilke lokale filer som finnes
-      const response = await fetch('/images/company_logos/');
-      if (response.ok) {
-        // Dette vil ikke fungere perfekt, men vi kan prøve å hente filnavnene
-        const localFileNames = [
-          'asplanviak.JPG',
-          'cowi.JPG',
-          'dnv.JPG',
-          'equinor.JPG',
-          'multiconsult.JPG',
-          'norconsult.JPG',
-          'statkraft.JPG',
-        ];
-        setLocalFiles(localFileNames);
-      }
+      // Hardkodet liste av lokale filer som faktisk finnes i public/images/company_logos/
+      const localFileNames = [
+        'asplanviak.JPG',
+        'cowi.JPG',
+        'dnv.JPG',
+        'equinor.JPG',
+        'multiconsult.JPG',
+        'norconsult.JPG',
+        'statkraft.JPG',
+      ];
+      setLocalFiles(localFileNames);
     } catch (error) {
       console.log('Kunne ikke hente lokale filer:', error);
     }
@@ -66,7 +64,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingLocalFile) {
-      alert(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`);
+      showToast(`Bildet ${fileName} eksisterer allerede som lokalt bilde!`, 'error');
       setUploading(false);
       return;
     }
@@ -76,7 +74,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
       f => f.toLowerCase() === fileName.toLowerCase()
     );
     if (existingSupabaseFile) {
-      alert(`Bildet ${fileName} eksisterer allerede i Supabase!`);
+      showToast(`Bildet ${fileName} eksisterer allerede i Supabase!`, 'error');
       setUploading(false);
       return;
     }
@@ -89,11 +87,20 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
 
     if (error) {
       console.error('Error uploading file:', error);
-      alert('Feil ved opplasting.');
+      showToast('Feil ved opplasting.', 'error');
     } else {
-      // Legg til i Supabase-filer - dette vil være tilgjengelig umiddelbart
+      // Legg til i Supabase-filer
       setFiles(prev => [...prev, fileName]);
-      alert('Bildet ble lastet opp suksessfullt!');
+      
+      // Legg også til i lokale filer (simulerer at bildet nå er tilgjengelig lokalt)
+      setLocalFiles(prev => {
+        if (!prev.includes(fileName)) {
+          return [...prev, fileName];
+        }
+        return prev;
+      });
+      
+      showToast('Bildet ble lastet opp suksessfullt!', 'success');
     }
 
     setUploading(false);
@@ -105,9 +112,9 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
 
     if (error) {
       console.error('Error deleting file:', error);
-      alert('Kunne ikke slette filen.');
+      showToast('Kunne ikke slette filen.', 'error');
     } else {
-      alert('Bildet er slettet');
+      showToast('Bildet er slettet', 'success');
       setFiles(prev => prev.filter(file => file !== fileName));
     }
   };
@@ -131,7 +138,7 @@ export default function ImgPartners({ isOpen, onClose }: AddCompanyLogoProps) {
 
       // Fjern fra lokale filer
       setLocalFiles(prev => prev.filter(file => file !== fileName));
-      alert(`${fileName} er slettet fra både lokale og Supabase bilder!`);
+      showToast(`${fileName} er slettet fra både lokale og Supabase bilder!`, 'success');
     }
   };
 
