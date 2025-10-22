@@ -69,6 +69,12 @@ export default function LazyImage({
     return () => observer.disconnect();
   }, [src]);
 
+  // Reset error state when src changes
+  useEffect(() => {
+    setHasError(false);
+    setIsLoaded(false);
+  }, [src]);
+
   const handleLoad = () => {
     setIsLoaded(true);
   };
@@ -80,11 +86,16 @@ export default function LazyImage({
       return;
     }
 
-    setHasError(true);
-    setIsLoaded(true);
+    // Call parent onError first to try fallback
     if (onError) {
       onError(e);
+      // Don't set hasError immediately - let parent handle fallback
+      return;
     }
+
+    // Only show error if no parent handler
+    setHasError(true);
+    setIsLoaded(true);
   };
 
   return (
