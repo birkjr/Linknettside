@@ -12,9 +12,20 @@ export const getOptimizedImageUrl = (
   fileName: string,
   category: 'board_pics' | 'company_logos' | 'subgroups' | 'events_jobads'
 ): string => {
-  // Prøv lokalt bilde først (for eksisterende bilder)
+  // Sjekk om det er et Supabase-bilde (inneholder UUID eller er et nytt bilde)
+  // Men ikke alle bilder med bindestrek er Supabase-bilder (f.eks. "logo.sintef.png")
+  if (fileName.includes('supabase') || 
+      (fileName.includes('-') && fileName.length > 25) || 
+      fileName.length > 30) {
+    console.log(`Detecting Supabase image: ${fileName}`);
+    return getSupabaseImageUrl(fileName, category);
+  }
+  
+  // Alltid prøv lokalt bilde først - handleImageError håndterer fallback til Supabase
   const localPath = category === 'events_jobads' ? 'jobads_events' : category;
-  return `/images/${localPath}/${fileName}`;
+  const localUrl = `/images/${localPath}/${fileName}`;
+  console.log(`Trying local image: ${localUrl}`);
+  return localUrl;
 };
 
 export const getSupabaseImageUrl = (
@@ -57,20 +68,24 @@ export const handleImageError = (
   category: 'board_pics' | 'company_logos' | 'subgroups' | 'events_jobads'
 ): void => {
   const target = e.currentTarget;
+  console.log(`Image error for ${fileName} in ${category}, current src: ${target.src}`);
 
   // Hvis lokalt bilde feilet, prøv Supabase
   if (target.src.includes('/images/')) {
     const supabaseUrl = getSupabaseImageUrl(fileName, category);
+    console.log(`Trying Supabase URL: ${supabaseUrl}`);
     target.src = supabaseUrl;
 
     // Preload Supabase-bildet for fremtidige besøk
     preloadImage(supabaseUrl).catch(() => {
       // Hvis Supabase også feiler, vis placeholder
-      target.src = '/images/placeholder.png';
+      console.log(`Supabase also failed, using placeholder`);
+      target.src = '/images/logo_transparent.png';
     });
   } else {
     // Hvis Supabase også feiler, vis placeholder
-    target.src = '/images/placeholder.png';
+    console.log(`Supabase failed, using placeholder`);
+    target.src = '/images/logo_transparent.png';
   }
 };
 

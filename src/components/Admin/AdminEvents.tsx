@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import { useToast } from '../Tools/ToastProvider';
+import ImageSelector from '../Tools/ImageSelector';
 
 type Event = {
   id: number;
@@ -225,14 +226,12 @@ export default function AddEvent() {
         />
         {/* Image Search and Selection */}
         <div>
-          <input
-            type="text"
-            placeholder={'Legg til bilde'}
+          <ImageSelector
             value={newEvent.imageURL}
-            onChange={e =>
-              setNewEvent({ ...newEvent, imageURL: e.target.value })
-            }
-            className="w-full p-2 border rounded mb-2"
+            onChange={(value) => setNewEvent({ ...newEvent, imageURL: value })}
+            category="events_jobads"
+            placeholder="Velg bilde for arrangement..."
+            className="mb-2"
           />
         </div>
         <button
@@ -333,13 +332,12 @@ export default function AddEvent() {
           />
           {/* Image Search and Selection */}
           <div>
-            <input
-              type="text"
+            <ImageSelector
               value={editingEvent.imageURL}
-              onChange={e =>
-                setEditingEvent({ ...editingEvent, imageURL: e.target.value })
-              }
-              className="w-full p-2 border rounded mb-2"
+              onChange={(value) => setEditingEvent({ ...editingEvent, imageURL: value })}
+              category="events_jobads"
+              placeholder="Velg bilde for arrangement..."
+              className="mb-2"
             />
           </div>
 

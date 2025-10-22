@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
 import { useToast } from '../Tools/ToastProvider';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ImageSelector from '../Tools/ImageSelector';
 
 type Job = {
   id: number;
@@ -182,14 +183,12 @@ export default function AddJob() {
           className="w-full p-2 border rounded mb-2"
         />
         <div>
-          <input
-            type="text"
-            placeholder={'Legg til bilde'}
+          <ImageSelector
             value={newJob.imageURL}
-            onChange={e =>
-              setNewJob({ ...newJob, imageURL: `${e.target.value}` })
-            }
-            className="w-full p-2 border rounded mb-2"
+            onChange={(value) => setNewJob({ ...newJob, imageURL: value })}
+            category="events_jobads"
+            placeholder="Velg bilde for jobbannonse..."
+            className="mb-2"
           />
         </div>
         <button
@@ -283,17 +282,12 @@ export default function AddJob() {
             />
             {/* Image Search and Selection */}
             <div>
-              <input
-                type="text"
-                //placeholder={`${editingJob.bedrift}.png`}
+              <ImageSelector
                 value={editingJob.imageURL}
-                onChange={e =>
-                  setEditingJob({
-                    ...editingJob,
-                    imageURL: `${e.target.value}`,
-                  })
-                }
-                className="w-full p-2 border rounded mb-2"
+                onChange={(value) => setEditingJob({ ...editingJob, imageURL: value })}
+                category="events_jobads"
+                placeholder="Velg bilde for jobbannonse..."
+                className="mb-2"
               />
             </div>
             <button
