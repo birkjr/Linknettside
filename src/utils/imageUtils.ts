@@ -12,9 +12,20 @@ export const getOptimizedImageUrl = (
   fileName: string,
   category: 'board_pics' | 'company_logos' | 'subgroups' | 'events_jobads'
 ): string => {
+  // Sjekk om det er et Supabase-bilde (inneholder UUID eller er et nytt bilde)
+  // Men ikke alle bilder med bindestrek er Supabase-bilder (f.eks. "logo.sintef.png")
+  if (fileName.includes('supabase') || 
+      (fileName.includes('-') && fileName.length > 25) || 
+      fileName.length > 30) {
+    console.log(`Detecting Supabase image: ${fileName}`);
+    return getSupabaseImageUrl(fileName, category);
+  }
+  
   // Alltid prøv lokalt bilde først - handleImageError håndterer fallback til Supabase
   const localPath = category === 'events_jobads' ? 'jobads_events' : category;
-  return `/images/${localPath}/${fileName}`;
+  const localUrl = `/images/${localPath}/${fileName}`;
+  console.log(`Trying local image: ${localUrl}`);
+  return localUrl;
 };
 
 export const getSupabaseImageUrl = (
