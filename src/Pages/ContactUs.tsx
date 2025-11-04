@@ -6,7 +6,7 @@ import { getOptimizedImageUrl, preloadAllImages } from '../utils/imageUtils';
 // Preload critical images
 const preloadBoardImages = (members: Styret[]) => {
   // Use the new preloading utility
-  const memberNames = members.map(member => member.name.split(' ')[0]);
+  const memberNames = members.map(member => member.name.split(' ')[0].toLowerCase());
   preloadAllImages(memberNames, 'board_pics');
 };
 
@@ -105,7 +105,7 @@ export default function ContactUs() {
             <div className="flex flex-col items-center justify-center my-3">
               <BoardPic
                 src={getOptimizedImageUrl(
-                  `${leder.name.split(' ')[0]}.png`,
+                  `${leder.name.split(' ')[0].toLowerCase()}.png`,
                   'board_pics'
                 )}
                 alt={leder.stilling}
@@ -134,7 +134,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${nestleder.name.split(' ')[0]}.png`,
+                    `${nestleder.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${nestleder.stilling}`}
@@ -166,7 +166,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${hr.name.split(' ')[0]}.png`,
+                    `${hr.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${hr.stilling}`}
@@ -192,7 +192,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${økonomi.name.split(' ')[0]}.png`,
+                    `${økonomi.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${økonomi.stilling}`}
@@ -221,7 +221,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${marked.name.split(' ')[0]}.png`,
+                    `${marked.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${marked.stilling}`}
@@ -247,7 +247,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${bedrift.name.split(' ')[0]}.png`,
+                    `${bedrift.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${bedrift.stilling}`}
@@ -273,7 +273,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${logistikk.name.split(' ')[0]}.png`,
+                    `${logistikk.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${logistikk.stilling}`}
@@ -305,7 +305,7 @@ export default function ContactUs() {
               <div className="text-center flex flex-col items-center justify-center my-3">
                 <BoardPic
                   src={getOptimizedImageUrl(
-                    `${fa.name.split(' ')[0]}.png`,
+                    `${fa.name.split(' ')[0].toLowerCase()}.png`,
                     'board_pics'
                   )}
                   alt={`${fa.stilling}`}
