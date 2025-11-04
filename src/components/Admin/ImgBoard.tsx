@@ -4,6 +4,7 @@ import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useToast } from '../Tools/ToastProvider';
+import { updateImageCacheVersion } from '../../utils/imageUtils';
 
 type EditBoardPics = {
   isOpen: boolean;
@@ -12,7 +13,6 @@ type EditBoardPics = {
 
 export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
   const [files, setFiles] = useState<string[]>([]);
-  const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const { showToast } = useToast();
@@ -21,7 +21,6 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
   useEffect(() => {
     if (isOpen) {
       fetchFiles();
-      fetchLocalFiles();
     }
   }, [isOpen]);
 
@@ -38,25 +37,6 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     }
   };
 
-  const fetchLocalFiles = async () => {
-    try {
-      // Sjekk hvilke lokale filer som finnes
-      const localFileNames = [
-        'Annie.png',
-        'Aqeel.png',
-        'Aryan.png',
-        'Julia.png',
-        'Julie.png',
-        'Julius.png',
-        'Kaia.png',
-        'Stina.png',
-      ];
-      setLocalFiles(localFileNames);
-    } catch (error) {
-      console.log('Kunne ikke hente lokale filer:', error);
-    }
-  };
-
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || event.target.files.length === 0) return;
     setUploading(true);
@@ -64,19 +44,6 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
 
     const file = event.target.files[0];
     const fileName = file.name;
-
-    // Sjekk om filen allerede eksisterer lokalt
-    const existingLocalFile = localFiles.find(
-      f => f.toLowerCase() === fileName.toLowerCase()
-    );
-    if (existingLocalFile) {
-      showToast(
-        `Bildet ${fileName} eksisterer allerede som lokalt bilde!`,
-        'error'
-      );
-      setUploading(false);
-      return;
-    }
 
     // Sjekk om filen allerede eksisterer i Supabase
     const existingSupabaseFile = files.find(
@@ -88,7 +55,7 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
       return;
     }
 
-    // Last opp til Supabase som backup, men legg til i lokale filer
+    // Last opp til Supabase
     const filePath = `board_pic/${fileName}`;
     const { error } = await supabase.storage
       .from('bilder')
@@ -97,10 +64,12 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     if (error) {
       setError('Kunne ikke laste opp bilde: ' + error.message);
       console.error('Kunne ikke laste opp bilde:', error);
+      showToast('Kunne ikke laste opp bilde.', 'error');
     } else {
-      // Legg til i lokale filer i stedet for Supabase-filer
-      setLocalFiles(prev => [...prev, fileName]);
-      showToast('Bildet ble lastet opp som lokalt bilde!', 'success');
+      // Oppdater cache-versjon for å tvinge refresh av bilder
+      updateImageCacheVersion();
+      showToast('Bildet ble lastet opp til Supabase!', 'success');
+      fetchFiles(); // Refresh the file list
     }
 
     setUploading(false);
@@ -117,36 +86,13 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
       console.error('Kunne ikke slette bilde:', error);
     } else {
       console.log('Suksessfull sletting av:', filePath); // Debugging line
+      // Oppdater cache-versjon for å tvinge refresh av bilder
+      updateImageCacheVersion();
       showToast('Bilde slettet suksessfullt!', 'success');
       fetchFiles(); // Refresh the file list
     }
   };
 
-  const handleDeleteLocal = async (fileName: string) => {
-    const confirmed = window.confirm(
-      `Er du sikker på at du vil slette ${fileName}?`
-    );
-
-    if (confirmed) {
-      // Slett fra Supabase også (siden vi lagrer backup der)
-      const filePath = `board_pic/${fileName}`;
-      const { error } = await supabase.storage
-        .from('bilder')
-        .remove([filePath]);
-
-      if (error) {
-        console.error('Error deleting from Supabase:', error);
-        // Fortsett med å fjerne fra lokale filer uansett
-      }
-
-      // Fjern fra lokale filer
-      setLocalFiles(prev => prev.filter(file => file !== fileName));
-      showToast(
-        `${fileName} er slettet fra både lokale og Supabase bilder!`,
-        'success'
-      );
-    }
-  };
 
   if (!isOpen) return null; // Don't render if modal is closed
 
@@ -168,24 +114,23 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
         {error && <p className="text-red-600 text-center">{error}</p>}
 
         {/* Info Section */}
-        <div className="bg-green-50 border border-green-200 rounded-lg p-3 mb-4">
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-3 mb-4">
           <div className="flex items-center mb-2">
             <svg
-              className="w-5 h-5 text-green-600 mr-2"
+              className="w-5 h-5 text-blue-600 mr-2"
               fill="currentColor"
               viewBox="0 0 20 20"
             >
               <path
                 fillRule="evenodd"
-                d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                 clipRule="evenodd"
               />
             </svg>
-            <span className="text-green-800 font-medium">Smart opplasting</span>
+            <span className="text-blue-800 font-medium">Supabase opplasting</span>
           </div>
-          <p className="text-green-700 text-sm">
-            Nye bilder lastes opp som lokale bilder (raske) og lagres også som
-            backup i Supabase.
+          <p className="text-blue-700 text-sm">
+            Alle bilder lastes opp direkte til Supabase og hentes fra Supabase.
           </p>
         </div>
 
@@ -210,45 +155,17 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
 
         {/* Scrollable Content Area */}
         <div className="flex-1 overflow-y-auto pr-2">
-          {/* Local Files Section */}
-          {localFiles.length > 0 && (
-            <div className="mb-4">
-              <h3 className="text-md font-semibold mb-2 text-green-700">
-                ✅ Lokale bilder (raske): {localFiles.length}
-              </h3>
-              <ul className="space-y-2">
-                {localFiles.map((file, index) => (
-                  <li
-                    key={index}
-                    className="flex items-center p-3 rounded-lg shadow-sm bg-green-50 border border-green-200"
-                  >
-                    <button
-                      onClick={() => handleDeleteLocal(file)}
-                      className="text-red-600 hover:scale-110 font-bold text-sm mr-4"
-                      title="Slett lokalt bilde"
-                    >
-                      <CancelIcon />
-                    </button>
-                    <span className="flex-grow text-green-800 font-medium">
-                      {file}
-                    </span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
           {/* Supabase Files Section */}
-          {files.length > 0 && (
+          {files.length > 0 ? (
             <div className="mb-4">
-              <h3 className="text-md font-semibold mb-2 text-orange-700">
-                ⚠️ Supabase bilder (trege): {files.length}
+              <h3 className="text-md font-semibold mb-2 text-blue-700">
+                📁 Supabase bilder: {files.length}
               </h3>
               <ul className="space-y-2">
                 {files.map((file, index) => (
                   <li
                     key={index}
-                    className="flex items-center p-3 rounded-lg shadow-sm bg-orange-50 border border-orange-200"
+                    className="flex items-center p-3 rounded-lg shadow-sm bg-blue-50 border border-blue-200"
                   >
                     <button
                       onClick={() => handleDelete(file)}
@@ -256,13 +173,17 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
                     >
                       <CancelIcon />
                     </button>
-                    <span className="flex-grow text-orange-800 font-medium">
+                    <span className="flex-grow text-blue-800 font-medium">
                       {file}
                     </span>
                   </li>
                 ))}
               </ul>
             </div>
+          ) : (
+            <p className="text-gray-500 text-center py-4">
+              Ingen bilder funnet. Last opp bilder for å se dem her.
+            </p>
           )}
         </div>
       </div>

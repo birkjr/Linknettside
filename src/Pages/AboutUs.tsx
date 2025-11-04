@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import SubGroupPic from '../components/Tools/SubGroupPic';
+import { getOptimizedImageUrl } from '../utils/imageUtils';
 
 // Preload critical images
 const preloadImages = () => {
-  const criticalImages = [`/images/subgroups/styret.png`];
+  const criticalImages = [getOptimizedImageUrl('styret.png', 'subgroups')];
 
   const prefetchImages = [
-    `/images/subgroups/bedrift.png`,
-    `/images/subgroups/marked.png`,
-    `/images/subgroups/logistikk.png`,
-    `/images/subgroups/fa.png`,
+    getOptimizedImageUrl('bedrift.png', 'subgroups'),
+    getOptimizedImageUrl('marked.png', 'subgroups'),
+    getOptimizedImageUrl('logistikk.png', 'subgroups'),
+    getOptimizedImageUrl('fa.png', 'subgroups'),
   ];
 
   // Preload critical above-the-fold images
@@ -153,7 +154,7 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Styret"
                 className="rounded-xl"
-                src={`/images/subgroups/styret.png`}
+                src={getOptimizedImageUrl('styret.png','subgroups')}
                 priority={true}
               />
             </div>
@@ -195,7 +196,7 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Bedrift"
                 className="rounded-xl"
-                src={`/images/subgroups/bedrift.png`}
+                src={getOptimizedImageUrl('bedrift.png','subgroups')}
               />
             </div>
           </div>
@@ -216,7 +217,7 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Markedsføring"
                 className="rounded-xl"
-                src={`/images/subgroups/marked.png`}
+                src={getOptimizedImageUrl('marked.png','subgroups')}
               />
             </div>
           </div>
@@ -237,7 +238,7 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Logistikk"
                 className="rounded-xl"
-                src={`/images/subgroups/logistikk.png`}
+                src={getOptimizedImageUrl('logistikk.png','subgroups')}
               />
             </div>
           </div>
@@ -259,7 +260,7 @@ export default function OmOss() {
               <SubGroupPic
                 alt="FA"
                 className="rounded-xl"
-                src={`/images/subgroups/fa.png`}
+                src={getOptimizedImageUrl('fa.png','subgroups')}
               />
             </div>
           </div>
