@@ -19,7 +19,17 @@
     "check:images": "node check-actual-images.js",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "format:staged": "prettier --write --list-different"
+    "lint:fix": "eslint . --fix",
+    "format:staged": "prettier --write --list-different",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "*.{ts,tsx,js,jsx,css,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -46,6 +56,8 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9",
+    "lint-staged": "^15",
     "postcss": "^8.5.1",
     "prettier": "^3.6.2",
     "sharp": "^0.34.4",
