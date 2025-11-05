@@ -3,24 +3,38 @@ import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import use
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from '../../auth';
+import { supabase } from '../../supabaseClient';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 
 export default function Header() {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
   const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { login } = useAuth(); // ✅ Get login function from auth
 
-  const correctPassword = 'LinkAdmin25'; // Your admin password
+  const handleLogin = async () => {
+    try {
+      // Use Supabase Auth instead of hardcoded password
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: 'link-styret@emilweb.no', // Admin email
+        password: password,
+      });
 
-  const handleLogin = () => {
-    if (password === correctPassword) {
-      login(); // ✅ Authenticate user
-      localStorage.setItem('isAdmin', 'true'); // Store authentication flag
-      navigate('/admin');
-      setShowPasswordModal(false);
-      setPassword(''); // Clear password after login
-    } else {
-      alert('Feil passord! 🚫');
+      if (error) {
+        alert('Feil passord! 🚫');
+        return;
+      }
+      if (data.user) {
+        login(); // Update auth context
+        navigate('/admin');
+        setShowPasswordModal(false);
+        setPassword(''); // Clear password after login
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('En feil oppstod under innlogging');
     }
   };
   const [menuOpen, setMenuOpen] = useState(false);
@@ -79,13 +93,27 @@ export default function Header() {
                 <h2 className="text-lg font-bold mb-4 text-center">
                   Admin Tilgang
                 </h2>
-                <input
-                  type="password"
-                  placeholder="Skriv inn passord"
-                  value={password}
-                  onChange={e => setPassword(e.target.value)}
-                  className="w-full p-2 border rounded mb-4"
-                />
+                <div className="flex items-center mb-4">
+                  <input
+                    type={showPassword ? 'text' : 'password'}
+                    placeholder="Skriv inn passord"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    onKeyDown={e => {
+                      if (e.key === 'Enter') {
+                        handleLogin();
+                      }
+                    }}
+                    className="w-full p-2 border rounded-l-md"
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="bg-gray-200 p-2 rounded-r-md"
+                  >
+                    {showPassword ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                  </button>
+                </div>
                 <div className="flex justify-between">
                   <button
                     onClick={() => setShowPasswordModal(false)}
