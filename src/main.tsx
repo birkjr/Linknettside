@@ -19,7 +19,18 @@ const NotFound = lazy(() => import('./Pages/NotFound.tsx'));
 
 // ✅ Private Route Component
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
-  const { isAuthenticated } = useAuth();
+  const { isAuthenticated, loading } = useAuth();
+  
+  // Show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      </div>
+    );
+  }
+  
+  // Redirect to home if not authenticated
   return isAuthenticated ? children : <Navigate to="/" />;
 };
 

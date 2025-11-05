@@ -32,8 +32,7 @@ export default function Footer() {
         return;
       }
       if (data.user) {
-        login(); // Your existing auth context login
-        localStorage.setItem('isAdmin', 'true');
+        login(); // Update auth context
         navigate('/admin');
         setShowPasswordModal(false);
         setPassword(''); // Clear password after login

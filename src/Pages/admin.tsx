@@ -8,18 +8,37 @@ import { useEffect } from 'react';
 import { useAuth } from '../auth';
 import UploadPhoto from '../components/Admin/UploadPhoto';
 import AdminPartners from '../components/Admin/AdminPartners';
+import { useToast } from '../components/Tools/ToastProvider';
 
 export default function admin() {
   const navigate = useNavigate();
-
-  const { isAuthenticated } = useAuth(); // ✅ Get authentication state
+  const { isAuthenticated, loading } = useAuth(); // ✅ Get authentication state and loading
+  const { showToast } = useToast();
 
   useEffect(() => {
+    // Wait for auth to finish loading
+    if (loading) return;
+    
+    // If not authenticated, redirect to home
     if (!isAuthenticated) {
-      alert('Ingen tilgang! 🚫');
+      showToast('Ingen tilgang! Du må være innlogget som admin.', 'error');
       navigate('/');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, loading, navigate, showToast]);
+
+  // Show loading spinner while checking authentication
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600"></div>
+      </div>
+    );
+  }
+
+  // Don't render admin panel if not authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col items-center justify-center">
