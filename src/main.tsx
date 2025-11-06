@@ -14,13 +14,21 @@ const ForBedrifter = lazy(() => import('./Pages/ForCompanies.tsx'));
 const Jobbtorget = lazy(() => import('./Pages/Jobs.tsx'));
 const OmOss = lazy(() => import('./Pages/AboutUs.tsx'));
 const ContactUs = lazy(() => import('./Pages/ContactUs.tsx'));
-const Admin = lazy(() => import('./Pages/admin.tsx'));
+const AdminEventsPage = lazy(() => import('./Pages/AdminEventsPage.tsx'));
+const AdminJobsPage = lazy(() => import('./Pages/AdminJobsPage.tsx'));
+const AdminAboutUsPage = lazy(() => import('./Pages/AdminAboutUsPage.tsx'));
+const AdminContactUsPage = lazy(() => import('./Pages/AdminContactUsPage.tsx'));
+const AdminNewsPage = lazy(() => import('./Pages/AdminNewsPage.tsx'));
+const AdminSupportPage = lazy(() => import('./Pages/AdminSupportPage.tsx'));
+const AdminUploadPage = lazy(() => import('./Pages/AdminUploadPage.tsx'));
+const AdminPartnersPage = lazy(() => import('./Pages/AdminPartnersPage.tsx'));
+const AdminBoardPage = lazy(() => import('./Pages/AdminBoardPage.tsx'));
 const NotFound = lazy(() => import('./Pages/NotFound.tsx'));
 
 // ✅ Private Route Component
 const PrivateRoute = ({ children }: { children: JSX.Element }) => {
   const { isAuthenticated, loading } = useAuth();
-  
+
   // Show loading spinner while checking authentication
   if (loading) {
     return (
@@ -29,7 +37,7 @@ const PrivateRoute = ({ children }: { children: JSX.Element }) => {
       </div>
     );
   }
-  
+
   // Redirect to home if not authenticated
   return isAuthenticated ? children : <Navigate to="/" />;
 };
@@ -58,12 +66,84 @@ createRoot(document.getElementById('root')!).render(
                   <Route path="om_oss" element={<OmOss />} />
                   <Route path="kontakt_oss" element={<ContactUs />} />
 
-                  {/* ✅ Protect Admin Route */}
+                  {/* ✅ Protect Admin Route - redirect to arrangementer */}
                   <Route
                     path="/admin"
                     element={
                       <PrivateRoute>
-                        <Admin />
+                        <Navigate to="/admin/arrangementer" replace />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/arrangementer"
+                    element={
+                      <PrivateRoute>
+                        <AdminEventsPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/jobbtorget"
+                    element={
+                      <PrivateRoute>
+                        <AdminJobsPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/om_oss"
+                    element={
+                      <PrivateRoute>
+                        <AdminAboutUsPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/kontakt_oss"
+                    element={
+                      <PrivateRoute>
+                        <AdminContactUsPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/nyheter"
+                    element={
+                      <PrivateRoute>
+                        <AdminNewsPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/support"
+                    element={
+                      <PrivateRoute>
+                        <AdminSupportPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/last_opp_bilder"
+                    element={
+                      <PrivateRoute>
+                        <AdminUploadPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/partnere"
+                    element={
+                      <PrivateRoute>
+                        <AdminPartnersPage />
+                      </PrivateRoute>
+                    }
+                  />
+                  <Route
+                    path="/admin/styret"
+                    element={
+                      <PrivateRoute>
+                        <AdminBoardPage />
                       </PrivateRoute>
                     }
                   />
