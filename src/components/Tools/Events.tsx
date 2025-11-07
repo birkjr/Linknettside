@@ -1,13 +1,15 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
-import PlaceIcon from "@mui/icons-material/Place";
-import RestaurantMenuIcon from "@mui/icons-material/RestaurantMenu";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
-import EventCleaner from "./EventCleaner"; // Import the EventCleaner component
-
-const supabaseStorageUrl =
-  "https://iglqmuqbolugyifhsrfh.supabase.co/storage/v1/object/public/bilder/";
+import { useEffect, useState } from 'react';
+import { supabase } from '../../supabaseClient';
+import { getOptimizedImageUrl, handleImageError } from '../../utils/imageUtils';
+import PlaceIcon from '@mui/icons-material/Place';
+import RestaurantMenuIcon from '@mui/icons-material/RestaurantMenu';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import EventCleaner from './EventCleaner'; // Import the EventCleaner component
+import LazyImage from './LazyImage';
+import SkeletonLoader from './SkeletonLoader';
+import Swipeable from './Swipeable';
+import PullToRefresh from './PullToRefresh';
 
 type Event = {
   id: string;
@@ -24,17 +26,20 @@ type Event = {
 export default function Arrangementer() {
   const [events, setEvents] = useState<Event[]>([]);
   const [loading, setLoading] = useState(true);
+  const [currentEventIndex, setCurrentEventIndex] = useState(0);
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    const formattedDate = date.toLocaleDateString("no-NO", {
-      day: "2-digit",
-      month: "2-digit",
-      year: "numeric",
+    const formattedDate = date.toLocaleDateString('no-NO', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
     });
 
     // Replace default formatting with desired format: "day.date year"
-    return formattedDate.replace(/\//g, ".").replace(/(\d{2})\.(\d{2})\.(\d{4})/, "$1.$2 $3");
+    return formattedDate
+      .replace(/\//g, '.')
+      .replace(/(\d{2})\.(\d{2})\.(\d{4})/, '$1.$2 $3');
   };
 
   const formatTime = (timeString: string) => {
@@ -43,10 +48,10 @@ export default function Arrangementer() {
 
   useEffect(() => {
     const fetchEvents = async () => {
-      const { data, error } = await supabase.from("events").select("*");
+      const { data, error } = await supabase.from('events').select('*');
 
       if (error) {
-        console.error("Kunne ikke hente arrangementer:", error);
+        console.error('Kunne ikke hente arrangementer:', error);
       } else {
         setEvents(data);
       }
@@ -56,73 +61,242 @@ export default function Arrangementer() {
     fetchEvents();
   }, []);
 
+  // Refresh events
+  const handleRefresh = async () => {
+    setLoading(true);
+    const { data, error } = await supabase.from('events').select('*');
+
+    if (error) {
+      console.error('Kunne ikke oppdatere arrangementer:', error);
+    } else {
+      setEvents(data || []);
+      setCurrentEventIndex(0);
+    }
+    setLoading(false);
+  };
+
+  // Swipe handlers
+  const handleSwipeLeft = () => {
+    if (currentEventIndex < events.length - 1) {
+      setCurrentEventIndex(currentEventIndex + 1);
+    }
+  };
+
+  const handleSwipeRight = () => {
+    if (currentEventIndex > 0) {
+      setCurrentEventIndex(currentEventIndex - 1);
+    }
+  };
+
   return (
-    <div className="w-full max-w-6xl mx-auto p-6 sm:p-12 text-black rounded-xl" style={{ backgroundColor: "#4682B4" }}>
+    <div
+      className="w-full max-w-6xl mx-auto p-6 sm:p-12 text-black rounded-xl"
+      style={{ backgroundColor: '#4682B4' }}
+    >
       <h1 className="text-white text-3xl text-center">Arrangementer</h1>
-      <p className="text-white text-sm text-center pb-4">Her er de kommende arrangementene for EMIL studenter</p>
+      <p className="text-white text-sm text-center pb-4">
+        Her er de kommende arrangementene for EMIL studenter
+      </p>
+      <EventCleaner events={events} setEvents={setEvents} />{' '}
+      {/* Include the EventCleaner component */}
+      <PullToRefresh onRefresh={handleRefresh}>
+        {loading ? (
+          <SkeletonLoader type="event" count={3} />
+        ) : events.length > 0 ? (
+          <div>
+            {/* Mobile: Swipeable single event view */}
+            <div className="lg:hidden">
+              <Swipeable
+                onSwipeLeft={handleSwipeLeft}
+                onSwipeRight={handleSwipeRight}
+              >
+                <div className="relative">
+                  {(() => {
+                    const sortedEvents = events.sort((a, b) => {
+                      return (
+                        new Date(a.date as string).getTime() -
+                        new Date(b.date as string).getTime()
+                      );
+                    });
+                    const currentEvent = sortedEvents[currentEventIndex];
 
-      <EventCleaner events={events} setEvents={setEvents} /> {/* Include the EventCleaner component */}
+                    return (
+                      <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
+                        <a
+                          key={currentEvent.id}
+                          href={currentEvent.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                        >
+                          <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
+                            {/* Logo Section */}
+                            <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
+                              <LazyImage
+                                src={
+                                  currentEvent.bedrift.toLowerCase() ===
+                                  'teknologiporten'
+                                    ? getOptimizedImageUrl(
+                                        'teknologiporten.png',
+                                        'events_jobads'
+                                      )
+                                    : getOptimizedImageUrl(
+                                        currentEvent.imageURL,
+                                        'events_jobads'
+                                      )
+                                }
+                                alt={currentEvent.bedrift}
+                                className="w-full h-full object-contain rounded-xl"
+                                onError={e => {
+                                  const fileName =
+                                    currentEvent.bedrift.toLowerCase() ===
+                                    'teknologiporten'
+                                      ? 'teknologiporten.png'
+                                      : currentEvent.imageURL;
+                                  handleImageError(
+                                    e,
+                                    fileName,
+                                    'events_jobads'
+                                  );
+                                }}
+                              />
+                            </div>
 
-      {loading ? (
-        <p className="text-center text-black">Laster inn arrangementer...</p>
-      ) : events.length > 0 ? (
-        <div>
-          {events
-            .sort((a, b) => {
-              // Ensure the date is treated as a string, and then compare using new Date()
-              return new Date(a.date as string).getTime() - new Date(b.date as string).getTime();
-            })
-            .map((event) => (
-              <a key={event.id} href={event.link} target="_blank" rel="noopener noreferrer">
-                <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
-                  <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
-                    
-                    {/* Logo Section */}
-                    <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
-                      <img
-                        src={
-                          event.bedrift.toLowerCase() === "teknologiporten"
-                            ? `${supabaseStorageUrl}/events_jobads/teknologiporten.png`
-                            : `${supabase.storage.from("bilder").getPublicUrl(`events_jobads/${event.imageURL}`).data.publicUrl}`
-                        }
-                        alt={event.bedrift}
-                        className="w-full h-full object-contain rounded-xl"
-                        onError={(e) => (e.currentTarget.src = "/images/placeholder.png")} // Fallback if image not found
-                      /> 
-                    </div>
+                            {/* Event Info Section */}
+                            <div className="flex-1 text-center justify-center md:text-left px-6">
+                              <h2 className="text-lg sm:text-xl font-semibold">
+                                {currentEvent.title}
+                              </h2>
+                              <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-4 text-sm text-gray-600 mt-2">
+                                <div className="flex items-center justify-center sm:justify-start">
+                                  <CalendarMonthIcon className="mr-1" />
+                                  {formatDate(currentEvent.date)}
+                                </div>
+                                <div className="flex items-center justify-center sm:justify-start">
+                                  <AccessTimeIcon className="mr-1" />
+                                  {formatTime(currentEvent.time)}
+                                </div>
+                                <div className="flex items-center justify-center sm:justify-start">
+                                  <PlaceIcon className="mr-1" />
+                                  {currentEvent.location}
+                                </div>
+                                <div className="flex items-center justify-center sm:justify-start">
+                                  <RestaurantMenuIcon className="mr-1" />
+                                  {currentEvent.restaurant}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </a>
+                      </div>
+                    );
+                  })()}
 
-                    {/* Event Info Section */}
-                    <div className="flex-1 text-center justify-center md:text-left px-6">
-                      <h2 className="text-lg sm:text-xl font-semibold">{event.title}</h2>
-                    </div>
-
-                    {/* Event Details */}
-                    <div className="flex-1 text-center md:text-left flex-col md:items-start text-sm text-black font-serif md:mt-0">
-                      <p className="flex items-center space-x-4 py-1">
-                        <PlaceIcon fontSize="inherit" />
-                        <span>{event.location}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <RestaurantMenuIcon fontSize="inherit" />
-                        <span>{event.restaurant}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <CalendarMonthIcon fontSize="inherit" />
-                        <span>{formatDate(event.date)}</span>
-                      </p>
-                      <p className="flex items-center space-x-4 py-1">
-                        <AccessTimeIcon fontSize="inherit" />
-                        <span>{formatTime(event.time)}</span>
-                      </p>
-                    </div>
+                  {/* Swipe indicator */}
+                  <div className="flex justify-center mt-4 space-x-2">
+                    {events.map((_, index) => (
+                      <div
+                        key={index}
+                        className={`w-2 h-2 rounded-full ${
+                          index === currentEventIndex
+                            ? 'bg-white'
+                            : 'bg-gray-300'
+                        }`}
+                      />
+                    ))}
                   </div>
+                  {/* Swipe hint */}
+                  <p className="text-center text-white text-sm mt-2">
+                    Swipe for å se flere arrangementer ({currentEventIndex + 1}/
+                    {events.length})
+                  </p>
                 </div>
-              </a>
-            ))}
-        </div>
-      ) : (
-        <p className="text-center text-white">Ingen arrangementer funnet.</p>
-      )}
+              </Swipeable>
+            </div>
+
+            {/* Desktop: All events list */}
+            <div className="hidden lg:block">
+              {events
+                .sort((a, b) => {
+                  // Ensure the date is treated as a string, and then compare using new Date()
+                  return (
+                    new Date(a.date as string).getTime() -
+                    new Date(b.date as string).getTime()
+                  );
+                })
+                .map(event => (
+                  <div className="w-full sm:max-w-2xl mx-auto bg-white py-4 rounded-lg shadow-lg transition-all duration-300 hover:scale-102 hover:shadow-md text-black mb-4">
+                    <a
+                      key={event.id}
+                      href={event.link}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <div className="flex flex-col sm:flex-row items-center text-center sm:text-left px-6">
+                        {/* Logo Section */}
+                        <div className="ml-4 w-20 h-20 sm:w-24 sm:h-24 rounded-lg flex items-center justify-center flex-shrink-0">
+                          <LazyImage
+                            src={
+                              event.bedrift.toLowerCase() === 'teknologiporten'
+                                ? getOptimizedImageUrl(
+                                    'teknologiporten.png',
+                                    'events_jobads'
+                                  )
+                                : getOptimizedImageUrl(
+                                    event.imageURL,
+                                    'events_jobads'
+                                  )
+                            }
+                            alt={event.bedrift}
+                            className="w-full h-full object-contain rounded-xl"
+                            onError={e => {
+                              const fileName =
+                                event.bedrift.toLowerCase() ===
+                                'teknologiporten'
+                                  ? 'teknologiporten.png'
+                                  : event.imageURL;
+                              handleImageError(e, fileName, 'events_jobads');
+                            }}
+                          />
+                        </div>
+
+                        {/* Event Info Section */}
+                        <div className="flex-1 text-center justify-center md:text-left px-6">
+                          <h2 className="text-lg sm:text-xl font-semibold">
+                            {event.title}
+                          </h2>
+                        </div>
+
+                        {/* Event Details */}
+                        <div className="flex-1 text-center md:text-left flex-col md:items-start text-sm text-black font-serif md:mt-0">
+                          <p className="flex items-center space-x-4 py-1">
+                            <PlaceIcon fontSize="inherit" />
+                            <span>{event.location}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <RestaurantMenuIcon fontSize="inherit" />
+                            <span>{event.restaurant}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <CalendarMonthIcon fontSize="inherit" />
+                            <span>{formatDate(event.date)}</span>
+                          </p>
+                          <p className="flex items-center space-x-4 py-1">
+                            <AccessTimeIcon fontSize="inherit" />
+                            <span>{formatTime(event.time)}</span>
+                          </p>
+                        </div>
+                      </div>
+                    </a>
+                  </div>
+                ))}
+            </div>
+          </div>
+        ) : (
+          <p className="text-center text-white">
+            Ingen arrangementer ute for øyeblikket.
+          </p>
+        )}
+      </PullToRefresh>
     </div>
   );
 }

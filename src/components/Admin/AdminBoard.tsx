@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { supabase } from "../../supabaseClient";
+import { useEffect, useState } from 'react';
+import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 
 type StyretMember = {
   id: number;
@@ -14,13 +15,14 @@ export default function AdminBoard() {
   const [loading, setLoading] = useState(true);
   const [editRow, setEditRow] = useState<number | null>(null);
   const [editedMember, setEditedMember] = useState<StyretMember | null>(null);
+  const { showToast } = useToast();
 
   // Fetch members from Supabase
   useEffect(() => {
     const fetchMembers = async () => {
-      const { data, error } = await supabase.from("styret").select("*");
+      const { data, error } = await supabase.from('styret').select('*');
       if (error) {
-        console.error("Error fetching board members:", error);
+        console.error('Error fetching board members:', error);
       } else {
         setMembers(data);
       }
@@ -37,7 +39,10 @@ export default function AdminBoard() {
   };
 
   // Handle Input Change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>, field: keyof StyretMember) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    field: keyof StyretMember
+  ) => {
     if (editedMember) {
       setEditedMember({ ...editedMember, [field]: e.target.value });
     }
@@ -47,13 +52,18 @@ export default function AdminBoard() {
   const handleSave = async () => {
     if (!editedMember) return;
 
-    const { error } = await supabase.from("styret").update(editedMember).eq("id", editedMember.id);
+    const { error } = await supabase
+      .from('styret')
+      .update(editedMember)
+      .eq('id', editedMember.id);
 
     if (error) {
-      console.error("Error updating member:", error);
-      alert("Could not update the board member. Try again.");
+      console.error('Error updating member:', error);
+      showToast('Could not update the board member. Try again.', 'error');
     } else {
-      setMembers(members.map((m) => (m.id === editedMember.id ? editedMember : m)));
+      setMembers(
+        members.map(m => (m.id === editedMember.id ? editedMember : m))
+      );
       setEditRow(null);
       setEditedMember(null);
     }
@@ -70,47 +80,57 @@ export default function AdminBoard() {
           <table className="w-full border-collapse border border-gray-300 text-xs sm:text-xs">
             <thead>
               <tr className="bg-white">
-                <th className="border border-gray-300 p-1 sm:p-2 text-left">Stilling</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-left">Navn</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-left">Tlf</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-left">E-post</th>
-                <th className="border border-gray-300 p-1 sm:p-2 text-left">Handling</th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-left">
+                  Stilling
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-left">
+                  Navn
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-left">
+                  Tlf
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-left">
+                  E-post
+                </th>
+                <th className="border border-gray-300 p-1 sm:p-2 text-left">
+                  Handling
+                </th>
               </tr>
             </thead>
             <tbody>
-              {members.map((member) => (
+              {members.map(member => (
                 <tr key={member.id} className="hover:bg-gray-100">
                   {editRow === member.id ? (
                     <>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedMember?.stilling || ""}
-                          onChange={(e) => handleChange(e, "stilling")}
+                          value={editedMember?.stilling || ''}
+                          onChange={e => handleChange(e, 'stilling')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedMember?.name || ""}
-                          onChange={(e) => handleChange(e, "name")}
+                          value={editedMember?.name || ''}
+                          onChange={e => handleChange(e, 'name')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="text"
-                          value={editedMember?.telefon || ""}
-                          onChange={(e) => handleChange(e, "telefon")}
+                          value={editedMember?.telefon || ''}
+                          onChange={e => handleChange(e, 'telefon')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
                       <td className="border border-gray-300 p-1">
                         <input
                           type="email"
-                          value={editedMember?.mail || ""}
-                          onChange={(e) => handleChange(e, "mail")}
+                          value={editedMember?.mail || ''}
+                          onChange={e => handleChange(e, 'mail')}
                           className="w-full border p-1 rounded text-xs"
                         />
                       </td>
@@ -131,10 +151,18 @@ export default function AdminBoard() {
                     </>
                   ) : (
                     <>
-                      <td className="border border-gray-300 p-1">{member.stilling}</td>
-                      <td className="border border-gray-300 p-1">{member.name}</td>
-                      <td className="border border-gray-300 p-1">{member.telefon}</td>
-                      <td className="border border-gray-300 p-1 truncate">{member.mail}</td>
+                      <td className="border border-gray-300 p-1">
+                        {member.stilling}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {member.name}
+                      </td>
+                      <td className="border border-gray-300 p-1">
+                        {member.telefon}
+                      </td>
+                      <td className="border border-gray-300 p-1 truncate">
+                        {member.mail}
+                      </td>
                       <td className="border border-gray-300 p-1">
                         <button
                           onClick={() => handleEdit(member)}

@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
-import { supabase } from "../../supabaseClient";
+import { useState, useEffect } from 'react';
+import { supabase } from '../../supabaseClient';
+import { useToast } from '../Tools/ToastProvider';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type News = {
@@ -11,18 +12,19 @@ type News = {
 
 export default function AddNews() {
   const [news, setNews] = useState<News[]>([]);
-  const [newTitle, setNewTitle] = useState("");
-  const [newDescription, setNewDescription] = useState("");
-  const [newLink, setNewLink] = useState("");
+  const [newTitle, setNewTitle] = useState('');
+  const [newDescription, setNewDescription] = useState('');
+  const [newLink, setNewLink] = useState('');
   const [loading, setLoading] = useState(true);
+  const { showToast } = useToast();
 
   // Fetch news on mount
   useEffect(() => {
     const fetchNews = async () => {
-      const { data, error } = await supabase.from("news").select("*");
+      const { data, error } = await supabase.from('news').select('*');
 
       if (error) {
-        console.error("Error fetching news:", error);
+        console.error('Error fetching news:', error);
       } else {
         setNews(data);
       }
@@ -34,34 +36,42 @@ export default function AddNews() {
 
   // Add a new news item
   const addNewsItem = async () => {
+    // Validering av påkrevde felt
+    if (!newTitle || !newDescription) {
+      showToast('Husk å fylle inn tittel og beskrivelse!', 'error');
+      return;
+    }
 
     const { data, error } = await supabase
-      .from("news")
+      .from('news')
       .insert([{ title: newTitle, description: newDescription, link: newLink }])
-      .select("*");
+      .select('*');
 
     if (error) {
-      console.error("Error adding news:", error);
-      alert("Kunne ikke legge til nyhet.");
+      console.error('Error adding news:', error);
+      showToast(
+        'Kunne ikke legge til nyhet. Sjekk at alle felt er riktig utfylt og prøv igjen.',
+        'error'
+      );
     } else {
-      alert("Nyhet lagt til!");
+      showToast('Nyhet lagt til!', 'success');
       setNews([...news, ...data]); // Update the local state
-      setNewTitle("");
-      setNewDescription("");
-      setNewLink("");
+      setNewTitle('');
+      setNewDescription('');
+      setNewLink('');
     }
   };
 
   // Delete a news item
   const deleteNewsItem = async (id: number) => {
-    const { error } = await supabase.from("news").delete().eq("id", id);
+    const { error } = await supabase.from('news').delete().eq('id', id);
 
     if (error) {
-      console.error("Error deleting news:", error);
-      alert("Kunne ikke slette nyhet.");
+      console.error('Error deleting news:', error);
+      showToast('Kunne ikke slette nyhet.', 'error');
     } else {
-      setNews(news.filter((item) => item.id !== id)); // Remove from local state
-      alert("Nyhet slettet.");
+      setNews(news.filter(item => item.id !== id)); // Remove from local state
+      showToast('Nyhet slettet.', 'success');
     }
   };
 
@@ -75,20 +85,20 @@ export default function AddNews() {
           type="text"
           placeholder="Tittel"
           value={newTitle}
-          onChange={(e) => setNewTitle(e.target.value)}
+          onChange={e => setNewTitle(e.target.value)}
           className="w-full p-2 border rounded mb-2"
         />
         <textarea
           placeholder="Beskrivelse"
           value={newDescription}
-          onChange={(e) => setNewDescription(e.target.value)}
+          onChange={e => setNewDescription(e.target.value)}
           className="w-full p-2 border rounded mb-2"
         />
         <input
           type="text"
           placeholder="Lenke til artikkel"
           value={newLink}
-          onChange={(e) => setNewLink(e.target.value)}
+          onChange={e => setNewLink(e.target.value)}
           className="w-full p-2 border rounded mb-2"
         />
         <button
@@ -106,8 +116,11 @@ export default function AddNews() {
         <p className="text-gray-500">Ingen nyheter ute for øyeblikket.</p>
       ) : (
         <ul className="space-y-1 bg-yellow-100">
-          {news.map((item) => (
-            <li key={item.id} className="p-4 rounded-lg shadow-md flex justify-between items-center">
+          {news.map(item => (
+            <li
+              key={item.id}
+              className="p-4 rounded-lg shadow-md flex justify-between items-center"
+            >
               <div>
                 <p className="font-bold">{item.title}</p>
               </div>
@@ -115,7 +128,7 @@ export default function AddNews() {
                 onClick={() => deleteNewsItem(item.id)}
                 className="text-red-600 hover:text-red-800 text-lg"
               >
-                <DeleteForeverIcon/>
+                <DeleteForeverIcon />
               </button>
             </li>
           ))}

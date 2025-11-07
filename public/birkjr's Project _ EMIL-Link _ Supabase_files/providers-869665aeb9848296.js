@@ -1,1 +1,244 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},t=(new e.Error).stack;t&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[t]="71699201-22b6-42ba-bbe9-f8c4f85b9553",e._sentryDebugIdIdentifier="sentry-dbid-71699201-22b6-42ba-bbe9-f8c4f85b9553")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[6902],{53494:function(e,t,s){(window.__NEXT_P=window.__NEXT_P||[]).push(["/project/[ref]/auth/providers",function(){return s(5632)}])},7539:function(e,t,s){"use strict";s.d(t,{Z:function(){return b}});var n=s(97458),r=s(12436),a=s(32691),i=s(99163),o=s(67628),c=s(72909),u=s(58326),l=s(83145),d=s.n(l),m=s(10947),h=s(90839),f=s(74334),p=s(37756);let x=e=>[{title:"Manage",items:[{name:"Users",key:"users",url:"/project/".concat(e,"/auth/users"),items:[]}]},{title:"Configuration",items:[{name:"Policies",key:"policies",url:"/project/".concat(e,"/auth/policies"),items:[]},...p.Qy?[{name:"Providers",key:"providers",url:"/project/".concat(e,"/auth/providers"),items:[]},{name:"Rate Limits",key:"rate-limits",url:"/project/".concat(e,"/auth/rate-limits"),items:[]},{name:"Email Templates",key:"templates",url:"/project/".concat(e,"/auth/templates"),items:[]},{name:"URL Configuration",key:"url-configuration",url:"/project/".concat(e,"/auth/url-configuration"),items:[]},{name:"Hooks",key:"hooks",url:"/project/".concat(e,"/auth/hooks"),items:[],label:"BETA"}]:[]]}],y=()=>{let{ref:e="default"}=(0,r.UO)(),t=(0,i.ar)();(0,c.kM)({projectRef:e});let s=(0,a.useRouter)().pathname.split("/")[4];return(0,n.jsxs)(n.Fragment,{children:[(0,n.jsx)(o.Q,{page:s,menu:x(e),"data-sentry-element":"ProductMenu","data-sentry-source-file":"AuthLayout.tsx"}),t&&(0,n.jsx)("div",{className:"px-3",children:(0,n.jsxs)(m.bZ,{children:[(0,n.jsx)(m.Cd,{className:"text-sm",children:"Column Privileges has been shifted"}),(0,n.jsxs)(m.X,{className:"text-xs",children:[(0,n.jsx)("p",{className:"mb-2",children:"It can now be found in the menu under the database section."}),(0,n.jsx)(h.z,{asChild:!0,type:"default",size:"tiny",children:(0,n.jsx)(d(),{href:"/project/".concat(e,"/database/column-privileges"),children:"Head over to Database"})})]})]})})]})};var b=(0,u.Q)(e=>{let{title:t,children:s}=e;return(0,n.jsx)(f.Z,{title:t||"Authentication",product:"Authentication",productMenu:(0,n.jsx)(y,{}),isBlocking:!1,"data-sentry-element":"ProjectLayout","data-sentry-component":"AuthLayout","data-sentry-source-file":"AuthLayout.tsx",children:s})})},99026:function(e,t,s){"use strict";s.d(t,{l:function(){return a}});var n=s(97458),r=s(65092);function a(e){return(0,n.jsxs)("div",{className:(0,r.cn)("mx-auto max-w-full xl:max-w-4xl px-4 md:px-5 pt-12 pb-20",e.className),"data-sentry-component":"FormsContainer","data-sentry-source-file":"FormsContainer.tsx",children:[e.header&&(0,n.jsx)("h1",{className:"text-foreground mb-8 text-3xl",children:e.header}),(0,n.jsx)("div",{className:"space-y-12 md:space-y-20",children:e.children})]})}},5632:function(e,t,s){"use strict";s.r(t);var n=s(97458),r=s(198),a=s(52682),i=s(7539),o=s(99026),c=s(61767),u=s(90817);let l=()=>{let e=(0,u.Xo)(r.KA.READ,"custom_config_gotrue");return(0,u.N4)()&&!e?(0,n.jsx)(c.Z,{isFullPage:!0,resourceText:"access your project's auth provider settings"}):(0,n.jsx)(o.l,{className:"w-full",children:(0,n.jsx)(a.dU,{})})};l.getLayout=e=>(0,n.jsx)(i.Z,{children:e}),t.default=l}},function(e){e.O(0,[6665,7623,588,783,1018,1706,1864,8703,2397,3954,9621,9911,659,7612,4637,9344,7726,6739,3302,3898,8985,5518,793,3594,3861,6120,7094,4334,9086,9874,9774,2888,179],function(){return e(e.s=53494)}),_N_E=e.O()}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      t = new e.Error().stack;
+    t &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[t] = '71699201-22b6-42ba-bbe9-f8c4f85b9553'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-71699201-22b6-42ba-bbe9-f8c4f85b9553'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [6902],
+    {
+      53494: function (e, t, s) {
+        (window.__NEXT_P = window.__NEXT_P || []).push([
+          '/project/[ref]/auth/providers',
+          function () {
+            return s(5632);
+          },
+        ]);
+      },
+      7539: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          Z: function () {
+            return b;
+          },
+        });
+        var n = s(97458),
+          r = s(12436),
+          a = s(32691),
+          i = s(99163),
+          o = s(67628),
+          c = s(72909),
+          u = s(58326),
+          l = s(83145),
+          d = s.n(l),
+          m = s(10947),
+          h = s(90839),
+          f = s(74334),
+          p = s(37756);
+        let x = e => [
+            {
+              title: 'Manage',
+              items: [
+                {
+                  name: 'Users',
+                  key: 'users',
+                  url: '/project/'.concat(e, '/auth/users'),
+                  items: [],
+                },
+              ],
+            },
+            {
+              title: 'Configuration',
+              items: [
+                {
+                  name: 'Policies',
+                  key: 'policies',
+                  url: '/project/'.concat(e, '/auth/policies'),
+                  items: [],
+                },
+                ...(p.Qy
+                  ? [
+                      {
+                        name: 'Providers',
+                        key: 'providers',
+                        url: '/project/'.concat(e, '/auth/providers'),
+                        items: [],
+                      },
+                      {
+                        name: 'Rate Limits',
+                        key: 'rate-limits',
+                        url: '/project/'.concat(e, '/auth/rate-limits'),
+                        items: [],
+                      },
+                      {
+                        name: 'Email Templates',
+                        key: 'templates',
+                        url: '/project/'.concat(e, '/auth/templates'),
+                        items: [],
+                      },
+                      {
+                        name: 'URL Configuration',
+                        key: 'url-configuration',
+                        url: '/project/'.concat(e, '/auth/url-configuration'),
+                        items: [],
+                      },
+                      {
+                        name: 'Hooks',
+                        key: 'hooks',
+                        url: '/project/'.concat(e, '/auth/hooks'),
+                        items: [],
+                        label: 'BETA',
+                      },
+                    ]
+                  : []),
+              ],
+            },
+          ],
+          y = () => {
+            let { ref: e = 'default' } = (0, r.UO)(),
+              t = (0, i.ar)();
+            (0, c.kM)({ projectRef: e });
+            let s = (0, a.useRouter)().pathname.split('/')[4];
+            return (0, n.jsxs)(n.Fragment, {
+              children: [
+                (0, n.jsx)(o.Q, {
+                  page: s,
+                  menu: x(e),
+                  'data-sentry-element': 'ProductMenu',
+                  'data-sentry-source-file': 'AuthLayout.tsx',
+                }),
+                t &&
+                  (0, n.jsx)('div', {
+                    className: 'px-3',
+                    children: (0, n.jsxs)(m.bZ, {
+                      children: [
+                        (0, n.jsx)(m.Cd, {
+                          className: 'text-sm',
+                          children: 'Column Privileges has been shifted',
+                        }),
+                        (0, n.jsxs)(m.X, {
+                          className: 'text-xs',
+                          children: [
+                            (0, n.jsx)('p', {
+                              className: 'mb-2',
+                              children:
+                                'It can now be found in the menu under the database section.',
+                            }),
+                            (0, n.jsx)(h.z, {
+                              asChild: !0,
+                              type: 'default',
+                              size: 'tiny',
+                              children: (0, n.jsx)(d(), {
+                                href: '/project/'.concat(
+                                  e,
+                                  '/database/column-privileges'
+                                ),
+                                children: 'Head over to Database',
+                              }),
+                            }),
+                          ],
+                        }),
+                      ],
+                    }),
+                  }),
+              ],
+            });
+          };
+        var b = (0, u.Q)(e => {
+          let { title: t, children: s } = e;
+          return (0, n.jsx)(f.Z, {
+            title: t || 'Authentication',
+            product: 'Authentication',
+            productMenu: (0, n.jsx)(y, {}),
+            isBlocking: !1,
+            'data-sentry-element': 'ProjectLayout',
+            'data-sentry-component': 'AuthLayout',
+            'data-sentry-source-file': 'AuthLayout.tsx',
+            children: s,
+          });
+        });
+      },
+      99026: function (e, t, s) {
+        'use strict';
+        s.d(t, {
+          l: function () {
+            return a;
+          },
+        });
+        var n = s(97458),
+          r = s(65092);
+        function a(e) {
+          return (0, n.jsxs)('div', {
+            className: (0, r.cn)(
+              'mx-auto max-w-full xl:max-w-4xl px-4 md:px-5 pt-12 pb-20',
+              e.className
+            ),
+            'data-sentry-component': 'FormsContainer',
+            'data-sentry-source-file': 'FormsContainer.tsx',
+            children: [
+              e.header &&
+                (0, n.jsx)('h1', {
+                  className: 'text-foreground mb-8 text-3xl',
+                  children: e.header,
+                }),
+              (0, n.jsx)('div', {
+                className: 'space-y-12 md:space-y-20',
+                children: e.children,
+              }),
+            ],
+          });
+        }
+      },
+      5632: function (e, t, s) {
+        'use strict';
+        s.r(t);
+        var n = s(97458),
+          r = s(198),
+          a = s(52682),
+          i = s(7539),
+          o = s(99026),
+          c = s(61767),
+          u = s(90817);
+        let l = () => {
+          let e = (0, u.Xo)(r.KA.READ, 'custom_config_gotrue');
+          return (0, u.N4)() && !e
+            ? (0, n.jsx)(c.Z, {
+                isFullPage: !0,
+                resourceText: "access your project's auth provider settings",
+              })
+            : (0, n.jsx)(o.l, {
+                className: 'w-full',
+                children: (0, n.jsx)(a.dU, {}),
+              });
+        };
+        ((l.getLayout = e => (0, n.jsx)(i.Z, { children: e })),
+          (t.default = l));
+      },
+    },
+    function (e) {
+      (e.O(
+        0,
+        [
+          6665, 7623, 588, 783, 1018, 1706, 1864, 8703, 2397, 3954, 9621, 9911,
+          659, 7612, 4637, 9344, 7726, 6739, 3302, 3898, 8985, 5518, 793, 3594,
+          3861, 6120, 7094, 4334, 9086, 9874, 9774, 2888, 179,
+        ],
+        function () {
+          return e((e.s = 53494));
+        }
+      ),
+        (_N_E = e.O()));
+    },
+  ]));

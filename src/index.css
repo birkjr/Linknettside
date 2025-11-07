@@ -1,5 +1,19 @@
 @import 'tailwindcss';
 
+/* Dark mode support */
+:root {
+  --bg-primary: #eeebe8;
+  --bg-secondary: #ffffff;
+  --text-primary: #000000;
+  --text-secondary: #4b5563;
+}
+
+.dark {
+  --bg-primary: #1a1a1a;
+  --bg-secondary: #2d2d2d;
+  --text-primary: #ffffff;
+  --text-secondary: #9ca3af;
+}
 
 #root {
   height: 100vh;
@@ -7,11 +21,42 @@
 }
 
 html {
-  background-color: #EEEBE8;
+  background-color: var(--bg-primary);
+  transition: background-color 0.3s ease;
 }
 
-html, body {
+html.dark {
+  background-color: var(--bg-primary);
+}
+
+html,
+body {
   overflow-x: hidden;
   width: 100%;
 }
 
+/* Fix mobile scroll issues */
+html {
+  height: 100%;
+  -webkit-overflow-scrolling: touch;
+}
+
+body {
+  height: 100%;
+  position: relative;
+}
+
+/* Prevent footer from sticking on mobile */
+@media (max-width: 768px) {
+  html,
+  body {
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Ensure proper scrolling on mobile */
+  #root {
+    min-height: 100vh;
+    position: relative;
+  }
+}

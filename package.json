@@ -3,11 +3,33 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
+  "packageManager": "pnpm@9.0.0",
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "pnpm:dev": "pnpm dev",
+    "pnpm:build": "pnpm build",
+    "pnpm:install": "pnpm install",
+    "pnpm:lint": "pnpm lint",
+    "pnpm:preview": "pnpm preview",
+    "migrate:images": "node migrate-images.js",
+    "update:image-paths": "node update-image-paths.js",
+    "check:images": "node check-actual-images.js",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "lint:fix": "eslint . --fix",
+    "format:staged": "prettier --write --list-different",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.{ts,tsx,js,jsx}": [
+      "eslint --fix"
+    ],
+    "*.{ts,tsx,js,jsx,css,md,json}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
@@ -16,9 +38,9 @@
     "@mui/material": "^6.4.2",
     "@supabase/supabase-js": "^2.48.1",
     "@tailwindcss/vite": "^4.0.1",
+    "@vercel/speed-insights": "^1.2.0",
     "dotenv": "^16.5.0",
     "emailjs-com": "^3.2.0",
-    "next": "^15.1.6",
     "nodemailer": "^6.10.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
@@ -34,10 +56,15 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "husky": "^9",
+    "lint-staged": "^15",
     "postcss": "^8.5.1",
+    "prettier": "^3.6.2",
+    "sharp": "^0.34.4",
     "tailwindcss": "^4.0.3",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
-    "vite": "^6.0.5"
+    "vite": "^6.0.5",
+    "vite-imagetools": "^8.0.0"
   }
 }

@@ -1,1 +1,398 @@
-!function(){try{var e="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:{},s=(new e.Error).stack;s&&(e._sentryDebugIds=e._sentryDebugIds||{},e._sentryDebugIds[s]="9d087d98-0990-4789-a1f2-a51e41d411b9",e._sentryDebugIdIdentifier="sentry-dbid-9d087d98-0990-4789-a1f2-a51e41d411b9")}catch(e){}}(),(self.webpackChunk_N_E=self.webpackChunk_N_E||[]).push([[1252],{9752:function(e,s,t){(window.__NEXT_P=window.__NEXT_P||[]).push(["/project/[ref]/database/backups/scheduled",function(){return t(52482)}])},28084:function(e,s,t){"use strict";var a=t(97458),r=t(88971),n=t(21786),i=t(83145),l=t.n(i);t(52983);var c=t(73565),d=t(47735);s.Z=function(e){var s;let{active:t}=e,i=(0,n.P)("clonetonewproject"),{ref:o,cloud_provider:u}=(null===(s=(0,r.d2)())||void 0===s?void 0:s.project)||{},f=[{enabled:!0,id:"scheduled",label:"Scheduled backups",href:"/project/".concat(o,"/database/backups/scheduled")},{enabled:!0,id:"pitr",label:"Point in time",href:"/project/".concat(o,"/database/backups/pitr")},{enabled:i&&"FLY"!==u,id:"rtnp",label:(0,a.jsxs)("div",{className:"flex items-center gap-1",children:["Restore to new project"," ",(0,a.jsx)(c.C,{size:"small",className:"!text-[10px] px-1.5 py-0",children:"New"})]}),href:"/project/".concat(o,"/database/backups/restore-to-new-project")}];return(0,a.jsx)(d.M,{className:"overflow-hidden overflow-x-auto","data-sentry-element":"NavMenu","data-sentry-component":"DatabaseBackupsNav","data-sentry-source-file":"DatabaseBackupsNav.tsx",children:f.map(e=>e.enabled&&(0,a.jsx)(d._,{active:e.id===t,children:(0,a.jsx)(l(),{href:e.href,children:e.label})},e.id))})}},24083:function(e,s,t){"use strict";t.d(s,{p:function(){return i}});var a=t(97458),r=t(65092),n=t(67096);let i=e=>{let{title:s,description:t,docsUrl:i,actions:l,className:c}=e;return(0,a.jsxs)("div",{className:(0,r.cn)("w-full mb-6 flex flex-col sm:flex-row md:items-center justify-between gap-4 ".concat(c)),"data-sentry-component":"FormHeader","data-sentry-source-file":"FormHeader.tsx",children:[(0,a.jsxs)("div",{className:"space-y-1",children:[(0,a.jsx)("h3",{className:"text-foreground text-xl prose",children:s}),t&&(0,a.jsx)("div",{className:"prose text-sm max-w-full",children:t})]}),(0,a.jsxs)("div",{className:"flex flex-col sm:flex-row md:items-center gap-x-2",children:[void 0!==i&&(0,a.jsx)(n.G,{href:i}),l]})]})}},61767:function(e,s,t){"use strict";var a=t(97458),r=t(44735);s.Z=e=>{let{resourceText:s,isFullPage:t=!1}=e,n=()=>(0,a.jsx)("div",{className:"block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200","data-sentry-component":"NoPermissionMessage","data-sentry-source-file":"NoPermission.tsx",children:(0,a.jsxs)("div",{className:"flex space-x-3",children:[(0,a.jsx)("div",{className:"mt-1",children:(0,a.jsx)(r.Z,{size:20,"data-sentry-element":"AlertCircle","data-sentry-source-file":"NoPermission.tsx"})}),(0,a.jsx)("div",{className:"flex w-full items-center justify-between",children:(0,a.jsxs)("div",{className:"space-y-1",children:[(0,a.jsxs)("p",{className:"text-sm",children:["You need additional permissions to ",s]}),(0,a.jsx)("div",{children:(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"Contact your organization owner or administrator for assistance."})})]})})]})});return t?(0,a.jsx)("div",{className:"flex h-full items-center justify-center",children:(0,a.jsx)("div",{className:"w-[550px]",children:(0,a.jsx)(n,{})})}):(0,a.jsx)(n,{})}},52482:function(e,s,t){"use strict";t.r(s);var a=t(97458),r=t(198),n=t(90953),i=t(12436),l=t(44146),c=t(28084),d=t(32500),o=t(78066),u=t(5529),f=t(67096),x=t(24083),p=t(13064),m=t(61767),b=t(63621),h=t(31279),j=t(90817),v=t(62432),y=t(33526);let N=()=>{let{ref:e}=(0,i.UO)(),{data:s,error:t,isLoading:d,isError:N,isSuccess:g}=(0,h.T)({projectRef:e}),w=(0,v.Qv)(),k=null==s?void 0:s.pitr_enabled,_=(0,j.N4)(),D=(0,j.Xo)(r.KA.READ,"back_ups");return(0,a.jsx)(o._S,{"data-sentry-element":"ScaffoldContainer","data-sentry-component":"DatabaseScheduledBackups","data-sentry-source-file":"scheduled.tsx",children:(0,a.jsx)(o.jX,{"data-sentry-element":"ScaffoldSection","data-sentry-source-file":"scheduled.tsx",children:(0,a.jsx)("div",{className:"col-span-12",children:(0,a.jsxs)("div",{className:"space-y-6",children:[(0,a.jsx)(x.p,{className:"!mb-0",title:"Database Backups","data-sentry-element":"FormHeader","data-sentry-source-file":"scheduled.tsx"}),(0,a.jsx)(c.Z,{active:"scheduled","data-sentry-element":"DatabaseBackupsNav","data-sentry-source-file":"scheduled.tsx"}),w?(0,a.jsx)(y.J,{type:"default",title:"Database backups are not available for OrioleDB",description:"OrioleDB is currently in public alpha and projects created are strictly ephemeral with no database backups",children:(0,a.jsx)(f.G,{abbrev:!1,className:"mt-2",href:"https://supabase.com/docs"})}):(0,a.jsxs)("div",{className:"flex flex-col gap-y-4",children:[d&&(0,a.jsx)(b.A,{}),N&&(0,a.jsx)(u.Z,{error:t,subject:"Failed to retrieve scheduled backups"}),g&&(0,a.jsxs)(a.Fragment,{children:[!k&&(0,a.jsx)("p",{className:"text-sm text-foreground-light",children:"Projects are backed up daily around midnight of your project's region and can be restored at any time."}),k&&(0,a.jsx)(p.Z,{hideCollapse:!0,defaultVisibility:!0,icon:(0,a.jsx)(n.Z,{strokeWidth:2}),title:"Point-In-Time-Recovery (PITR) enabled",description:(0,a.jsxs)("div",{children:["Your project uses PITR and full daily backups are no longer taken. They're not needed, as PITR supports a superset of functionality, in terms of the granular recovery that can be performed."," ",(0,a.jsx)("a",{className:"text-brand transition-colors hover:text-brand-600",href:"https://supabase.com/docs/guides/platform/backups",children:"Learn more"})]})}),_&&!D?(0,a.jsx)(m.Z,{resourceText:"view scheduled backups"}):(0,a.jsx)(l.M4,{})]})]})]})})})})};N.getLayout=e=>(0,a.jsx)(d.Z,{title:"Database",children:e}),s.default=N},47735:function(e,s,t){"use strict";t.d(s,{M:function(){return i},_:function(){return l}});var a=t(97458),r=t(52983),n=t(65092);let i=(0,r.forwardRef)((e,s)=>(0,a.jsx)("nav",{ref:s,dir:"ltr",...e,className:(0,n.cn)("border-b",e.className),children:(0,a.jsx)("ul",{role:"menu",className:"flex gap-5",children:e.children})})),l=(0,r.forwardRef)((e,s)=>{let{children:t,className:r,active:i,...l}=e;return(0,a.jsx)("li",{ref:s,"aria-selected":i?"true":"false","data-state":i?"active":"inactive",className:(0,n.cn)("inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground text-foreground-lighter hover:text-foreground data-[state=active]:border-foreground border-b-2 border-transparent *:py-1.5",r),...l,children:t})})}},function(e){e.O(0,[6665,3659,7186,7623,588,783,1018,1706,1864,8703,2397,3954,9621,9911,659,7612,4637,9344,7726,6739,3302,3898,8985,717,5538,2478,8827,6492,793,3594,3861,6120,7094,4334,9903,1968,8028,2241,9774,2888,179],function(){return e(e.s=9752)}),_N_E=e.O()}]);
+(!(function () {
+  try {
+    var e =
+        'undefined' != typeof window
+          ? window
+          : 'undefined' != typeof global
+            ? global
+            : 'undefined' != typeof self
+              ? self
+              : {},
+      s = new e.Error().stack;
+    s &&
+      ((e._sentryDebugIds = e._sentryDebugIds || {}),
+      (e._sentryDebugIds[s] = '9d087d98-0990-4789-a1f2-a51e41d411b9'),
+      (e._sentryDebugIdIdentifier =
+        'sentry-dbid-9d087d98-0990-4789-a1f2-a51e41d411b9'));
+  } catch (e) {}
+})(),
+  (self.webpackChunk_N_E = self.webpackChunk_N_E || []).push([
+    [1252],
+    {
+      9752: function (e, s, t) {
+        (window.__NEXT_P = window.__NEXT_P || []).push([
+          '/project/[ref]/database/backups/scheduled',
+          function () {
+            return t(52482);
+          },
+        ]);
+      },
+      28084: function (e, s, t) {
+        'use strict';
+        var a = t(97458),
+          r = t(88971),
+          n = t(21786),
+          i = t(83145),
+          l = t.n(i);
+        t(52983);
+        var c = t(73565),
+          d = t(47735);
+        s.Z = function (e) {
+          var s;
+          let { active: t } = e,
+            i = (0, n.P)('clonetonewproject'),
+            { ref: o, cloud_provider: u } =
+              (null === (s = (0, r.d2)()) || void 0 === s
+                ? void 0
+                : s.project) || {},
+            f = [
+              {
+                enabled: !0,
+                id: 'scheduled',
+                label: 'Scheduled backups',
+                href: '/project/'.concat(o, '/database/backups/scheduled'),
+              },
+              {
+                enabled: !0,
+                id: 'pitr',
+                label: 'Point in time',
+                href: '/project/'.concat(o, '/database/backups/pitr'),
+              },
+              {
+                enabled: i && 'FLY' !== u,
+                id: 'rtnp',
+                label: (0, a.jsxs)('div', {
+                  className: 'flex items-center gap-1',
+                  children: [
+                    'Restore to new project',
+                    ' ',
+                    (0, a.jsx)(c.C, {
+                      size: 'small',
+                      className: '!text-[10px] px-1.5 py-0',
+                      children: 'New',
+                    }),
+                  ],
+                }),
+                href: '/project/'.concat(
+                  o,
+                  '/database/backups/restore-to-new-project'
+                ),
+              },
+            ];
+          return (0, a.jsx)(d.M, {
+            className: 'overflow-hidden overflow-x-auto',
+            'data-sentry-element': 'NavMenu',
+            'data-sentry-component': 'DatabaseBackupsNav',
+            'data-sentry-source-file': 'DatabaseBackupsNav.tsx',
+            children: f.map(
+              e =>
+                e.enabled &&
+                (0, a.jsx)(
+                  d._,
+                  {
+                    active: e.id === t,
+                    children: (0, a.jsx)(l(), {
+                      href: e.href,
+                      children: e.label,
+                    }),
+                  },
+                  e.id
+                )
+            ),
+          });
+        };
+      },
+      24083: function (e, s, t) {
+        'use strict';
+        t.d(s, {
+          p: function () {
+            return i;
+          },
+        });
+        var a = t(97458),
+          r = t(65092),
+          n = t(67096);
+        let i = e => {
+          let {
+            title: s,
+            description: t,
+            docsUrl: i,
+            actions: l,
+            className: c,
+          } = e;
+          return (0, a.jsxs)('div', {
+            className: (0, r.cn)(
+              'w-full mb-6 flex flex-col sm:flex-row md:items-center justify-between gap-4 '.concat(
+                c
+              )
+            ),
+            'data-sentry-component': 'FormHeader',
+            'data-sentry-source-file': 'FormHeader.tsx',
+            children: [
+              (0, a.jsxs)('div', {
+                className: 'space-y-1',
+                children: [
+                  (0, a.jsx)('h3', {
+                    className: 'text-foreground text-xl prose',
+                    children: s,
+                  }),
+                  t &&
+                    (0, a.jsx)('div', {
+                      className: 'prose text-sm max-w-full',
+                      children: t,
+                    }),
+                ],
+              }),
+              (0, a.jsxs)('div', {
+                className: 'flex flex-col sm:flex-row md:items-center gap-x-2',
+                children: [void 0 !== i && (0, a.jsx)(n.G, { href: i }), l],
+              }),
+            ],
+          });
+        };
+      },
+      61767: function (e, s, t) {
+        'use strict';
+        var a = t(97458),
+          r = t(44735);
+        s.Z = e => {
+          let { resourceText: s, isFullPage: t = !1 } = e,
+            n = () =>
+              (0, a.jsx)('div', {
+                className:
+                  'block w-full rounded border border-opacity-20 py-4 px-6 border-overlay bg-surface-200',
+                'data-sentry-component': 'NoPermissionMessage',
+                'data-sentry-source-file': 'NoPermission.tsx',
+                children: (0, a.jsxs)('div', {
+                  className: 'flex space-x-3',
+                  children: [
+                    (0, a.jsx)('div', {
+                      className: 'mt-1',
+                      children: (0, a.jsx)(r.Z, {
+                        size: 20,
+                        'data-sentry-element': 'AlertCircle',
+                        'data-sentry-source-file': 'NoPermission.tsx',
+                      }),
+                    }),
+                    (0, a.jsx)('div', {
+                      className: 'flex w-full items-center justify-between',
+                      children: (0, a.jsxs)('div', {
+                        className: 'space-y-1',
+                        children: [
+                          (0, a.jsxs)('p', {
+                            className: 'text-sm',
+                            children: [
+                              'You need additional permissions to ',
+                              s,
+                            ],
+                          }),
+                          (0, a.jsx)('div', {
+                            children: (0, a.jsx)('p', {
+                              className: 'text-sm text-foreground-light',
+                              children:
+                                'Contact your organization owner or administrator for assistance.',
+                            }),
+                          }),
+                        ],
+                      }),
+                    }),
+                  ],
+                }),
+              });
+          return t
+            ? (0, a.jsx)('div', {
+                className: 'flex h-full items-center justify-center',
+                children: (0, a.jsx)('div', {
+                  className: 'w-[550px]',
+                  children: (0, a.jsx)(n, {}),
+                }),
+              })
+            : (0, a.jsx)(n, {});
+        };
+      },
+      52482: function (e, s, t) {
+        'use strict';
+        t.r(s);
+        var a = t(97458),
+          r = t(198),
+          n = t(90953),
+          i = t(12436),
+          l = t(44146),
+          c = t(28084),
+          d = t(32500),
+          o = t(78066),
+          u = t(5529),
+          f = t(67096),
+          x = t(24083),
+          p = t(13064),
+          m = t(61767),
+          b = t(63621),
+          h = t(31279),
+          j = t(90817),
+          v = t(62432),
+          y = t(33526);
+        let N = () => {
+          let { ref: e } = (0, i.UO)(),
+            {
+              data: s,
+              error: t,
+              isLoading: d,
+              isError: N,
+              isSuccess: g,
+            } = (0, h.T)({ projectRef: e }),
+            w = (0, v.Qv)(),
+            k = null == s ? void 0 : s.pitr_enabled,
+            _ = (0, j.N4)(),
+            D = (0, j.Xo)(r.KA.READ, 'back_ups');
+          return (0, a.jsx)(o._S, {
+            'data-sentry-element': 'ScaffoldContainer',
+            'data-sentry-component': 'DatabaseScheduledBackups',
+            'data-sentry-source-file': 'scheduled.tsx',
+            children: (0, a.jsx)(o.jX, {
+              'data-sentry-element': 'ScaffoldSection',
+              'data-sentry-source-file': 'scheduled.tsx',
+              children: (0, a.jsx)('div', {
+                className: 'col-span-12',
+                children: (0, a.jsxs)('div', {
+                  className: 'space-y-6',
+                  children: [
+                    (0, a.jsx)(x.p, {
+                      className: '!mb-0',
+                      title: 'Database Backups',
+                      'data-sentry-element': 'FormHeader',
+                      'data-sentry-source-file': 'scheduled.tsx',
+                    }),
+                    (0, a.jsx)(c.Z, {
+                      active: 'scheduled',
+                      'data-sentry-element': 'DatabaseBackupsNav',
+                      'data-sentry-source-file': 'scheduled.tsx',
+                    }),
+                    w
+                      ? (0, a.jsx)(y.J, {
+                          type: 'default',
+                          title:
+                            'Database backups are not available for OrioleDB',
+                          description:
+                            'OrioleDB is currently in public alpha and projects created are strictly ephemeral with no database backups',
+                          children: (0, a.jsx)(f.G, {
+                            abbrev: !1,
+                            className: 'mt-2',
+                            href: 'https://supabase.com/docs',
+                          }),
+                        })
+                      : (0, a.jsxs)('div', {
+                          className: 'flex flex-col gap-y-4',
+                          children: [
+                            d && (0, a.jsx)(b.A, {}),
+                            N &&
+                              (0, a.jsx)(u.Z, {
+                                error: t,
+                                subject: 'Failed to retrieve scheduled backups',
+                              }),
+                            g &&
+                              (0, a.jsxs)(a.Fragment, {
+                                children: [
+                                  !k &&
+                                    (0, a.jsx)('p', {
+                                      className:
+                                        'text-sm text-foreground-light',
+                                      children:
+                                        "Projects are backed up daily around midnight of your project's region and can be restored at any time.",
+                                    }),
+                                  k &&
+                                    (0, a.jsx)(p.Z, {
+                                      hideCollapse: !0,
+                                      defaultVisibility: !0,
+                                      icon: (0, a.jsx)(n.Z, { strokeWidth: 2 }),
+                                      title:
+                                        'Point-In-Time-Recovery (PITR) enabled',
+                                      description: (0, a.jsxs)('div', {
+                                        children: [
+                                          "Your project uses PITR and full daily backups are no longer taken. They're not needed, as PITR supports a superset of functionality, in terms of the granular recovery that can be performed.",
+                                          ' ',
+                                          (0, a.jsx)('a', {
+                                            className:
+                                              'text-brand transition-colors hover:text-brand-600',
+                                            href: 'https://supabase.com/docs/guides/platform/backups',
+                                            children: 'Learn more',
+                                          }),
+                                        ],
+                                      }),
+                                    }),
+                                  _ && !D
+                                    ? (0, a.jsx)(m.Z, {
+                                        resourceText: 'view scheduled backups',
+                                      })
+                                    : (0, a.jsx)(l.M4, {}),
+                                ],
+                              }),
+                          ],
+                        }),
+                  ],
+                }),
+              }),
+            }),
+          });
+        };
+        ((N.getLayout = e =>
+          (0, a.jsx)(d.Z, { title: 'Database', children: e })),
+          (s.default = N));
+      },
+      47735: function (e, s, t) {
+        'use strict';
+        t.d(s, {
+          M: function () {
+            return i;
+          },
+          _: function () {
+            return l;
+          },
+        });
+        var a = t(97458),
+          r = t(52983),
+          n = t(65092);
+        let i = (0, r.forwardRef)((e, s) =>
+            (0, a.jsx)('nav', {
+              ref: s,
+              dir: 'ltr',
+              ...e,
+              className: (0, n.cn)('border-b', e.className),
+              children: (0, a.jsx)('ul', {
+                role: 'menu',
+                className: 'flex gap-5',
+                children: e.children,
+              }),
+            })
+          ),
+          l = (0, r.forwardRef)((e, s) => {
+            let { children: t, className: r, active: i, ...l } = e;
+            return (0, a.jsx)('li', {
+              ref: s,
+              'aria-selected': i ? 'true' : 'false',
+              'data-state': i ? 'active' : 'inactive',
+              className: (0, n.cn)(
+                'inline-flex items-center justify-center whitespace-nowrap text-sm ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:text-foreground text-foreground-lighter hover:text-foreground data-[state=active]:border-foreground border-b-2 border-transparent *:py-1.5',
+                r
+              ),
+              ...l,
+              children: t,
+            });
+          });
+      },
+    },
+    function (e) {
+      (e.O(
+        0,
+        [
+          6665, 3659, 7186, 7623, 588, 783, 1018, 1706, 1864, 8703, 2397, 3954,
+          9621, 9911, 659, 7612, 4637, 9344, 7726, 6739, 3302, 3898, 8985, 717,
+          5538, 2478, 8827, 6492, 793, 3594, 3861, 6120, 7094, 4334, 9903, 1968,
+          8028, 2241, 9774, 2888, 179,
+        ],
+        function () {
+          return e((e.s = 9752));
+        }
+      ),
+        (_N_E = e.O()));
+    },
+  ]));
