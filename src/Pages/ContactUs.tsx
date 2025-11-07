@@ -1,12 +1,22 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import BoardPic from '../components/Tools/BoardPic';
-import { getOptimizedImageUrl, preloadAllImages } from '../utils/imageUtils';
+import {
+  getOptimizedImageUrl,
+  getSupabaseImageUrl,
+  preloadAllImages,
+  updateImageCacheVersion,
+} from '../utils/imageUtils';
+import CloseIcon from '@mui/icons-material/Close';
+import AddIcon from '@mui/icons-material/Add';
+import { useLocation } from 'react-router-dom';
 
 // Preload critical images
 const preloadBoardImages = (members: Styret[]) => {
   // Use the new preloading utility
-  const memberNames = members.map(member => member.name.split(' ')[0].toLowerCase());
+  const memberNames = members.map(member =>
+    member.name.split(' ')[0].toLowerCase()
+  );
   preloadAllImages(memberNames, 'board_pics');
 };
 
@@ -20,6 +30,8 @@ type Styret = {
 };
 
 export default function ContactUs() {
+  const location = useLocation();
+  const isAdmin = location.pathname.startsWith('/admin');
   const [leder, setLeder] = useState<Styret | null>(null);
   const [nestleder, setNestleder] = useState<Styret | null>(null);
   const [hr, setHr] = useState<Styret | null>(null);
@@ -40,40 +52,82 @@ export default function ContactUs() {
         // Preload images after data is fetched
         preloadBoardImages(data);
 
-        setLeder(
-          data.find((person: Styret) => person.stilling === 'Leder') || null
-        );
-        setNestleder(
-          data.find((person: Styret) => person.stilling === 'Nestleder') || null
-        );
-        setHr(
+        // Fetch existing board images from storage
+        const { data: storageFiles } = await supabase.storage
+          .from('bilder')
+          .list('board_pic');
+
+        // Helper function to find matching image in storage
+        const findImageForPerson = (person: Styret): string | null => {
+          if (person.bilde) return person.bilde; // Already has bilde in DB
+
+          // Find image based on person's first name (e.g., "aqeel.png")
+          const navnNormalized = person.name.split(' ')[0].toLowerCase();
+          const pattern = `${navnNormalized}.`;
+
+          const matchingFile = storageFiles?.find(file =>
+            file.name.toLowerCase().startsWith(pattern.toLowerCase())
+          );
+
+          return matchingFile ? matchingFile.name : null;
+        };
+
+        // Update each person with found image
+        const updatePersonWithImage = (
+          person: Styret | null
+        ): Styret | null => {
+          if (!person) return null;
+          const foundImage = findImageForPerson(person);
+          if (foundImage && !person.bilde) {
+            // Update database if image found but not in DB
+            supabase
+              .from('styret')
+              .update({ bilde: foundImage })
+              .eq('id', person.id)
+              .then(() => {
+                // Update locally after DB update
+              });
+            return { ...person, bilde: foundImage };
+          }
+          return person;
+        };
+
+        const lederData =
+          data.find((person: Styret) => person.stilling === 'Leder') || null;
+        const nestlederData =
+          data.find((person: Styret) => person.stilling === 'Nestleder') ||
+          null;
+        const hrData =
           data.find((person: Styret) => person.stilling === 'HR ansvarlig') ||
-            null
-        );
-        setØkonomi(
+          null;
+        const økonomiData =
           data.find(
             (person: Styret) => person.stilling === 'Økonomiansvarlig'
-          ) || null
-        );
-        setMarked(
+          ) || null;
+        const markedData =
           data.find(
             (person: Styret) => person.stilling === 'Teamleder markedsføring'
-          ) || null
-        );
-        setBedrift(
+          ) || null;
+        const bedriftData =
           data.find(
             (person: Styret) => person.stilling === 'Teamleder bedrift'
-          ) || null
-        );
-        setLogistikk(
+          ) || null;
+        const logistikkData =
           data.find(
             (person: Styret) => person.stilling === 'Teamleder logistikk'
-          ) || null
-        );
-        setFa(
+          ) || null;
+        const faData =
           data.find((person: Styret) => person.stilling === 'Teamleder FA') ||
-            null
-        );
+          null;
+
+        setLeder(updatePersonWithImage(lederData));
+        setNestleder(updatePersonWithImage(nestlederData));
+        setHr(updatePersonWithImage(hrData));
+        setØkonomi(updatePersonWithImage(økonomiData));
+        setMarked(updatePersonWithImage(markedData));
+        setBedrift(updatePersonWithImage(bedriftData));
+        setLogistikk(updatePersonWithImage(logistikkData));
+        setFa(updatePersonWithImage(faData));
       }
       setLoading(false);
     };
@@ -102,16 +156,86 @@ export default function ContactUs() {
 
         <>
           {leder && (
-            <div className="flex flex-col items-center justify-center my-3">
-              <BoardPic
-                src={getOptimizedImageUrl(
-                  `${leder.name.split(' ')[0].toLowerCase()}.png`,
-                  'board_pics'
-                )}
-                alt={leder.stilling}
-                className="h-40 rounded-2xl object-cover"
-                priority={true}
-              />
+            <div className="flex flex-col items-center justify-center my-3 relative">
+              {leder.bilde ? (
+                <>
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${leder.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', leder.id);
+                          setLeder({ ...leder, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        leder.bilde
+                          ? getSupabaseImageUrl(leder.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${leder.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={leder.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                      priority={true}
+                    />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {isAdmin ? (
+                    <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={async e => {
+                          const f = e.target.files?.[0];
+                          if (!f) return;
+                          // Use original filename as-is (admin user should name it correctly, e.g., "aqeel.png")
+                          const fileName = f.name;
+                          await supabase.storage
+                            .from('bilder')
+                            .upload(`board_pic/${fileName}`, f, {
+                              upsert: true,
+                            });
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: fileName })
+                            .eq('id', leder.id);
+                          setLeder({ ...leder, bilde: fileName });
+                          updateImageCacheVersion();
+                        }}
+                      />
+                      <div className="flex flex-col items-center justify-center">
+                        <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                          <AddIcon />
+                        </div>
+                        <span className="text-sm text-gray-500">
+                          Legg til bilde
+                        </span>
+                      </div>
+                    </label>
+                  ) : (
+                    <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                      <span className="text-gray-400">Ingen bilde</span>
+                    </div>
+                  )}
+                </>
+              )}
               <p className="font-semibold mt-2">{leder.stilling}</p>
               <p className="text-sm">{leder.name}</p>
               <p>
@@ -131,15 +255,83 @@ export default function ContactUs() {
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
             {nestleder && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${nestleder.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${nestleder.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {nestleder.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${nestleder.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', nestleder.id);
+                          setNestleder({ ...nestleder, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        nestleder.bilde
+                          ? getSupabaseImageUrl(nestleder.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${nestleder.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={nestleder.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly, e.g., "aryan.png")
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', nestleder.id);
+                            setNestleder({ ...nestleder, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{nestleder.stilling}</p>
                 <p className="text-sm">{nestleder.name}</p>
                 <p>
@@ -163,15 +355,83 @@ export default function ContactUs() {
               </div>
             )}
             {hr && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${hr.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${hr.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {hr.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${hr.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', hr.id);
+                          setHr({ ...hr, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        hr.bilde
+                          ? getSupabaseImageUrl(hr.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${hr.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={hr.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly, e.g., "julius.png")
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', hr.id);
+                            setHr({ ...hr, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{hr.stilling}</p>
                 <p className="text-sm">{hr.name}</p>
                 <p>
@@ -189,15 +449,83 @@ export default function ContactUs() {
               </div>
             )}
             {økonomi && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${økonomi.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${økonomi.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {økonomi.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${økonomi.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', økonomi.id);
+                          setØkonomi({ ...økonomi, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        økonomi.bilde
+                          ? getSupabaseImageUrl(økonomi.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${økonomi.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={økonomi.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly, e.g., "kaia.png")
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', økonomi.id);
+                            setØkonomi({ ...økonomi, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{økonomi.stilling}</p>
                 <p className="text-sm">{økonomi.name}</p>
                 <p>
@@ -218,15 +546,83 @@ export default function ContactUs() {
 
           <div className="grid lg:grid-cols-4 md:grid-cols-2 sm:p-0 flex-row justify-center sm:grid-cols-2">
             {marked && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${marked.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${marked.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {marked.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${marked.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', marked.id);
+                          setMarked({ ...marked, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        marked.bilde
+                          ? getSupabaseImageUrl(marked.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${marked.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={marked.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly)
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', marked.id);
+                            setMarked({ ...marked, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{marked.stilling}</p>
                 <p className="text-sm">{marked.name}</p>
                 <p>
@@ -244,15 +640,83 @@ export default function ContactUs() {
               </div>
             )}
             {bedrift && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${bedrift.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${bedrift.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {bedrift.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${bedrift.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', bedrift.id);
+                          setBedrift({ ...bedrift, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        bedrift.bilde
+                          ? getSupabaseImageUrl(bedrift.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${bedrift.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={bedrift.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly)
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', bedrift.id);
+                            setBedrift({ ...bedrift, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{bedrift.stilling}</p>
                 <p className="text-sm">{bedrift.name}</p>
                 <p>
@@ -270,15 +734,83 @@ export default function ContactUs() {
               </div>
             )}
             {logistikk && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${logistikk.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${logistikk.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {logistikk.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${logistikk.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', logistikk.id);
+                          setLogistikk({ ...logistikk, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        logistikk.bilde
+                          ? getSupabaseImageUrl(logistikk.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${logistikk.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={logistikk.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly)
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', logistikk.id);
+                            setLogistikk({ ...logistikk, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{logistikk.stilling}</p>
                 <p className="text-sm">{logistikk.name}</p>
                 <p>
@@ -302,15 +834,83 @@ export default function ContactUs() {
               </div>
             )}
             {fa && (
-              <div className="text-center flex flex-col items-center justify-center my-3">
-                <BoardPic
-                  src={getOptimizedImageUrl(
-                    `${fa.name.split(' ')[0].toLowerCase()}.png`,
-                    'board_pics'
-                  )}
-                  alt={`${fa.stilling}`}
-                  className="h-40 rounded-2xl"
-                />
+              <div className="text-center flex flex-col items-center justify-center my-3 relative">
+                {fa.bilde ? (
+                  <div className="relative">
+                    {isAdmin && (
+                      <button
+                        onClick={async () => {
+                          await supabase.storage
+                            .from('bilder')
+                            .remove([`board_pic/${fa.bilde}`]);
+                          await supabase
+                            .from('styret')
+                            .update({ bilde: null })
+                            .eq('id', fa.id);
+                          setFa({ ...fa, bilde: null });
+                          updateImageCacheVersion();
+                        }}
+                        className="absolute top-2 right-2 z-10 bg-red-500 hover:bg-red-600 text-white rounded-full p-2 shadow-lg"
+                        title="Slett bilde"
+                      >
+                        <CloseIcon />
+                      </button>
+                    )}
+                    <BoardPic
+                      src={
+                        fa.bilde
+                          ? getSupabaseImageUrl(fa.bilde, 'board_pics')
+                          : getOptimizedImageUrl(
+                              `${fa.name.split(' ')[0].toLowerCase()}.png`,
+                              'board_pics'
+                            )
+                      }
+                      alt={fa.stilling}
+                      className="h-40 rounded-2xl object-cover"
+                    />
+                  </div>
+                ) : (
+                  <>
+                    {isAdmin ? (
+                      <label className="relative flex items-center justify-center w-full h-40 rounded-2xl border-2 border-dashed border-gray-300 cursor-pointer hover:border-blue-500 bg-gray-50">
+                        <input
+                          type="file"
+                          accept="image/*"
+                          className="hidden"
+                          onChange={async e => {
+                            const f = e.target.files?.[0];
+                            if (!f) return;
+                            // Use original filename as-is (admin user should name it correctly)
+                            const fileName = f.name;
+                            await supabase.storage
+                              .from('bilder')
+                              .upload(`board_pic/${fileName}`, f, {
+                                upsert: true,
+                              });
+                            await supabase
+                              .from('styret')
+                              .update({ bilde: fileName })
+                              .eq('id', fa.id);
+                            setFa({ ...fa, bilde: fileName });
+                            updateImageCacheVersion();
+                          }}
+                        />
+                        <div className="flex flex-col items-center justify-center">
+                          <div className="bg-blue-500 hover:bg-blue-600 text-white rounded-full p-3 shadow-lg mb-2">
+                            <AddIcon />
+                          </div>
+                          <span className="text-sm text-gray-500">
+                            Legg til bilde
+                          </span>
+                        </div>
+                      </label>
+                    ) : (
+                      <div className="h-40 w-full rounded-2xl bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">Ingen bilde</span>
+                      </div>
+                    )}
+                  </>
+                )}
                 <p className="font-semibold mt-2">{fa.stilling}</p>
                 <p className="text-sm">{fa.name}</p>
                 <p>

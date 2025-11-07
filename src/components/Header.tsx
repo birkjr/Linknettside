@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useLocation
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 import { useAuth } from '../auth';
 import { supabase } from '../supabaseClient';
 import VisibilityIcon from '@mui/icons-material/Visibility';
@@ -12,7 +10,7 @@ export default function Header() {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
-  const { login } = useAuth(); // ✅ Get login function from auth
+  const { login } = useAuth(); // ✅ Get login from auth
 
   const handleLogin = async () => {
     try {
@@ -28,7 +26,7 @@ export default function Header() {
       }
       if (data.user) {
         login(); // Update auth context
-        navigate('/admin');
+        navigate('/admin/arrangementer');
         setShowPasswordModal(false);
         setPassword(''); // Clear password after login
       }
@@ -37,12 +35,12 @@ export default function Header() {
       alert('En feil oppstod under innlogging');
     }
   };
-  const [menuOpen, setMenuOpen] = useState(false);
   const location = useLocation(); // Get current route
+  const isAdmin = location.pathname === '/admin';
 
   return (
     <>
-      <nav className="bg-stone-100 w-full shadow-md z-50 lg:sticky lg:top-0">
+      <nav className="bg-stone-100 w-full shadow-lg z-50 lg:sticky lg:top-0">
         <div className="flex lg:flex-col sm:flex-row justify-between items-center w-full px-6 py-4">
           {/* Logo */}
           <Link to={'/'}>
@@ -55,7 +53,9 @@ export default function Header() {
 
           {/* Desktop Menu */}
           <div className="hidden lg:flex items-center py-6">
-            <ul className="flex flex-row space-x-10 font-medium text-xl text-gray-500">
+            <ul
+              className={`flex flex-row space-x-10 font-medium text-xl ${isAdmin ? 'text-red-100' : 'text-gray-500'}`}
+            >
               {[
                 { name: 'Jobbtorget', path: '/jobbtorget' },
                 { name: 'For bedrifter', path: '/for_bedrifter' },
@@ -66,8 +66,12 @@ export default function Header() {
                 <li key={path} className="group relative hover:scale-103">
                   <Link
                     to={path}
-                    className={`hover:text-green-800 ${
-                      location.pathname === path ? 'text-green-800' : ''
+                    className={`${isAdmin ? 'hover:text-white' : 'hover:text-green-800'} ${
+                      location.pathname === path
+                        ? isAdmin
+                          ? 'text-white font-semibold'
+                          : 'text-green-800'
+                        : ''
                     }`}
                   >
                     {name}
@@ -133,53 +137,8 @@ export default function Header() {
           )}
 
           {/* Mobile Menu Button - Hidden, using MobileNavigation component instead */}
-          <div className="relative lg:hidden flex hidden">
-            <button onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? (
-                <CloseIcon fontSize="large" />
-              ) : (
-                <MenuIcon fontSize="large" />
-              )}
-            </button>
-          </div>
         </div>
-
         {/* Mobile Menu - Hidden, using MobileNavigation component instead */}
-        {false && menuOpen && (
-          <div className="lg:hidden bg-white shadow-md py-4">
-            <ul className="flex flex-col items-center space-y-4 text-gray-700">
-              {[
-                { name: 'Jobbtorget', path: '/jobbtorget' },
-                { name: 'For bedrifter', path: '/for_bedrifter' },
-                { name: 'FAQ', path: '/faq' },
-                { name: 'Om oss', path: '/om_oss' },
-                { name: 'Kontakt oss', path: '/kontakt_oss' },
-              ].map(({ name, path }) => (
-                <li key={path}>
-                  <Link
-                    to={path}
-                    className={`hover:text-green-800 ${
-                      location.pathname === path
-                        ? 'text-green-800 font-bold'
-                        : ''
-                    }`}
-                    onClick={() => setMenuOpen(false)}
-                  >
-                    {name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-            {/*<a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
-                setShowPasswordModal(true); // Show password modal
-              }}
-              className="flex flex-col items-center text-gray-700 hover:text-red-400 hover:scale-103 my-4">
-              Admin</a>*/}
-          </div>
-        )}
       </nav>
     </>
   );
