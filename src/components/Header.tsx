@@ -4,6 +4,7 @@ import { useAuth } from '../auth';
 import { supabase } from '../supabaseClient';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { prefetchRoute } from '../utils/routePrefetch';
 
 export default function Header() {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -66,6 +67,8 @@ export default function Header() {
                 <li key={path} className="group relative hover:scale-103">
                   <Link
                     to={path}
+                    onMouseEnter={() => prefetchRoute(path)}
+                    onFocus={() => prefetchRoute(path)}
                     className={`${isAdmin ? 'hover:text-white' : 'hover:text-green-800'} ${
                       location.pathname === path
                         ? isAdmin

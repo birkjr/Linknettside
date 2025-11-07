@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import HomeIcon from '@mui/icons-material/Home';
 import WorkIcon from '@mui/icons-material/Work';
 import BusinessIcon from '@mui/icons-material/Business';
@@ -8,12 +8,27 @@ import InfoIcon from '@mui/icons-material/Info';
 import ContactMailIcon from '@mui/icons-material/ContactMail';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
+import { prefetchRoute } from '../../utils/routePrefetch';
+import { adminTabs } from '../../constants/adminTabs';
+import { useAuth } from '../../auth';
+
+type IconComponent = typeof HomeIcon;
+
+type NavItem = {
+  name: string;
+  path: string;
+  icon?: IconComponent;
+};
 
 export default function MobileNavigation() {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
+  const navigate = useNavigate();
+  const { logout } = useAuth();
 
-  const navItems = [
+  const isAdmin = location.pathname.startsWith('/admin');
+
+  const publicNavItems: NavItem[] = [
     { name: 'Hjem', path: '/', icon: HomeIcon },
     { name: 'Jobbtorget', path: '/jobbtorget', icon: WorkIcon },
     { name: 'For bedrifter', path: '/for_bedrifter', icon: BusinessIcon },
@@ -22,24 +37,53 @@ export default function MobileNavigation() {
     { name: 'Kontakt oss', path: '/kontakt_oss', icon: ContactMailIcon },
   ];
 
-  const isActive = (path: string) => {
-    return location.pathname === path;
-  };
+  const adminNavItems: NavItem[] = adminTabs.map(tab => ({
+    name: tab.label,
+    path: tab.path,
+  }));
+
+  const navItems = isAdmin ? adminNavItems : publicNavItems;
+
+  const isActive = (path: string) => location.pathname === path;
 
   return (
     <>
       {/* Mobile Menu Button */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="lg:hidden fixed top-4 right-4 z-50 bg-white rounded-full p-3 shadow-lg"
-        aria-label="Toggle menu"
-      >
-        {isOpen ? (
-          <CloseIcon className="text-gray-600" />
-        ) : (
-          <MenuIcon className="text-gray-600" />
+      <div className="lg:hidden fixed top-4 right-4 z-50 flex items-center gap-3">
+        {isAdmin && (
+          <button
+            onClick={async () => {
+              const path = location.pathname;
+              let publicPath = '/';
+              if (path.includes('/admin/jobbtorget'))
+                publicPath = '/jobbtorget';
+              else if (path.includes('/admin/om_oss')) publicPath = '/om_oss';
+              else if (path.includes('/admin/kontakt_oss'))
+                publicPath = '/kontakt_oss';
+              else if (path.includes('/admin/nyheter')) publicPath = '/';
+              else if (path.includes('/admin/arrangementer')) publicPath = '/';
+
+              await logout();
+              navigate(publicPath);
+              setIsOpen(false);
+            }}
+            className="rounded-full px-4 py-2 bg-white text-red-700 font-medium shadow-md"
+          >
+            Logg ut
+          </button>
         )}
-      </button>
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="bg-white rounded-full p-3 shadow-lg"
+          aria-label="Toggle menu"
+        >
+          {isOpen ? (
+            <CloseIcon className="text-gray-600" />
+          ) : (
+            <MenuIcon className="text-gray-600" />
+          )}
+        </button>
+      </div>
 
       {/* Mobile Menu Overlay */}
       {isOpen && (
@@ -61,18 +105,26 @@ export default function MobileNavigation() {
             <ul className="space-y-4">
               {navItems.map(item => {
                 const Icon = item.icon;
+                const active = isActive(item.path);
+                const activeClasses = isAdmin
+                  ? 'bg-red-100 text-red-700'
+                  : 'bg-green-100 text-green-700';
+                const hoverClasses = isAdmin
+                  ? 'text-gray-700 hover:bg-red-50'
+                  : 'text-gray-700 hover:bg-gray-100';
+
                 return (
                   <li key={item.path}>
                     <Link
                       to={item.path}
                       onClick={() => setIsOpen(false)}
-                      className={`flex items-center space-x-4 p-4 rounded-lg transition-colors ${
-                        isActive(item.path)
-                          ? 'bg-green-100 text-green-700'
-                          : 'text-gray-700 hover:bg-gray-100'
+                      onMouseEnter={() => prefetchRoute(item.path)}
+                      onFocus={() => prefetchRoute(item.path)}
+                      className={`flex items-center gap-4 p-4 rounded-lg transition-colors ${
+                        active ? activeClasses : hoverClasses
                       }`}
                     >
-                      <Icon className="text-2xl" />
+                      {Icon ? <Icon className="text-2xl" /> : null}
                       <span className="text-lg font-medium">{item.name}</span>
                     </Link>
                   </li>

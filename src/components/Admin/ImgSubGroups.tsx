@@ -1,10 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
 import { useToast } from '../Tools/ToastProvider';
 import { updateImageCacheVersion } from '../../utils/imageUtils';
+import { formatBytes, optimizeImage } from '../../utils/imageOptimizer';
+import { trpc } from '../../utils/trpc';
 
 type EditSubGroup = {
   isOpen: boolean;
@@ -14,15 +16,12 @@ type EditSubGroup = {
 export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
   const [files, setFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);
+  const [uploadMessage, setUploadMessage] = useState<string | null>(null);
   const { showToast } = useToast();
+  const createUploadUrl = trpc.createSubgroupUploadUrl.useMutation();
 
   // ✅ Prevent fetching files when modal is closed
-  useEffect(() => {
-    if (!isOpen) return;
-    fetchFiles();
-  }, [isOpen]);
-
-  const fetchFiles = async () => {
+  const fetchFiles = useCallback(async () => {
     // Subgroups ligger i subGroups mappen i Supabase
     const { data, error } = await supabase.storage
       .from('bilder')
@@ -32,47 +31,103 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
       showToast('Kunne ikke hente bilder fra Supabase.', 'error');
     } else {
       // Hent alle filer fra subGroups mappen
-      const subgroupFiles = data
-        ?.filter(file => file.name && !file.name.endsWith('/'))
-        .map(file => file.name) || [];
+      const subgroupFiles =
+        data
+          ?.filter(file => file.name && !file.name.endsWith('/'))
+          .map(file => file.name) || [];
       setFiles(subgroupFiles);
     }
-  };
+  }, [showToast]);
+
+  useEffect(() => {
+    if (!isOpen) return;
+    fetchFiles();
+  }, [isOpen, fetchFiles]);
 
   const handleUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     if (!event.target.files || event.target.files.length === 0) return;
     setUploading(true);
+    setUploadMessage('Optimaliserer bilde...');
 
     const file = event.target.files[0];
     const fileName = file.name;
+    const baseName = getFileKey(fileName);
 
-    // Sjekk om filen allerede eksisterer i Supabase
-    const existingSupabaseFile = files.find(
-      f => f.toLowerCase() === fileName.toLowerCase()
-    );
+    const existingSupabaseFile = files.find(f => getFileKey(f) === baseName);
     if (existingSupabaseFile) {
-      showToast(`Bildet ${fileName} eksisterer allerede i Supabase!`, 'error');
-      setUploading(false);
-      return;
+      showToast('Oppdaterer eksisterende bilde…', 'info');
     }
 
-    // Last opp til Supabase (subgroups ligger i subGroups mappen)
-    const filePath = `subGroups/${fileName}`;
-    const { error } = await supabase.storage
-      .from('bilder')
-      .upload(filePath, file);
+    try {
+      const {
+        file: optimizedFile,
+        didCompress,
+        originalSize,
+        optimizedSize,
+      } = await optimizeImage(file);
 
-    if (error) {
-      console.error('Error uploading file:', error);
-      showToast('Feil ved opplasting.', 'error');
-    } else {
+      if (didCompress) {
+        showToast(
+          `Bildet komprimert (${formatBytes(originalSize)} → ${formatBytes(optimizedSize)})`,
+          'info'
+        );
+      }
+
+      setUploadMessage('Laster opp til Supabase...');
+
+      // Last opp til Supabase (subgroups ligger i subGroups mappen)
+      const { url, fileName: remoteName } = await createUploadUrl.mutateAsync({
+        key: baseName,
+        mimeType: optimizedFile.type,
+      });
+
+      const fileForUpload =
+        optimizedFile.name === remoteName
+          ? optimizedFile
+          : new File([optimizedFile], remoteName, {
+              type: optimizedFile.type,
+              lastModified: optimizedFile.lastModified,
+            });
+
+      const uploadResponse = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': fileForUpload.type,
+          'x-upsert': 'true',
+          'cache-control': '3600',
+        },
+        body: fileForUpload,
+      });
+
+      if (!uploadResponse.ok) {
+        const errorText = await uploadResponse.text();
+        throw new Error(
+          `Upload failed with status ${uploadResponse.status}: ${errorText}`
+        );
+      }
+
+      if (existingSupabaseFile && existingSupabaseFile !== remoteName) {
+        await supabase.storage
+          .from('bilder')
+          .remove([`subGroups/${existingSupabaseFile}`]);
+      }
       // Oppdater cache-versjon for å tvinge refresh av bilder
       updateImageCacheVersion();
       showToast('Bildet ble lastet opp til Supabase!', 'success');
+      setFiles(prev =>
+        Array.from(
+          new Set([...prev.filter(f => getFileKey(f) !== baseName), remoteName])
+        )
+      );
       fetchFiles(); // Refresh the file list
+    } catch (compressionError) {
+      console.error('Error optimizing or uploading file:', compressionError);
+      showToast('Kunne ikke optimalisere eller laste opp bildet.', 'error');
     }
 
     setUploading(false);
+    setUploadMessage(null);
+    event.target.value = '';
   };
 
   const handleDelete = async (fileName: string) => {
@@ -122,7 +177,9 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="text-blue-800 font-medium">Supabase opplasting</span>
+            <span className="text-blue-800 font-medium">
+              Supabase opplasting
+            </span>
           </div>
           <p className="text-blue-700 text-sm">
             Alle bilder lastes opp direkte til Supabase og hentes fra Supabase.
@@ -145,7 +202,9 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
         </label>
 
         {uploading && (
-          <p className="text-gray-600 text-center">Laster opp...</p>
+          <p className="text-gray-600 text-center">
+            {uploadMessage ?? 'Jobber…'}
+          </p>
         )}
 
         {/* Scrollable Content Area */}
@@ -185,3 +244,6 @@ export default function ImgSubGroups({ isOpen, onClose }: EditSubGroup) {
     </div>
   );
 }
+
+const getFileKey = (fileName: string) =>
+  fileName.replace(/\.[^/.]+$/, '').toLowerCase();
