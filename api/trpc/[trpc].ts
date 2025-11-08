@@ -13,7 +13,7 @@ const handler = (req: Request) =>
   });
 
 export const config = {
-  runtime: 'nodejs18.x',
+  runtime: 'nodejs',
 };
 
 export default handler;
