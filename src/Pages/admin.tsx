@@ -13,10 +13,10 @@ import Groups2OutlinedIcon from '@mui/icons-material/Groups2Outlined';
 import CloudUploadOutlinedIcon from '@mui/icons-material/CloudUploadOutlined';
 import SupportAgentOutlinedIcon from '@mui/icons-material/SupportAgentOutlined';
 import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
-import { useAuth } from '../auth';
+import { useAuth } from '../context/AuthContext';
 import UploadPhoto from '../components/Admin/UploadPhoto';
 import AdminPartners from '../components/Admin/AdminPartners';
-import { useToast } from '../components/Tools/ToastProvider';
+import { useToast } from '../context/ToastContext';
 
 export default function Admin() {
   const navigate = useNavigate();

@@ -1,5 +1,7 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
+import { useState, ReactNode } from 'react';
 import Toast, { ToastType } from './Toast';
+import { ToastContext } from '../../context/ToastContext';
+import type { ToastContextType } from '../../context/ToastContext';
 
 interface ToastMessage {
   id: string;
@@ -7,21 +9,6 @@ interface ToastMessage {
   type: ToastType;
   duration?: number;
 }
-
-interface ToastContextType {
-  showToast: (message: string, type: ToastType, duration?: number) => void;
-  hideToast: (id: string) => void;
-}
-
-const ToastContext = createContext<ToastContextType | undefined>(undefined);
-
-export const useToast = () => {
-  const context = useContext(ToastContext);
-  if (!context) {
-    throw new Error('useToast must be used within a ToastProvider');
-  }
-  return context;
-};
 
 interface ToastProviderProps {
   children: ReactNode;
@@ -41,8 +28,13 @@ export default function ToastProvider({ children }: ToastProviderProps) {
     setToasts(prev => prev.filter(toast => toast.id !== id));
   };
 
+  const contextValue: ToastContextType = {
+    showToast,
+    hideToast,
+  };
+
   return (
-    <ToastContext.Provider value={{ showToast, hideToast }}>
+    <ToastContext.Provider value={contextValue}>
       {children}
 
       {/* Render all active toasts */}

@@ -2,12 +2,17 @@
 
 import React, { useState, useEffect } from 'react';
 import { handleImageError } from '../../utils/imageUtils';
+import SkeletonLoader from './SkeletonLoader';
 
 type SubGroupPicProps = {
   src: string;
   alt: string;
   className?: string;
   priority?: boolean; // For above-the-fold images
+  srcSet?: string;
+  sizes?: string;
+  imageClassName?: string;
+  fallbackHeight?: number;
 };
 
 const SubGroupPic: React.FC<SubGroupPicProps> = ({
@@ -15,10 +20,15 @@ const SubGroupPic: React.FC<SubGroupPicProps> = ({
   alt,
   className,
   priority = false,
+  srcSet,
+  sizes,
+  imageClassName,
+  fallbackHeight = 320,
 }) => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageError, setImageError] = useState(false);
   const [imageSrc, setImageSrc] = useState(src);
+  const [imageSrcSet, setImageSrcSet] = useState(srcSet);
   const imgRef = React.useRef<HTMLImageElement>(null);
 
   // Update imageSrc when src prop changes
@@ -26,7 +36,8 @@ const SubGroupPic: React.FC<SubGroupPicProps> = ({
     setImageSrc(src);
     setImageLoaded(false);
     setImageError(false);
-  }, [src]);
+    setImageSrcSet(srcSet);
+  }, [src, srcSet]);
 
   // Monitor src changes on the img element (for handleImageError fallback)
   useEffect(() => {
@@ -52,64 +63,72 @@ const SubGroupPic: React.FC<SubGroupPicProps> = ({
   // Preload image when component mounts or src changes
   useEffect(() => {
     const img = new Image();
+    if (imageSrcSet) {
+      img.srcset = imageSrcSet;
+    }
     img.onload = () => setImageLoaded(true);
     img.onerror = () => {
       // Don't set error immediately - let handleImageError try fallback
       setImageLoaded(false);
     };
     img.src = imageSrc;
-  }, [imageSrc]);
+  }, [imageSrc, imageSrcSet]);
 
-  const handleImageErrorWithFallback = (e: React.SyntheticEvent<HTMLImageElement>) => {
+  const handleImageErrorWithFallback = (
+    e: React.SyntheticEvent<HTMLImageElement>
+  ) => {
     const filename = src.split('/').pop() || '';
     handleImageError(e, filename, 'subgroups');
-    
+
     // Check if handleImageError changed the src after a short delay
     setTimeout(() => {
       if (imgRef.current && imgRef.current.src !== imageSrc) {
         // Source was changed by handleImageError, update our state
         setImageSrc(imgRef.current.src);
         setImageError(false);
+        if (imgRef.current) {
+          imgRef.current.removeAttribute('srcset');
+          imgRef.current.removeAttribute('sizes');
+        }
       } else {
-        // No fallback worked, show error
-        setImageError(true);
+        if (imgRef.current?.dataset.imageError === 'permanent') {
+          setImageError(true);
+          setImageLoaded(false);
+        }
       }
     }, 200);
   };
 
-  if (imageError) {
-    return (
-      <div
-        className={`bg-gray-200 flex items-center justify-center ${className}`}
-      >
-        <span className="text-gray-500 text-sm">Bilde ikke tilgjengelig</span>
-      </div>
-    );
-  }
+  const showSkeleton = !imageLoaded;
 
   return (
-    <div className={`relative ${className}`} style={{ zIndex: 1 }}>
-      {!imageLoaded && (
-        <div
-          className="absolute inset-0 bg-gray-200 animate-pulse flex items-center justify-center"
-          style={{ zIndex: 2 }}
-        >
-          <div className="w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-        </div>
-      )}
-      <img
-        ref={imgRef}
-        src={imageSrc}
-        alt={alt}
-        className={`${className} transition-opacity duration-300 ${
-          imageLoaded ? 'opacity-100' : 'opacity-0'
-        }`}
-        loading={priority ? 'eager' : 'lazy'}
-        fetchPriority={priority ? 'high' : 'auto'}
-        onLoad={() => setImageLoaded(true)}
-        onError={handleImageErrorWithFallback}
-        style={{ zIndex: 1 }}
-      />
+    <div
+      className={`relative overflow-hidden ${className ?? ''}`}
+      style={{
+        zIndex: 1,
+        minHeight: imageLoaded ? undefined : fallbackHeight,
+      }}
+    >
+      {showSkeleton ? (
+        <SkeletonLoader type="image" className="h-full w-full" />
+      ) : null}
+      {!imageError ? (
+        <img
+          ref={imgRef}
+          src={imageSrc}
+          srcSet={imageSrcSet}
+          sizes={sizes}
+          alt={alt}
+          className={`w-full transition-opacity duration-300 ${
+            imageLoaded ? 'opacity-100' : 'opacity-0'
+          } ${imageClassName ?? ''}`}
+          loading={priority ? 'eager' : 'lazy'}
+          fetchPriority={priority ? 'high' : 'auto'}
+          onLoad={() => setImageLoaded(true)}
+          onError={handleImageErrorWithFallback}
+          style={{ zIndex: 1 }}
+        />
+      ) : null}
     </div>
   );
 };

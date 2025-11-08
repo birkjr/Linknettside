@@ -1,44 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import SubGroupPic from '../components/Tools/SubGroupPic';
 import {
-  getOptimizedImageUrl,
   getSupabaseImageUrl,
   updateImageCacheVersion,
 } from '../utils/imageUtils';
+import { optimizeImage, formatBytes } from '../utils/imageOptimizer';
+import { useToast } from '../context/ToastContext';
+import { trpc } from '../utils/trpc';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import { useLocation } from 'react-router-dom';
 
-// Preload critical images
-const preloadImages = () => {
-  const criticalImages = [getOptimizedImageUrl('styret.png', 'subgroups')];
-
-  const prefetchImages = [
-    getOptimizedImageUrl('bedrift.png', 'subgroups'),
-    getOptimizedImageUrl('marked.png', 'subgroups'),
-    getOptimizedImageUrl('logistikk.png', 'subgroups'),
-    getOptimizedImageUrl('fa.png', 'subgroups'),
-  ];
-
-  // Preload critical above-the-fold images
-  criticalImages.forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = url;
-    document.head.appendChild(link);
-  });
-
-  // Prefetch other images with lower priority
-  prefetchImages.forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.as = 'image';
-    link.href = url;
-    document.head.appendChild(link);
-  });
-};
+const SUBGROUP_SIZES = '(min-width:1280px) 600px, (min-width:768px) 50vw, 90vw';
 
 type Styret = {
   id: number;
@@ -52,6 +26,8 @@ type Styret = {
 export default function OmOss() {
   const location = useLocation();
   const isAdmin = location.pathname.startsWith('/admin');
+  const { showToast } = useToast();
+  const createUploadUrl = trpc.createSubgroupUploadUrl.useMutation();
 
   const subgroupKeys = useMemo(
     () =>
@@ -77,10 +53,25 @@ export default function OmOss() {
   const [logistikk, setLogistikk] = useState<Styret | null>(null);
   const [fa, setFa] = useState<Styret | null>(null);
   const [loading, setLoading] = useState(true);
+  const subgroupSizes = SUBGROUP_SIZES;
+
+  const resolveSubgroupSrc = useCallback(
+    (key: (typeof subgroupKeys)[number]['key']) => {
+      const fileName = subgroupFileByKey[key];
+      if (fileName) {
+        return getSupabaseImageUrl(fileName, 'subgroups');
+      }
+      return `/images/subgroups/${key}.png`;
+    },
+    [subgroupFileByKey]
+  );
 
   useEffect(() => {
-    // Preload images immediately when component mounts
-    preloadImages();
+    const preloadUrls = subgroupKeys.map(({ key }) => resolveSubgroupSrc(key));
+    preloadUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+    });
 
     const fetchStyret = async () => {
       const { data, error } = await supabase.from('styret').select('*');
@@ -145,7 +136,7 @@ export default function OmOss() {
       setSubgroupFileByKey(byKey);
     };
     fetchSubgroupFiles();
-  }, [subgroupKeys]);
+  }, [resolveSubgroupSrc, subgroupKeys]);
 
   const handleDeleteSubgroup = async (key: string) => {
     const fileName = subgroupFileByKey[key];
@@ -156,19 +147,69 @@ export default function OmOss() {
   };
 
   const handleUploadSubgroup = async (key: string, file: File) => {
-    const path = `subGroups/${key}.${file.name.split('.').pop()}`;
-    // Remove any existing file for this key
-    const existing = subgroupFileByKey[key];
-    if (existing)
-      await supabase.storage.from('bilder').remove([`subGroups/${existing}`]);
-    await supabase.storage
-      .from('bilder')
-      .upload(path, file, { upsert: true, cacheControl: '3600' });
-    setSubgroupFileByKey(prev => ({
-      ...prev,
-      [key]: path.split('/').pop() || null,
-    }));
-    updateImageCacheVersion();
+    try {
+      const {
+        file: optimizedFile,
+        didCompress,
+        originalSize,
+        optimizedSize,
+      } = await optimizeImage(file, {
+        maxDimension: 1400,
+        sizeThreshold: 200 * 1024,
+      });
+
+      if (didCompress) {
+        showToast(
+          `Bildet komprimert (${formatBytes(originalSize)} → ${formatBytes(optimizedSize)})`,
+          'info'
+        );
+      }
+
+      const { url, fileName } = await createUploadUrl.mutateAsync({
+        key,
+        mimeType: optimizedFile.type,
+      });
+
+      const uploadFile =
+        optimizedFile.name === fileName
+          ? optimizedFile
+          : new File([optimizedFile], fileName, {
+              type: optimizedFile.type,
+              lastModified: optimizedFile.lastModified,
+            });
+
+      const uploadResponse = await fetch(url, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': uploadFile.type,
+          'x-upsert': 'true',
+          'cache-control': '3600',
+        },
+        body: uploadFile,
+      });
+
+      if (!uploadResponse.ok) {
+        const errorText = await uploadResponse.text();
+        throw new Error(
+          `Upload failed with status ${uploadResponse.status}: ${errorText}`
+        );
+      }
+
+      const existing = subgroupFileByKey[key];
+      if (existing && existing !== fileName) {
+        await supabase.storage.from('bilder').remove([`subGroups/${existing}`]);
+      }
+
+      setSubgroupFileByKey(prev => ({
+        ...prev,
+        [key]: fileName,
+      }));
+      updateImageCacheVersion();
+      showToast('Bildet ble oppdatert!', 'success');
+    } catch (uploadError) {
+      console.error('Failed to upload subgroup image', uploadError);
+      showToast('Kunne ikke laste opp bildet. Prøv igjen.', 'error');
+    }
   };
 
   if (loading) {
@@ -218,10 +259,13 @@ export default function OmOss() {
           <div>
             <div>
               <div className="relative">
+                <h3 className="text-3xl font-semibold text-center py-4 text-gray-600 md:hidden">
+                  Styret
+                </h3>
                 {isAdmin && subgroupFileByKey['styret'] && (
                   <button
                     onClick={() => handleDeleteSubgroup('styret')}
-                    className="absolute top-2 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
+                    className="absolute top-20 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
                     title="Slett bilde"
                   >
                     <CloseIcon />
@@ -246,21 +290,15 @@ export default function OmOss() {
                 <SubGroupPic
                   alt="Styret"
                   className="rounded-xl"
-                  src={
-                    subgroupFileByKey['styret']
-                      ? getSupabaseImageUrl(
-                          subgroupFileByKey['styret'] as string,
-                          'subgroups'
-                        )
-                      : getOptimizedImageUrl('styret.png', 'subgroups')
-                  }
+                  src={resolveSubgroupSrc('styret')}
+                  sizes={subgroupSizes}
                   priority={true}
                 />
               </div>
             </div>
           </div>
           <div className="py-8 flex flex-col mt-6 text-gray-600 text-sm sm:text-xl px-4 sm:px-0">
-            <h3 className="text-3xl font-semibold text-center sm:text-center py-4">
+            <h3 className="hidden md:block text-3xl font-semibold text-center text-gray-600 mb-4">
               Styret
             </h3>
             <p className="py-2 lg:text-center sm:text-left">
@@ -296,12 +334,15 @@ export default function OmOss() {
               {isAdmin && subgroupFileByKey['bedrift'] && (
                 <button
                   onClick={() => handleDeleteSubgroup('bedrift')}
-                  className="absolute top-2 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
+                  className="absolute top-20 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
                   title="Slett bilde"
                 >
                   <CloseIcon />
                 </button>
               )}
+              <h3 className="text-4xl font-semibold text-gray-600 py-4 text-center md:hidden">
+                Bedrift
+              </h3>
               {isAdmin && !subgroupFileByKey['bedrift'] && (
                 <label className="absolute inset-0 flex items-center justify-center cursor-pointer z-10">
                   <input
@@ -321,19 +362,15 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Bedrift"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['bedrift']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['bedrift'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('bedrift.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('bedrift')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
           <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
-            <h3 className="text-4xl font-semibold py-4 text-center">Bedrift</h3>
+            <h3 className="hidden md:block text-4xl font-semibold text-gray-600 text-center mb-4">
+              Bedrift
+            </h3>
             <p className="py-2 lg">
               Bedriftsgruppen har direkte kontakt med forskjellige bedrifter, og
               ansvaret med å sikre bedriftspresentasjoner m.m.
@@ -346,10 +383,13 @@ export default function OmOss() {
           {/* Marked */}
           <div>
             <div className="relative">
+              <h3 className="text-4xl font-semibold py-4 text-center text-gray-600 md:hidden">
+                Marked
+              </h3>
               {isAdmin && subgroupFileByKey['marked'] && (
                 <button
                   onClick={() => handleDeleteSubgroup('marked')}
-                  className="absolute top-2 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
+                  className="absolute top-20 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
                   title="Slett bilde"
                 >
                   <CloseIcon />
@@ -374,19 +414,15 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Markedsføring"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['marked']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['marked'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('marked.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('marked')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
-          <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
-            <h3 className="text-4xl font-semibold py-4 text-center">Marked</h3>
+          <div className="py-8 flex flex-col text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
+            <h3 className="hidden md:block text-4xl font-semibold text-gray-600 text-center mb-4">
+              Marked
+            </h3>
             <p className="py-2">
               Markedsføringsgruppen har ansvaret for å informere om
               bedriftspresentasjoner. Markedsføring har også i oppgave å skaffe
@@ -399,10 +435,13 @@ export default function OmOss() {
           {/* Logistikk */}
           <div>
             <div className="relative">
+              <h3 className="text-4xl font-semibold py-4 text-center text-gray-600 md:hidden">
+                Logistikk
+              </h3>
               {isAdmin && subgroupFileByKey['logistikk'] && (
                 <button
                   onClick={() => handleDeleteSubgroup('logistikk')}
-                  className="absolute top-2 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
+                  className="absolute top-20 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
                   title="Slett bilde"
                 >
                   <CloseIcon />
@@ -427,19 +466,13 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Logistikk"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['logistikk']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['logistikk'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('logistikk.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('logistikk')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
-          <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
-            <h3 className="text-4xl font-semibold py-4 text-center">
+          <div className="py-8 flex flex-col text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
+            <h3 className="hidden md:block text-4xl font-semibold text-gray-600 text-center mb-4">
               Logistikk
             </h3>
             <p className="py-2">
@@ -453,10 +486,13 @@ export default function OmOss() {
           {/* FA */}
           <div>
             <div className="relative">
+              <h3 className="text-4xl font-semibold py-4 text-center text-gray-600 md:hidden">
+                FA
+              </h3>
               {isAdmin && subgroupFileByKey['fa'] && (
                 <button
                   onClick={() => handleDeleteSubgroup('fa')}
-                  className="absolute top-2 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
+                  className="absolute top-20 right-2 z-10 bg-white/90 text-red-700 rounded-full p-1 shadow"
                   title="Slett bilde"
                 >
                   <CloseIcon />
@@ -481,19 +517,15 @@ export default function OmOss() {
               <SubGroupPic
                 alt="FA"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['fa']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['fa'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('fa.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('fa')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
-          <div className="py-8 flex flex-col mt-6 text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
-            <h3 className="text-4xl font-semibold py-4 text-center">FA</h3>
+          <div className="py-8 flex flex-col text-gray-600 text-xl max-w-lg mx-auto sm:text-left lg:text-center">
+            <h3 className="hidden md:block text-4xl font-semibold text-gray-600 text-center mb-4">
+              FA
+            </h3>
             <p className="py-2">
               FA-gruppen er de som setter opp alle arrangementer Emil link har,
               som ikke er i kategorien bedriftspresentasjoner. Det vil si alt av

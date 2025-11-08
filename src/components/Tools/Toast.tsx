@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ErrorIcon from '@mui/icons-material/Error';
 import InfoIcon from '@mui/icons-material/Info';
@@ -23,25 +23,24 @@ export default function Toast({
 }: ToastProps) {
   const [isAnimating, setIsAnimating] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsAnimating(false);
+    setTimeout(() => {
+      onClose();
+    }, 300); // Wait for animation to complete
+  }, [onClose]);
+
   useEffect(() => {
     if (isVisible) {
       setIsAnimating(true);
 
-      // Auto-close after duration
       const timer = setTimeout(() => {
         handleClose();
       }, duration);
 
       return () => clearTimeout(timer);
     }
-  }, [isVisible, duration]);
-
-  const handleClose = () => {
-    setIsAnimating(false);
-    setTimeout(() => {
-      onClose();
-    }, 300); // Wait for animation to complete
-  };
+  }, [duration, handleClose, isVisible]);
 
   const getToastStyles = () => {
     switch (type) {

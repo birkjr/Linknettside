@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom'; // Import useLocation
-import { useAuth } from '../auth';
+import { useAuth } from '../context/AuthContext';
 import { supabase } from '../supabaseClient';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import { prefetchRoute } from '../utils/routePrefetch';
+import { warmAboutUsImages } from '../utils/imageUtils';
 
 export default function Header() {
   const [showPasswordModal, setShowPasswordModal] = useState(false);
@@ -33,6 +35,12 @@ export default function Header() {
     } catch (error) {
       console.error('Login error:', error);
       alert('En feil oppstod under innlogging');
+    }
+  };
+  const handleNavIntent = (path: string) => {
+    prefetchRoute(path);
+    if (path === '/om_oss') {
+      warmAboutUsImages().catch(() => {});
     }
   };
   const location = useLocation(); // Get current route
@@ -66,6 +74,9 @@ export default function Header() {
                 <li key={path} className="group relative hover:scale-103">
                   <Link
                     to={path}
+                    onMouseEnter={() => handleNavIntent(path)}
+                    onFocus={() => handleNavIntent(path)}
+                    onTouchStart={() => handleNavIntent(path)}
                     className={`${isAdmin ? 'hover:text-white' : 'hover:text-green-800'} ${
                       location.pathname === path
                         ? isAdmin

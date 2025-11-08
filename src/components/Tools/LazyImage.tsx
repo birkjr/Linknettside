@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 
 interface LazyImageProps {
   src: string;
@@ -21,31 +21,36 @@ export default function LazyImage({
   const [imageSrc, setImageSrc] = useState<string>('');
   const imgRef = useRef<HTMLImageElement>(null);
 
-  // Check if browser supports WebP
-  const supportsWebP = () => {
+  const supportsWebP = useCallback(() => {
+    if (typeof document === 'undefined') {
+      return false;
+    }
+
     const canvas = document.createElement('canvas');
     canvas.width = 1;
     canvas.height = 1;
     return canvas.toDataURL('image/webp').indexOf('data:image/webp') === 0;
-  };
+  }, []);
 
-  // Get optimized image URL
-  const getOptimizedSrc = (originalSrc: string) => {
-    if (!originalSrc) return '';
+  const getOptimizedSrc = useCallback(
+    (originalSrc: string) => {
+      if (!originalSrc) return '';
 
-    // If it's already a WebP or external URL, return as is
-    if (originalSrc.includes('supabase') || originalSrc.includes('.webp')) {
+      // If it's already a WebP or external URL, return as is
+      if (originalSrc.includes('supabase') || originalSrc.includes('.webp')) {
+        return originalSrc;
+      }
+
+      // For local images, try WebP first if supported
+      if (supportsWebP() && originalSrc.includes('/images/')) {
+        const webpSrc = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
+        return webpSrc;
+      }
+
       return originalSrc;
-    }
-
-    // For local images, try WebP first if supported
-    if (supportsWebP() && originalSrc.includes('/images/')) {
-      const webpSrc = originalSrc.replace(/\.(jpg|jpeg|png)$/i, '.webp');
-      return webpSrc;
-    }
-
-    return originalSrc;
-  };
+    },
+    [supportsWebP]
+  );
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -67,7 +72,7 @@ export default function LazyImage({
     }
 
     return () => observer.disconnect();
-  }, [src]);
+  }, [getOptimizedSrc, src]);
 
   // Reset error state when src changes
   useEffect(() => {

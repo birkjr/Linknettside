@@ -1,5 +1,26 @@
 import { supabase } from '../supabaseClient';
 
+type ImageCategory =
+  | 'board_pics'
+  | 'company_logos'
+  | 'subgroups'
+  | 'events_jobads';
+
+type ImageResizeMode = 'cover' | 'contain' | 'fill';
+
+type ImageTransformOptions = {
+  width?: number;
+  height?: number;
+  quality?: number;
+  resize?: ImageResizeMode;
+  format?: 'origin';
+};
+
+type SupabaseImageOptions = {
+  transform?: ImageTransformOptions;
+  cacheBusterValue?: string;
+};
+
 /**
  * Smart bildehåndtering som prøver lokale bilder først, deretter Supabase
  * Med automatisk preloading for optimal ytelse
@@ -10,7 +31,7 @@ const imageCache = new Set<string>();
 
 export const getOptimizedImageUrl = (
   fileName: string,
-  category: 'board_pics' | 'company_logos' | 'subgroups' | 'events_jobads'
+  category: ImageCategory
 ): string => {
   // board_pics og subgroups skal ALLTID hentes fra Supabase
   if (category === 'board_pics' || category === 'subgroups') {
@@ -19,12 +40,14 @@ export const getOptimizedImageUrl = (
 
   // Sjekk om det er et Supabase-bilde (inneholder UUID eller er et nytt bilde)
   // Men ikke alle bilder med bindestrek er Supabase-bilder (f.eks. "logo.sintef.png")
-  if (fileName.includes('supabase') || 
-      (fileName.includes('-') && fileName.length > 25) || 
-      fileName.length > 30) {
+  if (
+    fileName.includes('supabase') ||
+    (fileName.includes('-') && fileName.length > 25) ||
+    fileName.length > 30
+  ) {
     return getSupabaseImageUrl(fileName, category);
   }
-  
+
   // Alltid prøv lokalt bilde først - handleImageError håndterer fallback til Supabase
   const localPath = category === 'events_jobads' ? 'jobads_events' : category;
   const localUrl = `/images/${localPath}/${fileName}`;
@@ -33,7 +56,8 @@ export const getOptimizedImageUrl = (
 
 export const getSupabaseImageUrl = (
   fileName: string,
-  category: 'board_pics' | 'company_logos' | 'subgroups' | 'events_jobads'
+  category: ImageCategory,
+  options: SupabaseImageOptions = {}
 ): string => {
   const supabaseCategory =
     category === 'company_logos'
@@ -44,27 +68,23 @@ export const getSupabaseImageUrl = (
           ? 'subGroups' // subgroups ligger i subGroups mappen i Supabase
           : 'events_jobads';
 
-  const publicUrl = supabase.storage
+  const transformOptions = options.transform;
+  const { data } = supabase.storage
     .from('bilder')
-    .getPublicUrl(`${supabaseCategory}/${fileName}`).data.publicUrl;
+    .getPublicUrl(
+      `${supabaseCategory}/${fileName}`,
+      transformOptions ? { transform: transformOptions } : undefined
+    );
 
-  // Legg til cache-busting parameter for å unngå gamle bilder fra cache
-  // Bruk timestamp for å tvinge browseren til å hente nytt bilde
-  // For board_pics og subgroups, bruk en versjon som kan oppdateres i admin
-  // For andre bilder, bruk timestamp hver gang
-  let cacheBuster: string;
-  if (category === 'board_pics' || category === 'subgroups') {
-    // Bruk versjon fra localStorage, eller timestamp hvis ikke satt
-    const version = localStorage.getItem('boardPicCacheVersion');
-    cacheBuster = version || Date.now().toString();
-  } else {
-    // Bruk timestamp for å tvinge refresh
-    cacheBuster = Date.now().toString();
+  let publicUrl = data.publicUrl;
+  const cacheBuster = getCacheBusterValue(category, options.cacheBusterValue);
+
+  if (cacheBuster) {
+    const separator = publicUrl.includes('?') ? '&' : '?';
+    publicUrl = `${publicUrl}${separator}v=${cacheBuster}`;
   }
-  
-  // Legg til cache-busting parameter hvis det ikke allerede finnes
-  const separator = publicUrl.includes('?') ? '&' : '?';
-  return `${publicUrl}${separator}v=${cacheBuster}`;
+
+  return publicUrl;
 };
 
 export const preloadImage = (url: string): Promise<void> => {
@@ -90,6 +110,10 @@ export const handleImageError = (
 ): void => {
   const target = e.currentTarget;
 
+  if ((target as HTMLImageElement).dataset.imageError === 'permanent') {
+    return;
+  }
+
   // Hvis lokalt bilde feilet, prøv Supabase
   if (target.src.includes('/images/')) {
     const supabaseUrl = getSupabaseImageUrl(fileName, category);
@@ -97,12 +121,14 @@ export const handleImageError = (
 
     // Preload Supabase-bildet for fremtidige besøk
     preloadImage(supabaseUrl).catch(() => {
-      // Hvis Supabase også feiler, vis placeholder
-      target.src = '/images/logo_transparent.png';
+      target.onerror = null;
+      (target as HTMLImageElement).dataset.imageError = 'permanent';
+      target.removeAttribute('src');
     });
   } else {
-    // Hvis Supabase også feiler, vis placeholder
-    target.src = '/images/logo_transparent.png';
+    target.onerror = null;
+    (target as HTMLImageElement).dataset.imageError = 'permanent';
+    target.removeAttribute('src');
   }
 };
 
@@ -133,4 +159,150 @@ export const clearImageCache = () => {
 // Funksjon for å oppdatere cache-versjon manuelt
 export const updateImageCacheVersion = () => {
   localStorage.setItem('boardPicCacheVersion', Date.now().toString());
+};
+
+const getCacheBusterValue = (
+  category: ImageCategory,
+  override?: string
+): string => {
+  if (override) {
+    return override;
+  }
+
+  if (typeof window === 'undefined') {
+    return Date.now().toString();
+  }
+
+  if (category === 'board_pics' || category === 'subgroups') {
+    const version = window.localStorage.getItem('boardPicCacheVersion');
+    return version ?? 'static';
+  }
+
+  return Date.now().toString();
+};
+
+const DEFAULT_SUBGROUP_WIDTHS = [360, 640, 960, 1280, 1600] as const;
+
+export const getResponsiveSupabaseSrcSet = (
+  fileName: string,
+  category: ImageCategory,
+  widths: readonly number[] = DEFAULT_SUBGROUP_WIDTHS,
+  options: { quality?: number; resize?: ImageResizeMode } = {}
+): { src: string; srcSet: string } => {
+  const uniqueSortedWidths = [...new Set(widths)].sort((a, b) => a - b);
+  const cacheVersion = getCacheBusterValue(category);
+  const transformBase: ImageTransformOptions = {
+    quality: options.quality,
+    resize: options.resize,
+  };
+
+  const srcSet = uniqueSortedWidths
+    .map(width => {
+      const transform = { ...transformBase, width };
+      const url = getSupabaseImageUrl(fileName, category, {
+        transform,
+        cacheBusterValue: cacheVersion,
+      });
+      return `${url} ${width}w`;
+    })
+    .join(', ');
+
+  const largestWidth = uniqueSortedWidths[uniqueSortedWidths.length - 1];
+  const src = getSupabaseImageUrl(fileName, category, {
+    transform: { ...transformBase, width: largestWidth },
+    cacheBusterValue: cacheVersion,
+  });
+
+  return { src, srcSet };
+};
+
+const SUBGROUP_DEFAULT_FILES: Record<
+  'styret' | 'bedrift' | 'marked' | 'logistikk' | 'fa',
+  string
+> = {
+  styret: 'styret.png',
+  bedrift: 'bedrift.png',
+  marked: 'marked.png',
+  logistikk: 'logistikk.png',
+  fa: 'fa.png',
+};
+
+let aboutUsWarmPromise: Promise<void> | null = null;
+
+export const warmAboutUsImages = (): Promise<void> => {
+  if (aboutUsWarmPromise) return aboutUsWarmPromise;
+
+  if (typeof window === 'undefined') {
+    aboutUsWarmPromise = Promise.resolve();
+    return aboutUsWarmPromise;
+  }
+
+  const preloadFromSrcSet = (srcSet: string, collector: Set<string>): void => {
+    srcSet
+      .split(',')
+      .map(part => part.trim())
+      .forEach(entry => {
+        if (!entry) return;
+        const [url] = entry.split(' ');
+        if (url) collector.add(url);
+      });
+  };
+
+  const scheduleForFile = (fileName: string, collector: Set<string>): void => {
+    const { src, srcSet } = getResponsiveSupabaseSrcSet(fileName, 'subgroups');
+    collector.add(src);
+    preloadFromSrcSet(srcSet, collector);
+  };
+
+  aboutUsWarmPromise = (async () => {
+    const urlQueue = new Set<string>();
+
+    // Start preloading default fallback variants immediately
+    Object.values(SUBGROUP_DEFAULT_FILES).forEach(fileName =>
+      scheduleForFile(fileName, urlQueue)
+    );
+
+    const defaultPreloads = Array.from(urlQueue).map(url =>
+      preloadImage(url).catch(() => undefined)
+    );
+
+    try {
+      const { data, error } = await supabase.storage
+        .from('bilder')
+        .list('subGroups');
+
+      if (error) {
+        console.warn('warmAboutUsImages: failed to list subGroups', error);
+      }
+
+      const files = data?.filter(file => !file.name.endsWith('/')) ?? [];
+
+      const resolvedFiles: Record<string, string> = {};
+      Object.entries(SUBGROUP_DEFAULT_FILES).forEach(([key, fallback]) => {
+        const match =
+          files.find(
+            file =>
+              file.name === fallback ||
+              file.name.toLowerCase().startsWith(`${key.toLowerCase()}.`)
+          ) ?? null;
+        resolvedFiles[key] = match?.name ?? fallback;
+      });
+
+      const customUrls = new Set<string>();
+      Object.values(resolvedFiles).forEach(fileName =>
+        scheduleForFile(fileName, customUrls)
+      );
+
+      const customPreloads = Array.from(customUrls).map(url =>
+        preloadImage(url).catch(() => undefined)
+      );
+
+      await Promise.all([...defaultPreloads, ...customPreloads]);
+    } catch (err) {
+      console.warn('warmAboutUsImages: failed to warm images', err);
+      await Promise.all(defaultPreloads);
+    }
+  })();
+
+  return aboutUsWarmPromise;
 };

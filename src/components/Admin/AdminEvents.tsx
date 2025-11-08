@@ -1,7 +1,7 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '../../supabaseClient';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 import ImageSelector from '../Tools/ImageSelector';
 
 type Event = {
@@ -46,19 +46,22 @@ export default function AddEvent() {
     fetchEvents();
   }, []);
 
-  const removeEvent = async (id: number) => {
-    const { error } = await supabase.from('events').delete().eq('id', id);
-    if (error) {
-      console.error('Error deleting job:', error);
-      showToast('Kunne ikke fjerne arrangement. Prøv igjen.', 'error');
-    } else {
-      setEvents(events.filter(event => event.id !== id)); // Update state to remove event
-      showToast('Arrangement har blitt fjernet.', 'success');
-    }
-  };
+  const removeEvent = useCallback(
+    async (id: number) => {
+      const { error } = await supabase.from('events').delete().eq('id', id);
+      if (error) {
+        console.error('Error deleting job:', error);
+        showToast('Kunne ikke fjerne arrangement. Prøv igjen.', 'error');
+      } else {
+        setEvents(prev => prev.filter(event => event.id !== id)); // Update state to remove event
+        showToast('Arrangement har blitt fjernet.', 'success');
+      }
+    },
+    [showToast]
+  );
 
   // Function to delete past events
-  const deletePastEvents = async () => {
+  const deletePastEvents = useCallback(async () => {
     const now = new Date();
     console.log('Current Date and Time:', now);
 
@@ -73,7 +76,7 @@ export default function AddEvent() {
     for (const event of pastEvents) {
       await removeEvent(event.id);
     }
-  };
+  }, [events, removeEvent]);
 
   // Set up interval to check for past events
   useEffect(() => {
@@ -84,7 +87,7 @@ export default function AddEvent() {
       clearInterval(intervalId); // Cleanup on unmount
       console.log('Clearing interval');
     };
-  }, []); // Run only once on mount
+  }, [deletePastEvents]);
 
   // Function to add a new event
   const addNewEvent = async () => {
@@ -228,7 +231,7 @@ export default function AddEvent() {
         <div>
           <ImageSelector
             value={newEvent.imageURL}
-            onChange={(value) => setNewEvent({ ...newEvent, imageURL: value })}
+            onChange={value => setNewEvent({ ...newEvent, imageURL: value })}
             category="events_jobads"
             placeholder="Velg bilde for arrangement..."
             className="mb-2"
@@ -334,7 +337,9 @@ export default function AddEvent() {
           <div>
             <ImageSelector
               value={editingEvent.imageURL}
-              onChange={(value) => setEditingEvent({ ...editingEvent, imageURL: value })}
+              onChange={value =>
+                setEditingEvent({ ...editingEvent, imageURL: value })
+              }
               category="events_jobads"
               placeholder="Velg bilde for arrangement..."
               className="mb-2"

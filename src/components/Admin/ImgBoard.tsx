@@ -3,7 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 import { updateImageCacheVersion } from '../../utils/imageUtils';
 
 type EditBoardPics = {
@@ -93,7 +93,6 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
     }
   };
 
-
   if (!isOpen) return null; // Don't render if modal is closed
 
   return (
@@ -127,7 +126,9 @@ export default function ImgBoard({ isOpen, onClose }: EditBoardPics) {
                 clipRule="evenodd"
               />
             </svg>
-            <span className="text-blue-800 font-medium">Supabase opplasting</span>
+            <span className="text-blue-800 font-medium">
+              Supabase opplasting
+            </span>
           </div>
           <p className="text-blue-700 text-sm">
             Alle bilder lastes opp direkte til Supabase og hentes fra Supabase.

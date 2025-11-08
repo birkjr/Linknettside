@@ -12,7 +12,11 @@ export default function Layout() {
     <div className={`flex flex-col min-h-screen ${isAdmin ? 'bg-red-50' : ''}`}>
       {isAdmin ? <AdminNavbar /> : <Header />}
       <MobileNavigation />
-      <main className={`flex-grow pb-4 ${isAdmin ? 'bg-red-50' : ''}`}>
+      <main
+        className={`flex-grow pb-4 ${
+          isAdmin ? 'bg-red-50 px-4 sm:px-6 lg:px-8' : ''
+        }`}
+      >
         <PageTransition>
           <Outlet /> {/* This renders the current page */}
         </PageTransition>
