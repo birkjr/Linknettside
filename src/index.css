@@ -46,6 +46,15 @@ body {
   position: relative;
 }
 
+@keyframes shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
 /* Prevent footer from sticking on mobile */
 @media (max-width: 768px) {
   html,

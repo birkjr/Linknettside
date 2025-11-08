@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 type News = {

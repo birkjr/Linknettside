@@ -27,7 +27,7 @@ export const appRouter = router({
 
       const { data, error } = await ctx.supabase.storage
         .from(BUCKET)
-        .createSignedUploadUrl(path, 120, { upsert: true });
+        .createSignedUploadUrl(path, { upsert: true });
 
       if (error || !data) {
         throw new TRPCError({

@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { ChangeEvent, useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 
 type Partners = {
   id: number;
@@ -51,13 +51,15 @@ export default function AdminBoard() {
 
   // Handle Input Change
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
+    e: ChangeEvent<HTMLInputElement>,
     field: keyof Partners
   ) => {
+    const value = field === 'mainpartner' ? e.target.checked : e.target.value;
+
     if (editedPartner) {
-      setEditedPartner({ ...editedPartner, [field]: e.target.value });
+      setEditedPartner({ ...editedPartner, [field]: value } as Partners);
     } else {
-      setNewPartner({ ...newPartner, [field]: e.target.value });
+      setNewPartner({ ...newPartner, [field]: value } as Partners);
     }
   };
 
@@ -98,7 +100,8 @@ export default function AdminBoard() {
     }
 
     // Fjern id fra objektet før insert - Supabase vil generere det automatisk
-    const { id, ...partnerToInsert } = newPartner;
+    const { id: _ignoredId, ...partnerToInsert } = newPartner;
+    void _ignoredId;
 
     const { data, error } = await supabase
       .from('partners')
@@ -286,7 +289,7 @@ export default function AdminBoard() {
                 </td>
                 <td className="border border-gray-300 p-1">
                   <input
-                    type="text"
+                    type="checkbox"
                     checked={newPartner.mainpartner}
                     onChange={e => handleChange(e, 'mainpartner')}
                     className="w-full border p-1 rounded text-xs"

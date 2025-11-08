@@ -10,7 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { prefetchRoute } from '../../utils/routePrefetch';
 import { adminTabs } from '../../constants/adminTabs';
-import { useAuth } from '../../auth';
+import { useAuth } from '../../context/AuthContext';
 
 type IconComponent = typeof HomeIcon;
 

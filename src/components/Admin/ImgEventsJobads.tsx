@@ -3,14 +3,17 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 
-type ImgEventsJobads = {
+type ImgEventsJobadsProps = {
   isOpen: boolean;
   onClose: () => void;
 };
 
-export default function imgEventsJobads({ isOpen, onClose }: ImgEventsJobads) {
+export default function ImgEventsJobads({
+  isOpen,
+  onClose,
+}: ImgEventsJobadsProps) {
   const [files, setFiles] = useState<string[]>([]);
   const [localFiles, setLocalFiles] = useState<string[]>([]);
   const [uploading, setUploading] = useState(false);

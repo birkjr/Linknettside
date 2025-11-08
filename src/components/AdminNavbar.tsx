@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth';
+import { useAuth } from '../context/AuthContext';
 import { prefetchRoute } from '../utils/routePrefetch';
 import { adminTabs } from '../constants/adminTabs';
 

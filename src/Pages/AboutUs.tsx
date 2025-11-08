@@ -1,47 +1,18 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import SubGroupPic from '../components/Tools/SubGroupPic';
 import {
-  getOptimizedImageUrl,
   getSupabaseImageUrl,
   updateImageCacheVersion,
 } from '../utils/imageUtils';
 import { optimizeImage, formatBytes } from '../utils/imageOptimizer';
-import { useToast } from '../components/Tools/ToastProvider';
+import { useToast } from '../context/ToastContext';
 import { trpc } from '../utils/trpc';
 import CloseIcon from '@mui/icons-material/Close';
 import AddIcon from '@mui/icons-material/Add';
 import { useLocation } from 'react-router-dom';
 
-// Preload critical images
-const preloadImages = () => {
-  const criticalImages = [getOptimizedImageUrl('styret.png', 'subgroups')];
-
-  const prefetchImages = [
-    getOptimizedImageUrl('bedrift.png', 'subgroups'),
-    getOptimizedImageUrl('marked.png', 'subgroups'),
-    getOptimizedImageUrl('logistikk.png', 'subgroups'),
-    getOptimizedImageUrl('fa.png', 'subgroups'),
-  ];
-
-  // Preload critical above-the-fold images
-  criticalImages.forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'preload';
-    link.as = 'image';
-    link.href = url;
-    document.head.appendChild(link);
-  });
-
-  // Prefetch other images with lower priority
-  prefetchImages.forEach(url => {
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.as = 'image';
-    link.href = url;
-    document.head.appendChild(link);
-  });
-};
+const SUBGROUP_SIZES = '(min-width:1280px) 600px, (min-width:768px) 50vw, 90vw';
 
 type Styret = {
   id: number;
@@ -82,10 +53,25 @@ export default function OmOss() {
   const [logistikk, setLogistikk] = useState<Styret | null>(null);
   const [fa, setFa] = useState<Styret | null>(null);
   const [loading, setLoading] = useState(true);
+  const subgroupSizes = SUBGROUP_SIZES;
+
+  const resolveSubgroupSrc = useCallback(
+    (key: (typeof subgroupKeys)[number]['key']) => {
+      const fileName = subgroupFileByKey[key];
+      if (fileName) {
+        return getSupabaseImageUrl(fileName, 'subgroups');
+      }
+      return `/images/subgroups/${key}.png`;
+    },
+    [subgroupFileByKey]
+  );
 
   useEffect(() => {
-    // Preload images immediately when component mounts
-    preloadImages();
+    const preloadUrls = subgroupKeys.map(({ key }) => resolveSubgroupSrc(key));
+    preloadUrls.forEach(url => {
+      const img = new Image();
+      img.src = url;
+    });
 
     const fetchStyret = async () => {
       const { data, error } = await supabase.from('styret').select('*');
@@ -150,7 +136,7 @@ export default function OmOss() {
       setSubgroupFileByKey(byKey);
     };
     fetchSubgroupFiles();
-  }, [subgroupKeys]);
+  }, [resolveSubgroupSrc, subgroupKeys]);
 
   const handleDeleteSubgroup = async (key: string) => {
     const fileName = subgroupFileByKey[key];
@@ -304,14 +290,8 @@ export default function OmOss() {
                 <SubGroupPic
                   alt="Styret"
                   className="rounded-xl"
-                  src={
-                    subgroupFileByKey['styret']
-                      ? getSupabaseImageUrl(
-                          subgroupFileByKey['styret'] as string,
-                          'subgroups'
-                        )
-                      : getOptimizedImageUrl('styret.png', 'subgroups')
-                  }
+                  src={resolveSubgroupSrc('styret')}
+                  sizes={subgroupSizes}
                   priority={true}
                 />
               </div>
@@ -382,14 +362,8 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Bedrift"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['bedrift']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['bedrift'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('bedrift.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('bedrift')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
@@ -440,14 +414,8 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Markedsføring"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['marked']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['marked'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('marked.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('marked')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
@@ -498,14 +466,8 @@ export default function OmOss() {
               <SubGroupPic
                 alt="Logistikk"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['logistikk']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['logistikk'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('logistikk.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('logistikk')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>
@@ -555,14 +517,8 @@ export default function OmOss() {
               <SubGroupPic
                 alt="FA"
                 className="rounded-xl"
-                src={
-                  subgroupFileByKey['fa']
-                    ? getSupabaseImageUrl(
-                        subgroupFileByKey['fa'] as string,
-                        'subgroups'
-                      )
-                    : getOptimizedImageUrl('fa.png', 'subgroups')
-                }
+                src={resolveSubgroupSrc('fa')}
+                sizes={subgroupSizes}
               />
             </div>
           </div>

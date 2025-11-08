@@ -7,7 +7,7 @@ import WindPowerIcon from '@mui/icons-material/WindPower';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import Partners from './Schema/Partners';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../auth';
+import { useAuth } from '../context/AuthContext';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { supabase } from '../supabaseClient';

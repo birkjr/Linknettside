@@ -1,11 +1,13 @@
 interface SkeletonLoaderProps {
-  type: 'job' | 'event';
+  type: 'job' | 'event' | 'image';
   count?: number;
+  className?: string;
 }
 
 export default function SkeletonLoader({
   type,
   count = 1,
+  className = '',
 }: SkeletonLoaderProps) {
   const renderJobSkeleton = () => (
     <div className="bg-white rounded-lg shadow-md p-6 mb-4 animate-pulse">
@@ -45,11 +47,24 @@ export default function SkeletonLoader({
     </div>
   );
 
+  const renderImageSkeleton = () => (
+    <div
+      className={`relative overflow-hidden rounded-xl bg-gradient-to-r from-gray-200 via-gray-100 to-gray-200 ${className}`}
+    >
+      <div className="absolute inset-0 animate-[pulse_2s_ease-in-out_infinite] bg-white/20" />
+      <div className="absolute inset-0 translate-x-[-100%] bg-gradient-to-r from-transparent via-white/60 to-transparent animate-[shimmer_1.8s_ease-in-out_infinite]" />
+    </div>
+  );
+
   return (
     <>
       {Array.from({ length: count }).map((_, index) => (
         <div key={index}>
-          {type === 'job' ? renderJobSkeleton() : renderEventSkeleton()}
+          {type === 'job'
+            ? renderJobSkeleton()
+            : type === 'event'
+              ? renderEventSkeleton()
+              : renderImageSkeleton()}
         </div>
       ))}
     </>

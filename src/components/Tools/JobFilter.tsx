@@ -11,21 +11,27 @@ export default function JobFilter({
   onFilterChange,
   onSearch,
 }: JobFilterProps) {
-  // Load saved filters from localStorage
-  const savedFilters = localStorage.getItem('jobFilters');
-  const initialFilters = savedFilters
-    ? JSON.parse(savedFilters)
-    : { jobType: '', place: '' };
+  const [filters, setFilters] = useState<{ jobType: string; place: string }>(
+    () => {
+      if (typeof window === 'undefined') {
+        return { jobType: '', place: '' };
+      }
 
-  const [filters, setFilters] = useState(initialFilters);
+      const storedFilters = window.localStorage.getItem('jobFilters');
+      return storedFilters
+        ? JSON.parse(storedFilters)
+        : { jobType: '', place: '' };
+    }
+  );
   const [searchQuery, setSearchQuery] = useState('');
 
-  // Apply saved filters on mount
   useEffect(() => {
-    if (savedFilters) {
-      onFilterChange(initialFilters);
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('jobFilters', JSON.stringify(filters));
     }
-  }, []);
+
+    onFilterChange(filters);
+  }, [filters, onFilterChange]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLSelectElement | HTMLInputElement>
@@ -33,11 +39,6 @@ export default function JobFilter({
     const { name, value } = e.target;
     const updatedFilters = { ...filters, [name]: value };
     setFilters(updatedFilters);
-
-    // Save to localStorage
-    localStorage.setItem('jobFilters', JSON.stringify(updatedFilters));
-
-    onFilterChange(updatedFilters);
   };
 
   const handleSearchChange = (value: string) => {

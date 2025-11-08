@@ -3,7 +3,8 @@ import { createRoot } from 'react-dom/client';
 import './index.css';
 import { Route, Routes, Navigate, BrowserRouter } from 'react-router-dom';
 import Layout from './components/layout.tsx';
-import { AuthProvider, useAuth } from './auth.tsx'; // ✅ Import authentication
+import { AuthProvider } from './auth.tsx'; // ✅ Import authentication
+import { useAuth } from './context/AuthContext';
 import ErrorBoundary from './components/Tools/ErrorBoundary.tsx';
 import ToastProvider from './components/Tools/ToastProvider.tsx';
 import { getRouteLoader } from './utils/routePrefetch.ts';
@@ -34,9 +35,9 @@ const trpcClient = trpc.createClient({
   links: [
     httpBatchLink({
       url: '/api/trpc',
+      transformer: superjson,
     }),
   ],
-  transformer: superjson,
 });
 
 // ✅ Private Route Component

@@ -3,7 +3,7 @@ import { supabase } from '../../supabaseClient';
 import AddPhotoAlternateIcon from '@mui/icons-material/AddPhotoAlternate';
 import CloseIcon from '@mui/icons-material/Close';
 import CancelIcon from '@mui/icons-material/Cancel';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 import { updateImageCacheVersion } from '../../utils/imageUtils';
 import { formatBytes, optimizeImage } from '../../utils/imageOptimizer';
 import { trpc } from '../../utils/trpc';

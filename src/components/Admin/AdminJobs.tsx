@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../../supabaseClient';
-import { useToast } from '../Tools/ToastProvider';
+import { useToast } from '../../context/ToastContext';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import ImageSelector from '../Tools/ImageSelector';
 
@@ -185,7 +185,7 @@ export default function AddJob() {
         <div>
           <ImageSelector
             value={newJob.imageURL}
-            onChange={(value) => setNewJob({ ...newJob, imageURL: value })}
+            onChange={value => setNewJob({ ...newJob, imageURL: value })}
             category="events_jobads"
             placeholder="Velg bilde for jobbannonse..."
             className="mb-2"
@@ -284,7 +284,9 @@ export default function AddJob() {
             <div>
               <ImageSelector
                 value={editingJob.imageURL}
-                onChange={(value) => setEditingJob({ ...editingJob, imageURL: value })}
+                onChange={value =>
+                  setEditingJob({ ...editingJob, imageURL: value })
+                }
                 category="events_jobads"
                 placeholder="Velg bilde for jobbannonse..."
                 className="mb-2"
